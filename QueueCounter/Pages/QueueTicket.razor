@@ -1,0 +1,70 @@
+﻿@page "/queue-ticket/{QueueId:int}"
+@inject HttpClient HttpClient
+@inject NavigationManager NavigationManager
+@using QMS.Models
+
+
+
+<h3>ใบคิวของคุณ</h3>
+
+@if (queueDetails != null)
+{
+    <div class="card p-3">
+        <h4>หมายเลขคิว: @queueDetails.QueueNumber</h4>
+        <p>รายการที่เลือก: @queueDetails.QueueType</p>
+        <p>วันที่และเวลา: @queueDetails.queue_date.ToString("dd/MM/yyyy HH:mm")</p>
+        <button class="btn btn-secondary mt-3" @onclick="BackToBooking">กลับไปที่หน้าจองคิว</button>
+    </div>
+}
+else if (loading)
+{
+    <p>กำลังโหลดข้อมูล...</p>
+
+}
+else
+{
+    <p>ไม่พบข้อมูล</p>
+}
+
+@code {
+    [Parameter]
+    public int QueueId { get; set; }
+    private bool loading = true;
+
+
+    private QueueModel queueDetails;
+
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            var response = await HttpClient.GetAsync($"https://localhost:44328/api/Queue/{QueueId}");
+            if (response.IsSuccessStatusCode)
+            {
+                queueDetails = await response.Content.ReadFromJsonAsync<QueueModel>();
+            }
+            else
+            {
+                Console.WriteLine($"API returned error: {response.StatusCode}");
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error fetching queue details: {ex.Message}");
+        }
+        finally
+        {
+            loading = false;
+            Console.WriteLine(queueDetails);
+        }
+    }
+
+    private void BackToBooking()
+    {
+        NavigationManager.NavigateTo("/");
+    }
+}
+
+

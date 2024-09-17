@@ -705,3 +705,4 @@ C:\Users\Asus\Desktop\Queue Manage\QueueUser\obj\Debug\net7.0\refint\QMS.dll
 C:\Users\Asus\Desktop\Queue Manage\QueueUser\obj\Debug\net7.0\QMS.pdb
 C:\Users\Asus\Desktop\Queue Manage\QueueUser\obj\Debug\net7.0\QMS.genruntimeconfig.cache
 C:\Users\Asus\Desktop\Queue Manage\QueueUser\obj\Debug\net7.0\ref\QMS.dll
+C:\Users\Asus\Desktop\Queue Manage\QueueUser\obj\Debug\net7.0\QMS.sourcelink.json

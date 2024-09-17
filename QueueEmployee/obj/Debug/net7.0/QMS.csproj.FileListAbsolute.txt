@@ -1,0 +1,209 @@
+D:\work\Icoop\DonNet\QMS\bin\Debug\net7.0\appsettings.Development.json
+D:\work\Icoop\DonNet\QMS\bin\Debug\net7.0\appsettings.json
+D:\work\Icoop\DonNet\QMS\bin\Debug\net7.0\QMS.staticwebassets.runtime.json
+D:\work\Icoop\DonNet\QMS\bin\Debug\net7.0\QMS.exe
+D:\work\Icoop\DonNet\QMS\bin\Debug\net7.0\QMS.deps.json
+D:\work\Icoop\DonNet\QMS\bin\Debug\net7.0\QMS.runtimeconfig.json
+D:\work\Icoop\DonNet\QMS\bin\Debug\net7.0\QMS.dll
+D:\work\Icoop\DonNet\QMS\bin\Debug\net7.0\QMS.pdb
+D:\work\Icoop\DonNet\QMS\bin\Debug\net7.0\Microsoft.AspNetCore.Authorization.dll
+D:\work\Icoop\DonNet\QMS\bin\Debug\net7.0\Microsoft.AspNetCore.Components.dll
+D:\work\Icoop\DonNet\QMS\bin\Debug\net7.0\Microsoft.AspNetCore.Metadata.dll
+D:\work\Icoop\DonNet\QMS\bin\Debug\net7.0\Microsoft.Extensions.Logging.Abstractions.dll
+D:\work\Icoop\DonNet\QMS\bin\Debug\net7.0\Microsoft.Extensions.Options.dll
+D:\work\Icoop\DonNet\QMS\bin\Debug\net7.0\Radzen.Blazor.dll
+D:\work\Icoop\DonNet\QMS\bin\Debug\net7.0\System.Linq.Dynamic.Core.dll
+D:\work\Icoop\DonNet\QMS\obj\Debug\net7.0\QMS.csproj.AssemblyReference.cache
+D:\work\Icoop\DonNet\QMS\obj\Debug\net7.0\QMS.GeneratedMSBuildEditorConfig.editorconfig
+D:\work\Icoop\DonNet\QMS\obj\Debug\net7.0\QMS.AssemblyInfoInputs.cache
+D:\work\Icoop\DonNet\QMS\obj\Debug\net7.0\QMS.AssemblyInfo.cs
+D:\work\Icoop\DonNet\QMS\obj\Debug\net7.0\QMS.csproj.CoreCompileInputs.cache
+D:\work\Icoop\DonNet\QMS\obj\Debug\net7.0\QMS.MvcApplicationPartsAssemblyInfo.cache
+D:\work\Icoop\DonNet\QMS\obj\Debug\net7.0\QMS.RazorAssemblyInfo.cache
+D:\work\Icoop\DonNet\QMS\obj\Debug\net7.0\QMS.RazorAssemblyInfo.cs
+D:\work\Icoop\DonNet\QMS\obj\Debug\net7.0\staticwebassets\msbuild.QMS.Microsoft.AspNetCore.StaticWebAssets.props
+D:\work\Icoop\DonNet\QMS\obj\Debug\net7.0\staticwebassets\msbuild.build.QMS.props
+D:\work\Icoop\DonNet\QMS\obj\Debug\net7.0\staticwebassets\msbuild.buildMultiTargeting.QMS.props
+D:\work\Icoop\DonNet\QMS\obj\Debug\net7.0\staticwebassets\msbuild.buildTransitive.QMS.props
+D:\work\Icoop\DonNet\QMS\obj\Debug\net7.0\staticwebassets.pack.json
+D:\work\Icoop\DonNet\QMS\obj\Debug\net7.0\staticwebassets.build.json
+D:\work\Icoop\DonNet\QMS\obj\Debug\net7.0\staticwebassets.development.json
+D:\work\Icoop\DonNet\QMS\obj\Debug\net7.0\scopedcss\Shared\MainLayout.razor.rz.scp.css
+D:\work\Icoop\DonNet\QMS\obj\Debug\net7.0\scopedcss\Shared\NavMenu.razor.rz.scp.css
+D:\work\Icoop\DonNet\QMS\obj\Debug\net7.0\scopedcss\bundle\QMS.styles.css
+D:\work\Icoop\DonNet\QMS\obj\Debug\net7.0\scopedcss\projectbundle\QMS.bundle.scp.css
+D:\work\Icoop\DonNet\QMS\obj\Debug\net7.0\QMS.csproj.CopyComplete
+D:\work\Icoop\DonNet\QMS\obj\Debug\net7.0\QMS.dll
+D:\work\Icoop\DonNet\QMS\obj\Debug\net7.0\refint\QMS.dll
+D:\work\Icoop\DonNet\QMS\obj\Debug\net7.0\QMS.pdb
+D:\work\Icoop\DonNet\QMS\obj\Debug\net7.0\QMS.genruntimeconfig.cache
+D:\work\Icoop\DonNet\QMS\obj\Debug\net7.0\ref\QMS.dll
+D:\work\Icoop\DonNet\QMS\bin\Debug\net7.0\Newtonsoft.Json.dll
+C:\Users\Asus\Downloads\QMS\QMS\bin\Debug\net7.0\appsettings.Development.json
+C:\Users\Asus\Downloads\QMS\QMS\bin\Debug\net7.0\appsettings.json
+C:\Users\Asus\Downloads\QMS\QMS\bin\Debug\net7.0\QMS.staticwebassets.runtime.json
+C:\Users\Asus\Downloads\QMS\QMS\bin\Debug\net7.0\QMS.exe
+C:\Users\Asus\Downloads\QMS\QMS\bin\Debug\net7.0\QMS.deps.json
+C:\Users\Asus\Downloads\QMS\QMS\bin\Debug\net7.0\QMS.runtimeconfig.json
+C:\Users\Asus\Downloads\QMS\QMS\bin\Debug\net7.0\QMS.dll
+C:\Users\Asus\Downloads\QMS\QMS\bin\Debug\net7.0\QMS.pdb
+C:\Users\Asus\Downloads\QMS\QMS\bin\Debug\net7.0\Microsoft.AspNetCore.Authorization.dll
+C:\Users\Asus\Downloads\QMS\QMS\bin\Debug\net7.0\Microsoft.AspNetCore.Components.dll
+C:\Users\Asus\Downloads\QMS\QMS\bin\Debug\net7.0\Microsoft.AspNetCore.Metadata.dll
+C:\Users\Asus\Downloads\QMS\QMS\bin\Debug\net7.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\Asus\Downloads\QMS\QMS\bin\Debug\net7.0\Microsoft.Extensions.Options.dll
+C:\Users\Asus\Downloads\QMS\QMS\bin\Debug\net7.0\Newtonsoft.Json.dll
+C:\Users\Asus\Downloads\QMS\QMS\bin\Debug\net7.0\Radzen.Blazor.dll
+C:\Users\Asus\Downloads\QMS\QMS\bin\Debug\net7.0\System.Linq.Dynamic.Core.dll
+C:\Users\Asus\Downloads\QMS\QMS\obj\Debug\net7.0\QMS.csproj.AssemblyReference.cache
+C:\Users\Asus\Downloads\QMS\QMS\obj\Debug\net7.0\QMS.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Asus\Downloads\QMS\QMS\obj\Debug\net7.0\QMS.AssemblyInfoInputs.cache
+C:\Users\Asus\Downloads\QMS\QMS\obj\Debug\net7.0\QMS.AssemblyInfo.cs
+C:\Users\Asus\Downloads\QMS\QMS\obj\Debug\net7.0\QMS.csproj.CoreCompileInputs.cache
+C:\Users\Asus\Downloads\QMS\QMS\obj\Debug\net7.0\QMS.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Asus\Downloads\QMS\QMS\obj\Debug\net7.0\QMS.RazorAssemblyInfo.cache
+C:\Users\Asus\Downloads\QMS\QMS\obj\Debug\net7.0\QMS.RazorAssemblyInfo.cs
+C:\Users\Asus\Downloads\QMS\QMS\obj\Debug\net7.0\staticwebassets.build.json
+C:\Users\Asus\Downloads\QMS\QMS\obj\Debug\net7.0\staticwebassets.development.json
+C:\Users\Asus\Downloads\QMS\QMS\obj\Debug\net7.0\staticwebassets\msbuild.QMS.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\Asus\Downloads\QMS\QMS\obj\Debug\net7.0\staticwebassets\msbuild.build.QMS.props
+C:\Users\Asus\Downloads\QMS\QMS\obj\Debug\net7.0\staticwebassets\msbuild.buildMultiTargeting.QMS.props
+C:\Users\Asus\Downloads\QMS\QMS\obj\Debug\net7.0\staticwebassets\msbuild.buildTransitive.QMS.props
+C:\Users\Asus\Downloads\QMS\QMS\obj\Debug\net7.0\staticwebassets.pack.json
+C:\Users\Asus\Downloads\QMS\QMS\obj\Debug\net7.0\scopedcss\Shared\MainLayout.razor.rz.scp.css
+C:\Users\Asus\Downloads\QMS\QMS\obj\Debug\net7.0\scopedcss\Shared\NavMenu.razor.rz.scp.css
+C:\Users\Asus\Downloads\QMS\QMS\obj\Debug\net7.0\scopedcss\bundle\QMS.styles.css
+C:\Users\Asus\Downloads\QMS\QMS\obj\Debug\net7.0\scopedcss\projectbundle\QMS.bundle.scp.css
+C:\Users\Asus\Downloads\QMS\QMS\obj\Debug\net7.0\QMS.csproj.Up2Date
+C:\Users\Asus\Downloads\QMS\QMS\obj\Debug\net7.0\QMS.dll
+C:\Users\Asus\Downloads\QMS\QMS\obj\Debug\net7.0\refint\QMS.dll
+C:\Users\Asus\Downloads\QMS\QMS\obj\Debug\net7.0\QMS.pdb
+C:\Users\Asus\Downloads\QMS\QMS\obj\Debug\net7.0\QMS.genruntimeconfig.cache
+C:\Users\Asus\Downloads\QMS\QMS\obj\Debug\net7.0\ref\QMS.dll
+C:\Users\Asus\Desktop\coding\C#\isocare\QueueBlazor\QMS\bin\Debug\net7.0\appsettings.Development.json
+C:\Users\Asus\Desktop\coding\C#\isocare\QueueBlazor\QMS\bin\Debug\net7.0\appsettings.json
+C:\Users\Asus\Desktop\coding\C#\isocare\QueueBlazor\QMS\bin\Debug\net7.0\QMS.staticwebassets.runtime.json
+C:\Users\Asus\Desktop\coding\C#\isocare\QueueBlazor\QMS\bin\Debug\net7.0\QMS.exe
+C:\Users\Asus\Desktop\coding\C#\isocare\QueueBlazor\QMS\bin\Debug\net7.0\QMS.deps.json
+C:\Users\Asus\Desktop\coding\C#\isocare\QueueBlazor\QMS\bin\Debug\net7.0\QMS.runtimeconfig.json
+C:\Users\Asus\Desktop\coding\C#\isocare\QueueBlazor\QMS\bin\Debug\net7.0\QMS.dll
+C:\Users\Asus\Desktop\coding\C#\isocare\QueueBlazor\QMS\bin\Debug\net7.0\QMS.pdb
+C:\Users\Asus\Desktop\coding\C#\isocare\QueueBlazor\QMS\bin\Debug\net7.0\Microsoft.AspNetCore.Authorization.dll
+C:\Users\Asus\Desktop\coding\C#\isocare\QueueBlazor\QMS\bin\Debug\net7.0\Microsoft.AspNetCore.Components.dll
+C:\Users\Asus\Desktop\coding\C#\isocare\QueueBlazor\QMS\bin\Debug\net7.0\Microsoft.AspNetCore.Metadata.dll
+C:\Users\Asus\Desktop\coding\C#\isocare\QueueBlazor\QMS\bin\Debug\net7.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\Asus\Desktop\coding\C#\isocare\QueueBlazor\QMS\bin\Debug\net7.0\Microsoft.Extensions.Options.dll
+C:\Users\Asus\Desktop\coding\C#\isocare\QueueBlazor\QMS\bin\Debug\net7.0\Newtonsoft.Json.dll
+C:\Users\Asus\Desktop\coding\C#\isocare\QueueBlazor\QMS\bin\Debug\net7.0\Radzen.Blazor.dll
+C:\Users\Asus\Desktop\coding\C#\isocare\QueueBlazor\QMS\bin\Debug\net7.0\System.Linq.Dynamic.Core.dll
+C:\Users\Asus\Desktop\coding\C#\isocare\QueueBlazor\QMS\obj\Debug\net7.0\QMS.csproj.AssemblyReference.cache
+C:\Users\Asus\Desktop\coding\C#\isocare\QueueBlazor\QMS\obj\Debug\net7.0\QMS.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Asus\Desktop\coding\C#\isocare\QueueBlazor\QMS\obj\Debug\net7.0\QMS.AssemblyInfoInputs.cache
+C:\Users\Asus\Desktop\coding\C#\isocare\QueueBlazor\QMS\obj\Debug\net7.0\QMS.AssemblyInfo.cs
+C:\Users\Asus\Desktop\coding\C#\isocare\QueueBlazor\QMS\obj\Debug\net7.0\QMS.csproj.CoreCompileInputs.cache
+C:\Users\Asus\Desktop\coding\C#\isocare\QueueBlazor\QMS\obj\Debug\net7.0\QMS.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Asus\Desktop\coding\C#\isocare\QueueBlazor\QMS\obj\Debug\net7.0\QMS.RazorAssemblyInfo.cache
+C:\Users\Asus\Desktop\coding\C#\isocare\QueueBlazor\QMS\obj\Debug\net7.0\QMS.RazorAssemblyInfo.cs
+C:\Users\Asus\Desktop\coding\C#\isocare\QueueBlazor\QMS\obj\Debug\net7.0\staticwebassets.build.json
+C:\Users\Asus\Desktop\coding\C#\isocare\QueueBlazor\QMS\obj\Debug\net7.0\staticwebassets.development.json
+C:\Users\Asus\Desktop\coding\C#\isocare\QueueBlazor\QMS\obj\Debug\net7.0\staticwebassets\msbuild.QMS.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\Asus\Desktop\coding\C#\isocare\QueueBlazor\QMS\obj\Debug\net7.0\staticwebassets\msbuild.build.QMS.props
+C:\Users\Asus\Desktop\coding\C#\isocare\QueueBlazor\QMS\obj\Debug\net7.0\staticwebassets\msbuild.buildMultiTargeting.QMS.props
+C:\Users\Asus\Desktop\coding\C#\isocare\QueueBlazor\QMS\obj\Debug\net7.0\staticwebassets\msbuild.buildTransitive.QMS.props
+C:\Users\Asus\Desktop\coding\C#\isocare\QueueBlazor\QMS\obj\Debug\net7.0\staticwebassets.pack.json
+C:\Users\Asus\Desktop\coding\C#\isocare\QueueBlazor\QMS\obj\Debug\net7.0\scopedcss\Shared\MainLayout.razor.rz.scp.css
+C:\Users\Asus\Desktop\coding\C#\isocare\QueueBlazor\QMS\obj\Debug\net7.0\scopedcss\Shared\NavMenu.razor.rz.scp.css
+C:\Users\Asus\Desktop\coding\C#\isocare\QueueBlazor\QMS\obj\Debug\net7.0\scopedcss\bundle\QMS.styles.css
+C:\Users\Asus\Desktop\coding\C#\isocare\QueueBlazor\QMS\obj\Debug\net7.0\scopedcss\projectbundle\QMS.bundle.scp.css
+C:\Users\Asus\Desktop\coding\C#\isocare\QueueBlazor\QMS\obj\Debug\net7.0\QMS.csproj.Up2Date
+C:\Users\Asus\Desktop\coding\C#\isocare\QueueBlazor\QMS\obj\Debug\net7.0\QMS.dll
+C:\Users\Asus\Desktop\coding\C#\isocare\QueueBlazor\QMS\obj\Debug\net7.0\refint\QMS.dll
+C:\Users\Asus\Desktop\coding\C#\isocare\QueueBlazor\QMS\obj\Debug\net7.0\QMS.pdb
+C:\Users\Asus\Desktop\coding\C#\isocare\QueueBlazor\QMS\obj\Debug\net7.0\QMS.genruntimeconfig.cache
+C:\Users\Asus\Desktop\coding\C#\isocare\QueueBlazor\QMS\obj\Debug\net7.0\ref\QMS.dll
+C:\Users\Asus\Desktop\coding\C#\isocare\QueueBlazor\QMS\bin\Debug\net7.0\Blazored.LocalStorage.dll
+C:\Users\Asus\Desktop\coding\C#\isocare\QueueBlazor\QMS\obj\Debug\net7.0\QMS.sourcelink.json
+C:\Users\Asus\Desktop\Queue\bin\Debug\net7.0\appsettings.Development.json
+C:\Users\Asus\Desktop\Queue\bin\Debug\net7.0\appsettings.json
+C:\Users\Asus\Desktop\Queue\bin\Debug\net7.0\QMS.staticwebassets.runtime.json
+C:\Users\Asus\Desktop\Queue\bin\Debug\net7.0\QMS.exe
+C:\Users\Asus\Desktop\Queue\bin\Debug\net7.0\QMS.deps.json
+C:\Users\Asus\Desktop\Queue\bin\Debug\net7.0\QMS.runtimeconfig.json
+C:\Users\Asus\Desktop\Queue\bin\Debug\net7.0\QMS.dll
+C:\Users\Asus\Desktop\Queue\bin\Debug\net7.0\QMS.pdb
+C:\Users\Asus\Desktop\Queue\bin\Debug\net7.0\Blazored.LocalStorage.dll
+C:\Users\Asus\Desktop\Queue\bin\Debug\net7.0\Microsoft.AspNetCore.Authorization.dll
+C:\Users\Asus\Desktop\Queue\bin\Debug\net7.0\Microsoft.AspNetCore.Components.dll
+C:\Users\Asus\Desktop\Queue\bin\Debug\net7.0\Microsoft.AspNetCore.Metadata.dll
+C:\Users\Asus\Desktop\Queue\bin\Debug\net7.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\Asus\Desktop\Queue\bin\Debug\net7.0\Microsoft.Extensions.Options.dll
+C:\Users\Asus\Desktop\Queue\bin\Debug\net7.0\Newtonsoft.Json.dll
+C:\Users\Asus\Desktop\Queue\bin\Debug\net7.0\Radzen.Blazor.dll
+C:\Users\Asus\Desktop\Queue\bin\Debug\net7.0\System.Linq.Dynamic.Core.dll
+C:\Users\Asus\Desktop\Queue\obj\Debug\net7.0\QMS.csproj.AssemblyReference.cache
+C:\Users\Asus\Desktop\Queue\obj\Debug\net7.0\QMS.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Asus\Desktop\Queue\obj\Debug\net7.0\QMS.AssemblyInfoInputs.cache
+C:\Users\Asus\Desktop\Queue\obj\Debug\net7.0\QMS.AssemblyInfo.cs
+C:\Users\Asus\Desktop\Queue\obj\Debug\net7.0\QMS.csproj.CoreCompileInputs.cache
+C:\Users\Asus\Desktop\Queue\obj\Debug\net7.0\QMS.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Asus\Desktop\Queue\obj\Debug\net7.0\QMS.RazorAssemblyInfo.cache
+C:\Users\Asus\Desktop\Queue\obj\Debug\net7.0\QMS.RazorAssemblyInfo.cs
+C:\Users\Asus\Desktop\Queue\obj\Debug\net7.0\staticwebassets.build.json
+C:\Users\Asus\Desktop\Queue\obj\Debug\net7.0\staticwebassets.development.json
+C:\Users\Asus\Desktop\Queue\obj\Debug\net7.0\staticwebassets\msbuild.QMS.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\Asus\Desktop\Queue\obj\Debug\net7.0\staticwebassets\msbuild.build.QMS.props
+C:\Users\Asus\Desktop\Queue\obj\Debug\net7.0\staticwebassets\msbuild.buildMultiTargeting.QMS.props
+C:\Users\Asus\Desktop\Queue\obj\Debug\net7.0\staticwebassets\msbuild.buildTransitive.QMS.props
+C:\Users\Asus\Desktop\Queue\obj\Debug\net7.0\staticwebassets.pack.json
+C:\Users\Asus\Desktop\Queue\obj\Debug\net7.0\scopedcss\Shared\MainLayout.razor.rz.scp.css
+C:\Users\Asus\Desktop\Queue\obj\Debug\net7.0\scopedcss\Shared\NavMenu.razor.rz.scp.css
+C:\Users\Asus\Desktop\Queue\obj\Debug\net7.0\scopedcss\bundle\QMS.styles.css
+C:\Users\Asus\Desktop\Queue\obj\Debug\net7.0\scopedcss\projectbundle\QMS.bundle.scp.css
+C:\Users\Asus\Desktop\Queue\obj\Debug\net7.0\QMS.csproj.Up2Date
+C:\Users\Asus\Desktop\Queue\obj\Debug\net7.0\QMS.dll
+C:\Users\Asus\Desktop\Queue\obj\Debug\net7.0\refint\QMS.dll
+C:\Users\Asus\Desktop\Queue\obj\Debug\net7.0\QMS.pdb
+C:\Users\Asus\Desktop\Queue\obj\Debug\net7.0\QMS.genruntimeconfig.cache
+C:\Users\Asus\Desktop\Queue\obj\Debug\net7.0\ref\QMS.dll
+C:\Users\Asus\Desktop\Queue Manage\QueueEmployee\bin\Debug\net7.0\appsettings.Development.json
+C:\Users\Asus\Desktop\Queue Manage\QueueEmployee\bin\Debug\net7.0\appsettings.json
+C:\Users\Asus\Desktop\Queue Manage\QueueEmployee\bin\Debug\net7.0\QMS.staticwebassets.runtime.json
+C:\Users\Asus\Desktop\Queue Manage\QueueEmployee\bin\Debug\net7.0\QMS.exe
+C:\Users\Asus\Desktop\Queue Manage\QueueEmployee\bin\Debug\net7.0\QMS.deps.json
+C:\Users\Asus\Desktop\Queue Manage\QueueEmployee\bin\Debug\net7.0\QMS.runtimeconfig.json
+C:\Users\Asus\Desktop\Queue Manage\QueueEmployee\bin\Debug\net7.0\QMS.dll
+C:\Users\Asus\Desktop\Queue Manage\QueueEmployee\bin\Debug\net7.0\QMS.pdb
+C:\Users\Asus\Desktop\Queue Manage\QueueEmployee\bin\Debug\net7.0\Blazored.LocalStorage.dll
+C:\Users\Asus\Desktop\Queue Manage\QueueEmployee\bin\Debug\net7.0\Microsoft.AspNetCore.Authorization.dll
+C:\Users\Asus\Desktop\Queue Manage\QueueEmployee\bin\Debug\net7.0\Microsoft.AspNetCore.Components.dll
+C:\Users\Asus\Desktop\Queue Manage\QueueEmployee\bin\Debug\net7.0\Microsoft.AspNetCore.Metadata.dll
+C:\Users\Asus\Desktop\Queue Manage\QueueEmployee\bin\Debug\net7.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\Asus\Desktop\Queue Manage\QueueEmployee\bin\Debug\net7.0\Microsoft.Extensions.Options.dll
+C:\Users\Asus\Desktop\Queue Manage\QueueEmployee\bin\Debug\net7.0\Newtonsoft.Json.dll
+C:\Users\Asus\Desktop\Queue Manage\QueueEmployee\bin\Debug\net7.0\Radzen.Blazor.dll
+C:\Users\Asus\Desktop\Queue Manage\QueueEmployee\bin\Debug\net7.0\System.Linq.Dynamic.Core.dll
+C:\Users\Asus\Desktop\Queue Manage\QueueEmployee\obj\Debug\net7.0\QMS.csproj.AssemblyReference.cache
+C:\Users\Asus\Desktop\Queue Manage\QueueEmployee\obj\Debug\net7.0\QMS.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Asus\Desktop\Queue Manage\QueueEmployee\obj\Debug\net7.0\QMS.AssemblyInfoInputs.cache
+C:\Users\Asus\Desktop\Queue Manage\QueueEmployee\obj\Debug\net7.0\QMS.AssemblyInfo.cs
+C:\Users\Asus\Desktop\Queue Manage\QueueEmployee\obj\Debug\net7.0\QMS.csproj.CoreCompileInputs.cache
+C:\Users\Asus\Desktop\Queue Manage\QueueEmployee\obj\Debug\net7.0\QMS.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Asus\Desktop\Queue Manage\QueueEmployee\obj\Debug\net7.0\QMS.RazorAssemblyInfo.cache
+C:\Users\Asus\Desktop\Queue Manage\QueueEmployee\obj\Debug\net7.0\QMS.RazorAssemblyInfo.cs
+C:\Users\Asus\Desktop\Queue Manage\QueueEmployee\obj\Debug\net7.0\staticwebassets.build.json
+C:\Users\Asus\Desktop\Queue Manage\QueueEmployee\obj\Debug\net7.0\staticwebassets.development.json
+C:\Users\Asus\Desktop\Queue Manage\QueueEmployee\obj\Debug\net7.0\staticwebassets\msbuild.QMS.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\Asus\Desktop\Queue Manage\QueueEmployee\obj\Debug\net7.0\staticwebassets\msbuild.build.QMS.props
+C:\Users\Asus\Desktop\Queue Manage\QueueEmployee\obj\Debug\net7.0\staticwebassets\msbuild.buildMultiTargeting.QMS.props
+C:\Users\Asus\Desktop\Queue Manage\QueueEmployee\obj\Debug\net7.0\staticwebassets\msbuild.buildTransitive.QMS.props
+C:\Users\Asus\Desktop\Queue Manage\QueueEmployee\obj\Debug\net7.0\staticwebassets.pack.json
+C:\Users\Asus\Desktop\Queue Manage\QueueEmployee\obj\Debug\net7.0\scopedcss\Shared\MainLayout.razor.rz.scp.css
+C:\Users\Asus\Desktop\Queue Manage\QueueEmployee\obj\Debug\net7.0\scopedcss\Shared\NavMenu.razor.rz.scp.css
+C:\Users\Asus\Desktop\Queue Manage\QueueEmployee\obj\Debug\net7.0\scopedcss\bundle\QMS.styles.css
+C:\Users\Asus\Desktop\Queue Manage\QueueEmployee\obj\Debug\net7.0\scopedcss\projectbundle\QMS.bundle.scp.css
+C:\Users\Asus\Desktop\Queue Manage\QueueEmployee\obj\Debug\net7.0\QMS.csproj.Up2Date
+C:\Users\Asus\Desktop\Queue Manage\QueueEmployee\obj\Debug\net7.0\QMS.dll
+C:\Users\Asus\Desktop\Queue Manage\QueueEmployee\obj\Debug\net7.0\refint\QMS.dll
+C:\Users\Asus\Desktop\Queue Manage\QueueEmployee\obj\Debug\net7.0\QMS.pdb
+C:\Users\Asus\Desktop\Queue Manage\QueueEmployee\obj\Debug\net7.0\QMS.genruntimeconfig.cache
+C:\Users\Asus\Desktop\Queue Manage\QueueEmployee\obj\Debug\net7.0\ref\QMS.dll

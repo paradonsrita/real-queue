@@ -1,0 +1,80 @@
+﻿@page "/edit-user-profile"
+@using System.Security.Claims
+@using Microsoft.AspNetCore.Components.Authorization
+@using QMS.Data.Entities
+@using QMS.Services
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject AccountService AccountService
+@inject NavigationManager NavigationManager
+@inject ILogger<EditUserProfile> Logger
+
+<h2>แก้ไขข้อมูลส่วนตัว</h2>
+
+<EditForm Model="@user" OnValidSubmit="HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-group">
+        <label for="citizen_id_number">รหัสบัตรประชาชน:</label>
+        <InputText id="citizen_id_number" @bind-Value="user.citizen_id_number" class="form-control" readonly />
+    </div>
+    <div class="form-group">
+        <label for="firstname">ชื่อ:</label>
+        <InputText id="firstname" @bind-Value="user.firstname" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label for="lastname">นามสกุล:</label>
+        <InputText id="lastname" @bind-Value="user.lastname" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label for="phone_number">เบอร์โทร:</label>
+        <InputText id="phone_number" @bind-Value="user.phone_number" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">บันทึก</button>
+</EditForm>
+
+@if (!string.IsNullOrEmpty(errorMessage))
+{
+    <div class="alert alert-danger">@errorMessage</div>
+}
+
+@code {
+    private User user = new User();
+    private string errorMessage;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+            var userId = authState.User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+
+            if (userId != null)
+            {
+                user = await AccountService.GetUserByIdAsync(userId);
+            }
+            else
+            {
+                NavigationManager.NavigateTo("/");
+            }
+        }
+        catch (Exception ex)
+        {
+            Logger.LogError(ex, "Error loading user profile.");
+        }
+    }
+
+    private async Task HandleValidSubmit()
+    {
+        try
+        {
+            await AccountService.UpdateUserAsync(user);
+            NavigationManager.NavigateTo("/user-profile");
+        }
+        catch (Exception ex)
+        {
+            errorMessage = "An error occurred while updating the profile.";
+            Logger.LogError(ex, "Error updating user profile.");
+        }
+    }
+}

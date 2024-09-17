@@ -1,0 +1,35 @@
+﻿@using QMS.Models;
+@using Radzen.Blazor;
+
+<h3>ColumnChart</h3>
+<RadzenChart>
+    @if (CounterQueues != null && CounterQueues.Any())
+    {
+        <RadzenColumnSeries Data="@CounterQueues" CategoryProperty="type_name" Title="Counter queue" LineType="LineType.Dashed" ValueProperty="Total">
+            <RadzenSeriesDataLabels Visible="@ShowDataLabels" />
+        </RadzenColumnSeries>
+    }
+    @if (BookingQueues != null && BookingQueues.Any())
+    {
+        <RadzenColumnSeries Data="@BookingQueues" CategoryProperty="type_name" Title="Booking queue" LineType="LineType.Dashed" ValueProperty="Total">
+            <RadzenSeriesDataLabels Visible="@ShowDataLabels" />
+        </RadzenColumnSeries>
+    }
+
+    <RadzenColumnOptions Radius="5" />
+    <RadzenValueAxis Min="0">
+        <RadzenGridLines Visible="true" />
+        <RadzenAxisTitle Text="Amount of queue" />
+    </RadzenValueAxis>
+</RadzenChart>
+
+@code {
+    [Parameter]
+    public IEnumerable<Statistic> CounterQueues { get; set; }
+
+    [Parameter]
+    public IEnumerable<Statistic> BookingQueues { get; set; }
+
+    [Parameter]
+    public bool ShowDataLabels { get; set; }
+}

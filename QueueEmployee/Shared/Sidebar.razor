@@ -1,0 +1,27 @@
+﻿@using Microsoft.JSInterop;
+@using Radzen.Blazor;
+@using System.Net.Http.Headers;
+@using Newtonsoft.Json.Linq;
+<nav>
+    <RadzenPanelMenu>
+        <RadzenPanelMenuItem Text="Manage queue" Icon="home">
+            <RadzenPanelMenuItem Text="Counter queue" Path="/counter-queue"/>
+            <RadzenPanelMenuItem Text="Booking queue" Path="/booking-queue"/>
+        </RadzenPanelMenuItem>
+        <RadzenPanelMenuItem Text="Queue Statistics" Icon="account_box">
+            <RadzenPanelMenuItem Text="Daily Statistic" Path="/daily-statistic" />
+            <RadzenPanelMenuItem Text="Booking Statistic" Path="/booking-statistic" />
+        </RadzenPanelMenuItem>
+        <!-- <RadzenPanelMenuItem Text="Add Queue" Path="/add-queue" /> -->
+        <!-- <RadzenPanelMenuItem Text="Calendar" Path="/booking-calendar" />  -->
+        
+    </RadzenPanelMenu>
+</nav>
+@code {
+    [Inject]
+    private NavigationManager NavigationManager { get; set; }
+    bool multiple = false;
+    private bool isLoading = false;
+    private string bearerToken;
+
+}

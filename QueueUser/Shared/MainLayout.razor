@@ -1,0 +1,58 @@
+﻿@inherits LayoutComponentBase
+@inject IJSRuntime js
+@inject NavigationManager Navigation
+
+
+<PageTitle>QMS</PageTitle>
+
+<RadzenLayout Style="grid-template-areas: 'rz-sidebar rz-header' 'rz-sidebar rz-body'">
+    <RadzenHeader>
+        <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" Gap="0">
+            <RadzenSidebarToggle Click="@(() => sidebarExpanded = !sidebarExpanded)" />
+            <RadzenLabel style="text-align: center; width: 100%;" Text="ชื่อสหกรณ์">
+            </RadzenLabel>
+            <RadzenLabel style="text-align: center; width: 10%;" Text="Header"></RadzenLabel>
+            <RadzenLabel style="text-align: center; width: 10%;" Text="Header">
+                <RadzenProfileMenu>
+                    <Template>
+                        <RadzenGravatar Email="user@example.com">
+                        </RadzenGravatar>
+                    </Template>
+                    <ChildContent>
+                        <RadzenProfileMenuItem Text="Notification" Path="notification" Icon="announcement">
+                        </RadzenProfileMenuItem>
+                        <a @onclick="Logout">
+                            <RadzenProfileMenuItem Text="Logout" Icon="account_circle">
+                            </RadzenProfileMenuItem>
+                        </a>
+                    </ChildContent>
+                </RadzenProfileMenu>
+            </RadzenLabel>
+        </RadzenStack>
+    </RadzenHeader>
+    <RadzenSidebar @bind-Expanded="@sidebarExpanded">
+        <div class="rz-p-4">
+            <Sidebar />
+        </div>
+    </RadzenSidebar>
+    <RadzenBody>
+        <div class="rz-p-4">
+            @Body
+        </div>
+    </RadzenBody>
+</RadzenLayout>
+
+@code {
+    bool sidebarExpanded = true;
+    private async Task Logout()
+    {
+
+        // ลบ JWT token จาก localStorage
+        await js.InvokeVoidAsync("localStorage.removeItem", "jwtToken");
+
+        // นำผู้ใช้ไปยังหน้า login หรือหน้าอื่น
+        Navigation.NavigateTo("/login", forceLoad: true);
+
+        Console.WriteLine("User has logged out.");
+    }
+}

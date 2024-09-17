@@ -1,0 +1,57 @@
+﻿@using Microsoft.JSInterop;
+@using Radzen.Blazor;
+@using System.Net.Http.Headers;
+@using Newtonsoft.Json.Linq;
+<nav>
+    <RadzenPanelMenu>
+        <RadzenPanelMenuItem Text="Home" Icon="home" Path="/home" />
+        <RadzenPanelMenuItem Text="จองคิวออนไลน์" Icon="event" Path="/Booking"/>
+        <RadzenPanelMenuItem Text="ข้อมูลส่วนตัว" Icon="account_box" Path="/profile" />
+
+    </RadzenPanelMenu>
+</nav>
+@code {
+    [Inject]
+    private NavigationManager NavigationManager { get; set; }
+    [Inject] private IJSRuntime JSRuntime { get; set; }
+    [Inject] private HttpClient HttpClient { get; set; }
+
+    bool multiple = false;
+    private bool firstRender = true;
+    private string bearerToken;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            this.firstRender = false;
+
+            try
+            {
+                // ดึงโทเค็นจาก LocalStorage เมื่อการเรนเดอร์เสร็จสมบูรณ์
+                bearerToken = await JSRuntime.InvokeAsync<string>("localStorage.getItem", "authToken");
+
+                if (!string.IsNullOrEmpty(bearerToken))
+                {
+                    // ตั้งค่า Bearer Token ให้กับ HttpClient
+                    HttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", bearerToken);
+                }
+            }
+            catch (Exception ex)
+            {
+                // จัดการข้อผิดพลาดถ้ามี
+                Console.WriteLine($"Error loading token: {ex.Message}");
+            }
+        }
+    }
+
+    private void Logout()
+    {
+        // ลบโทเค็นออกจาก LocalStorage
+        JSRuntime.InvokeVoidAsync("localStorage.removeItem", "authToken");
+
+        // นำทางกลับไปยังหน้าเข้าสู่ระบบหรือหน้าแรก
+        NavigationManager.NavigateTo("/");
+    }
+
+}

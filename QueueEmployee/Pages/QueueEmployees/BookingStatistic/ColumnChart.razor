@@ -1,0 +1,87 @@
+﻿@using QMS.Models;
+@using Radzen.Blazor;
+
+<RadzenStack Orientation="Orientation.Vertical" Gap="1rem" class="rz-p-0 rz-p-md-6 rz-p-lg-12">
+    <RadzenCard Variant="Variant.Outlined" Style=" border-width: 2px; border-radius: 10px;">
+        <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" Wrap="FlexWrap.Wrap">
+            <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" Gap="0.5rem">
+                <RadzenCheckBox @bind-Value="@showDataLabels" Name="dataLabels" Style="border: 2px solid #c5d0d9; padding: 4px; border-radius: 5px;"></RadzenCheckBox>
+                <RadzenLabel Text="Show Data Labels" Component="dataLabels" />
+            </RadzenStack>
+        </RadzenStack>
+    </RadzenCard>
+
+    <RadzenChart>
+        <RadzenCategoryAxis>
+            <RadzenCategoryAxisLabels Rotation="Rotation.Horizontal" />
+        </RadzenCategoryAxis>
+
+        <!-- Series สำหรับ bookingStatistic -->
+        <RadzenColumnSeries Data="@bookingStatistic" CategoryProperty="type_name" ValueProperty="Total" Title="Booking"
+                            Stroke="blue" Fill="blue" >
+            <RadzenSeriesDataLabels Visible="@showDataLabels" />
+        </RadzenColumnSeries>
+
+        <!-- Series สำหรับ counterStatistic -->
+        <RadzenColumnSeries Data="@counterStatistic" CategoryProperty="type_name" ValueProperty="Total" Title="Counter"
+                            Stroke="green" Fill="green">
+            <RadzenSeriesDataLabels Visible="@showDataLabels" />
+    </RadzenColumnSeries>
+
+        <RadzenLegend Position="LegendPosition.Top" />
+        <RadzenValueAxis>
+            <RadzenValueAxisTitle Text="Total" />
+        </RadzenValueAxis>
+    </RadzenChart>
+</RadzenStack>
+
+
+@code {
+    [Parameter]
+    public IEnumerable<Statistic> Statistics { get; set; }
+
+    public IEnumerable<Statistic> bookingStatistic { get; set; }
+    public IEnumerable<Statistic> counterStatistic { get; set; }
+
+    public bool showDataLabels { get; set; }
+
+    protected override void OnParametersSet()
+    {
+        // รวมค่าที่มีความซ้ำซ้อน
+        bookingStatistic = Statistics
+            .Where(q => q.Source == "booking")
+            .GroupBy(q => q.type_name)
+                        .Select(g => new Statistic
+                            {
+                                type_name = g.Key,
+                                Total = g.Sum(g => g.Total)
+                            })
+            .ToList();
+
+        counterStatistic = Statistics
+            .Where(q => q.Source == "counter")
+            .GroupBy(q => q.type_name)
+                        .Select(g => new Statistic
+                            {
+                                type_name = g.Key,
+                                Total = g.Sum(g => g.Total)
+                            })
+            .ToList();
+
+
+        // ตรวจสอบข้อมูลด้วยการพิมพ์ออกมาใน Console
+        Console.WriteLine("Booking Statistic:");
+        foreach (var item in bookingStatistic)
+        {
+            Console.WriteLine($"Type: {item.type_name}, Total: {item.Total}");
+        }
+
+        Console.WriteLine("Counter Statistic:");
+        foreach (var item in counterStatistic)
+        {
+            Console.WriteLine($"Type: {item.type_name}, Total: {item.Total}");
+        }
+    }
+
+
+}

@@ -1,0 +1,48 @@
+﻿@page "/counter"
+@using QMS.Services
+@using QMS.Models
+
+@inject QueueCounterService QueueService
+@inject NavigationManager NavigationManager
+
+<h3>เลือกประเภทคิว</h3>
+
+<div>
+    <button class="btn btn-primary m-2" @onclick='() => BookQueue("F")'>Finance</button>
+    <button class="btn btn-primary m-2" @onclick='() => BookQueue("L")'>Loan</button>
+    <button class="btn btn-primary m-2" @onclick='() => BookQueue("S")'>Shares</button>
+    <button class="btn btn-primary m-2" @onclick='() => BookQueue("D")'>รายการ D</button>
+</div>
+
+@if (!string.IsNullOrEmpty(ErrorMessage))
+{
+    <div class="alert alert-danger mt-3">
+        @ErrorMessage
+    </div>
+}
+
+@code {
+    private string ErrorMessage;
+
+    private async Task BookQueue(string queueType)
+    {
+        var result = await QueueService.AddQueueAsync(queueType);
+
+        if (result != null)
+        {
+            var queueId = result.queue_id; // หรือถ้า result เป็นแบบอื่น ให้แก้ไขให้ถูกต้องตามชนิด
+            if (queueId > 0)
+            {
+                NavigationManager.NavigateTo($"/queue-ticket/{queueId}", true);
+            }
+            else
+            {
+                ErrorMessage = "ไม่สามารถจองคิวได้ กรุณาลองใหม่อีกครั้ง";
+            }
+        }
+        else
+        {
+            ErrorMessage = "ไม่สามารถจองคิวได้ กรุณาลองใหม่อีกครั้ง";
+        }
+    }
+}

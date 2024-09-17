@@ -1,0 +1,68 @@
+﻿@page "/"
+@inject IJSRuntime js
+@inject HttpClient Http
+@inject NavigationManager Navigation
+@using QMS.Models
+@inject IConfiguration Configuration
+
+
+<h3>Welcome to the Application</h3>
+
+        <p>กำลังโหลด</p>
+
+
+@code {
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            try
+            {
+            // ตรวจสอบ token หลังจาก render เสร็จ
+            var token = await js.InvokeAsync<string>("localStorage.getItem", "jwtToken");
+
+            if (!string.IsNullOrEmpty(token))
+            {
+                // ดึง userId จาก token
+                var userId = JwtHelper.GetUserIdFromToken(token, Configuration);
+
+                if (userId.HasValue)
+                {
+                    Http.DefaultRequestHeaders.Authorization =
+                        new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+
+                        var response = await Http.GetAsync($"https://localhost:44328/api/User?userId={userId.Value}");
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        Navigation.NavigateTo("/home");
+                    }
+                    else
+                    {
+                        await js.InvokeVoidAsync("localStorage.removeItem", "jwtToken");
+                        Navigation.NavigateTo("/login");
+                    }
+                }//1500701309052 Paradon_2003
+                else
+                {
+                    await js.InvokeVoidAsync("localStorage.removeItem", "jwtToken");
+                    Navigation.NavigateTo("/login");
+                }
+            }
+            else
+            {
+                Navigation.NavigateTo("/login");
+            }
+            }
+            catch (Exception ex)
+            {
+                // การจัดการข้อผิดพลาด
+                Console.WriteLine($"Error: {ex.Message}");
+                await js.InvokeVoidAsync("localStorage.removeItem", "jwtToken");
+                Navigation.NavigateTo("/login");
+            }
+        }
+    }
+}
+

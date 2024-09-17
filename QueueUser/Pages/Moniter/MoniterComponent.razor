@@ -1,0 +1,63 @@
+﻿@page "/monitor"
+@inject HttpClient Http
+
+<h3>Monitor</h3>
+
+
+
+<h5>Counter queue</h5>
+@if (queue.Where(q => q.Source == "counter") != null)
+{
+    <table class="table table-dark mt-5">
+        <thead>
+            <tr>
+                <th>Queue Number</th>
+                <th>Queue Type</th>
+                <th>Counter</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var stat in queue.Where(q => q.QueueStatus == "in process" && q.Source == "counter"))
+            {
+                <tr>
+                    <td>@stat.QueueNumber</td>
+                    <td>@stat.QueueType</td>
+                    <td>@stat.Counter</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Loading...</p>
+}
+
+@code {
+    private List<StatisticModel> queue;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            queue = await Http.GetFromJsonAsync<List<StatisticModel>>("https://localhost:44328/api/Statistics/daily-statistics");
+
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error loading statistics: {ex.Message}");
+        }
+    }
+
+    // Model ที่จะใช้ในการรับข้อมูล
+    public class StatisticModel
+    {
+        public int queue_id { get; set; }
+        public DateTime QueueDate { get; set; }
+        public string QueueStatus { get; set; }
+        public string QueueType { get; set; }
+        public string QueueNumber { get; set; }
+        public int? Counter { get; set; }
+        public string Source { get; set; }
+    }
+}

@@ -1,0 +1,21 @@
+﻿@using Microsoft.JSInterop;
+@using QMS.Services.LocalStorage
+@using Radzen.Blazor;
+@using System.Net.Http.Headers;
+@using Newtonsoft.Json.Linq;
+@inject LocalStorageService LocalStorageService
+@inject NavigationManager Navigation
+
+
+
+<RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center">
+	<RadzenLabel Text="Select Counter" />
+    <RadzenDropDown @bind-Value="selectedCounter" 
+    Data="counter" Change="OnCounterChanged" />
+
+	<RadzenLabel Text="Select Transaction" />
+    <RadzenDropDown @bind-Value="selectedTransaction" 
+    Data="transaction" Change="OnTransactionChanged" />
+</RadzenStack>
+
+

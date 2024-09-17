@@ -1,0 +1,86 @@
+﻿@using QMS.Models;
+@using Radzen.Blazor;
+@using System.Globalization
+
+
+<RadzenStack class="rz-p-0 rz-p-md-6 rz-p-lg-12">
+    <RadzenCard Variant="Variant.Outlined"  Style=" border-width: 2px; border-radius: 10px;">
+        <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" Wrap="FlexWrap.Wrap">
+            <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" Gap="0.5rem">
+                <RadzenCheckBox @bind-Value="@smooth" Name="smooth" Style="border: 2px solid #c5d0d9; padding: 4px; border-radius: 5px;"></RadzenCheckBox>
+                <RadzenLabel Text="Smooth" Component="smooth" />
+            </RadzenStack>
+            <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" Gap="0.5rem">
+                <RadzenCheckBox @bind-Value="@showDataLabels" Name="dataLabels" Style="border: 2px solid #c5d0d9; padding: 4px; border-radius: 5px;"></RadzenCheckBox>
+                <RadzenLabel Text="Show Data Labels" Component="dataLabels" />
+            </RadzenStack>
+            <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" Gap="0.5rem">
+                <RadzenCheckBox @bind-Value="@showMarkers" Name="markers" Style="border: 2px solid #c5d0d9; padding: 4px; border-radius: 5px;"></RadzenCheckBox>
+                <RadzenLabel Text="Show Markers" Component="markers" />
+            </RadzenStack>
+            
+        </RadzenStack>
+    </RadzenCard>
+
+   <RadzenChart>
+        <RadzenChartTooltipOptions/>
+        <RadzenLineSeries Smooth="@smooth" Data="@counterStatistic" CategoryProperty="Date" Title="Counter Queue" LineType="LineType.Dashed" ValueProperty="Total">
+            <RadzenMarkers Visible="@showMarkers" MarkerType="MarkerType.Square" />
+            <RadzenSeriesDataLabels Visible="@showDataLabels" />
+        </RadzenLineSeries>
+        <RadzenLineSeries Smooth="@smooth" Data="@bookingStatistic" CategoryProperty="Date" Title="Booking Queue" ValueProperty="Total">
+            <RadzenMarkers Visible="@showMarkers" MarkerType="MarkerType.Circle" />
+            <RadzenSeriesDataLabels Visible="@showDataLabels" />
+        </RadzenLineSeries>
+        <RadzenCategoryAxis Padding="20" />
+        <RadzenValueAxis>
+            <RadzenGridLines Visible="true" />
+        </RadzenValueAxis>
+        <RadzenLegend Position="LegendPosition.Top" />
+
+    </RadzenChart>
+</RadzenStack>
+
+@code {
+    bool smooth = false;
+    bool showDataLabels = false;
+    bool showMarkers = true;
+    [Parameter] 
+    public IEnumerable<Statistic> Statistics { get; set; }
+
+    private IEnumerable<Statistic> bookingStatistic { get; set; }
+    private IEnumerable<Statistic> counterStatistic { get; set; }
+
+
+    protected override void OnParametersSet()
+    {
+        // รวมค่าที่มีความซ้ำซ้อน
+        bookingStatistic = Statistics
+            .Where(q => q.Source == "booking")
+            .GroupBy(q => new
+            {
+                q.Date
+            })
+            .Select(group => new Statistic
+                {
+                    Date = group.Key.Date,
+                    Total = group.Sum(g => g.Total) // รวมค่า Total ที่มีความซ้ำ
+                })
+            .ToList();
+
+        counterStatistic = Statistics
+            .Where(q => q.Source == "counter")
+            .GroupBy(q => new { q.Date })
+            .Select(group => new Statistic
+                {
+                    Date = group.Key.Date,
+                    Total = group.Sum(g => g.Total) // รวมค่า Total ที่มีความซ้ำ
+                })
+            .ToList();
+    }
+
+
+
+    
+
+}

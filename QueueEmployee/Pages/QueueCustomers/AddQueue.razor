@@ -1,0 +1,52 @@
+﻿@page "/add-queue"
+@inject HttpClient Http
+@using Radzen.Blazor;
+@inject IHttpClientFactory ClientFactory
+
+
+<PageTitle>Add Queue</PageTitle>
+
+<h3>Select Queue Type</h3>
+<RadzenButton Text="Queue L" Click="@(args => PostQueueAsync("L"))" Style="margin-right: 10px;" />
+<RadzenButton Text="Queue F" Click="@(args => PostQueueAsync("F"))" Style="margin-right: 10px;" />
+<RadzenButton Text="Queue S" Click="@(args => PostQueueAsync("S"))" />
+
+@if (isSuccess)
+{
+    <p>Queue created successfully!</p>
+}
+else if (!string.IsNullOrEmpty(errorMessage))
+{
+    <p>Error: @errorMessage</p>
+}
+@code {
+    [Inject]
+    private NavigationManager NavigationManager { get; set; }
+    bool multiple = false;
+    private bool isLoading = false;
+
+    private bool isSuccess;
+    private string errorMessage;
+
+    private async Task PostQueueAsync(string type)
+    {
+        try
+        {
+
+            var response = await Http.PostAsJsonAsync($"https://localhost:44328/api/Queue?type={type}", new { });
+            if (response.IsSuccessStatusCode)
+            {
+                isSuccess = true;
+            }
+            else
+            {
+                isSuccess = false;
+                errorMessage = await response.Content.ReadAsStringAsync();
+            }
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error: {ex.Message}";
+        }
+    }
+}

@@ -1,0 +1,14 @@
+﻿@page "/registration-successful"
+@inject NavigationManager NavigationManager
+
+<h3>Registration Successful</h3>
+<p>Your registration was successful!</p>
+
+<button class="btn btn-primary" @onclick="NavigateToNextPage">กลับหน้าเข้าสู่ระบบ</button>
+
+@code {
+    private void NavigateToNextPage()
+    {
+        NavigationManager.NavigateTo("/");
+    }
+}

@@ -1,0 +1,24 @@
+﻿@page "/logout"
+@using QMS.Pages.Profile
+@inject CustomAuthenticationStateProvider AuthenticationStateProvider
+@inject NavigationManager Navigation
+@inject ILogger<UserProfile> Logger
+
+<h3>ออกจากระบบ</h3>
+
+<p>กำลังออกจากระบบ...</p>
+
+@code {
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            AuthenticationStateProvider.SetUserLoggedOut();
+            Navigation.NavigateTo("/");
+        }
+        catch (Exception ex)
+        {
+            Logger.LogError(ex, "Error logging out.");
+        }
+    }
+}

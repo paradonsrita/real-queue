@@ -5,14 +5,17 @@
 @inject QueueService QueueService
 @inject NavigationManager NavigationManager
 
-<h3>เลือกประเภทคิว</h3>
+<div class="text-center">
+    <h3>เลือกประเภทคิว</h3>
 
-<div>
-    <button class="btn btn-primary m-2" @onclick='() => BookQueue("F")'>Finance</button>
-    <button class="btn btn-primary m-2" @onclick='() => BookQueue("L")'>Loan</button>
-    <button class="btn btn-primary m-2" @onclick='() => BookQueue("S")'>Shares</button>
-    <button class="btn btn-primary m-2" @onclick='() => BookQueue("D")'>รายการ D</button>
+    <div>
+        <button class="btn btn-primary m-2" @onclick='() => BookQueue("F")'>เปิด-ปิดบัญชีฝากถอน</button>
+        <button class="btn btn-primary m-2" @onclick='() => BookQueue("L")'>ขอกู้ รับชำระ จ่ายเงินกู้</button>
+        <button class="btn btn-primary m-2" @onclick='() => BookQueue("S")'>สมัครสมาชิก ลาออก ซื้อ-ถอนหุ้น</button>
+        <button class="btn btn-primary m-2">อื่น ๆ</button>
+    </div>
 </div>
+
 
 @if (!string.IsNullOrEmpty(ErrorMessage))
 {

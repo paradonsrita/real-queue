@@ -11,7 +11,7 @@
 {
     <div class="card p-3">
         <h4>หมายเลขคิว: @queueDetails.QueueNumber</h4>
-        <p>รายการที่เลือก: @queueDetails.QueueType</p>
+        <p>รายการที่เลือก: @TransformQueueType(queueDetails.QueueType)</p>
         <p>วันที่และเวลา: @queueDetails.queue_date.ToString("dd/MM/yyyy HH:mm")</p>
         <button class="btn btn-secondary mt-3" @onclick="BackToBooking">กลับไปที่หน้าจองคิว</button>
     </div>
@@ -19,7 +19,6 @@
 else if (loading)
 {
     <p>กำลังโหลดข้อมูล...</p>
-
 }
 else
 {
@@ -34,7 +33,13 @@ else
 
     private QueueModel queueDetails;
 
-
+    // Dictionary สำหรับแปลงค่า QueueType
+    private Dictionary<string, string> queueTypeMappings = new Dictionary<string, string>
+    {
+        { "Loan", "ขอกู้ รับชำระ จ่ายเงินกู้" },
+        { "Finance", "เปิด-ปิดบัญชีฝากถอน" },
+        { "Shares", "สมัครสมาชิก ลาออก ซื้อ-ถอนหุ้น" }
+    };
 
     protected override async Task OnInitializedAsync()
     {
@@ -64,6 +69,10 @@ else
     private void BackToBooking()
     {
         NavigationManager.NavigateTo("/");
+    }
+    private string TransformQueueType(string queueType)
+    {
+        return queueTypeMappings.TryGetValue(queueType, out var thaiValue) ? thaiValue : queueType;
     }
 }
 

@@ -1,0 +1,30 @@
+﻿@inherits LayoutComponentBase
+
+<PageTitle>QMS</PageTitle>
+
+<RadzenLayout Style="grid-template-areas: 'rz-sidebar rz-header' 'rz-sidebar rz-body'">
+    <RadzenHeader>
+        <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" Gap="0">
+            <RadzenSidebarToggle Click="@(() => sidebarExpanded = !sidebarExpanded)" />
+            <RadzenLabel style="text-align: center; width: 100%;" Text="ชื่อสหกรณ์">
+            </RadzenLabel>
+            <RadzenLabel style="text-align: center; width: 10%;" Text="Header"></RadzenLabel>
+            
+        </RadzenStack>
+    </RadzenHeader>
+    
+    <RadzenBody>
+        <div class="rz-p-4">
+            @Body
+        </div>
+    </RadzenBody>
+</RadzenLayout>
+
+@code {
+    bool sidebarExpanded = true;
+    private async Task Logout()
+    {
+
+        Console.WriteLine("User has logged out.");
+    }
+}

@@ -1,0 +1,21 @@
+﻿@using Microsoft.JSInterop;
+@using Radzen.Blazor;
+@using System.Net.Http.Headers;
+@using Newtonsoft.Json.Linq;
+<nav>
+    <RadzenPanelMenu>
+        <RadzenPanelMenuItem Text="Home" Icon="home">
+            <RadzenPanelMenuItem Text="home1" Path="/index">
+            </RadzenPanelMenuItem>
+        </RadzenPanelMenuItem>
+        <RadzenPanelMenuItem Text="Users" Icon="account_box" />
+    </RadzenPanelMenu>
+</nav>
+@code {
+    [Inject]
+    private NavigationManager NavigationManager { get; set; }
+    bool multiple = false;
+    private bool isLoading = false;
+    private string bearerToken;
+
+}

@@ -1,4 +1,4 @@
-using Newtonsoft.Json.Serialization;
+﻿using Newtonsoft.Json.Serialization;
 using System.Text;
 using ApiIsocare2.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -8,6 +8,8 @@ using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
 using ApiIsocare2.Utilities.Interface;
 using ApiIsocare2.Utilities;
+using ApiIsocare2.Utilities.SignalR;
+
 
 namespace ApiIsocare2
 {
@@ -17,12 +19,9 @@ namespace ApiIsocare2
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            //Add services to the container.
-            //builder.Services.AddDbContext<AppDbContext>(options =>
-            //options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-
             
-
+            
+            //forget password
             var key = Encoding.ASCII.GetBytes(builder.Configuration["Jwt:Key"]);
             builder.Services.AddAuthentication(options =>
             {
@@ -60,6 +59,9 @@ namespace ApiIsocare2
                     ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("DefaultConnection"))));
 
 
+            builder.Services.AddSignalR(); // Add SignalR services
+
+
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
@@ -76,6 +78,7 @@ namespace ApiIsocare2
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
+
             }
 
             app.UseHttpsRedirection();
@@ -83,9 +86,13 @@ namespace ApiIsocare2
             app.UseAuthentication(); // Ensure authentication is used
 
             app.UseAuthorization();
+            app.UseStaticFiles(); //มีประโยชน์ในการจัดการไฟล์ที่ผู้ใช้สามารถเข้าถึงได้โดยตรง
 
 
             app.MapControllers();
+
+            app.MapHub<NotificationHub>("/notificationHub"); // Map SignalR Hub
+
 
             app.Run();
         }

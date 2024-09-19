@@ -1,0 +1,55 @@
+is_global = true
+build_property.TargetFramework = net7.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = QMS
+build_property.RootNamespace = QMS
+build_property.ProjectDir = C:\Users\Asus\Desktop\Queue Manage\QueueMoniter\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 7.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\Asus\Desktop\Queue Manage\QueueMoniter
+build_property._RazorSourceGeneratorDebug = 
+
+[C:/Users/Asus/Desktop/Queue Manage/QueueMoniter/App.razor]
+build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Asus/Desktop/Queue Manage/QueueMoniter/Pages/Moniter/MoniterComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTW9uaXRlclxNb25pdGVyQ29tcG9uZW50LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Asus/Desktop/Queue Manage/QueueMoniter/Shared/Sidebar.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXFNpZGViYXIucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Asus/Desktop/Queue Manage/QueueMoniter/Shared/SurveyPrompt.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXFN1cnZleVByb21wdC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Asus/Desktop/Queue Manage/QueueMoniter/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Asus/Desktop/Queue Manage/QueueMoniter/Pages/Moniter/MonitorTable.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTW9uaXRlclxNb25pdG9yVGFibGUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-dvelimjc70
+
+[C:/Users/Asus/Desktop/Queue Manage/QueueMoniter/Shared/MainLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE1haW5MYXlvdXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-5820ef2mb7
+
+[C:/Users/Asus/Desktop/Queue Manage/QueueMoniter/Pages/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Asus/Desktop/Queue Manage/QueueMoniter/Pages/_Host.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX0hvc3QuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 

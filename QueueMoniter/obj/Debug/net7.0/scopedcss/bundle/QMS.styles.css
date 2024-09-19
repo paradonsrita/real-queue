@@ -1,0 +1,118 @@
+/* _content/QMS/Pages/Moniter/MonitorTable.razor.rz.scp.css */
+.custom-border[b-dvelimjc70] {
+    position: relative;
+    padding: 20px;
+    background-color: #69b496;
+}
+
+    .custom-border[b-dvelimjc70]::before {
+        content: "";
+        position: absolute;
+        top: -10px;
+        left: -10px;
+        right: -10px;
+        bottom: -10px;
+        border: 5px solid transparent;
+        background: #f1ede2;
+        z-index: -1;
+    }
+
+.table[b-dvelimjc70] {
+    border-collapse: collapse; /* รวมกรอบเซลล์ให้เป็นหนึ่งเดียว */
+    width: 100%; /* กำหนดความกว้างของตาราง */
+}
+
+    .table th[b-dvelimjc70], .table td[b-dvelimjc70] {
+        border: 1px solid #ddd; /* กำหนดสีและความหนาของกรอบเซลล์ */
+        padding: 8px; /* กำหนดระยะห่างภายในเซลล์ */
+    }
+
+    .table tbody tr:nth-child(even)[b-dvelimjc70] {
+        background-color: #343a40 !important; /* สีดำสำหรับแถวที่เป็นเลขคี่ */
+        color: #ffffff; /* สีตัวอักษรขาวเพื่อให้มีความชัดเจน */
+    }
+
+    .table thead[b-dvelimjc70] {
+        background-color: #343a40 !important; /* สีดำสำหรับแถวที่เป็นเลขคี่ */
+        color: #ffffff; /* สีตัวอักษรขาวเพื่อให้มีความชัดเจน */
+    }
+
+    .table tbody tr:nth-child(odd)[b-dvelimjc70] {
+        background-color: #bfbfbf !important; /* สีขาวสำหรับแถวที่เป็นเลขคู่ */
+        color: #000000; /* สีตัวอักษรดำสำหรับแถวที่เป็นสีขาว */
+    }
+
+tr[b-dvelimjc70] {
+    height: 50px; /* กำหนดความสูงของแถวให้เหมือนกับแถวที่มีข้อมูล */
+}
+/* _content/QMS/Shared/MainLayout.razor.rz.scp.css */
+.page[b-5820ef2mb7] {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+main[b-5820ef2mb7] {
+    flex: 1;
+}
+
+.sidebar[b-5820ef2mb7] {
+    background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%);
+}
+
+.top-row[b-5820ef2mb7] {
+    background-color: #f7f7f7;
+    border-bottom: 1px solid #d6d5d5;
+    justify-content: flex-end;
+    height: 3.5rem;
+    display: flex;
+    align-items: center;
+}
+
+    .top-row[b-5820ef2mb7]  a, .top-row .btn-link[b-5820ef2mb7] {
+        white-space: nowrap;
+        margin-left: 1.5rem;
+    }
+
+    .top-row a:first-child[b-5820ef2mb7] {
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+@media (max-width: 640.98px) {
+    .top-row:not(.auth)[b-5820ef2mb7] {
+        display: none;
+    }
+
+    .top-row.auth[b-5820ef2mb7] {
+        justify-content: space-between;
+    }
+
+    .top-row a[b-5820ef2mb7], .top-row .btn-link[b-5820ef2mb7] {
+        margin-left: 0;
+    }
+}
+
+@media (min-width: 641px) {
+    .page[b-5820ef2mb7] {
+        flex-direction: row;
+    }
+
+    .sidebar[b-5820ef2mb7] {
+        width: 250px;
+        height: 100vh;
+        position: sticky;
+        top: 0;
+    }
+
+    .top-row[b-5820ef2mb7] {
+        position: sticky;
+        top: 0;
+        z-index: 1;
+    }
+
+    .top-row[b-5820ef2mb7], article[b-5820ef2mb7] {
+        padding-left: 2rem !important;
+        padding-right: 1.5rem !important;
+    }
+}

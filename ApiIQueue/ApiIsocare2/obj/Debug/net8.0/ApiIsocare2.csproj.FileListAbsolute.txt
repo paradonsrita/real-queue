@@ -756,3 +756,5 @@ C:\Users\Asus\Desktop\Queue Manage\ApiIQueue\ApiIsocare2\obj\Debug\net8.0\refint
 C:\Users\Asus\Desktop\Queue Manage\ApiIQueue\ApiIsocare2\obj\Debug\net8.0\ApiIsocare2.pdb
 C:\Users\Asus\Desktop\Queue Manage\ApiIQueue\ApiIsocare2\obj\Debug\net8.0\ApiIsocare2.genruntimeconfig.cache
 C:\Users\Asus\Desktop\Queue Manage\ApiIQueue\ApiIsocare2\obj\Debug\net8.0\ref\ApiIsocare2.dll
+C:\Users\Asus\Desktop\Queue Manage\ApiIQueue\ApiIsocare2\bin\Debug\net8.0\System.Net.WebSockets.WebSocketProtocol.dll
+C:\Users\Asus\Desktop\Queue Manage\ApiIQueue\ApiIsocare2\obj\Debug\net8.0\ApiIsocare2.sourcelink.json

@@ -9,35 +9,39 @@
             <RadzenLabel style="text-align: center; width: 100%;" Text="ชื่อสหกรณ์">
             </RadzenLabel>
             <RadzenLabel style="text-align: center; width: 10%;" Text="Header"></RadzenLabel>
-            <RadzenLabel style="text-align: center; width: 10%;" Text="Header">
-                <RadzenProfileMenu>
-                    <Template>
-                        <RadzenGravatar Email="user@example.com">
-                        </RadzenGravatar>
-                    </Template>
-                    <ChildContent>
-                        <RadzenProfileMenuItem Text="Menu" Path="menu" Icon="line_weight">
-                        </RadzenProfileMenuItem>
-                        <RadzenProfileMenuItem Text="FileInput" Path="fileinput" Icon="attach_file">
-                        </RadzenProfileMenuItem>
-                        <RadzenProfileMenuItem Text="Dialog" Path="dialog" Icon="perm_media">
-                        </RadzenProfileMenuItem>
-                        <RadzenProfileMenuItem Text="Notification" Path="notification" Icon="announcement">
-                        </RadzenProfileMenuItem>
-                        <a @onclick="Logout">
-                            <RadzenProfileMenuItem Text="Logout" Icon="account_circle">
+            <!--
+                <RadzenLabel style="text-align: center; width: 10%;" Text="Header">
+                    <RadzenProfileMenu>
+                        <Template>
+                            <RadzenGravatar Email="user@example.com">
+                            </RadzenGravatar>
+                        </Template>
+                        <ChildContent>
+                            <RadzenProfileMenuItem Text="Menu" Path="menu" Icon="line_weight">
                             </RadzenProfileMenuItem>
-                        </a>
-                    </ChildContent>
-                </RadzenProfileMenu>
-            </RadzenLabel>
+                            <RadzenProfileMenuItem Text="FileInput" Path="fileinput" Icon="attach_file">
+                            </RadzenProfileMenuItem>
+                            <RadzenProfileMenuItem Text="Dialog" Path="dialog" Icon="perm_media">
+                            </RadzenProfileMenuItem>
+                            <RadzenProfileMenuItem Text="Notification" Path="notification" Icon="announcement">
+                            </RadzenProfileMenuItem>
+                            <a @onclick="Logout">
+                                <RadzenProfileMenuItem Text="Logout" Icon="account_circle">
+                                </RadzenProfileMenuItem>
+                            </a>
+                        </ChildContent>
+                    </RadzenProfileMenu>
+                </RadzenLabel>
+            -->
         </RadzenStack>
     </RadzenHeader>
+    <!--
     <RadzenSidebar @bind-Expanded="@sidebarExpanded">
         <div class="rz-p-4">
             <Sidebar />
         </div>
     </RadzenSidebar>
+    -->
     <RadzenBody>
         <div class="rz-p-4">
             @Body

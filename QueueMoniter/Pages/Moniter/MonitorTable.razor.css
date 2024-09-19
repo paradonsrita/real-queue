@@ -1,0 +1,46 @@
+﻿.custom-border {
+    position: relative;
+    padding: 20px;
+    background-color: #69b496;
+}
+
+    .custom-border::before {
+        content: "";
+        position: absolute;
+        top: -10px;
+        left: -10px;
+        right: -10px;
+        bottom: -10px;
+        border: 5px solid transparent;
+        background: #f1ede2;
+        z-index: -1;
+    }
+
+.table {
+    border-collapse: collapse; /* รวมกรอบเซลล์ให้เป็นหนึ่งเดียว */
+    width: 100%; /* กำหนดความกว้างของตาราง */
+}
+
+    .table th, .table td {
+        border: 1px solid #ddd; /* กำหนดสีและความหนาของกรอบเซลล์ */
+        padding: 8px; /* กำหนดระยะห่างภายในเซลล์ */
+    }
+
+    .table tbody tr:nth-child(even) {
+        background-color: #343a40 !important; /* สีดำสำหรับแถวที่เป็นเลขคี่ */
+        color: #ffffff; /* สีตัวอักษรขาวเพื่อให้มีความชัดเจน */
+    }
+
+    .table thead {
+        background-color: #343a40 !important; /* สีดำสำหรับแถวที่เป็นเลขคี่ */
+        color: #ffffff; /* สีตัวอักษรขาวเพื่อให้มีความชัดเจน */
+    }
+
+    .table tbody tr:nth-child(odd) {
+        background-color: #bfbfbf !important; /* สีขาวสำหรับแถวที่เป็นเลขคู่ */
+        color: #000000; /* สีตัวอักษรดำสำหรับแถวที่เป็นสีขาว */
+    }
+
+tr {
+    height: 50px; /* กำหนดความสูงของแถวให้เหมือนกับแถวที่มีข้อมูล */
+}

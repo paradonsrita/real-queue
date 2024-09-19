@@ -32,7 +32,7 @@ else
             @foreach (var queue in queues.Where(q => q.counter == selectedCounter && q.QueueStatus == "in process").OrderBy(q => q.QueueNumber))
             {
                 <tr>
-                    <td>@queue.QueueType</td>
+                    <td>@TransformQueueType(queue.QueueType)</td>
                     <td>@queue.QueueNumber</td>
                     <td>@queue.counter</td>
                 </tr>
@@ -54,7 +54,7 @@ else
                 .OrderBy(q => q.QueueNumber))
             {
                 <tr>
-                    <td>@queue.QueueType</td>
+                    <td>@TransformQueueType(queue.QueueType)</td>
                     <td>@queue.QueueNumber</td>
                 </tr>
             }

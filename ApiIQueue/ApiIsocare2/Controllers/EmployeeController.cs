@@ -1,7 +1,9 @@
 ﻿using ApiIsocare2.Data;
 using ApiIsocare2.Models;
+using ApiIsocare2.Utilities.SignalR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 
 namespace ApiIsocare2.Controllers
@@ -10,10 +12,12 @@ namespace ApiIsocare2.Controllers
     [ApiController]
     public class EmployeeController : ControllerBase
     {
+        private readonly IHubContext<NotificationHub> _hubContext;
         private readonly AppDbContext _db;
-        public EmployeeController(AppDbContext db)
+        public EmployeeController(IHubContext<NotificationHub> hubContext,AppDbContext db)
         {
             _db = db;
+            _hubContext = hubContext;
         }
 
         //  PUT: api/Employee/callCounterQueue
@@ -50,6 +54,9 @@ namespace ApiIsocare2.Controllers
                 if (nowQueue != null || waitQueue != null)
                 {
                     await _db.SaveChangesAsync();
+                    // Notify clients via SignalR
+                    await _hubContext.Clients.All.SendAsync("ReceiveMessage", "Queue updated");
+
                     return NoContent();
                 }
                 throw new Exception("No wait queue or now queue");
@@ -91,6 +98,10 @@ namespace ApiIsocare2.Controllers
 
                     }
                     await _db.SaveChangesAsync();
+
+                    // Notify clients via SignalR
+                    await _hubContext.Clients.All.SendAsync("ReceiveMessage", "Queue updated");
+
                     return NoContent();
                 }
 
@@ -130,6 +141,10 @@ namespace ApiIsocare2.Controllers
                         waitQueue.queue_status_id = 2;
                         waitQueue.counter = counter;
                         await _db.SaveChangesAsync();
+
+                        // Notify clients via SignalR
+                        await _hubContext.Clients.All.SendAsync("ReceiveMessage", "Queue updated");
+
                     }
                     else
                     {
@@ -177,6 +192,10 @@ namespace ApiIsocare2.Controllers
 
                     }
                     await _db.SaveChangesAsync();
+
+                    // Notify clients via SignalR
+                    await _hubContext.Clients.All.SendAsync("ReceiveMessage", "Queue updated");
+
                     return NoContent();
                 }
 

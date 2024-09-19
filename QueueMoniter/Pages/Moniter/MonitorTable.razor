@@ -1,0 +1,46 @@
+﻿@using System.Collections.Generic
+@using QMS.Models
+
+<table class="table mb-5">
+    <thead>
+        <tr>
+            <th>Queue Number</th>
+            <th>Queue Type</th>
+            <th>Counter</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var stat in Queue.Where(q => q.QueueStatus == "in process" && q.Source == Source))
+        {
+            <tr>
+                <td>@(string.IsNullOrEmpty(stat.QueueNumber) ? "-" : stat.QueueNumber)</td>
+                <td>@(string.IsNullOrEmpty(stat.QueueType) ? "-" : stat.QueueType)</td>
+                <td>@(stat.Counter.HasValue ? stat.Counter.ToString() : "-")</td>
+            </tr>
+        }
+        @if (Queue.Count(q => q.QueueStatus == "in process" && q.Source == Source) < 3)
+        {
+            var emptyRows = 3 - Queue.Count(q => q.QueueStatus == "in process" && q.Source == Source);
+
+            @for (int i = 0; i < emptyRows; i++)
+            {
+                <tr class="empty-row">
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+@code {
+    [Parameter]
+    public string Source { get; set; }
+
+    [Parameter]
+    public List<QueueModel> Queue { get; set; }
+
+    // Model ที่จะใช้ในการรับข้อมูล
+    
+}

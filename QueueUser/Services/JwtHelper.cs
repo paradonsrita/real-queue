@@ -7,6 +7,17 @@ namespace QMS.Services
 {
     public class JwtHelper
     {
+
+        // ฟังก์ชันที่ใช้ตรวจสอบว่า token หมดอายุหรือไม่
+        public static bool IsTokenExpired(string token)
+        {
+            var handler = new JwtSecurityTokenHandler();
+            var jwtToken = handler.ReadJwtToken(token);
+
+            var expiration = jwtToken.ValidTo;
+            return expiration < DateTime.UtcNow; // คืนค่า true ถ้าหมดอายุ
+        }
+
         public static int? GetUserIdFromToken(string token, IConfiguration configuration)
         {
             var tokenHandler = new JwtSecurityTokenHandler();

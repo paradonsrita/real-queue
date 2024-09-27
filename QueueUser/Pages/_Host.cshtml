@@ -17,6 +17,12 @@
     <link rel="stylesheet" href="_content/Radzen.Blazor/css/standard-base.css">
     <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
     <component type="typeof(HeadOutlet)" render-mode="ServerPrerendered" />
+
+    <!-- FullCalendar CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.css" rel="stylesheet" />
+
+    <!-- FullCalendar JS -->
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js"></script>
 </head>
 <body>
     <component type="typeof(App)" render-mode="ServerPrerendered" />
@@ -31,6 +37,10 @@
         <a href="" class="reload">Reload</a>
         <a class="dismiss">🗙</a>
     </div>
+
+    <script src="~/js/calendar.js"></script>
+
+
 
     <script src="_framework/blazor.server.js"></script>
     <script src="_content/Radzen.Blazor/Radzen.Blazor.js?v=@(typeof(Radzen.Colors).Assembly.GetName().Version)"></script>

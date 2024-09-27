@@ -8,7 +8,6 @@ using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
 using ApiIsocare2.Utilities.Interface;
 using ApiIsocare2.Utilities;
-using ApiIsocare2.Utilities.SignalR;
 
 
 namespace ApiIsocare2
@@ -59,7 +58,6 @@ namespace ApiIsocare2
                     ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("DefaultConnection"))));
 
 
-            builder.Services.AddSignalR(); // Add SignalR services
 
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -71,7 +69,15 @@ namespace ApiIsocare2
             options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore).AddNewtonsoftJson(options =>
             options.SerializerSettings.ContractResolver = new DefaultContractResolver());
 
+
+
+
+
+
+
             var app = builder.Build();
+
+
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
@@ -91,7 +97,8 @@ namespace ApiIsocare2
 
             app.MapControllers();
 
-            app.MapHub<NotificationHub>("/notificationHub"); // Map SignalR Hub
+
+
 
 
             app.Run();

@@ -12,20 +12,18 @@ namespace ApiIsocare2.Controllers
     public class UserController : ControllerBase
     {
         private readonly AppDbContext _db;
-        private readonly IConfiguration _configuration;
-        public UserController(AppDbContext db, IConfiguration Configuration)
+        public UserController(AppDbContext db)
         {
             _db = db;
-            _configuration = Configuration;
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetUserData()
+        public async Task<IActionResult> GetUserData(int userId)
         {
             try
             {
 
-
+/*
                 var token = Request.Headers["Authorization"].ToString().Replace("Bearer ", "");
                 var userId = JwtHelper.GetUserIdFromToken(token, _configuration);
 
@@ -33,11 +31,11 @@ namespace ApiIsocare2.Controllers
                 {
                     return Unauthorized("Invalid token.");
                 }
-
+*/
                 
 
                 var result = await _db.Users
-                    .Where(u => u.user_id == userId.Value)
+                    .Where(u => u.user_id == userId)
                     .Select(u => new 
                     {
                         u.user_id,

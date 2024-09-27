@@ -4,6 +4,8 @@ using QMS.Services.LocalStorage;
 
 
 
+
+
 namespace QMS.Pages.QueueEmployees.HomeCounterQueue
 {
     public partial class MenuHomePage
@@ -12,6 +14,7 @@ namespace QMS.Pages.QueueEmployees.HomeCounterQueue
         private string error;
         private int? selectedCounter;
         private string selectedTransaction;
+
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {

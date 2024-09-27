@@ -22,12 +22,12 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Asus/Desktop/Queue Manage/QueueUser/Pages/CounterQueue/Counter.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291bnRlclF1ZXVlXENvdW50ZXIucmF6b3I=
+[C:/Users/Asus/Desktop/Queue Manage/QueueUser/Pages/Booking/BookingComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQm9va2luZ1xCb29raW5nQ29tcG9uZW50LnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Asus/Desktop/Queue Manage/QueueUser/Pages/CounterQueue/QueueTicket.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291bnRlclF1ZXVlXFF1ZXVlVGlja2V0LnJhem9y
+[C:/Users/Asus/Desktop/Queue Manage/QueueUser/Pages/Booking/BookingForm.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQm9va2luZ1xCb29raW5nRm9ybS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Asus/Desktop/Queue Manage/QueueUser/Pages/Home.razor]
@@ -74,6 +74,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUmVzZXRQYXNzd29yZFxSZXNldFBhc3N3b3JkLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Asus/Desktop/Queue Manage/QueueUser/Shared/PopupComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXFBvcHVwQ29tcG9uZW50LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Asus/Desktop/Queue Manage/QueueUser/Shared/Sidebar.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXFNpZGViYXIucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
@@ -86,9 +90,9 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Asus/Desktop/Queue Manage/QueueUser/Pages/Moniter/MoniterComponent.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTW9uaXRlclxNb25pdGVyQ29tcG9uZW50LnJhem9y
-build_metadata.AdditionalFiles.CssScope = b-otapurfxs5
+[C:/Users/Asus/Desktop/Queue Manage/QueueUser/Pages/Booking/Calendar.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQm9va2luZ1xDYWxlbmRhci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-opcn1yltzr
 
 [C:/Users/Asus/Desktop/Queue Manage/QueueUser/Shared/MainLayout.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE1haW5MYXlvdXQucmF6b3I=

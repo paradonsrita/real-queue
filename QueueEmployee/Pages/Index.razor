@@ -13,9 +13,12 @@ Welcome to your new app.
 
 <SurveyPrompt Title="How is Blazor working for you?" />
 
+
+
+
+
 <RadzenButton Text="Create PDF" ButtonStyle="ButtonStyle.Success" Click="GetData" Style="width: 200px; height: 50px; font-size: 1.25rem;" />
 
-<RadzenButton Text="Print PDF" ButtonStyle="ButtonStyle.Success" Click="PrintPdf" Style="width: 200px; height: 50px; font-size: 1.25rem;" />
 <p>@htmlData</p>
 
 @code {
@@ -24,23 +27,12 @@ Welcome to your new app.
     private async Task GetData()
     {
         htmlData = await GetPdfData();
+        await JSRuntime.InvokeVoidAsync("printPdf", htmlData);
         Console.WriteLine(htmlData);  // ตรวจสอบว่าข้อมูล htmlData ถูกสร้างหรือไม่
 
 
     }
 
-    private async Task PrintPdf()
-    {
-        if (!string.IsNullOrEmpty(htmlData))
-        {
-            Console.WriteLine("Calling printPdf with data");
-            await JSRuntime.InvokeVoidAsync("printPdf", htmlData);
-        }
-        else
-        {
-            Console.WriteLine("htmlData is empty");
-        }
-    }
 
     private async Task<string> GetPdfData()
     {
@@ -48,26 +40,51 @@ Welcome to your new app.
         
         //สร้าง HTML สำหรับ PDF
         var InputHtml = $@"
-        <html>
-        <head>
-            <style>
-                @page {{
-                    size: A4;
-                    margin: 10mm;
-                }}
-                .hidden-content {{
-                    display: none;
-                }}
-            </style>
-        </head>
-        <body>
-            <div class='row' style='width: 100%;'>
-                <div>
-                    <h1>ทดสอบปริ้น</h1>
-                </div>
-            </div>
-        </body>
-        </html>";
+<html>
+<head>
+    <style>
+        h1 {{
+            font-size: 25px;
+            text-align: center;
+        }}
+        .content {{
+            margin: 0 auto;
+            width: 100%;
+        }}
+        .row {{
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 0;
+        }}
+        .hidden-content {{
+            display: none;
+        }}
+    </style>
+</head>
+<body>
+    <div class='content'>
+        <h1>ใบเสร็จ</h1>
+        <div class='row'>
+            <div>รายการ</div>
+            <div>จำนวนเงิน</div>
+        </div>
+        <div class='row'>
+            <div>สินค้า 1</div>
+            <div>100.00</div>
+        </div>
+        <div class='row'>
+            <div>สินค้า 2</div>
+            <div>200.00</div>
+        </div>
+        <hr />
+        <div class='row'>
+            <div>รวมทั้งหมด</div>
+            <div>300.00</div>
+        </div>
+    </div>
+</body>
+</html>";
+
 
         return InputHtml;
         

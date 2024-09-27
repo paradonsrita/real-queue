@@ -24,6 +24,13 @@ builder.Services.AddHttpClient<QueueCounterService>(client =>
 });
 
 
+
+builder.Services.AddScoped<BookingService>();
+builder.Services.AddScoped<UserServices>();
+builder.Services.AddScoped<TokenService>();
+
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

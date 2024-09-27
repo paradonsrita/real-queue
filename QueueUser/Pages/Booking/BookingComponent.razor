@@ -1,0 +1,24 @@
+﻿@page "/Booking"
+@inject HttpClient Http
+@inject NavigationManager Navigation
+
+<h3>Booking</h3>
+
+<div>
+    <label>Type:</label>
+    <button class="btn btn-primary m-2" @onclick='() => GoToDateInput("F")'>เปิด-ปิดบัญชีฝากถอน</button>
+    <button class="btn btn-primary m-2" @onclick='() => GoToDateInput("L")'>ขอกู้ รับชำระ จ่ายเงินกู้</button>
+    <button class="btn btn-primary m-2" @onclick='() => GoToDateInput("S")'>สมัครสมาชิก ลาออก ซื้อ-ถอนหุ้น</button>
+</div>
+
+
+
+@code {
+    
+    private void GoToDateInput(string transaction)
+    {
+        // นำค่าที่เลือกส่งไปยังหน้า DateInput
+        Navigation.NavigateTo($"/booking-calendar/{transaction}");
+    }
+    
+}

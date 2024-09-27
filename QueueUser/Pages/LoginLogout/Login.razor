@@ -63,7 +63,6 @@
                 var result = await response.Content.ReadFromJsonAsync<TokenResponse>();
                 // เก็บ JWT token ไว้เพื่อใช้ในภายหลัง
                 var token = result.Token;
-                Console.WriteLine(token);
                 // ตัวอย่างการเก็บ token ลงใน local storage
                 await js.InvokeVoidAsync("localStorage.setItem", "jwtToken", token);
                 Navigation.NavigateTo("/home");

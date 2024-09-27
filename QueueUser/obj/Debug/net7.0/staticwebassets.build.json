@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "wHjeAH2e4ZYvRZ20IAmREbb6OtASfP3izTV0FUcvj/o=",
+  "Hash": "zOJCZjGm8JCHamLn/KLvzNB0i3QX6uV303GtlSJyZys=",
   "Source": "QMS",
   "BasePath": "_content/QMS",
   "Mode": "Default",
@@ -1117,6 +1117,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.png"
+    },
+    {
+      "Identity": "C:\\Users\\Asus\\Desktop\\Queue Manage\\QueueUser\\wwwroot\\js\\calendar.js",
+      "SourceId": "QMS",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Asus\\Desktop\\Queue Manage\\QueueUser\\wwwroot\\",
+      "BasePath": "_content/QMS",
+      "RelativePath": "js/calendar.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\calendar.js"
     }
   ]
 }

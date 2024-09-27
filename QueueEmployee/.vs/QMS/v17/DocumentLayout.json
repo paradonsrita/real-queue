@@ -9,10 +9,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{CE27CAA5-165F-4E38-AE43-046442C2C853}|QMS.csproj|c:\\users\\asus\\desktop\\queue manage\\queueemployee\\pages\\queueemployees\\homecounterqueue\\menuhomepage.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{CE27CAA5-165F-4E38-AE43-046442C2C853}|QMS.csproj|solutionrelative:pages\\queueemployees\\homecounterqueue\\menuhomepage.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CE27CAA5-165F-4E38-AE43-046442C2C853}|QMS.csproj|c:\\users\\asus\\desktop\\queue manage\\queueemployee\\qms.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{CE27CAA5-165F-4E38-AE43-046442C2C853}|QMS.csproj|solutionrelative:qms.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,7 +18,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
@@ -41,23 +37,6 @@
               "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "QMS",
-              "DocumentMoniker": "C:\\Users\\Asus\\Desktop\\Queue Manage\\QueueEmployee\\QMS.csproj",
-              "RelativeDocumentMoniker": "QMS.csproj",
-              "ToolTip": "C:\\Users\\Asus\\Desktop\\Queue Manage\\QueueEmployee\\QMS.csproj",
-              "RelativeToolTip": "QMS.csproj",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAANAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2024-09-19T05:34:51.667Z",
-              "EditorCaption": ""
-            },
-            {
               "$type": "Document",
               "DocumentIndex": 1,
               "Title": "MenuHomePage.razor",
@@ -67,7 +46,7 @@
               "RelativeToolTip": "Pages\\QueueEmployees\\HomeCounterQueue\\MenuHomePage.razor",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAUAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-19T05:23:44.909Z",
+              "WhenOpened": "2024-09-24T04:07:18.444Z",
               "EditorCaption": ""
             },
             {
@@ -78,10 +57,14 @@
               "RelativeDocumentMoniker": "Pages\\QueueEmployees\\HomeCounterQueue\\MenuHomePage.razor.cs",
               "ToolTip": "C:\\Users\\Asus\\Desktop\\Queue Manage\\QueueEmployee\\Pages\\QueueEmployees\\HomeCounterQueue\\MenuHomePage.razor.cs",
               "RelativeToolTip": "Pages\\QueueEmployees\\HomeCounterQueue\\MenuHomePage.razor.cs",
-              "ViewState": "AQIAABoAAAAAAAAAAAAAACYAAAAAAAAA",
+              "ViewState": "AQIAADwAAAAAAAAAAAAqwDwAAAANAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-19T05:23:31.397Z",
+              "WhenOpened": "2024-09-24T04:05:04.293Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
             }
           ]
         }

@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using QMS.Services;
 
 
+
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -41,6 +43,8 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.MapBlazorHub();
+
+
 app.MapFallbackToPage("/_Host");
 
 app.Run();

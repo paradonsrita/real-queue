@@ -694,7 +694,6 @@ C:\Users\Asus\Desktop\Queue Manage\QueueUser\obj\Debug\net7.0\staticwebassets\ms
 C:\Users\Asus\Desktop\Queue Manage\QueueUser\obj\Debug\net7.0\staticwebassets\msbuild.buildMultiTargeting.QMS.props
 C:\Users\Asus\Desktop\Queue Manage\QueueUser\obj\Debug\net7.0\staticwebassets\msbuild.buildTransitive.QMS.props
 C:\Users\Asus\Desktop\Queue Manage\QueueUser\obj\Debug\net7.0\staticwebassets.pack.json
-C:\Users\Asus\Desktop\Queue Manage\QueueUser\obj\Debug\net7.0\scopedcss\Pages\Moniter\MoniterComponent.razor.rz.scp.css
 C:\Users\Asus\Desktop\Queue Manage\QueueUser\obj\Debug\net7.0\scopedcss\Shared\MainLayout.razor.rz.scp.css
 C:\Users\Asus\Desktop\Queue Manage\QueueUser\obj\Debug\net7.0\scopedcss\Shared\NavMenu.razor.rz.scp.css
 C:\Users\Asus\Desktop\Queue Manage\QueueUser\obj\Debug\net7.0\scopedcss\bundle\QMS.styles.css
@@ -706,3 +705,4 @@ C:\Users\Asus\Desktop\Queue Manage\QueueUser\obj\Debug\net7.0\QMS.pdb
 C:\Users\Asus\Desktop\Queue Manage\QueueUser\obj\Debug\net7.0\QMS.genruntimeconfig.cache
 C:\Users\Asus\Desktop\Queue Manage\QueueUser\obj\Debug\net7.0\ref\QMS.dll
 C:\Users\Asus\Desktop\Queue Manage\QueueUser\obj\Debug\net7.0\QMS.sourcelink.json
+C:\Users\Asus\Desktop\Queue Manage\QueueUser\obj\Debug\net7.0\scopedcss\Pages\Booking\Calendar.razor.rz.scp.css

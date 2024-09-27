@@ -57,8 +57,8 @@
       "PackagePath": "staticwebassets\\favicon.png"
     },
     {
-      "Id": "C:\\Users\\Asus\\Desktop\\Queue Manage\\QueueEmployee\\wwwroot\\print.js",
-      "PackagePath": "staticwebassets\\print.js"
+      "Id": "C:\\Users\\Asus\\Desktop\\Queue Manage\\QueueEmployee\\wwwroot\\js\\print.js",
+      "PackagePath": "staticwebassets\\js\\print.js"
     },
     {
       "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.QMS.Microsoft.AspNetCore.StaticWebAssets.props",

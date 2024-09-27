@@ -1,8 +1,12 @@
 ﻿@page "/"
 @inject HttpClient Http
 @using QMS.Models
+@inject IJSRuntime JsRuntime
+
 
 <h3>Monitor</h3>
+<button class="btn btn-primary" @onclick="OnButtonClick">Call C# from JS</button>
+
 
 
 
@@ -26,9 +30,11 @@ else
 
 @code {
     private List<QueueModel> queue;
-
+    
     protected override async Task OnInitializedAsync()
     {
+        
+       
         try
         {
             queue = await Http.GetFromJsonAsync<List<QueueModel>>("https://localhost:44328/api/Statistics/daily-statistics");

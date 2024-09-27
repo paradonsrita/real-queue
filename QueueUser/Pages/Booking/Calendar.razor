@@ -1,0 +1,233 @@
+﻿@page "/booking-calendar/{transaction}"
+@using QMS.Models
+@inject IJSRuntime JSRuntime
+@inject BookingService BookingService
+@using Microsoft.JSInterop;
+@inject NavigationManager Navigation
+@inject IConfiguration Configuration
+@inject HttpClient Http
+@inject TokenService TokenService
+
+
+
+
+<h3>จองคิว'@TransformQueueType(transaction)</h3>
+
+@if (!string.IsNullOrEmpty(message))
+{
+    <p>@message</p>
+}
+
+<div id="calendar" style="background-color: white; border: 1px solid #ccc; padding: 10px;"></div>
+
+
+@if (isPopupVisible)
+{
+    <div class="modal" style="display: block;">
+        <div class="modal-content">
+            <span class="close" @onclick="ClosePopup">&times;</span>
+            <h4>Bookings on @selectedDate.ToShortDateString()</h4>
+            <p>
+                08:00 ว่าง @(10 - total08) คิว
+                @if (total08 < 10)
+                {
+                    <button @onclick="() => ShowConfirmation(8)">จอง 08:00</button>
+                }
+                else
+                {
+                    <span style="color: red;">ไม่สามารถจองได้</span>
+                }
+            </p>
+            <p>
+                13:00 ว่าง @(10 - total13) คิว
+                @if (total13 < 10)
+                {
+                    <button @onclick="() => ShowConfirmation(13)">จอง 13:00</button>
+                }
+                else
+                {
+                    <span style="color: red;">ไม่สามารถจองได้</span>
+                }
+            </p>
+        </div>
+    </div>
+}
+
+@if (isConfirmationVisible)
+{
+    <div class="modal" style="display: block;">
+        <div class="modal-content">
+            <h4>ยืนยันการจอง</h4>
+            <p>คุณต้องการจองคิวเวลา @(selectedHour == 8 ? "08:00" : "13:00") ใช่หรือไม่?</p>
+            <button @onclick="ConfirmBooking">ยืนยัน</button>
+            <button @onclick="CancelConfirmation">ยกเลิก</button>
+        </div>
+    </div>
+}
+
+
+@code {
+    [Parameter] public string transaction { get; set; }
+
+    private bool isPopupVisible = false;
+    private bool isConfirmationVisible = false;
+
+    private DateTime selectedDate;
+    private int total08;
+    private int total13;
+    private int selectedHour;
+
+    private List<CalendarBooking> bookingResults;
+    private string message;
+
+    private DotNetObjectReference<Calendar> objRef;
+
+    // Dictionary สำหรับแปลงค่า QueueType
+    private Dictionary<string, string> queueTypeMappings = new Dictionary<string, string>
+    {
+        { "L", "ขอกู้ รับชำระ จ่ายเงินกู้" },
+        { "F", "เปิด-ปิดบัญชีฝากถอน" },
+        { "S", "สมัครสมาชิก ลาออก ซื้อ-ถอนหุ้น" }
+    };
+
+    protected override async Task OnInitializedAsync()
+    {
+        bookingResults = await BookingService.GetQueueOnDate(transaction);
+        StateHasChanged();
+    }
+
+    private void ClosePopup()
+    {
+        isPopupVisible = false;
+    }
+
+    private void ShowConfirmation(int hour)
+    {
+        selectedHour = hour;
+        isConfirmationVisible = true;
+    }
+
+    private async Task ConfirmBooking()
+    {
+        // ดำเนินการจองเมื่อยืนยันแล้ว
+        await BookTimeSlot(selectedHour);
+        isConfirmationVisible = false; // ปิดการยืนยันเมื่อจองเสร็จ
+
+        // เพิ่มการแจ้งเตือนเมื่อจองสำเร็จ
+        message = $"คุณได้จองคิวเวลา {(selectedHour == 8 ? "08:00" : "13:00")} สำเร็จแล้ว!";
+        StateHasChanged(); // อัปเดต UI หลังจากจองเสร็จ
+    }
+
+    private void CancelConfirmation()
+    {
+        isConfirmationVisible = false;
+    }
+
+    [JSInvokable] // ตรวจสอบให้แน่ใจว่ามีการประกาศ JSInvokable
+    public void ShowPopup(string dateStr)
+    {
+        Console.WriteLine(dateStr);
+        selectedDate = DateTime.Parse(dateStr);
+        total08 = bookingResults.FirstOrDefault(b => b.Date.Date == selectedDate.Date && b.Time.Hours == 8)?.Total ?? 0;
+        total13 = bookingResults.FirstOrDefault(b => b.Date.Date == selectedDate.Date && b.Time.Hours == 13)?.Total ?? 0;
+
+        isPopupVisible = true;
+        StateHasChanged();  //Update UI
+
+    }
+
+    private async Task BookTimeSlot(int hour)
+    {
+        try
+        {
+            var token = await TokenService.GetTokenAsync();
+
+            if (!string.IsNullOrEmpty(token))
+            {
+                // ตรวจสอบว่า token หมดอายุหรือไม่
+                if (TokenService.IsTokenExpired(token))
+                {
+                    Console.WriteLine("asd");
+                    await TokenService.RemoveTokenAsync();
+                    Navigation.NavigateTo("/login");
+                    return;
+                }
+
+                var userId = TokenService.GetUserIdFromToken(token);
+
+                if (userId.HasValue)
+                {
+                    // Set the Authorization header
+                    Http.DefaultRequestHeaders.Authorization =
+                        new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+
+
+                    var request = new AddBookingRequest
+                        {
+                            UserId = userId.Value, // กำหนดค่า user ID
+                            Type = transaction, // กำหนด queue_type_id
+                            AppointmentDate = selectedDate.Date,
+                            AppointmentTime = hour == 8 ? "08:00" : "13:00"
+                        };
+
+                    await BookingService.BookSlot(request);
+                    isPopupVisible = false; // ปิด popup หลังจากจองเสร็จ
+                    message = "Booking added successfully!";
+
+                    // เรียก API อีกครั้งเพื่ออัปเดตจำนวนคิวว่างใหม่
+                    bookingResults = await BookingService.GetQueueOnDate(transaction);
+
+                    // คำนวณจำนวนคิวว่างใหม่
+                    total08 = bookingResults.FirstOrDefault(b => b.Date.Date == selectedDate.Date && b.Time.Hours == 8)?.Total ?? 0;
+                    total13 = bookingResults.FirstOrDefault(b => b.Date.Date == selectedDate.Date && b.Time.Hours == 13)?.Total ?? 0;
+
+                    StateHasChanged();
+
+                }
+                else
+                {
+                    Console.WriteLine("asa");
+
+                    await TokenService.RemoveTokenAsync();
+                    Navigation.NavigateTo("/login");
+                }
+
+
+            }
+            else
+            {
+                Console.WriteLine("sd");
+                Navigation.NavigateTo("/login");
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error fetching user profile: {ex.Message}");
+            await TokenService.RemoveTokenAsync();
+            Navigation.NavigateTo("/login");
+        }
+        
+        
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+            objRef = DotNetObjectReference.Create(this);
+            JSRuntime.InvokeVoidAsync("initializeCalendar", objRef);
+        }
+    }
+
+    public void Dispose()
+    {
+        objRef?.Dispose();
+    }
+
+    
+
+    private string TransformQueueType(string queueType)
+    {
+        return queueTypeMappings.TryGetValue(queueType, out var thaiValue) ? thaiValue : queueType;
+    }
+}

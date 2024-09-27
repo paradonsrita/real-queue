@@ -178,14 +178,14 @@ namespace ApiIsocare2.Controllers
             }
         }
 
-
-        [HttpPost("add-queue")]
-        public async Task<IActionResult> AddBooking(int userId, string type, DateTime appointmentDate, string appointmentTime)
+		//api/Booking/add-queue
+		[HttpPost("add-queue")]
+        public async Task<IActionResult> AddBooking([FromBody] AddBookingRequest request)
         {
             try
             {
                 // แปลงเวลาจาก appointmentTime เป็น TimeSpan
-                if (!TimeSpan.TryParse(appointmentTime, out var timeOfDay))
+                if (!TimeSpan.TryParse(request.AppointmentTime, out var timeOfDay))
                 {
                     return BadRequest("Invalid appointment time format.");
                 }
@@ -197,10 +197,10 @@ namespace ApiIsocare2.Controllers
                 }
 
                 // แก้ไขค่าเวลาให้เป็น 08:00 หรือ 13:00
-                var correctedAppointmentDate = appointmentDate.Date.Add(timeOfDay);
+                var correctedAppointmentDate = request.AppointmentDate.Date.Add(timeOfDay);
 
                 var number = await _db.BookingQueues
-                                .Where(q => q.appointment_date.Date == correctedAppointmentDate.Date && q.queue_type_id == type)
+                                .Where(q => q.appointment_date.Date == correctedAppointmentDate.Date && q.queue_type_id == request.Type)
                                 .OrderByDescending(q => q.queue_number)
                                 .Select(q => q.queue_number)
                                 .FirstOrDefaultAsync();
@@ -209,10 +209,10 @@ namespace ApiIsocare2.Controllers
 
                 var queue = new BookingQueue
                 {
-                    queue_type_id = type,
+                    queue_type_id = request.Type,
                     queue_number = number,
                     queue_status_id = 0,
-                    user_id = userId,
+                    user_id = request.UserId,
                     booking_date = DateTime.Now,
                     appointment_date = correctedAppointmentDate,
                     counter = 0

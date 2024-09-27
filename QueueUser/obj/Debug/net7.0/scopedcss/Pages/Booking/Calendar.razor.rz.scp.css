@@ -1,0 +1,49 @@
+.modal[b-opcn1yltzr] {
+    display: none; /* เริ่มต้นเป็น hidden */
+    position: fixed;
+    z-index: 1; /* ตั้งค่าชั้นให้สูงที่สุด */
+    left: 0;
+    top: 0;
+    width: 100%; /* ความกว้างเต็ม */
+    height: 100%; /* ความสูงเต็ม */
+    overflow: auto; /* ถ้ามีเนื้อหามากกว่าหน้าจอ */
+    background-color: rgb(0,0,0); /* สีพื้นหลัง */
+    background-color: rgba(0,0,0,0.4); /* สีพื้นหลังแบบโปร่งใส */
+}
+
+.modal-content[b-opcn1yltzr] {
+    background-color: #fefefe;
+    margin: 15% auto; /* ตั้งค่า margin */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* ความกว้างของ modal */
+}
+
+.close[b-opcn1yltzr] {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+    .close:hover[b-opcn1yltzr],
+    .close:focus[b-opcn1yltzr] {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+
+/* สำหรับวันที่ผ่านมา */
+.fc-day-past[b-opcn1yltzr] {
+    background-color: #f0f0f0 !important; /* สีเทาสำหรับวันที่ผ่านมา */
+    pointer-events: none; /* ไม่สามารถคลิกได้ */
+    opacity: 0.5; /* ทำให้โปร่งแสง */
+}
+
+/* สำหรับวันเสาร์และอาทิตย์ */
+.fc-sat[b-opcn1yltzr], .fc-sun[b-opcn1yltzr] {
+    background-color: #f0f0f0 !important; /* สีเทาสำหรับวันหยุดสุดสัปดาห์ */
+    pointer-events: none; /* ไม่สามารถคลิกได้ */
+    opacity: 0.5; /* ทำให้โปร่งแสง */
+}

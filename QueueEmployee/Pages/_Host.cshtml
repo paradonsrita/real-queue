@@ -41,12 +41,12 @@
     <script src="_content/Radzen.Blazor/Radzen.Blazor.js?v=@(typeof(Radzen.Colors).Assembly.GetName().Version)"></script>
 
     <!--_Host.cshtml-->
-    <script>
+    @* <script>
         // สร้าง PDF ด้วย iframe
         window.printPdf = function (pdfData) {
             var iframe = document.createElement("iframe");
-            iframe.style.width = "210mm";
-            iframe.style.height = "297mm";
+            iframe.style.width = "80mm";
+            iframe.style.height = "auto";
             iframe.style.display = "none";
             document.body.appendChild(iframe);
 
@@ -55,23 +55,11 @@
             // doc.write(pdfData);
             doc.write(pdfData);
             doc.close();
-            console.log("HTML written to iframe");
-
-            // ลบองค์ประกอบที่ไม่มีตัวอักษรก่อนพิมพ์
-            var elements = doc.body.querySelectorAll("*");
-            elements.forEach(function (el) {
-                if (el.textContent.trim() === "") {
-                    el.style.display = "none";
-                }
-            });
-
-            setTimeout(function () {
-                iframe.contentWindow.focus();
-                iframe.contentWindow.print();
-                document.body.removeChild(iframe); // ลบ iframe หลังจากพิมพ์
-            }, 500);
+            console.log(doc);
+            return iframe;
         };
-    </script>
+    </script> *@
+    <script src="/js/print.js"></script>
 
 
 

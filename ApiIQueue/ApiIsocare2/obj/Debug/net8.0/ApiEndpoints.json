@@ -44,24 +44,9 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "userId",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "type",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "appointmentDate",
-        "Type": "System.DateTime",
-        "IsRequired": false
-      },
-      {
-        "Name": "appointmentTime",
-        "Type": "System.String",
-        "IsRequired": false
+        "Name": "request",
+        "Type": "ApiIsocare2.Models.AddBookingRequest",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
@@ -378,7 +363,13 @@
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
     "ReturnTypes": []
   },
   {

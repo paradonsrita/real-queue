@@ -8,6 +8,9 @@ using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
 using ApiIsocare2.Utilities.Interface;
 using ApiIsocare2.Utilities;
+using ApiIsocare2.Utilities.SignalR;
+using Microsoft.AspNetCore.Cors.Infrastructure;
+
 
 
 namespace ApiIsocare2
@@ -43,6 +46,7 @@ namespace ApiIsocare2
             });
 
 
+
             builder.Services.AddScoped<IEmailService, EmailService>();
             // Add services to the container.
             builder.Services.AddControllers()
@@ -70,8 +74,21 @@ namespace ApiIsocare2
             options.SerializerSettings.ContractResolver = new DefaultContractResolver());
 
 
+            // เพิ่มการตั้งค่า CORS
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowSpecificOrigin",
+                    builder =>
+                    {
+                        builder.WithOrigins("https://localhost:7062")
+                               .AllowAnyMethod()
+                               .AllowAnyHeader()
+                               .AllowCredentials(); // ต้องอนุญาต Credentials สำหรับ WebSocket
 
+                    });
+            });
 
+            builder.Services.AddSignalR();  // ต้องใส่บรรทัดนี้
 
 
 
@@ -94,6 +111,9 @@ namespace ApiIsocare2
             app.UseAuthorization();
             app.UseStaticFiles(); //มีประโยชน์ในการจัดการไฟล์ที่ผู้ใช้สามารถเข้าถึงได้โดยตรง
 
+            app.UseCors("AllowSpecificOrigin"); // เพิ่มส่วนนี้ใน pipeline
+
+            app.MapHub<NotificationHub>("/notificationHub");
 
             app.MapControllers();
 

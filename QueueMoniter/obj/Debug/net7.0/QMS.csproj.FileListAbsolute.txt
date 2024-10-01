@@ -249,3 +249,11 @@ C:\Users\Asus\Desktop\Queue Manage\QueueMoniter\obj\Debug\net7.0\QMS.pdb
 C:\Users\Asus\Desktop\Queue Manage\QueueMoniter\obj\Debug\net7.0\QMS.genruntimeconfig.cache
 C:\Users\Asus\Desktop\Queue Manage\QueueMoniter\obj\Debug\net7.0\ref\QMS.dll
 C:\Users\Asus\Desktop\Queue Manage\QueueMoniter\obj\Debug\net7.0\scopedcss\Pages\Moniter\MonitorTable.razor.rz.scp.css
+C:\Users\Asus\Desktop\Queue Manage\QueueMoniter\bin\Debug\net7.0\Microsoft.AspNetCore.Connections.Abstractions.dll
+C:\Users\Asus\Desktop\Queue Manage\QueueMoniter\bin\Debug\net7.0\Microsoft.AspNetCore.Http.Connections.Client.dll
+C:\Users\Asus\Desktop\Queue Manage\QueueMoniter\bin\Debug\net7.0\Microsoft.AspNetCore.Http.Connections.Common.dll
+C:\Users\Asus\Desktop\Queue Manage\QueueMoniter\bin\Debug\net7.0\Microsoft.AspNetCore.SignalR.Client.dll
+C:\Users\Asus\Desktop\Queue Manage\QueueMoniter\bin\Debug\net7.0\Microsoft.AspNetCore.SignalR.Client.Core.dll
+C:\Users\Asus\Desktop\Queue Manage\QueueMoniter\bin\Debug\net7.0\Microsoft.AspNetCore.SignalR.Common.dll
+C:\Users\Asus\Desktop\Queue Manage\QueueMoniter\bin\Debug\net7.0\Microsoft.AspNetCore.SignalR.Protocols.Json.dll
+C:\Users\Asus\Desktop\Queue Manage\QueueMoniter\bin\Debug\net7.0\Microsoft.Extensions.Features.dll

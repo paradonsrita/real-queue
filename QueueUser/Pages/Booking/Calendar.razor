@@ -11,14 +11,14 @@
 
 
 
-<h3>จองคิว'@TransformQueueType(transaction)</h3>
+<h3>จองคิว @TransformQueueType(transaction)</h3>
 
 @if (!string.IsNullOrEmpty(message))
 {
     <p>@message</p>
 }
 
-<div id="calendar" style="background-color: white; border: 1px solid #ccc; padding: 10px;"></div>
+<div id="calendar" style="width: 50%; height: 50vh; margin: 0 auto; border: 1px solid #ddd;"></div>
 
 
 @if (isPopupVisible)
@@ -27,28 +27,8 @@
         <div class="modal-content">
             <span class="close" @onclick="ClosePopup">&times;</span>
             <h4>Bookings on @selectedDate.ToShortDateString()</h4>
-            <p>
-                08:00 ว่าง @(10 - total08) คิว
-                @if (total08 < 10)
-                {
-                    <button @onclick="() => ShowConfirmation(8)">จอง 08:00</button>
-                }
-                else
-                {
-                    <span style="color: red;">ไม่สามารถจองได้</span>
-                }
-            </p>
-            <p>
-                13:00 ว่าง @(10 - total13) คิว
-                @if (total13 < 10)
-                {
-                    <button @onclick="() => ShowConfirmation(13)">จอง 13:00</button>
-                }
-                else
-                {
-                    <span style="color: red;">ไม่สามารถจองได้</span>
-                }
-            </p>
+            @RenderBookingSlot(8, total08)
+            @RenderBookingSlot(13, total13)
         </div>
     </div>
 }
@@ -123,10 +103,22 @@
         isConfirmationVisible = false;
     }
 
+    [JSInvokable]
+    public async Task<bool> CheckBookingAvailability(string dateStr)
+    {
+        selectedDate = DateTime.Parse(dateStr);
+        bookingResults = await BookingService.GetQueueOnDate(transaction);
+
+        var total08 = bookingResults.FirstOrDefault(b => b.Date.Date == selectedDate.Date && b.Time.Hours == 8)?.Total ?? 0;
+        var total13 = bookingResults.FirstOrDefault(b => b.Date.Date == selectedDate.Date && b.Time.Hours == 13)?.Total ?? 0;
+
+        return total08 < 10 || total13 < 10;  // คืนค่า true หากสามารถจองได้
+    }
+
+
     [JSInvokable] // ตรวจสอบให้แน่ใจว่ามีการประกาศ JSInvokable
     public void ShowPopup(string dateStr)
     {
-        Console.WriteLine(dateStr);
         selectedDate = DateTime.Parse(dateStr);
         total08 = bookingResults.FirstOrDefault(b => b.Date.Date == selectedDate.Date && b.Time.Hours == 8)?.Total ?? 0;
         total13 = bookingResults.FirstOrDefault(b => b.Date.Date == selectedDate.Date && b.Time.Hours == 13)?.Total ?? 0;
@@ -142,16 +134,12 @@
         {
             var token = await TokenService.GetTokenAsync();
 
-            if (!string.IsNullOrEmpty(token))
+            if (string.IsNullOrEmpty(token) || TokenService.IsTokenExpired(token))
             {
-                // ตรวจสอบว่า token หมดอายุหรือไม่
-                if (TokenService.IsTokenExpired(token))
-                {
-                    Console.WriteLine("asd");
-                    await TokenService.RemoveTokenAsync();
-                    Navigation.NavigateTo("/login");
-                    return;
-                }
+                await TokenService.RemoveTokenAsync();
+                Navigation.NavigateTo("/login");
+                return;
+            }
 
                 var userId = TokenService.GetUserIdFromToken(token);
 
@@ -171,34 +159,20 @@
                         };
 
                     await BookingService.BookSlot(request);
-                    isPopupVisible = false; // ปิด popup หลังจากจองเสร็จ
-                    message = "Booking added successfully!";
+                await RefreshBookingData();
 
-                    // เรียก API อีกครั้งเพื่ออัปเดตจำนวนคิวว่างใหม่
-                    bookingResults = await BookingService.GetQueueOnDate(transaction);
-
-                    // คำนวณจำนวนคิวว่างใหม่
-                    total08 = bookingResults.FirstOrDefault(b => b.Date.Date == selectedDate.Date && b.Time.Hours == 8)?.Total ?? 0;
-                    total13 = bookingResults.FirstOrDefault(b => b.Date.Date == selectedDate.Date && b.Time.Hours == 13)?.Total ?? 0;
-
-                    StateHasChanged();
 
                 }
                 else
                 {
-                    Console.WriteLine("asa");
 
                     await TokenService.RemoveTokenAsync();
                     Navigation.NavigateTo("/login");
                 }
 
 
-            }
-            else
-            {
-                Console.WriteLine("sd");
-                Navigation.NavigateTo("/login");
-            }
+            
+            
         }
         catch (Exception ex)
         {
@@ -208,6 +182,16 @@
         }
         
         
+    }
+
+
+    private async Task RefreshBookingData()
+    {
+        bookingResults = await BookingService.GetQueueOnDate(transaction);
+        total08 = bookingResults.FirstOrDefault(b => b.Date.Date == selectedDate.Date && b.Time.Hours == 8)?.Total ?? 0;
+        total13 = bookingResults.FirstOrDefault(b => b.Date.Date == selectedDate.Date && b.Time.Hours == 13)?.Total ?? 0;
+        isPopupVisible = false;
+        StateHasChanged();
     }
 
     protected override void OnAfterRender(bool firstRender)
@@ -230,4 +214,16 @@
     {
         return queueTypeMappings.TryGetValue(queueType, out var thaiValue) ? thaiValue : queueType;
     }
+
+    private RenderFragment RenderBookingSlot(int hour, int total) => @<p>
+        @hour:00 ว่าง @(10 - total) คิว
+        @if (total < 10)
+    {
+        <button @onclick="() => ShowConfirmation(hour)">จอง @hour:00</button>
+    }
+    else
+    {
+        <span style="color: red;">ไม่สามารถจองได้</span>
+    }
+    </p>;
 }

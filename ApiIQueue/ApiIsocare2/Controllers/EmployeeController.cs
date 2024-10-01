@@ -1,7 +1,9 @@
 ﻿using ApiIsocare2.Data;
 using ApiIsocare2.Models;
+using ApiIsocare2.Utilities.SignalR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 
 namespace ApiIsocare2.Controllers
@@ -10,10 +12,15 @@ namespace ApiIsocare2.Controllers
     [ApiController]
     public class EmployeeController : ControllerBase
     {
+
         private readonly AppDbContext _db;
-        public EmployeeController(AppDbContext db)
+        private readonly IHubContext<NotificationHub> _hubContext;
+
+        public EmployeeController(AppDbContext db, IHubContext<NotificationHub> hubContext)
         {
             _db = db;
+            _hubContext = hubContext;
+
         }
 
         //  PUT: api/Employee/callCounterQueue
@@ -50,7 +57,9 @@ namespace ApiIsocare2.Controllers
                 if (nowQueue != null || waitQueue != null)
                 {
                     await _db.SaveChangesAsync();
-                    
+
+                    await _hubContext.Clients.All.SendAsync("RefreshPage");
+
                     return NoContent();
                 }
                 throw new Exception("No wait queue or now queue");
@@ -92,7 +101,9 @@ namespace ApiIsocare2.Controllers
 
                     }
                     await _db.SaveChangesAsync();
-                    
+
+                    await _hubContext.Clients.All.SendAsync("RefreshPage");
+
                     return NoContent();
                 }
 
@@ -133,7 +144,8 @@ namespace ApiIsocare2.Controllers
                         waitQueue.counter = counter;
                         await _db.SaveChangesAsync();
 
-                        
+                        await _hubContext.Clients.All.SendAsync("RefreshPage");
+
                     }
                     else
                     {
@@ -181,7 +193,8 @@ namespace ApiIsocare2.Controllers
                     }
                     await _db.SaveChangesAsync();
 
-                    
+                    await _hubContext.Clients.All.SendAsync("RefreshPage");
+
                     return NoContent();
                 }
 

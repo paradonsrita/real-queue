@@ -6,6 +6,7 @@ using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 using QMS.Services;
+using Microsoft.AspNetCore.SignalR.Client;
 
 
 
@@ -25,6 +26,15 @@ builder.Services.AddHttpClient<QueueService>(client =>
 });
 
 
+builder.Services.AddSignalR();
+
+// ตั้งค่า URL สำหรับเชื่อมต่อกับ API ที่มี SignalR
+builder.Services.AddScoped(service => new HubConnectionBuilder()
+    .WithUrl("https://localhost:44328/notificationHub") // URL ของ API
+    .WithAutomaticReconnect() // เพิ่มการเชื่อมต่อใหม่อัตโนมัติ
+
+    .Build()
+);
 
 var app = builder.Build();
 

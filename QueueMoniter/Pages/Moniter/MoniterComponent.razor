@@ -2,10 +2,15 @@
 @inject HttpClient Http
 @using QMS.Models
 @inject IJSRuntime JsRuntime
+@inject NavigationManager Navigation
+
+@using Microsoft.AspNetCore.SignalR.Client
+@implements IAsyncDisposable
+
+
 
 
 <h3>Monitor</h3>
-<button class="btn btn-primary" @onclick="OnButtonClick">Call C# from JS</button>
 
 
 
@@ -30,15 +35,34 @@ else
 
 @code {
     private List<QueueModel> queue;
-    
+    private HubConnection? hubConnection;
+
+
+
     protected override async Task OnInitializedAsync()
     {
+
+        hubConnection = new HubConnectionBuilder()
+            .WithUrl("https://localhost:44328/notificationHub") // หรือ URL ที่ชี้ไปยังเครื่อง B
+            .Build();
+
+        hubConnection.On("RefreshPage", () =>
+        {
+            // ทำการรีเฟรชหรือโหลดข้อมูลใหม่
+            InvokeAsync(async () => await LoadQueueData());
+        });
+        await hubConnection.StartAsync();
+        await LoadQueueData(); // โหลดข้อมูลครั้งแรก
+
         
-       
+    }
+
+    private async Task LoadQueueData()
+    {
         try
         {
             queue = await Http.GetFromJsonAsync<List<QueueModel>>("https://localhost:44328/api/Statistics/daily-statistics");
-
+            InvokeAsync(StateHasChanged); // อัปเดต UI
         }
         catch (Exception ex)
         {
@@ -46,5 +70,12 @@ else
         }
     }
 
+    public async ValueTask DisposeAsync()
+    {
+        if (hubConnection is not null)
+        {
+            await hubConnection.DisposeAsync();
+        }
+    }
     
 }

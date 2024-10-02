@@ -381,8 +381,8 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "newUser",
-        "Type": "ApiIsocare2.Models.User",
+        "Name": "newProfile",
+        "Type": "ApiIsocare2.Models.EditProfile",
         "IsRequired": true
       }
     ],

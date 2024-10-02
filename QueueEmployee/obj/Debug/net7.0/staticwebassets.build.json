@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "YTJ6AZ0QXahExJsgEN4KQKgYAZVe/BqRzHB9FFd5ds8=",
+  "Hash": "MhuyAKAt+sbu5cqFn/Pr6T35L4UuvvlpdGg5dZp4z4s=",
   "Source": "QMS",
   "BasePath": "_content/QMS",
   "Mode": "Default",
@@ -1117,25 +1117,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.png"
-    },
-    {
-      "Identity": "C:\\Users\\Asus\\Desktop\\Queue Manage\\QueueEmployee\\wwwroot\\js\\print.js",
-      "SourceId": "QMS",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Asus\\Desktop\\Queue Manage\\QueueEmployee\\wwwroot\\",
-      "BasePath": "_content/QMS",
-      "RelativePath": "js/print.js",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "PreferTarget",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\js\\print.js"
     }
   ]
 }

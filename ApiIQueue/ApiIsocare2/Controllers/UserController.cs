@@ -63,12 +63,12 @@ namespace ApiIsocare2.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> EditProfile(User newUser)
+        public async Task<IActionResult> EditProfile([FromBody] EditProfile newProfile)
         {
             try
             {
                 var oldUser = _db.Users
-                                .Where(u => u.user_id == newUser.user_id)
+                                .Where(u => u.user_id == newProfile.user_id)
                                 .FirstOrDefault();
 
 
@@ -77,8 +77,8 @@ namespace ApiIsocare2.Controllers
                     return NotFound();
                 }
 
-                oldUser.phone_number = newUser.phone_number;
-                oldUser.user_email = newUser.user_email;
+                oldUser.phone_number = newProfile.phone_number;
+                oldUser.user_email = newProfile.user_email;
                 await _db.SaveChangesAsync();
 
                 return Ok("แก้ไขเรียบร้อย");

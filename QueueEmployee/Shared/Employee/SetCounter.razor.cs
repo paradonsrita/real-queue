@@ -17,14 +17,15 @@ namespace QMS.Shared.Employee
         private string selectedTransactionThai;
 
         private List<int> counter = new List<int> { 1, 2, 3, 4, 5, 6 };
-        private List<string> transactionsInThai = new List<string> { "ขอกู้ รับชำระ จ่ายเงินกู้", "เปิด-ปิดบัญชีฝากถอน", "สมัครสมาชิก ลาออก ซื้อ-ถอนหุ้น" };
+        private List<string> transactionsInThai = new List<string> { "ขอกู้ รับชำระ จ่ายเงินกู้", "เปิด-ปิดบัญชีฝากถอน", "สมัครสมาชิก ลาออก ซื้อ-ถอนหุ้น" , "อื่นๆ"};
 
         // ภาษาอังกฤษที่เก็บใน LocalStorage
         private Dictionary<string, string> transactionMappings = new Dictionary<string, string>
     {
         { "ขอกู้ รับชำระ จ่ายเงินกู้", "Loan" },
         { "เปิด-ปิดบัญชีฝากถอน", "Finance" },
-        { "สมัครสมาชิก ลาออก ซื้อ-ถอนหุ้น", "Shares" }
+        { "สมัครสมาชิก ลาออก ซื้อ-ถอนหุ้น", "Shares" },
+        { "อื่นๆ" , "Other"}
     };
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {

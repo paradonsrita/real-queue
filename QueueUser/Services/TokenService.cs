@@ -10,17 +10,20 @@ namespace QMS.Services
     public class TokenService
     {
         private readonly IJSRuntime _jsRuntime;
-        private readonly IConfiguration _configuration;
 
-        public TokenService(IJSRuntime jsRuntime, IConfiguration configuration)
+        public TokenService(IJSRuntime jsRuntime)
         {
             _jsRuntime = jsRuntime;
-            _configuration = configuration;
         }
 
         public async Task<string> GetTokenAsync()
         {
             var token = await _jsRuntime.InvokeAsync<string>("localStorage.getItem", "jwtToken");
+            if (string.IsNullOrEmpty(token))
+            {
+                // ถ้าไม่มีใน localStorage ให้ลองดึงจาก sessionStorage
+                token = await _jsRuntime.InvokeAsync<string>("sessionStorage.getItem", "jwtToken");
+            }
             return token;
         }
 
@@ -54,6 +57,7 @@ namespace QMS.Services
         public async Task RemoveTokenAsync()
         {
             await _jsRuntime.InvokeVoidAsync("localStorage.removeItem", "jwtToken");
+            await _jsRuntime.InvokeVoidAsync("sessionStorage.removeItem", "jwtToken");
         }
     }
 }

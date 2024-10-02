@@ -1,9 +1,8 @@
 ﻿@page "/"
-@inject IJSRuntime js
 @inject HttpClient Http
 @inject NavigationManager Navigation
 @using QMS.Models
-@inject IConfiguration Configuration
+@inject TokenService TokenService
 
 
 <h3>Welcome to the Application</h3>
@@ -20,12 +19,12 @@
             try
             {
             // ตรวจสอบ token หลังจาก render เสร็จ
-            var token = await js.InvokeAsync<string>("localStorage.getItem", "jwtToken");
+                var token = await TokenService.GetTokenAsync();
 
             if (!string.IsNullOrEmpty(token))
             {
                 // ดึง userId จาก token
-                var userId = JwtHelper.GetUserIdFromToken(token, Configuration);
+                var userId = TokenService.GetUserIdFromToken(token);
 
                 if (userId.HasValue)
                 {
@@ -40,14 +39,14 @@
                     }
                     else
                     {
-                        await js.InvokeVoidAsync("localStorage.removeItem", "jwtToken");
-                        Navigation.NavigateTo("/login");
+                            await TokenService.RemoveTokenAsync();
+                            Navigation.NavigateTo("/login");
                     }
                 }//1500701309052 Paradon_2003
                 else
                 {
-                    await js.InvokeVoidAsync("localStorage.removeItem", "jwtToken");
-                    Navigation.NavigateTo("/login");
+                        await TokenService.RemoveTokenAsync();
+                        Navigation.NavigateTo("/login");
                 }
             }
             else
@@ -59,7 +58,7 @@
             {
                 // การจัดการข้อผิดพลาด
                 Console.WriteLine($"Error: {ex.Message}");
-                await js.InvokeVoidAsync("localStorage.removeItem", "jwtToken");
+                await TokenService.RemoveTokenAsync();
                 Navigation.NavigateTo("/login");
             }
         }

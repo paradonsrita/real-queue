@@ -64,7 +64,14 @@ namespace QMS.Pages.QueueEmployees.HomeCounterQueue
                 return;
             }
 
-            var transactionInitial = selectedTransaction.Substring(0, 1);
+            string transactionInitial = selectedTransaction switch
+            {
+                "Finance" => "F",
+                "Other" => "H",
+                "Loan" => "L",
+                "Shares" => "S",
+                _ => throw new InvalidOperationException("Invalid transaction type")
+            }; 
             var requestUri = $"https://localhost:44328/api/Employee/callCounterQueue?transaction={Uri.EscapeDataString(transactionInitial)}&counter={selectedCounter}";
 
             try
@@ -98,7 +105,14 @@ namespace QMS.Pages.QueueEmployees.HomeCounterQueue
                 return;
             }
 
-            var transactionInitial = selectedTransaction.Substring(0, 1);
+            string transactionInitial = selectedTransaction switch
+            {
+                "Finance" => "F",
+                "Other" => "H",
+                "Loan" => "L",
+                "Shares" => "S",
+                _ => throw new InvalidOperationException("Invalid transaction type")
+            };
             var requestUri = $"https://localhost:44328/api/Employee/skipCounterQueue?transaction={Uri.EscapeDataString(transactionInitial)}&counter={selectedCounter}";
 
             try

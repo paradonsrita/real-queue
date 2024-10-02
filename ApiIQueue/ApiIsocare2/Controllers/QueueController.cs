@@ -93,18 +93,18 @@ namespace ApiIsocare2.Controllers
         {
             try
             {
-                var count = await _db.CounterQueues
+                int? count = await _db.CounterQueues
                                     .Where(q => q.queue_date.Date == DateTime.Today && q.queue_type_id == type)
                                     .OrderByDescending(q => q.queue_number)
-                                    .Select(q => q.queue_number)
+                                    .Select(q => (int?)q.queue_number) // cast เป็น int?
                                     .FirstOrDefaultAsync();
 
-                count = count == 0 ? 1 : count + 1;
+                count = count == null || count == 0 ? 101 : count + 1;
 
-                
+
                 var queue = new CounterQueue
                 {
-                    queue_number = count,
+                    queue_number = count.Value,
                     queue_date = DateTime.Now,
                     queue_type_id = type,
                     queue_status_id = 0,

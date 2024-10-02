@@ -2,11 +2,11 @@
 @using QMS.Data.Entities
 @using System.Security.Claims
 @inject HttpClient Http
-@inject IJSRuntime js
 @using QMS.Models
 @inject NavigationManager Navigation
-@inject IConfiguration Configuration
 @using System.Text.Json;
+@inject TokenService TokenService
+
 
 
 
@@ -25,7 +25,14 @@ else
         <p><strong>เบอร์โทรศัพท์:</strong> @user.phone_number</p>
         <p><strong>อีเมล:</strong> @user.user_email</p>
     </div>
+    <RadzenButton Variant="Variant.Outlined" Click=@(args => ToEditProfile()) Text="แก้ไขโปรไฟล์" ButtonStyle="ButtonStyle.Primary" />
+
+    <CascadingValue Value="@user.user_id">
+        <!-- ค่าที่จะถูกส่งไปยังหน้าถัดไป -->
+    </CascadingValue>
 }
+
+
 
 @code {
     private Models.UserModel user;
@@ -36,12 +43,17 @@ else
         {
             try
             {
-                var token = await js.InvokeAsync<string>("localStorage.getItem", "jwtToken");
+                var token = await TokenService.GetTokenAsync();
 
-                if (!string.IsNullOrEmpty(token))
+                if (string.IsNullOrEmpty(token) || TokenService.IsTokenExpired(token))
                 {
+                    await TokenService.RemoveTokenAsync();
+                    Navigation.NavigateTo("/login");
+                    return;
+                }
 
-                    var userId = JwtHelper.GetUserIdFromToken(token, Configuration);
+                
+                    var userId = TokenService.GetUserIdFromToken(token);
 
                     if (userId.HasValue)
                     {
@@ -59,33 +71,35 @@ else
                         }
                         else
                         {
-                         
+
 
                             // Handle errors such as 404 or other status codes
-                            await js.InvokeVoidAsync("localStorage.removeItem", "jwtToken");
+                            await TokenService.RemoveTokenAsync();
                             Navigation.NavigateTo("/login");
                         }
                     }
                     else
                     {
-                        await js.InvokeVoidAsync("localStorage.removeItem", "jwtToken");
+                        await TokenService.RemoveTokenAsync();
                         Navigation.NavigateTo("/login");
                     }
 
 
-                }
-                else
-                {
-                    Navigation.NavigateTo("/login");
-                }
+                
+                
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Error fetching user profile: {ex.Message}");
-                await js.InvokeVoidAsync("localStorage.removeItem", "jwtToken");
+                await TokenService.RemoveTokenAsync();
                 Navigation.NavigateTo("/login");
             }
         }
+    }
+
+    private void ToEditProfile()
+    {
+        Navigation.NavigateTo("/edit-user-profile");
     }
 }
 

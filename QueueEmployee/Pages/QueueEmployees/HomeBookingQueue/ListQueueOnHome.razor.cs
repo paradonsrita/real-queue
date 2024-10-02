@@ -59,6 +59,7 @@ namespace QMS.Pages.QueueEmployees.HomeBookingQueue
                 "Finance" => "เปิด-ปิดบัญชีฝากถอน",
                 "Loan" => "ขอกู้ รับชำระ จ่ายเงินกู้",
                 "Shares" => "สมัครสมาชิก ลาออก ซื้อ-ถอนหุ้น",
+                "Other" => "อื่นๆ",
                 _ => queueType
             };
         }

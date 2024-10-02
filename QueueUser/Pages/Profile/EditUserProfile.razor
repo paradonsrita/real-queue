@@ -1,80 +1,142 @@
 ﻿@page "/edit-user-profile"
-@using System.Security.Claims
-@using Microsoft.AspNetCore.Components.Authorization
-@using QMS.Data.Entities
-@using QMS.Services
-@inject AuthenticationStateProvider AuthenticationStateProvider
-@inject AccountService AccountService
-@inject NavigationManager NavigationManager
-@inject ILogger<EditUserProfile> Logger
+@inject HttpClient Http
+@inject NavigationManager Navigation
+@using QMS.Models
+@inject IJSRuntime js
+@inject TokenService TokenService
 
-<h2>แก้ไขข้อมูลส่วนตัว</h2>
 
-<EditForm Model="@user" OnValidSubmit="HandleValidSubmit">
-    <DataAnnotationsValidator />
-    <ValidationSummary />
+<h3>แก้ไขโปรไฟล์</h3>
 
-    <div class="form-group">
-        <label for="citizen_id_number">รหัสบัตรประชาชน:</label>
-        <InputText id="citizen_id_number" @bind-Value="user.citizen_id_number" class="form-control" readonly />
-    </div>
-    <div class="form-group">
-        <label for="firstname">ชื่อ:</label>
-        <InputText id="firstname" @bind-Value="user.firstname" class="form-control" />
-    </div>
-    <div class="form-group">
-        <label for="lastname">นามสกุล:</label>
-        <InputText id="lastname" @bind-Value="user.lastname" class="form-control" />
-    </div>
-    <div class="form-group">
-        <label for="phone_number">เบอร์โทร:</label>
-        <InputText id="phone_number" @bind-Value="user.phone_number" class="form-control" />
-    </div>
-    <button type="submit" class="btn btn-primary">บันทึก</button>
-</EditForm>
-
-@if (!string.IsNullOrEmpty(errorMessage))
+@if (user == null)
 {
-    <div class="alert alert-danger">@errorMessage</div>
+    <p>กำลังโหลดข้อมูล...</p>
+}
+else
+{
+    <EditForm Model="@user" OnValidSubmit="SaveProfile">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <!-- แสดงชื่อและนามสกุล -->
+        <div>
+            <label>ชื่อ:</label>
+            <InputText @bind-Value="user.firstname" class="form-control" disabled />
+        </div>
+        <div>
+            <label>นามสกุล:</label>
+            <InputText @bind-Value="user.lastname" class="form-control" disabled />
+        </div>
+
+        <!-- แสดงหมายเลขบัตรประชาชน -->
+        <div>
+            <label>หมายเลขบัตรประชาชน:</label>
+            <InputText @bind-Value="user.citizen_id_number" class="form-control" disabled />
+        </div>
+
+        <!-- ฟิลด์ที่สามารถแก้ไขได้ เช่น เบอร์โทรศัพท์และอีเมล -->
+        <div>
+            <label>เบอร์โทรศัพท์:</label>
+            <InputText @bind-Value="user.phone_number" class="form-control" />
+        </div>
+        <div>
+            <label>อีเมล:</label>
+            <InputText @bind-Value="user.user_email" class="form-control" />
+        </div>
+
+        <button type="submit">save</button>
+    </EditForm>
 }
 
 @code {
-    private User user = new User();
-    private string errorMessage;
+    private NewProfile user = new NewProfile();
 
-    protected override async Task OnInitializedAsync()
+
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        try
+        if (firstRender)
         {
-            var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
-            var userId = authState.User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+            try
+            {
 
-            if (userId != null)
-            {
-                user = await AccountService.GetUserByIdAsync(userId);
+
+                var token = await TokenService.GetTokenAsync();
+
+                if (string.IsNullOrEmpty(token) || TokenService.IsTokenExpired(token))
+                {
+                    await TokenService.RemoveTokenAsync();
+                    Navigation.NavigateTo("/login");
+                    return;
+                }
+                var userId = TokenService.GetUserIdFromToken(token);
+
+                if (userId.HasValue)
+                {
+                    // Set the Authorization header
+                    Http.DefaultRequestHeaders.Authorization =
+                        new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+
+                    // Fetch user profile data from API
+                    var response = await Http.GetAsync($"https://localhost:44328/api/User?userId={userId.Value}");
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        user = await response.Content.ReadFromJsonAsync<NewProfile>();
+                        StateHasChanged(); // Refresh the UI with the fetched data
+                    }
+                    else
+                    {
+
+
+                        // Handle errors such as 404 or other status codes
+                        await TokenService.RemoveTokenAsync();
+                        Navigation.NavigateTo("/login");
+                    }
+                }
+                else
+                {
+                    await TokenService.RemoveTokenAsync();
+                    Navigation.NavigateTo("/login");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                NavigationManager.NavigateTo("/");
+                Console.WriteLine($"Error fetching user profile: {ex.Message}");
+                await TokenService.RemoveTokenAsync();
+                Navigation.NavigateTo("/login");
             }
-        }
-        catch (Exception ex)
-        {
-            Logger.LogError(ex, "Error loading user profile.");
         }
     }
 
-    private async Task HandleValidSubmit()
+
+
+    private async Task SaveProfile()
     {
-        try
+        Console.WriteLine("กำลังบันทึกข้อมูล...");
+        var response = await Http.PutAsJsonAsync($"https://localhost:44328/api/User", user);
+        Console.WriteLine($"สถานะการตอบกลับ: {response.StatusCode}");
+
+        if (response.IsSuccessStatusCode)
         {
-            await AccountService.UpdateUserAsync(user);
-            NavigationManager.NavigateTo("/user-profile");
+            Console.WriteLine("บันทึกข้อมูลสำเร็จ");
+            Navigation.NavigateTo("/profile");
         }
-        catch (Exception ex)
+        else
         {
-            errorMessage = "An error occurred while updating the profile.";
-            Logger.LogError(ex, "Error updating user profile.");
+            var errorMessage = await response.Content.ReadAsStringAsync();
+            Console.WriteLine($"เกิดข้อผิดพลาดในการบันทึกข้อมูล: {errorMessage}");
         }
+    }
+
+    private class NewProfile
+    {
+        public int user_id { get; set; }
+        public string firstname { get; set; }
+        public string lastname { get; set; }
+        public string phone_number { get; set; }
+        public string citizen_id_number { get; set; }
+        public string user_email { get; set; }
+
     }
 }

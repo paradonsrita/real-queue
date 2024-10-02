@@ -33,6 +33,9 @@
             <label>Password</label>
             <InputText @bind-Value="loginModel.Password" type="password" />
         </div>
+        <div>
+            <label><InputCheckbox @bind-Value="rememberMe" /> Remember Me</label>
+        </div>
         <button type="submit">Login</button>
     </EditForm>
 
@@ -52,6 +55,8 @@
 @code {
     private LoginModel loginModel = new LoginModel();
     private string errorMessage;
+    private bool rememberMe = false; // ตัวเลือก Remember Me
+
 
     private async Task HandleLogin()
     {
@@ -63,8 +68,17 @@
                 var result = await response.Content.ReadFromJsonAsync<TokenResponse>();
                 // เก็บ JWT token ไว้เพื่อใช้ในภายหลัง
                 var token = result.Token;
-                // ตัวอย่างการเก็บ token ลงใน local storage
-                await js.InvokeVoidAsync("localStorage.setItem", "jwtToken", token);
+
+                if (rememberMe)
+                {
+                    // เก็บ token ใน localStorage ถ้าเลือก Remember Me
+                    await js.InvokeVoidAsync("localStorage.setItem", "jwtToken", token);
+                }
+                else
+                {
+                    // เก็บ token ใน sessionStorage ถ้าไม่เลือก Remember Me
+                    await js.InvokeVoidAsync("sessionStorage.setItem", "jwtToken", token);
+                }
                 Navigation.NavigateTo("/home");
 
             }

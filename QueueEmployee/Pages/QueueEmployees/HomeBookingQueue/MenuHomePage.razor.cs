@@ -61,7 +61,14 @@ namespace QMS.Pages.QueueEmployees.HomeBookingQueue
                 return;
             }
 
-            var transactionInitial = selectedTransaction.Substring(0, 1);
+            string transactionInitial = selectedTransaction switch
+            {
+                "Finance" => "F",
+                "Other" => "H",
+                "Loan" => "L",
+                "Shares" => "S",
+                _ => throw new InvalidOperationException("Invalid transaction type")
+            };
             var requestUri = $"https://localhost:44328/api/Employee/callBookingQueue?transaction={Uri.EscapeDataString(transactionInitial)}&counter={selectedCounter}";
 
             try
@@ -95,11 +102,22 @@ namespace QMS.Pages.QueueEmployees.HomeBookingQueue
                 return;
             }
 
-            var transactionInitial = selectedTransaction.Substring(0, 1);
+            string transactionInitial = selectedTransaction switch
+            {
+                "Finance" => "F",
+                "Other" => "H",
+                "Loan" => "L",
+                "Shares" => "S",
+                _ => throw new InvalidOperationException("Invalid transaction type")
+            };
+            Console.WriteLine($"Transaction Initial: {transactionInitial}"); // พิมพ์ค่าที่จะส่งไป
+
             var requestUri = $"https://localhost:44328/api/Employee/skipBookingQueue?transaction={Uri.EscapeDataString(transactionInitial)}&counter={selectedCounter}";
 
             try
             {
+                Console.WriteLine($"Transaction: {selectedTransaction}, Counter: {selectedCounter}");
+
                 var response = await Http.PutAsync(requestUri, null);
                 if (response.IsSuccessStatusCode)
                 {

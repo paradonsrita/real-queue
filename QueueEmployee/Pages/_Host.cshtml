@@ -40,26 +40,6 @@
     <script src="_framework/blazor.server.js"></script>
     <script src="_content/Radzen.Blazor/Radzen.Blazor.js?v=@(typeof(Radzen.Colors).Assembly.GetName().Version)"></script>
 
-    <!--_Host.cshtml-->
-    @* <script>
-        // สร้าง PDF ด้วย iframe
-        window.printPdf = function (pdfData) {
-            var iframe = document.createElement("iframe");
-            iframe.style.width = "80mm";
-            iframe.style.height = "auto";
-            iframe.style.display = "none";
-            document.body.appendChild(iframe);
-
-            var doc = iframe.contentWindow.document;
-            doc.open();
-            // doc.write(pdfData);
-            doc.write(pdfData);
-            doc.close();
-            console.log(doc);
-            return iframe;
-        };
-    </script> *@
-    <script src="/js/print.js"></script>
 
 
 

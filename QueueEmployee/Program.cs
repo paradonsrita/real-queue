@@ -12,7 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 
 // Add services to the container.
-builder.Services.AddScoped<LocalStorageService>();
+builder.Services.AddScoped<SessionStorageService>();
 
 //calendar
 builder.Services.AddScoped<DialogService>(); // Add this line

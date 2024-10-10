@@ -1,6 +1,6 @@
 ﻿using System.Security.Claims;
 using ApiIsocare2.Data;
-using ApiIsocare2.Models;
+using ApiIsocare2.Models.UserModel;
 using ApiIsocare2.Utilities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -23,20 +23,20 @@ namespace ApiIsocare2.Controllers
             try
             {
 
-/*
-                var token = Request.Headers["Authorization"].ToString().Replace("Bearer ", "");
-                var userId = JwtHelper.GetUserIdFromToken(token, _configuration);
+                /*
+                                var token = Request.Headers["Authorization"].ToString().Replace("Bearer ", "");
+                                var userId = JwtHelper.GetUserIdFromToken(token, _configuration);
 
-                if (!userId.HasValue)
-                {
-                    return Unauthorized("Invalid token.");
-                }
-*/
-                
+                                if (!userId.HasValue)
+                                {
+                                    return Unauthorized("Invalid token.");
+                                }
+                */
+
 
                 var result = await _db.Users
                     .Where(u => u.user_id == userId)
-                    .Select(u => new 
+                    .Select(u => new
                     {
                         u.user_id,
                         u.citizen_id_number,
@@ -55,7 +55,7 @@ namespace ApiIsocare2.Controllers
                 return Ok(result);
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 var innerExceptionMessage = ex.InnerException?.Message ?? "No inner exception";
                 return StatusCode(500, $"Error : {ex.Message}, Inner Exception : {innerExceptionMessage}");

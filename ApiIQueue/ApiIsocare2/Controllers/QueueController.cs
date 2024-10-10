@@ -1,7 +1,7 @@
 ﻿using ApiIsocare2.Data;
 using Microsoft.AspNetCore.Mvc;
-using ApiIsocare2.Models;
 using Microsoft.EntityFrameworkCore;
+using ApiIsocare2.Models.Queue;
 
 namespace ApiIsocare2.Controllers
 {

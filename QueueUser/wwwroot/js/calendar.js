@@ -44,6 +44,9 @@
                                     console.error("Error calling ShowPopup:", error);
                                 });
                         }
+                        else {
+                            alert("ไม่สามารถเลือกวันที่ผ่านมาแล้วหรือวันเสาร์อาทิตย์ได้")
+                        }
                     } else {
                         console.log("Date is fully booked:", info.dateStr);
                     }

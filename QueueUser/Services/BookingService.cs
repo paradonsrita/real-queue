@@ -20,13 +20,11 @@ namespace QMS.Services
             return await response.Content.ReadFromJsonAsync<List<CalendarBooking>>();
         }
 
-        public async Task BookSlot(AddBookingRequest request)
+        public async Task<HttpResponseMessage> BookSlot(AddBookingRequest request)
         {
             var response = await _httpClient.PostAsJsonAsync("https://localhost:44328/api/Booking/add-queue", request);
-            if (!response.IsSuccessStatusCode)
-            {
-                throw new Exception("Error occurred while booking the slot.");
-            }
+            return response; // ส่งคืน HttpResponseMessage เพื่อให้ตรวจสอบสถานะ
+
         }
     }
 

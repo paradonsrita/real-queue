@@ -9,7 +9,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[ApiIsocare2.Models.BookingQueue, ApiIsocare2, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[ApiIsocare2.Models.Booking.BookingQueue, ApiIsocare2, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -45,7 +45,7 @@
     "Parameters": [
       {
         "Name": "request",
-        "Type": "ApiIsocare2.Models.AddBookingRequest",
+        "Type": "ApiIsocare2.Models.Booking.AddBookingRequest",
         "IsRequired": true
       }
     ],
@@ -193,7 +193,7 @@
     "Parameters": [
       {
         "Name": "loginModel",
-        "Type": "ApiIsocare2.Models.LoginModel",
+        "Type": "ApiIsocare2.Models.UserModel.LoginModel",
         "IsRequired": true
       }
     ],
@@ -209,7 +209,7 @@
     "Parameters": [
       {
         "Name": "registerModel",
-        "Type": "ApiIsocare2.Models.User",
+        "Type": "ApiIsocare2.Models.UserModel.User",
         "IsRequired": true
       }
     ],
@@ -225,7 +225,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[ApiIsocare2.Models.CounterQueue, ApiIsocare2, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[ApiIsocare2.Models.Queue.CounterQueue, ApiIsocare2, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -267,7 +267,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "ApiIsocare2.Models.CounterQueue",
+        "Type": "ApiIsocare2.Models.Queue.CounterQueue",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -319,7 +319,7 @@
     "Parameters": [
       {
         "Name": "model",
-        "Type": "ApiIsocare2.Models.ResetPasswordModel",
+        "Type": "ApiIsocare2.Models.UserModel.ResetPasswordModel",
         "IsRequired": true
       }
     ],
@@ -382,7 +382,7 @@
     "Parameters": [
       {
         "Name": "newProfile",
-        "Type": "ApiIsocare2.Models.EditProfile",
+        "Type": "ApiIsocare2.Models.UserModel.EditProfile",
         "IsRequired": true
       }
     ],

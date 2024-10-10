@@ -1,5 +1,6 @@
-﻿using ApiIsocare2.Data;
-using ApiIsocare2.Models;
+﻿using System.ComponentModel.DataAnnotations;
+using ApiIsocare2.Data;
+using ApiIsocare2.Models.Booking;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -145,7 +146,7 @@ namespace ApiIsocare2.Controllers
 
                 // 2. ดึงข้อมูลจากฐานข้อมูลและจัดกลุ่มตามวันที่และเวลา
                 var bookingData = _db.BookingQueues
-                    .Where(q => q.appointment_date <= maxDate && q.appointment_date > today && q.queue_type_id == transaction)
+                    .Where(q => q.appointment_date <= maxDate && q.appointment_date > today && q.queue_type_id == transaction && q.queue_status_id == 0)
                     .GroupBy(q => new
                     {
                         Date = q.appointment_date.Date,
@@ -198,6 +199,31 @@ namespace ApiIsocare2.Controllers
 
                 // แก้ไขค่าเวลาให้เป็น 08:00 หรือ 13:00
                 var correctedAppointmentDate = request.AppointmentDate.Date.Add(timeOfDay);
+
+
+                // ตรวจสอบว่า user_id ได้จองคิวในเวลานี้แล้วหรือยัง
+                var existingQueue = await _db.BookingQueues
+                    .Where(q => q.appointment_date.Date == correctedAppointmentDate.Date
+                                && q.appointment_date.TimeOfDay == timeOfDay
+                                && q.user_id == request.UserId
+                                && q.queue_status_id != -9)
+                    .FirstOrDefaultAsync();
+
+                if (existingQueue != null)
+                {
+                    return BadRequest($"คุณได้ทำการจอง ณ วันที่ {request.AppointmentDate.ToString("dd/MM/yyyy")} เวลา {request.AppointmentTime} ไปแล้วในคิว {existingQueue.queue_type_id}{existingQueue.queue_number.ToString("000")}");
+                }
+
+                var queueCount = await _db.BookingQueues
+                                .Where(q => q.appointment_date.Date == correctedAppointmentDate.Date
+                                            && q.appointment_date.TimeOfDay == timeOfDay
+                                            && q.queue_type_id == request.Type)
+                                .CountAsync();
+
+                if (queueCount >= 10)
+                {
+                    return BadRequest("Cannot add more than 10 queues for this time.");
+                }
 
                 var number = await _db.BookingQueues
                                 .Where(q => q.appointment_date.Date == correctedAppointmentDate.Date && q.queue_type_id == request.Type)
@@ -256,6 +282,11 @@ namespace ApiIsocare2.Controllers
             }
 
         }
+
+
+
+
+
         
     }
 }

@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using ApiIsocare2.Models;
 using Microsoft.EntityFrameworkCore.Migrations;
+using ApiIsocare2.Models.Booking;
+using ApiIsocare2.Models.Queue;
+using ApiIsocare2.Models.UserModel;
 
 
 namespace ApiIsocare2.Data

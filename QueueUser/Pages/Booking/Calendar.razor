@@ -7,15 +7,16 @@
 @inject IConfiguration Configuration
 @inject HttpClient Http
 @inject TokenService TokenService
+@inject IJSRuntime JsRuntime
 
 
 
 
-<h3>จองคิว @TransformQueueType(transaction)</h3>
+<h3 class="text-center"><strong>จองคิว @TransformQueueType(transaction)</strong></h3>
 
 @if (!string.IsNullOrEmpty(message))
 {
-    <p>@message</p>
+    <p class="@(message.Contains("สำเร็จ") ? "message-success" : "message-error")">@((MarkupString)message)</p>
 }
 
 <div id="calendar" style="width: 50%; height: 50vh; margin: 0 auto; border: 1px solid #ddd;"></div>
@@ -23,27 +24,42 @@
 
 @if (isPopupVisible)
 {
-    <div class="modal" style="display: block;">
-        <div class="modal-content">
+    <div class="modal" style="display: block;" @onclick="ClosePopup">
+        <div class="modal-content" @onclick:stopPropagation="true">
             <span class="close" @onclick="ClosePopup">&times;</span>
-            <h4>Bookings on @selectedDate.ToShortDateString()</h4>
-            @RenderBookingSlot(8, total08)
-            @RenderBookingSlot(13, total13)
+            <h4 class="text-center mb-4"><strong>จองคิววันที่ @selectedDate.ToString("dd/MM/yyyy")</strong></h4>
+            
+            <RadzenStack Orientation="Orientation.Vertical" Gap="1rem">
+                @RenderBookingSlot(8, total08)
+                @RenderBookingSlot(13, total13)
+            </RadzenStack>
+
         </div>
     </div>
 }
 
 @if (isConfirmationVisible)
 {
-    <div class="modal" style="display: block;">
-        <div class="modal-content">
-            <h4>ยืนยันการจอง</h4>
-            <p>คุณต้องการจองคิวเวลา @(selectedHour == 8 ? "08:00" : "13:00") ใช่หรือไม่?</p>
-            <button @onclick="ConfirmBooking">ยืนยัน</button>
-            <button @onclick="CancelConfirmation">ยกเลิก</button>
+    <div class="modal" style="display: block;" @onclick="CancelConfirmation">
+        <div class="modal-content" style="margin: 10% auto; width: 50%;" @onclick:stopPropagation="true">
+            <RadzenCard Style="padding: 20px;">
+
+
+                <h4 class="text-center"><strong>ยืนยันการจอง</strong></h4>
+                <div class="modal-detail">
+                    <p>ประเภทธุรกรรม: @TransformQueueType(transaction)</p>
+                    <p>วันที่: @selectedDate.ToString("dd/MM/yyyy")</p>
+                    <p>เวลา: @(selectedHour == 8 ? "08:00" : "13:00")</p>
+                </div>
+                <RadzenStack Orientation="Orientation.Horizontal" Gap="1rem" class="rz-mt-4 justify-content-center">
+                    <RadzenButton Text="ยกเลิก" Click="CancelConfirmation" Style="margin: 10px; background-color:red;" />
+                    <RadzenButton Text="ยืนยัน" Click="ConfirmBooking" Style="margin: 10px; background-color:green;"/>
+                </RadzenStack>
+            </RadzenCard>
         </div>
     </div>
 }
+
 
 
 @code {
@@ -80,6 +96,8 @@
     private void ClosePopup()
     {
         isPopupVisible = false;
+        message = string.Empty; // เคลียร์ข้อความเมื่อปิด popup
+
     }
 
     private void ShowConfirmation(int hour)
@@ -95,7 +113,6 @@
         isConfirmationVisible = false; // ปิดการยืนยันเมื่อจองเสร็จ
 
         // เพิ่มการแจ้งเตือนเมื่อจองสำเร็จ
-        message = $"คุณได้จองคิวเวลา {(selectedHour == 8 ? "08:00" : "13:00")} สำเร็จแล้ว!";
         StateHasChanged(); // อัปเดต UI หลังจากจองเสร็จ
     }
 
@@ -158,9 +175,24 @@
                             AppointmentDate = selectedDate.Date,
                             AppointmentTime = hour == 8 ? "08:00" : "13:00"
                         };
+                        
+                    // ดำเนินการจอง
+                    var response = await BookingService.BookSlot(request);
 
-                    await BookingService.BookSlot(request);
-                await RefreshBookingData();
+                    if (response.IsSuccessStatusCode)
+                    {
+                        // จองสำเร็จ
+                        await RefreshBookingData();
+                        message = $@"คุณได้จองคิวประเภท{@TransformQueueType(transaction)}<br/>
+                            ในวันที่ {request.AppointmentDate.ToString("dd/MM/yyyy")} เวลา {(hour == 8 ? "08:00" : "13:00")} สำเร็จแล้ว!"; // เพิ่มข้อความแจ้งเตือนสำเร็จ
+
+                    }
+                    else
+                    {
+                        // ดึงข้อความแจ้งเตือนจาก API
+                        message = await response.Content.ReadAsStringAsync();
+                        await RefreshBookingData();
+                    }
 
 
                 }
@@ -177,7 +209,7 @@
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Error fetching user profile: {ex.Message}");
+            Console.WriteLine($"Error fetching {ex.Message}");
             await TokenService.RemoveTokenAsync();
             Navigation.NavigateTo("/login");
         }
@@ -220,7 +252,7 @@
         @hour:00 ว่าง @(10 - total) คิว
         @if (total < 10)
     {
-        <button @onclick="() => ShowConfirmation(hour)">จอง @hour:00</button>
+        <button @onclick="() => ShowConfirmation(hour)" class="booking-button">จอง @hour:00</button>
     }
     else
     {

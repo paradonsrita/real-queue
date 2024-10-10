@@ -14,10 +14,18 @@
 .modal-content[b-opcn1yltzr] {
     background-color: #fefefe;
     margin: 15% auto; /* ตั้งค่า margin */
-    padding: 20px;
+    padding: 30px;
     border: 1px solid #888;
-    width: 80%; /* ความกว้างของ modal */
+    width: 70%; /* ความกว้างของ modal */
 }
+
+.modal-detail[b-opcn1yltzr] {
+    font-size: 120%;
+    border: 2px solid black;
+    border-radius: 10px;
+    padding: 3%;
+}
+
 
 .close[b-opcn1yltzr] {
     color: #aaa;
@@ -46,4 +54,39 @@
     background-color: #f0f0f0 !important; /* สีเทาสำหรับวันหยุดสุดสัปดาห์ */
     pointer-events: none; /* ไม่สามารถคลิกได้ */
     opacity: 0.5; /* ทำให้โปร่งแสง */
+}
+
+
+.booking-button[b-opcn1yltzr] {
+    background-color: #ADFF2F;
+    border: 2px solid #008000;
+    border-radius: 5px;
+    color: rgb(0,0,0);
+}
+
+.booking-button:hover[b-opcn1yltzr] {
+    color: #fff;
+    background-color: #006400;
+}
+
+.message-success[b-opcn1yltzr] {
+    background-color: lightgreen;
+    font-weight: bold;
+    font-size: 18px;
+    border: 3px solid green;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 10px;
+    text-align: center;
+}
+
+.message-error[b-opcn1yltzr] {
+    background-color: salmon;
+    font-weight: bold;
+    font-size: 18px;
+    margin: 10px;
+    text-align: center;
+    border: 3px solid red;
+    border-radius: 10px;
+    padding: 10px;
 }

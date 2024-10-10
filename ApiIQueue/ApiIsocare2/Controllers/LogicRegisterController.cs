@@ -1,5 +1,5 @@
 ﻿using ApiIsocare2.Data;
-using ApiIsocare2.Models;
+using ApiIsocare2.Models.UserModel;
 using ApiIsocare2.Utilities;
 using Microsoft.AspNetCore.Mvc;
 

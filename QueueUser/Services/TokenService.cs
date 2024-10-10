@@ -24,6 +24,12 @@ namespace QMS.Services
                 // ถ้าไม่มีใน localStorage ให้ลองดึงจาก sessionStorage
                 token = await _jsRuntime.InvokeAsync<string>("sessionStorage.getItem", "jwtToken");
             }
+
+            if (!string.IsNullOrEmpty(token) && IsTokenExpired(token))
+            {
+                // Optionally handle expired token
+                return null; // or throw an exception or return an empty string based on your logic
+            }
             return token;
         }
 

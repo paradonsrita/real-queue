@@ -1,6 +1,7 @@
 ﻿@inherits LayoutComponentBase
 @inject IJSRuntime js
 @inject NavigationManager Navigation
+@inject TokenService TokenService
 
 <PageTitle>QMS</PageTitle>
 
@@ -50,7 +51,7 @@
     {
         if (firstRender)
         {
-            var token = await js.InvokeAsync<string>("localStorage.getItem", "jwtToken");
+            var token = await TokenService.GetTokenAsync();
             isLoggedIn = !string.IsNullOrEmpty(token);
             StateHasChanged();
         }
@@ -62,9 +63,11 @@
         Console.WriteLine($"Sidebar Expanded: {sidebarExpanded}"); // ดูค่าที่เปลี่ยน
     }
 
+    
+
     private async Task Logout()
     {
-        await js.InvokeVoidAsync("localStorage.removeItem", "jwtToken");
+        await TokenService.RemoveTokenAsync();
         Navigation.NavigateTo("/login", forceLoad: true);
         Console.WriteLine("User has logged out.");
     }

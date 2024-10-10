@@ -3,6 +3,14 @@
   "WorkspaceRootPath": "C:\\Users\\Asus\\Desktop\\Queue Manage\\QueueUser\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{CE27CAA5-165F-4E38-AE43-046442C2C853}|QMS.csproj|c:\\users\\asus\\desktop\\queue manage\\queueuser\\pages\\_host.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{CE27CAA5-165F-4E38-AE43-046442C2C853}|QMS.csproj|solutionrelative:pages\\_host.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CE27CAA5-165F-4E38-AE43-046442C2C853}|QMS.csproj|c:\\users\\asus\\desktop\\queue manage\\queueuser\\wwwroot\\js\\print.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{CE27CAA5-165F-4E38-AE43-046442C2C853}|QMS.csproj|solutionrelative:wwwroot\\js\\print.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{CE27CAA5-165F-4E38-AE43-046442C2C853}|QMS.csproj|c:\\users\\asus\\desktop\\queue manage\\queueuser\\pages\\booking\\cancelbooking.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{CE27CAA5-165F-4E38-AE43-046442C2C853}|QMS.csproj|solutionrelative:pages\\booking\\cancelbooking.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
@@ -43,6 +51,32 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "_Host.cshtml",
+              "DocumentMoniker": "C:\\Users\\Asus\\Desktop\\Queue Manage\\QueueUser\\Pages\\_Host.cshtml",
+              "RelativeDocumentMoniker": "Pages\\_Host.cshtml",
+              "ToolTip": "C:\\Users\\Asus\\Desktop\\Queue Manage\\QueueUser\\Pages\\_Host.cshtml",
+              "RelativeToolTip": "Pages\\_Host.cshtml",
+              "ViewState": "AQIAAB4AAAAAAAAAAAAAACkAAAAnAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-10T03:03:20.053Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Print.js",
+              "DocumentMoniker": "C:\\Users\\Asus\\Desktop\\Queue Manage\\QueueUser\\wwwroot\\js\\Print.js",
+              "RelativeDocumentMoniker": "wwwroot\\js\\Print.js",
+              "ToolTip": "C:\\Users\\Asus\\Desktop\\Queue Manage\\QueueUser\\wwwroot\\js\\Print.js",
+              "RelativeToolTip": "wwwroot\\js\\Print.js",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAIwA4AAAAoAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2024-10-10T03:02:37.119Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "CancelBooking.razor",
               "DocumentMoniker": "C:\\Users\\Asus\\Desktop\\Queue Manage\\QueueUser\\Pages\\Booking\\CancelBooking.razor",
               "RelativeDocumentMoniker": "Pages\\Booking\\CancelBooking.razor",
@@ -55,7 +89,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "Calendar.razor",
               "DocumentMoniker": "C:\\Users\\Asus\\Desktop\\Queue Manage\\QueueUser\\Pages\\Booking\\Calendar.razor",
               "RelativeDocumentMoniker": "Pages\\Booking\\Calendar.razor",
@@ -63,12 +97,11 @@
               "RelativeToolTip": "Pages\\Booking\\Calendar.razor",
               "ViewState": "AQIAALQAAAAAAAAAAAAAAMkAAAAUAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-10-03T10:30:11.04Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-03T10:30:11.04Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "BookingService.cs",
               "DocumentMoniker": "C:\\Users\\Asus\\Desktop\\Queue Manage\\QueueUser\\Services\\BookingService.cs",
               "RelativeDocumentMoniker": "Services\\BookingService.cs",

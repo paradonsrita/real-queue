@@ -49,12 +49,18 @@ namespace ApiIsocare2.Controllers
 
         }
 
-
+        // api/Booking/profile/{userId}
         [HttpGet("profile/{userId}")]
         public async Task<ActionResult> getQueueInThisProfile(int userId)
         {
             try
             {
+                // ตรวจสอบว่า userId มีอยู่ในฐานข้อมูลหรือไม่
+                var userExists = await _db.Users.AnyAsync(u => u.user_id == userId);
+                if (!userExists)
+                {
+                    return NotFound($"User with ID {userId} not found.");
+                }
                 var result = await (from q in _db.BookingQueues
                                     join qs in _db.QueueStatuses on q.queue_status_id equals qs.queue_status_id
                                     join qt in _db.QueueTypes on q.queue_type_id equals qt.queue_type_id
@@ -75,6 +81,7 @@ namespace ApiIsocare2.Controllers
                                         qu.citizen_id_number
                                     })
                                 .Where(q => q.user_id == userId)
+                                .OrderBy(q => q.queue_id)
                                 .ToListAsync();
                 return Ok(result);
             }

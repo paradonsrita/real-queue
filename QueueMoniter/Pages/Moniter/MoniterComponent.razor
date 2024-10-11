@@ -43,7 +43,7 @@ else
     {
 
         hubConnection = new HubConnectionBuilder()
-            .WithUrl("https://localhost:44328/notificationHub") // หรือ URL ที่ชี้ไปยังเครื่อง B
+            .WithUrl("https://localhost:44328/notificationHub")
             .Build();
 
         hubConnection.On("RefreshPage", () =>

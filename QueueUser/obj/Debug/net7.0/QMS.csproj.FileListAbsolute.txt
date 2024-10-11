@@ -706,3 +706,4 @@ C:\Users\Asus\Desktop\Queue Manage\QueueUser\obj\Debug\net7.0\QMS.genruntimeconf
 C:\Users\Asus\Desktop\Queue Manage\QueueUser\obj\Debug\net7.0\ref\QMS.dll
 C:\Users\Asus\Desktop\Queue Manage\QueueUser\obj\Debug\net7.0\QMS.sourcelink.json
 C:\Users\Asus\Desktop\Queue Manage\QueueUser\obj\Debug\net7.0\scopedcss\Pages\Booking\Calendar.razor.rz.scp.css
+C:\Users\Asus\Desktop\Queue Manage\QueueUser\obj\Debug\net7.0\scopedcss\Pages\Booking\CancelBooking.razor.rz.scp.css

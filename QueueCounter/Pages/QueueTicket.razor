@@ -1,25 +1,32 @@
 ﻿@page "/queue-ticket/{QueueId:int}"
 @inject HttpClient HttpClient
 @inject NavigationManager NavigationManager
+@using Microsoft.JSInterop
 @inject IJSRuntime JSRuntime
+@using Newtonsoft.Json
 @using QMS.Models
+@using System.Text
 
+<PageTitle>QueueTicket</PageTitle>
 
-
-<h3>ใบคิวของคุณ</h3>
+<h1>บัตรคิวของคุณ</h1>
 
 @if (queueDetails != null)
 {
-    <div class="card p-3">
+    <div class="boxqueue card p-3 justify-content-center align-items-center ">
         <h4>หมายเลขคิว: @queueDetails.QueueNumber</h4>
-        <p>รายการที่เลือก: @TransformQueueType(queueDetails.QueueType)</p>
+        <p>รายการที่เลือก: @queueDetails.QueueType</p>
         <p>วันที่และเวลา: @queueDetails.queue_date.ToString("dd/MM/yyyy HH:mm")</p>
-        <button class="btn btn-secondary mt-3" @onclick="BackToBooking">กลับไปที่หน้าจองคิว</button>
+        <p>* ถ้าเรียกคิวแล้วไม่อยู่ทำรายการ ขอสงวนสิทธิ์ในการข้ามคิว และต้องกดคิวใหม่เพื่อใช้บริการ *</p>
     </div>
+    <button class="btn btn-secondary mt-3" @onclick="BackToBooking">กลับไปที่หน้ากดคิว</button>
+    <button class="btn btn-secondary mt-3" @onclick="() => PrintData(queueDetails)">พิมพ์บัตรคิว</button>
+
 }
 else if (loading)
 {
     <p>กำลังโหลดข้อมูล...</p>
+
 }
 else
 {
@@ -27,22 +34,22 @@ else
 }
 
 @code {
+
     [Parameter]
     public int QueueId { get; set; }
     private bool loading = true;
-    private string htmlData;
-
-
     private QueueModel queueDetails;
+    private string htmlData;
 
     // Dictionary สำหรับแปลงค่า QueueType
     private Dictionary<string, string> queueTypeMappings = new Dictionary<string, string>
     {
-        { "Loan", "ขอกู้ รับชำระ จ่ายเงินกู้" },
         { "Finance", "เปิด-ปิดบัญชีฝากถอน" },
-        { "Shares", "สมัครสมาชิก ลาออก ซื้อ-ถอนหุ้น" },
-        { "Other", "อื่นๆ"}
+        { "Loan", "ขอกู้ จ่ายเงินกู้" },
+        { "Shares", "สมัครสมาชิก ลาออก ซื้อ-ถอนหุ้น รับชำระหนี้" },
+        {"Other", "อื่นๆ"}
     };
+
 
     protected override async Task OnInitializedAsync()
     {
@@ -52,7 +59,8 @@ else
             if (response.IsSuccessStatusCode)
             {
                 queueDetails = await response.Content.ReadFromJsonAsync<QueueModel>();
-                PrintData(queueDetails);
+                
+                await PrintData(queueDetails);
             }
             else
             {
@@ -74,11 +82,11 @@ else
     {
         NavigationManager.NavigateTo("/");
     }
+
     private string TransformQueueType(string queueType)
     {
         return queueTypeMappings.TryGetValue(queueType, out var thaiValue) ? thaiValue : queueType;
     }
-
 
     private async Task PrintData(QueueModel queue)
     {
@@ -86,66 +94,48 @@ else
         await JSRuntime.InvokeVoidAsync("printPdf", htmlData);
         Console.WriteLine(htmlData);  // ตรวจสอบว่าข้อมูล htmlData ถูกสร้างหรือไม่
 
-
     }
 
 
     private async Task<string> GetPdfData(QueueModel queue)
     {
-
+        var queueDateFormatted = queue.queue_date.ToString("dd/MM/yyyy HH:mm");
 
         //สร้าง HTML สำหรับ PDF
         var InputHtml = $@"
-<html>
-<head>
-    <style>
-        h1 {{
-            font-size: 20px;
-            text-align: center;
-        }}
-        .content {{
-            margin: 0 auto;
-            width: 100%;
-        }}
-        .row {{
-            display: flex;
-            justify-content: space-between;
-            padding: 5px 0;
-        }}
-        .hidden-content {{
-            display: none;
-        }}
-    </style>
-</head>
-<body>
-    <div class='content'>
-        <h1>ใบเสร็จ {queue.QueueNumber}</h1>
-        <div class='row'>
-            <div>รายการ</div>
-            <div>จำนวนเงิน</div>
-        </div>
-        <div class='row'>
-            <div>สินค้า 1</div>
-            <div>100.00</div>
-        </div>
-        <div class='row'>
-            <div>สินค้า 2</div>
-            <div>200.00</div>
-        </div>
-        <hr />
-        <div class='row'>
-            <div>รวมทั้งหมด</div>
-            <div>300.00</div>
-        </div>
-    </div>
-</body>
-</html>";
-
+        <html>
+        <head>
+            <style>
+                @page {{
+                    width: 80mm;
+                    height: auto;
+                    margin: auto;
+               
+                }}
+                .boxqueue {{
+                    text-align: justify;
+                }}
+                .hidden-content {{
+                    display: none;
+                }}
+                p {{
+                    font-size: 80%
+                }}
+            </style>
+        </head>
+        <body>
+            <div class='boxqueue'>
+                <h3 style='text-align:start;'>หมายเลขคิว: </h3>
+                <h2 style='text-align:start;'>{queue.QueueNumber}</h2>
+                <p>รายการที่เลือก: {TransformQueueType(queue.QueueType)}</p>
+                <p>วันที่และเวลา: {queueDateFormatted}</p>
+                <p>*ถ้าเรียกคิวแล้วไม่อยู่ทำรายการ ขอสงวนสิทธิ์ในการข้ามคิว และต้องกดคิวใหม่เพื่อใช้บริการ*</p>
+            </div>
+        </body>
+        </html>";
 
         return InputHtml;
 
     }
 
 }
-
-

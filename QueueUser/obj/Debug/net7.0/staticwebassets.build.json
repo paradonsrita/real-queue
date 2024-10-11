@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "zOJCZjGm8JCHamLn/KLvzNB0i3QX6uV303GtlSJyZys=",
+  "Hash": "MHTHFxfJNVXGwOgaP8J/mlIgDxQEdR6GHlvQmgYZF7Q=",
   "Source": "QMS",
   "BasePath": "_content/QMS",
   "Mode": "Default",
@@ -1136,6 +1136,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\calendar.js"
+    },
+    {
+      "Identity": "C:\\Users\\Asus\\Desktop\\Queue Manage\\QueueUser\\wwwroot\\js\\Print.js",
+      "SourceId": "QMS",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Asus\\Desktop\\Queue Manage\\QueueUser\\wwwroot\\",
+      "BasePath": "_content/QMS",
+      "RelativePath": "js/Print.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\Print.js"
     }
   ]
 }

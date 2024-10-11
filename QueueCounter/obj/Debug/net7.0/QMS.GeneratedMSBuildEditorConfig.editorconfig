@@ -30,10 +30,6 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRmV0Y2hEYXRhLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Asus/Desktop/Queue Manage/QueueCounter/Pages/Index.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXgucmF6b3I=
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/Asus/Desktop/Queue Manage/QueueCounter/Pages/QueueTicket.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUXVldWVUaWNrZXQucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
@@ -49,6 +45,10 @@ build_metadata.AdditionalFiles.CssScope =
 [C:/Users/Asus/Desktop/Queue Manage/QueueCounter/_Imports.razor]
 build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Asus/Desktop/Queue Manage/QueueCounter/Pages/Index.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXgucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-o1f6pmm03b
 
 [C:/Users/Asus/Desktop/Queue Manage/QueueCounter/Shared/MainLayout.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE1haW5MYXlvdXQucmF6b3I=

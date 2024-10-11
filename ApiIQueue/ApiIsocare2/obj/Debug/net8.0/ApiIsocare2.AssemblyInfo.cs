@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ApiIsocare2")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2ed139c11576064666df1fc0e6c2d91d839e45d9")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+dc2780cc9b9e0178e3bc20224af769dc3d40c6bb")]
 [assembly: System.Reflection.AssemblyProductAttribute("ApiIsocare2")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ApiIsocare2")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

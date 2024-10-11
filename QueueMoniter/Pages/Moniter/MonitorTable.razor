@@ -10,27 +10,39 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var stat in Queue.Where(q => q.QueueStatus == "in process" && q.Source == Source))
+        @if (Queue != null && Queue.Any())
         {
-            <tr>
-                <td>@(string.IsNullOrEmpty(stat.QueueNumber) ? "-" : stat.QueueNumber)</td>
-                <td>@(string.IsNullOrEmpty(stat.QueueType) ? "-" : stat.QueueType)</td>
-                <td>@(stat.Counter.HasValue ? stat.Counter.ToString() : "-")</td>
-            </tr>
-        }
-        @if (Queue.Count(q => q.QueueStatus == "in process" && q.Source == Source) < 3)
-        {
-            var emptyRows = 3 - Queue.Count(q => q.QueueStatus == "in process" && q.Source == Source);
+            // กรองคิวที่มีสถานะ "in process" และ Source ตรงกับที่กำหนด
+            var filteredQueue = Queue
+                        .Where(q => q.QueueStatus == "in process" && q.Source == Source)
+                        .OrderByDescending(q => q.queue_id)
+                        .Take(3)
+                        .ToList();
+            var queueCount = filteredQueue.Count;
 
-            @for (int i = 0; i < emptyRows; i++)
+            @foreach (var stat in filteredQueue)
             {
-                <tr class="empty-row">
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                <tr>
+                    <td>@(string.IsNullOrEmpty(stat.QueueNumber) ? "-" : stat.QueueNumber)</td>
+                    <td>@(queueTypeMappings.ContainsKey(stat.QueueType) ? queueTypeMappings[stat.QueueType] : stat.QueueType)</td>
+                    <td>@(stat.Counter.HasValue ? stat.Counter.ToString() : "-")</td>
                 </tr>
             }
+            @if (queueCount < 3)
+            {
+                var emptyRows = 3 - queueCount;
+
+                @for (int i = 0; i < emptyRows; i++)
+                {
+                    <tr class="empty-row">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                }
+            }
         }
+        
     </tbody>
 </table>
 
@@ -41,6 +53,12 @@
     [Parameter]
     public List<QueueModel> Queue { get; set; }
 
-    // Model ที่จะใช้ในการรับข้อมูล
-    
+
+    private Dictionary<string, string> queueTypeMappings = new Dictionary<string, string>
+    {
+        { "Finance", "เปิด-ปิดบัญชีฝากถอน" },
+        { "Loan", "ขอกู้ จ่ายเงินกู้" },
+        { "Shares", "สมัครสมาชิก ลาออก ซื้อ-ถอนหุ้น รับชำระหนี้" },
+        { "Other", "อื่นๆ"}
+    };
 }

@@ -1,0 +1,77 @@
+﻿.custom-border {
+    position: relative;
+    padding: 20px;
+    background-color: #f1ede2;
+}
+
+    .custom-border::before {
+        content: "";
+        position: absolute;
+        top: -10px;
+        left: -10px;
+        right: -10px;
+        bottom: -10px;
+        border: 5px solid transparent;
+        background: #b3b3ba;
+        z-index: -1;
+    }
+
+/* กำหนดสไตล์สำหรับกลุ่มปุ่ม */
+.button-group {
+    display: flex;
+    justify-content: center;
+    gap: 5%;
+    margin-top: 7%;
+    flex-wrap: wrap;
+}
+
+/* กำหนดสไตล์สำหรับปุ่มกลม */
+.button-rounded {
+    width: 290px;
+    height: 290px;
+    border-radius: 20%;
+    background-color: #17372a;
+    color: wheat;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 40px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+    .button-rounded:hover {
+        background-color: #a62b4c;
+        color: whitesmoke;
+    }
+
+
+.filter-bar {
+    display: none; /* เริ่มต้นเป็น hidden */
+    position: fixed;
+    z-index: 1; /* ตั้งค่าชั้นให้สูงที่สุด */
+    background-color: #fefefe;
+    right: 0;
+    top: 0;
+    width: 30%; /* ความกว้างเต็ม */
+    height: 100vh; /* ความสูงเต็ม */
+    padding: 3%;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.3);
+    border: 1px solid #888;
+}
+
+
+.filter-options {
+    border-bottom: 2px solid black; /* ขอบล่างเป็นสีดำ */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* เงาให้ดูมีมิติ */
+    padding: 10px; /* เพิ่มระยะห่างด้านล่างถ้าต้องการ */
+    margin-top: 7%;
+    margin-bottom:7%;
+}
+    
+
+    .filter-bar.show {
+    display: block;
+}

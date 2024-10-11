@@ -1,0 +1,116 @@
+﻿@using QMS.Models
+@inject TokenService TokenService
+@inject NavigationManager Navigation
+@inject IJSRuntime js
+@inject HttpClient Http
+
+
+<RadzenCard Variant="@Variant" class="rz-my-12 rz-mx-auto" Style="max-width: 520px; padding: 2rem; font-size: 1.2rem; border-radius: 20px; border: 1px solid #ddd;">
+    <!-- เพิ่ม border-radius และ border -->
+    <RadzenStack Orientation="Orientation.Horizontal" JustifyContent="JustifyContent.Start" Gap="2rem" class="rz-p-4">
+        <RadzenStack Gap="0">
+            <RadzenText TextStyle="TextStyle.Overline" class="rz-display-flex rz-mt-2 rz-my-0" Style="font-size: 1.2rem;">หมายเลขคิว</RadzenText>
+            <RadzenText TextStyle="TextStyle.Body1" Style="font-size: 1.5rem;"><b>@Booking.QueueNumber</b></RadzenText>
+
+            <RadzenText TextStyle="TextStyle.Overline" class="rz-display-flex rz-mt-4 rz-mb-0" Style="font-size: 1.2rem;">วันที่จอง</RadzenText>
+            <RadzenText TextStyle="TextStyle.Body1" Style="font-size: 1.5rem;"><b>@Booking.booking_date.ToString("yyyy-MM-dd") เวลา @Booking.booking_date.ToString("HH:mm")</b></RadzenText>
+
+            <RadzenText TextStyle="TextStyle.Overline" class="rz-display-flex rz-mt-4 rz-mb-0" Style="font-size: 1.2rem;">วันที่นัดหมาย</RadzenText>
+            <RadzenText TextStyle="TextStyle.Body1" Style="font-size: 1.5rem;"><b>@Booking.appointment_date.ToString("yyyy-MM-dd") เวลา @Booking.appointment_date.ToString("HH:mm")</b></RadzenText>
+
+            <RadzenText TextStyle="TextStyle.Overline" class="rz-display-flex rz-mt-4 rz-mb-0" Style="font-size: 1.2rem;">ประเภทคิว</RadzenText>
+            <RadzenText TextStyle="TextStyle.Body1" Style="font-size: 1.5rem;"><b>@(queueTypeMappings.ContainsKey(Booking.QueueType) ? queueTypeMappings[Booking.QueueType] : Booking.QueueType)</b></RadzenText>
+
+            <RadzenText TextStyle="TextStyle.Overline" class="rz-display-flex rz-mt-4 rz-mb-0" Style="font-size: 1.2rem;">สถานะคิว</RadzenText>
+            <RadzenText TextStyle="TextStyle.Body1" Style="@GetStatusStyle(Booking)"><b>@Booking.QueueStatus</b></RadzenText>
+
+            @if (Booking.QueueStatus == "waiting" && Booking.appointment_date.Date > DateTime.Today)
+            {
+
+
+                <RadzenStack Orientation="Orientation.Horizontal" Gap="1rem" class="rz-mt-4 justify-content-center">
+                    <RadzenButton Text="ยกเลิกคิว" Click="@(() => HandleCancelBooking(Booking.queue_id))"
+                                  Disabled="@(Booking.QueueStatus == "canceled" || Booking.QueueStatus == "success")"
+                                  Style="font-size: 1.2rem; background-color: red; color: white;" />
+
+                    <RadzenButton Text="ปริ้น" Click="@(() => HandlePrintBooking(Booking))"
+                                  Disabled="@(Booking.QueueStatus == "canceled" || Booking.QueueStatus == "success")"
+                                  Style="font-size: 1.2rem; background-color: green; color: white;" />
+                </RadzenStack>
+            }
+        </RadzenStack>
+    </RadzenStack>
+</RadzenCard>
+@code {
+    [Parameter] public BookingModel Booking { get; set; }
+    [Parameter] public Variant Variant { get; set; }
+
+
+    private async Task HandlePrintBooking(BookingModel booking)
+    {
+        try
+        {
+            await js.InvokeVoidAsync("printBooking", booking.QueueNumber, booking.QueueType, booking.booking_date, booking.appointment_date, booking.phone_number);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"เกิดข้อผิดพลาดในการปริ้น: {ex.Message}");
+        }
+    }
+
+    private async Task HandleCancelBooking(int queueId)
+    {
+        try
+        {
+            var token = await TokenService.GetTokenAsync();
+            if (string.IsNullOrEmpty(token) || TokenService.IsTokenExpired(token))
+            {
+                await TokenService.RemoveTokenAsync();
+                Navigation.NavigateTo("/login");
+                return;
+            }
+
+            Http.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+            var response = await Http.PutAsync($"https://localhost:44328/api/Booking/cancel?id={queueId}", null);
+            if (response.IsSuccessStatusCode)
+            {
+                Console.WriteLine("ยกเลิกการจองเรียบร้อยแล้ว");
+            }
+            else
+            {
+                Console.WriteLine("เกิดข้อผิดพลาดในการยกเลิกการจอง");
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"เกิดข้อผิดพลาด: {ex.Message}");
+        }
+    }
+
+    private string GetQueueStatusColor(string queueStatus)
+    {
+        return queueStatus switch
+        {
+            "canceled" => "color: red;",
+            "waiting" => "color: blue;",
+            "success" => "color: green;",
+            _ => ""
+        };
+    }
+
+    private string GetStatusStyle(BookingModel booking)
+    {
+        return $"font-size: 1.5rem; {GetQueueStatusColor(booking.QueueStatus)}";
+    }
+
+
+    private Dictionary<string, string> queueTypeMappings = new Dictionary<string, string>
+    {
+        { "Finance", "เปิด-ปิดบัญชีฝากถอน" },
+        { "Loan", "ขอกู้ จ่ายเงินกู้" },
+        { "Shares", "สมัครสมาชิก ลาออก ซื้อ-ถอนหุ้น รับชำระหนี้" },
+        { "Other", "อื่นๆ"}
+    };
+
+
+}

@@ -1,5 +1,9 @@
 ﻿function initializeCalendar(objRef) {
     var today = new Date();
+    const futureDate = new Date();
+    
+    futureDate.setDate(today.getDate() + 30);
+
     var calendarEl = document.getElementById('calendar');
 
     if (!calendarEl) {
@@ -35,7 +39,10 @@
             objRef.invokeMethodAsync('CheckBookingAvailability', info.dateStr)
                 .then((result) => {
                     if (result) {
-                        if (info.date >= today && isWeekday(info.date)) {
+                        if (info.date > futureDate) {
+                            alert(`ต้องเลือกภายใน 30 วันต่อจากเวลาปัจจุบัน`)
+                        }
+                        else if (info.date >= today && isWeekday(info.date)) {
                             objRef.invokeMethodAsync('ShowPopup', info.dateStr)
                                 .then(() => {
                                     console.log("Popup should be visible now.");
@@ -66,7 +73,7 @@ function isWeekday(date) {
     var day = date.getDay(); // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
     return day >= 1 && day <= 5; // คืนค่า true หากวันคือจันทร์ถึงศุกร์
 }
-
+/*
 function markFullDays(fullDays) {
     var calendarEl = document.getElementById('calendar');
     var calendar = new FullCalendar.Calendar(calendarEl);
@@ -84,3 +91,4 @@ function markFullDays(fullDays) {
 
     calendar.render();
 }
+*/

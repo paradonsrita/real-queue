@@ -57,6 +57,10 @@
       "PackagePath": "staticwebassets\\favicon.png"
     },
     {
+      "Id": "C:\\Users\\Asus\\Desktop\\Queue Manage\\QueueUser\\wwwroot\\js\\Print.js",
+      "PackagePath": "staticwebassets\\js\\Print.js"
+    },
+    {
       "Id": "C:\\Users\\Asus\\Desktop\\Queue Manage\\QueueUser\\wwwroot\\js\\calendar.js",
       "PackagePath": "staticwebassets\\js\\calendar.js"
     },

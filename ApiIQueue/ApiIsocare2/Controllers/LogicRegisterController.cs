@@ -32,28 +32,41 @@ namespace ApiIsocare2.Controllers
             {
                 var hashedPassword = PasswordHasher.HashPassword(loginModel.password);
                 var user = _db.Users
-                    .Where(u => u.citizen_id_number == loginModel.citizenId && u.password == hashedPassword)
+                    .Where(u => u.citizen_id_number == loginModel.citizenId)
                     .Select(u => new { u.user_id, u.citizen_id_number, u.password })
                     .SingleOrDefault();
 
 
                 if (user != null)
                 {
-                    var key = _configuration["Jwt:Key"];
-                    if (key.Length < 16)
+                    if (PasswordHasher.VerifyPassword(user.password, loginModel.password))
                     {
-                        return StatusCode(500, "ข้อผิดพลาด: คีย์ JWT สั้นเกินไป.");
-                    }
-                    var token = JwtHelper.GenerateJwtToken(
-                       user.user_id.ToString(),
-                        key,
-                       _configuration["Jwt:Issuer"],
-                       _configuration["Jwt:Audience"]
-                    );
-                    return Ok(new { Token = token });
-                }
+                        var key = _configuration["Jwt:Key"];
+                        if (string.IsNullOrEmpty(key) || key.Length < 16)
+                        {
+                            return StatusCode(500, "ข้อผิดพลาด: คีย์ JWT สั้นเกินไป.");
+                        }
+                        var token = JwtHelper.GenerateJwtToken(
+                           user.user_id.ToString(),
+                            key,
+                           _configuration["Jwt:Issuer"],
+                           _configuration["Jwt:Audience"]
+                        );
+                        return Ok(new { Token = token });
 
-                return Unauthorized();
+                    }
+                    else
+                    {
+                        return Unauthorized("Invalid password.");
+                    }
+
+
+
+                }
+                return Unauthorized("User not found.");
+
+
+
 
             }
             catch (Exception ex)

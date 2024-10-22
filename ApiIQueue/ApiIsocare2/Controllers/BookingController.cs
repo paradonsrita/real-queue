@@ -248,7 +248,8 @@ namespace ApiIsocare2.Controllers
                     user_id = request.UserId,
                     booking_date = DateTime.Now,
                     appointment_date = correctedAppointmentDate,
-                    counter = 0
+                    counter = 0,
+                    call_queue_time = null
                 };
                 _db.BookingQueues.Add(queue);
                 await _db.SaveChangesAsync();

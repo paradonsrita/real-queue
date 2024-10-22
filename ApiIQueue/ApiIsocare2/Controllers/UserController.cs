@@ -62,6 +62,28 @@ namespace ApiIsocare2.Controllers
             }
         }
 
+        ///api/User/citizen-id?citizenId=1500701309052
+        [HttpGet("citizen-id")]
+        public async Task<IActionResult> GetUserNameByCitizenId(string citizenId)
+        {
+            var user = await _db.Users
+                            .Where(u => u.citizen_id_number == citizenId)
+                            .Select(u => new
+                            {
+                                u.user_id,
+                                citizen_id = u.citizen_id_number,
+                                name = $"{u.firstname} {u.lastname}"
+                            })
+                            .FirstOrDefaultAsync();
+
+            if (user == null)
+            {
+                return NotFound("user not found");
+            }
+            return Ok(user);
+        }
+
+
         [HttpPut]
         public async Task<IActionResult> EditProfile([FromBody] EditProfile newProfile)
         {
@@ -90,5 +112,6 @@ namespace ApiIsocare2.Controllers
             }
 
         }
+
     }
 }

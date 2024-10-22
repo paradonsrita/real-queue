@@ -31,7 +31,9 @@ namespace ApiIsocare2.Controllers
                                         QueueStatus = qs.queue_status_name,
                                         QueueType = qt.type_name,
                                         QueueNumber = qt.queue_type_id.ToUpper() + q.queue_number.ToString("000"),
-                                        q.counter
+                                        q.counter,
+                                        q.call_queue_time
+
                                     })
                                 .Where(q => q.queue_date.Date == DateTime.Today)
                                 .ToListAsync();
@@ -64,7 +66,8 @@ namespace ApiIsocare2.Controllers
                                         QueueStatus = qs.queue_status_name,
                                         QueueType = qt.type_name,
                                         QueueNumber = qt.queue_type_id.ToUpper() + q.queue_number.ToString("000"),
-                                        q.counter
+                                        q.counter,
+                                        q.call_queue_time
                                     })
                            .Where(q => q.queue_id == id)
                            .FirstOrDefaultAsync();
@@ -108,7 +111,8 @@ namespace ApiIsocare2.Controllers
                     queue_date = DateTime.Now,
                     queue_type_id = type,
                     queue_status_id = 0,
-                    counter = 0
+                    counter = 0,
+                    call_queue_time = null
                 };
                 
                 _db.CounterQueues.Add(queue);

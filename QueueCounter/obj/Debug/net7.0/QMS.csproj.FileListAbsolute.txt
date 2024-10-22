@@ -250,3 +250,7 @@ C:\Users\Asus\Desktop\Queue Manage\QueueCounter\obj\Debug\net7.0\QMS.pdb
 C:\Users\Asus\Desktop\Queue Manage\QueueCounter\obj\Debug\net7.0\QMS.genruntimeconfig.cache
 C:\Users\Asus\Desktop\Queue Manage\QueueCounter\obj\Debug\net7.0\ref\QMS.dll
 C:\Users\Asus\Desktop\Queue Manage\QueueCounter\obj\Debug\net7.0\scopedcss\Pages\Index.razor.rz.scp.css
+C:\Users\Asus\Desktop\Queue Manage\QueueCounter\bin\Debug\net7.0\Blazored.SessionStorage.dll
+C:\Users\Asus\Desktop\Queue Manage\QueueCounter\bin\Debug\net7.0\Microsoft.AspNetCore.Components.Forms.dll
+C:\Users\Asus\Desktop\Queue Manage\QueueCounter\bin\Debug\net7.0\Microsoft.AspNetCore.Components.Web.dll
+C:\Users\Asus\Desktop\Queue Manage\QueueCounter\bin\Debug\net7.0\Microsoft.JSInterop.dll

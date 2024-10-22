@@ -26,14 +26,6 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXgucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Asus/Desktop/Queue Manage/QueueEmployee/Pages/QueueCustomers/AddQueue.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUXVldWVDdXN0b21lcnNcQWRkUXVldWUucmF6b3I=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/Asus/Desktop/Queue Manage/QueueEmployee/Pages/QueueCustomers/BookingCalendar.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUXVldWVDdXN0b21lcnNcQm9va2luZ0NhbGVuZGFyLnJhem9y
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/Asus/Desktop/Queue Manage/QueueEmployee/Pages/QueueEmployees/BookingStatistic/BookingStatistic.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUXVldWVFbXBsb3llZXNcQm9va2luZ1N0YXRpc3RpY1xCb29raW5nU3RhdGlzdGljLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
@@ -97,10 +89,6 @@ build_metadata.AdditionalFiles.CssScope =
 [C:/Users/Asus/Desktop/Queue Manage/QueueEmployee/Shared/MainLayout.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE1haW5MYXlvdXQucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-5820ef2mb7
-
-[C:/Users/Asus/Desktop/Queue Manage/QueueEmployee/Shared/NavMenu.razor]
-build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE5hdk1lbnUucmF6b3I=
-build_metadata.AdditionalFiles.CssScope = b-nez0iwrp9r
 
 [C:/Users/Asus/Desktop/Queue Manage/QueueEmployee/Pages/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s

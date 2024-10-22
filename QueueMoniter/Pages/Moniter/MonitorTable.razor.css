@@ -24,6 +24,8 @@
     .table th, .table td {
         border: 1px solid #ddd; /* กำหนดสีและความหนาของกรอบเซลล์ */
         padding: 8px; /* กำหนดระยะห่างภายในเซลล์ */
+        font-size: 120%;
+        align-content:center;
     }
 
     .table tbody tr:nth-child(even) {

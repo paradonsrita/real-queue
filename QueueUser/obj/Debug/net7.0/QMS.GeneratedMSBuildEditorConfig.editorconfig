@@ -26,8 +26,8 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQm9va2luZ1xCb29raW5nQ29tcG9uZW50LnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Asus/Desktop/Queue Manage/QueueUser/Pages/Booking/CancelCard.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQm9va2luZ1xDYW5jZWxDYXJkLnJhem9y
+[C:/Users/Asus/Desktop/Queue Manage/QueueUser/Pages/Booking/TableRecord.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQm9va2luZ1xUYWJsZVJlY29yZC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Asus/Desktop/Queue Manage/QueueUser/Pages/Home.razor]
@@ -78,10 +78,6 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXFNpZGViYXIucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Asus/Desktop/Queue Manage/QueueUser/Shared/SurveyPrompt.razor]
-build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXFN1cnZleVByb21wdC5yYXpvcg==
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/Asus/Desktop/Queue Manage/QueueUser/_Imports.razor]
 build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
@@ -94,13 +90,13 @@ build_metadata.AdditionalFiles.CssScope = b-opcn1yltzr
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQm9va2luZ1xDYW5jZWxCb29raW5nLnJhem9y
 build_metadata.AdditionalFiles.CssScope = b-b7953azwwt
 
+[C:/Users/Asus/Desktop/Queue Manage/QueueUser/Pages/Booking/CancelCard.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQm9va2luZ1xDYW5jZWxDYXJkLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-sq9wr84vik
+
 [C:/Users/Asus/Desktop/Queue Manage/QueueUser/Shared/MainLayout.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE1haW5MYXlvdXQucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-5820ef2mb7
-
-[C:/Users/Asus/Desktop/Queue Manage/QueueUser/Shared/NavMenu.razor]
-build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE5hdk1lbnUucmF6b3I=
-build_metadata.AdditionalFiles.CssScope = b-nez0iwrp9r
 
 [C:/Users/Asus/Desktop/Queue Manage/QueueUser/Pages/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s

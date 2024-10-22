@@ -75,3 +75,16 @@
     .filter-bar.show {
     display: block;
 }
+
+.booking-card {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+}
+@media (max-width: 480px) {
+    .booking-card {
+        grid-template-columns: repeat(1, 1fr);
+        
+    }
+    
+}

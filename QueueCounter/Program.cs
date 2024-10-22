@@ -6,6 +6,7 @@ using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 using QMS.Services;
+using Blazored.SessionStorage;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,6 +16,7 @@ builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<WeatherForecastService>();
 
+builder.Services.AddBlazoredSessionStorage();
 
 
 

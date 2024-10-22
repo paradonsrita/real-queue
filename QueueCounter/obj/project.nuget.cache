@@ -1,18 +1,19 @@
 {
   "version": 2,
-  "dgSpecHash": "grsvr/lgLuSx6sV0tWoHPAW5KJzaOyPzhRXCuB/ATliqPdUWEKG+Ah5m171LTtSTq5zBQcd+oh49tYOtXV/jDA==",
+  "dgSpecHash": "Ia4aXDonYZsIiaprutXt3PBcHiM7IQ4jgHqkoee896g8N7o7U00LDom62MV1vRs2oGFMF0Y/lCSzIxgYSlQ71g==",
   "success": true,
   "projectFilePath": "C:\\Users\\Asus\\Desktop\\Queue Manage\\QueueCounter\\QMS.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Asus\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\Asus\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",
+    "C:\\Users\\Asus\\.nuget\\packages\\blazored.sessionstorage\\2.4.0\\blazored.sessionstorage.2.4.0.nupkg.sha512",
     "C:\\Users\\Asus\\.nuget\\packages\\dartsassbuilder\\1.0.0\\dartsassbuilder.1.0.0.nupkg.sha512",
     "C:\\Users\\Asus\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\Asus\\.nuget\\packages\\microsoft.aspnetcore.authorization\\7.0.14\\microsoft.aspnetcore.authorization.7.0.14.nupkg.sha512",
     "C:\\Users\\Asus\\.nuget\\packages\\microsoft.aspnetcore.components\\7.0.14\\microsoft.aspnetcore.components.7.0.14.nupkg.sha512",
     "C:\\Users\\Asus\\.nuget\\packages\\microsoft.aspnetcore.components.analyzers\\7.0.14\\microsoft.aspnetcore.components.analyzers.7.0.14.nupkg.sha512",
-    "C:\\Users\\Asus\\.nuget\\packages\\microsoft.aspnetcore.components.forms\\7.0.0\\microsoft.aspnetcore.components.forms.7.0.0.nupkg.sha512",
-    "C:\\Users\\Asus\\.nuget\\packages\\microsoft.aspnetcore.components.web\\7.0.0\\microsoft.aspnetcore.components.web.7.0.0.nupkg.sha512",
+    "C:\\Users\\Asus\\.nuget\\packages\\microsoft.aspnetcore.components.forms\\7.0.1\\microsoft.aspnetcore.components.forms.7.0.1.nupkg.sha512",
+    "C:\\Users\\Asus\\.nuget\\packages\\microsoft.aspnetcore.components.web\\7.0.1\\microsoft.aspnetcore.components.web.7.0.1.nupkg.sha512",
     "C:\\Users\\Asus\\.nuget\\packages\\microsoft.aspnetcore.metadata\\7.0.14\\microsoft.aspnetcore.metadata.7.0.14.nupkg.sha512",
     "C:\\Users\\Asus\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\Asus\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
@@ -43,7 +44,7 @@
     "C:\\Users\\Asus\\.nuget\\packages\\microsoft.identitymodel.protocols\\6.35.0\\microsoft.identitymodel.protocols.6.35.0.nupkg.sha512",
     "C:\\Users\\Asus\\.nuget\\packages\\microsoft.identitymodel.protocols.openidconnect\\6.35.0\\microsoft.identitymodel.protocols.openidconnect.6.35.0.nupkg.sha512",
     "C:\\Users\\Asus\\.nuget\\packages\\microsoft.identitymodel.tokens\\6.35.0\\microsoft.identitymodel.tokens.6.35.0.nupkg.sha512",
-    "C:\\Users\\Asus\\.nuget\\packages\\microsoft.jsinterop\\7.0.0\\microsoft.jsinterop.7.0.0.nupkg.sha512",
+    "C:\\Users\\Asus\\.nuget\\packages\\microsoft.jsinterop\\7.0.1\\microsoft.jsinterop.7.0.1.nupkg.sha512",
     "C:\\Users\\Asus\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
     "C:\\Users\\Asus\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
     "C:\\Users\\Asus\\.nuget\\packages\\microsoft.sqlserver.server\\1.0.0\\microsoft.sqlserver.server.1.0.0.nupkg.sha512",
@@ -77,10 +78,10 @@
     "C:\\Users\\Asus\\.nuget\\packages\\system.text.json\\7.0.0\\system.text.json.7.0.0.nupkg.sha512",
     "C:\\Users\\Asus\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.4\\system.threading.tasks.extensions.4.5.4.nupkg.sha512",
     "C:\\Users\\Asus\\.nuget\\packages\\system.windows.extensions\\6.0.0\\system.windows.extensions.6.0.0.nupkg.sha512",
-    "C:\\Users\\Asus\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\7.0.18\\microsoft.windowsdesktop.app.ref.7.0.18.nupkg.sha512",
-    "C:\\Users\\Asus\\.nuget\\packages\\microsoft.netcore.app.ref\\7.0.18\\microsoft.netcore.app.ref.7.0.18.nupkg.sha512",
     "C:\\Users\\Asus\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\7.0.18\\microsoft.aspnetcore.app.ref.7.0.18.nupkg.sha512",
-    "C:\\Users\\Asus\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\7.0.18\\microsoft.netcore.app.host.win-x64.7.0.18.nupkg.sha512"
+    "C:\\Users\\Asus\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\7.0.18\\microsoft.netcore.app.host.win-x64.7.0.18.nupkg.sha512",
+    "C:\\Users\\Asus\\.nuget\\packages\\microsoft.netcore.app.ref\\7.0.18\\microsoft.netcore.app.ref.7.0.18.nupkg.sha512",
+    "C:\\Users\\Asus\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\7.0.18\\microsoft.windowsdesktop.app.ref.7.0.18.nupkg.sha512"
   ],
   "logs": []
 }

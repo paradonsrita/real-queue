@@ -10,7 +10,7 @@
 
 
 
-<h3>Monitor</h3>
+<h1 class="text-center"><b>Monitor</b></h1>
 
 
 
@@ -23,6 +23,7 @@
 
     <MonitorTable Source="counter" Queue="queue"></MonitorTable>
 
+    
 
     <h5>Booking queue</h5>
 
@@ -61,7 +62,7 @@ else
     {
         try
         {
-            queue = await Http.GetFromJsonAsync<List<QueueModel>>("https://localhost:44328/api/Statistics/daily-statistics");
+            queue = await Http.GetFromJsonAsync<List<QueueModel>>("https://localhost:44328/api/Monitor");
             InvokeAsync(StateHasChanged); // อัปเดต UI
         }
         catch (Exception ex)

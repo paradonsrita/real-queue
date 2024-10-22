@@ -8,6 +8,7 @@
     ".NETCoreApp,Version=v7.0": {
       "QMS/1.0.0": {
         "dependencies": {
+          "Blazored.SessionStorage": "2.4.0",
           "Microsoft.EntityFrameworkCore": "7.0.20",
           "Microsoft.EntityFrameworkCore.SqlServer": "7.0.20",
           "Microsoft.EntityFrameworkCore.Tools": "7.0.20",
@@ -52,6 +53,17 @@
           }
         }
       },
+      "Blazored.SessionStorage/2.4.0": {
+        "dependencies": {
+          "Microsoft.AspNetCore.Components.Web": "7.0.1"
+        },
+        "runtime": {
+          "lib/net7.0/Blazored.SessionStorage.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
       "DartSassBuilder/1.0.0": {},
       "Humanizer.Core/2.14.1": {
         "runtime": {
@@ -87,18 +99,30 @@
         }
       },
       "Microsoft.AspNetCore.Components.Analyzers/7.0.14": {},
-      "Microsoft.AspNetCore.Components.Forms/7.0.0": {
+      "Microsoft.AspNetCore.Components.Forms/7.0.1": {
         "dependencies": {
           "Microsoft.AspNetCore.Components": "7.0.14"
+        },
+        "runtime": {
+          "lib/net7.0/Microsoft.AspNetCore.Components.Forms.dll": {
+            "assemblyVersion": "7.0.0.0",
+            "fileVersion": "7.0.122.56809"
+          }
         }
       },
-      "Microsoft.AspNetCore.Components.Web/7.0.0": {
+      "Microsoft.AspNetCore.Components.Web/7.0.1": {
         "dependencies": {
           "Microsoft.AspNetCore.Components": "7.0.14",
-          "Microsoft.AspNetCore.Components.Forms": "7.0.0",
+          "Microsoft.AspNetCore.Components.Forms": "7.0.1",
           "Microsoft.Extensions.DependencyInjection": "7.0.0",
-          "Microsoft.JSInterop": "7.0.0",
+          "Microsoft.JSInterop": "7.0.1",
           "System.IO.Pipelines": "7.0.0"
+        },
+        "runtime": {
+          "lib/net7.0/Microsoft.AspNetCore.Components.Web.dll": {
+            "assemblyVersion": "7.0.0.0",
+            "fileVersion": "7.0.122.56809"
+          }
         }
       },
       "Microsoft.AspNetCore.Metadata/7.0.14": {
@@ -406,7 +430,14 @@
           }
         }
       },
-      "Microsoft.JSInterop/7.0.0": {},
+      "Microsoft.JSInterop/7.0.1": {
+        "runtime": {
+          "lib/net7.0/Microsoft.JSInterop.dll": {
+            "assemblyVersion": "7.0.0.0",
+            "fileVersion": "7.0.122.56809"
+          }
+        }
+      },
       "Microsoft.NETCore.Platforms/1.1.0": {},
       "Microsoft.NETCore.Targets/1.1.0": {},
       "Microsoft.SqlServer.Server/1.0.0": {
@@ -456,7 +487,7 @@
         "dependencies": {
           "DartSassBuilder": "1.0.0",
           "Microsoft.AspNetCore.Components": "7.0.14",
-          "Microsoft.AspNetCore.Components.Web": "7.0.0",
+          "Microsoft.AspNetCore.Components.Web": "7.0.1",
           "System.Linq.Dynamic.Core": "1.3.7"
         },
         "runtime": {
@@ -679,6 +710,13 @@
       "path": "azure.identity/1.10.3",
       "hashPath": "azure.identity.1.10.3.nupkg.sha512"
     },
+    "Blazored.SessionStorage/2.4.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-e3XXH+zGGxDq1zC7YzLDD8mfvtoC6ESwTWOGD25H+FbPJlB7yQeL72hDY76tqkcrh98fh+y12r4BNhyQVV9YKw==",
+      "path": "blazored.sessionstorage/2.4.0",
+      "hashPath": "blazored.sessionstorage.2.4.0.nupkg.sha512"
+    },
     "DartSassBuilder/1.0.0": {
       "type": "package",
       "serviceable": true,
@@ -714,19 +752,19 @@
       "path": "microsoft.aspnetcore.components.analyzers/7.0.14",
       "hashPath": "microsoft.aspnetcore.components.analyzers.7.0.14.nupkg.sha512"
     },
-    "Microsoft.AspNetCore.Components.Forms/7.0.0": {
+    "Microsoft.AspNetCore.Components.Forms/7.0.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-xmcICgXAkrCQ3d4cNgD5YxtFqTPvnOl0hS7orIIziWZ3OQLAYFDpDhpITbK13iRSqsN5GXpxgzHIrAIr2ail8A==",
-      "path": "microsoft.aspnetcore.components.forms/7.0.0",
-      "hashPath": "microsoft.aspnetcore.components.forms.7.0.0.nupkg.sha512"
+      "sha512": "sha512-2I1598ymJIekXUE2abOblmqJjfcd6uhR+iHXo8t9ohrEfR6FjyGUeNfuF3qt73QPIlHzu6EgpWsH7EpyWXSBDg==",
+      "path": "microsoft.aspnetcore.components.forms/7.0.1",
+      "hashPath": "microsoft.aspnetcore.components.forms.7.0.1.nupkg.sha512"
     },
-    "Microsoft.AspNetCore.Components.Web/7.0.0": {
+    "Microsoft.AspNetCore.Components.Web/7.0.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-UkwVMsRozkcKl18Qjc8jyXM/L+ehRMqDblkCGgheGU0WC/EB/yfw/cwTEbiAeztgfVlSpC6a19Zm75U+ie+RCw==",
-      "path": "microsoft.aspnetcore.components.web/7.0.0",
-      "hashPath": "microsoft.aspnetcore.components.web.7.0.0.nupkg.sha512"
+      "sha512": "sha512-4A0V4lHQ5UfNKcnUfkYmwQlNfFICaWYTpmXglxpB9NnoM+kX02zzd1+sEyyXGU1RaxzarNNEtXlfQw4q9CEgEw==",
+      "path": "microsoft.aspnetcore.components.web/7.0.1",
+      "hashPath": "microsoft.aspnetcore.components.web.7.0.1.nupkg.sha512"
     },
     "Microsoft.AspNetCore.Metadata/7.0.14": {
       "type": "package",
@@ -938,12 +976,12 @@
       "path": "microsoft.identitymodel.tokens/6.35.0",
       "hashPath": "microsoft.identitymodel.tokens.6.35.0.nupkg.sha512"
     },
-    "Microsoft.JSInterop/7.0.0": {
+    "Microsoft.JSInterop/7.0.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-C9diwCnaWZ7PH3zOyf2zgcwFEqbSU11DzCnUPXCf5cqXMFeZDrEDP+M74TiCURKJ5vxImRvMtD7RiHYCtkxoXw==",
-      "path": "microsoft.jsinterop/7.0.0",
-      "hashPath": "microsoft.jsinterop.7.0.0.nupkg.sha512"
+      "sha512": "sha512-DA12CdI0/5v/TqIPcEAOjDN0U1622DKls1dtutCdRmLliOvtqCvsLgKzqU2hpvSqAiOs4tnKCGjVK7arNCNYdA==",
+      "path": "microsoft.jsinterop/7.0.1",
+      "hashPath": "microsoft.jsinterop.7.0.1.nupkg.sha512"
     },
     "Microsoft.NETCore.Platforms/1.1.0": {
       "type": "package",

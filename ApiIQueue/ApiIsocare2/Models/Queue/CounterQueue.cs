@@ -24,5 +24,7 @@ namespace ApiIsocare2.Models.Queue
         public int queue_number { get; set; }
 
         public int counter { get; set; }
+        public DateTime? call_queue_time { get; set; }
+
     }
 }

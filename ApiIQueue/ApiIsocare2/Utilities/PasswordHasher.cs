@@ -16,5 +16,13 @@ namespace ApiIsocare2.Utilities
             }
             return builder.ToString();
         }
+        public static bool VerifyPassword(string hashedPassword, string inputPassword)
+        {
+            // แฮชรหัสผ่านที่ผู้ใช้ส่งมา
+            var hashedInputPassword = HashPassword(inputPassword);
+
+            // ตรวจสอบว่าแฮชตรงกันหรือไม่
+            return hashedPassword == hashedInputPassword;
+        }
     }
 }

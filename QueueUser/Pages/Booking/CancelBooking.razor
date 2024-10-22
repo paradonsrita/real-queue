@@ -1,5 +1,5 @@
 ﻿﻿
-@page "/cancel-booking/"
+@page "/cancel/"
 @inject HttpClient Http
 @inject IJSRuntime js
 @using QMS.Models
@@ -22,20 +22,32 @@
 
         <div class="filter-options">
             <RadzenLabel Text="เลือกประเภทธุรกรรม" Component="TypeFilter" class="" />
-            <RadzenDropDown @bind-Value="selectedQueueType" Placeholder="เลือกประเภทคิว" Data="queueTypeOptions"/>
+            <RadzenDropDown @bind-Value="selectedQueueType" Placeholder="เลือกประเภทคิว" Data="queueTypeOptions" 
+                Change="@((arg) => {currentPage = 1;})"/>
         </div>
 
         <div class="filter-options">
             <RadzenLabel Text="Appointment Date" Component="AppointmentDateFilter" class="rz-ms-2" />
 
-            <RadzenCheckBox TValue="bool" Value=@appointmentDateFilter Change="(arg => appointmentDateFilter = !appointmentDateFilter)" Name="AppointmentDateFilter" />
+            <RadzenCheckBox TValue="bool" Value=@appointmentDateFilter Change="(arg => { appointmentDateFilter = !appointmentDateFilter; currentPage = 1; })" Name="AppointmentDateFilter" />
         </div>
 
         <!--sort-->
         <RadzenText TextStyle="TextStyle.Body1" Style="font-size: 1.5rem; text-align: center; margin-top:50px;"><b>เรียงลำดับตาม</b></RadzenText>
 
         <div class="filter-options">
-            <RadzenDropDown @bind-Value="selectedSortOption" Placeholder="เลือกการเรียงลำดับ" Data="sortOptions" />
+            <RadzenDropDown @bind-Value="selectedSortOption" Placeholder="เลือกการเรียงลำดับ" Data="sortOptions" 
+                Change="@((arg) => {currentPage = 1; })"/>
+        </div>
+
+        <div class="filter-options">
+            <RadzenLabel Text="วันที่เริ่มต้น" Component="StartDateFilter" />
+            <RadzenDatePicker @bind-Value="startDate" />
+        </div>
+
+        <div class="filter-options">
+            <RadzenLabel Text="วันที่สิ้นสุด" Component="EndDateFilter" />
+            <RadzenDatePicker @bind-Value="endDate" />
         </div>
 
         <RadzenButton Text="ปิด" Shade="Shade.Dark" Click="ToggleFilter" ButtonStyle="ButtonStyle.Base" Style="text-align: center; margin-top:50px;" />
@@ -60,7 +72,7 @@
             <RadzenButton Click=@(args => ToggleFilter()) Text="กรอง" />
         </div>
         
-        <div class="booking-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;">
+        <div class="booking-card">
             @foreach (var booking in PaginatedQueueBookings)
             {
                 <CancelCard Booking="@booking"
@@ -82,7 +94,7 @@
     private string? message;
     private bool isLoading = false;
     private int currentPage = 1;
-    private int pageSize = 20;
+    private int pageSize = 10;
 
 
     //filter
@@ -97,7 +109,8 @@
     private IEnumerable<BookingModel> FilteredBookings => bookings.Where(b => selectedQueueType == "All" || b.QueueType == selectedQueueType);
     private List<string> queueTypeOptions = new List<string> { "All", "Loan", "Finance", "Shares", "Other" };
 
-
+    private DateTime? startDate;
+    private DateTime? endDate;
     //sort
     private string selectedSortOption = "วันที่จอง"; // ตัวเลือกการเรียงลำดับเริ่มต้น
     private List<string> sortOptions = new List<string> { "วันที่จอง" ,"วันที่นัดหมาย", "ประเภทธุรกรรม", "สถานะ" }; // ตัวเลือกการเรียงลำดับ
@@ -106,6 +119,16 @@
         get
         {
             var filtered = FilteredBookings;
+
+            // กรองตามวันที่เริ่มต้นและวันที่สิ้นสุด
+            if (startDate.HasValue)
+            {
+                filtered = filtered.Where(b => b.appointment_date >= startDate.Value);
+            }
+            if (endDate.HasValue)
+            {
+                filtered = filtered.Where(b => b.appointment_date <= endDate.Value);
+            }
 
             return selectedSortOption switch
             {
@@ -157,8 +180,11 @@
     private void ToggleFilter()
     {
         filterExpanded = !filterExpanded;
+        if (filterExpanded)
+        {
+            currentPage = 1; // ตั้งค่าหน้าปัจจุบันเป็น 1
+        }
 
-        
         StateHasChanged();
     }
 
@@ -209,23 +235,18 @@
 
 
 
-    private string GetQueueStatusColor(string queueStatus)
-    {
-        return queueStatus switch
-        {
-            "cancled" => "color: red;",
-            "waiting" => "color: blue;",
-            "success" => "color: green;",
-            _ => ""
-        };
-    }
 
 
     private bool IsLastPage
     {
         get
         {
-            return currentPage >= Math.Ceiling((double)bookings.Count / pageSize);
+            // ตรวจสอบว่า appointmentDateFilter เป็น true หรือไม่
+            var bookingsToCount = appointmentDateFilter
+                ? SortedFilteredBookings.Where(b => b.appointment_date.Date > DateTime.Today)
+                : SortedFilteredBookings;
+
+            return currentPage >= Math.Ceiling((double)bookingsToCount.Count() / pageSize);
         }
     }
 

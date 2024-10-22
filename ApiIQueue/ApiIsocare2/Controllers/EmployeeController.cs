@@ -47,6 +47,7 @@ namespace ApiIsocare2.Controllers
                     {
                         waitQueue.queue_status_id = 2;
                         waitQueue.counter = counter;
+                        waitQueue.call_queue_time = DateTime.Now;
                         
                     }
                     else
@@ -98,7 +99,7 @@ namespace ApiIsocare2.Controllers
                     {
                         waitQueue.queue_status_id = 2; 
                         waitQueue.counter = counter;
-
+                        waitQueue.call_queue_time = DateTime.Now;
                     }
                     await _db.SaveChangesAsync();
 
@@ -142,6 +143,8 @@ namespace ApiIsocare2.Controllers
                     {
                         waitQueue.queue_status_id = 2;
                         waitQueue.counter = counter;
+                        waitQueue.call_queue_time = DateTime.Now;
+
                         await _db.SaveChangesAsync();
 
                         await _hubContext.Clients.All.SendAsync("RefreshPage");
@@ -189,7 +192,9 @@ namespace ApiIsocare2.Controllers
                     if (waitQueue != null)
                     {
                         waitQueue.queue_status_id = 2;
-                        waitQueue.counter = counter; 
+                        waitQueue.counter = counter;
+                        waitQueue.call_queue_time = DateTime.Now;
+
                     }
                     await _db.SaveChangesAsync();
 

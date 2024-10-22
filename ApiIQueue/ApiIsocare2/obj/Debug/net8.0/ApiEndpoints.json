@@ -216,6 +216,16 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "ApiIsocare2.Controllers.MonitorController",
+    "Method": "DailyStatistics",
+    "RelativePath": "api/Monitor",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "ApiIsocare2.Controllers.QueueController",
     "Method": "GetCounterQueues",
     "RelativePath": "api/Queue",
@@ -384,6 +394,22 @@
         "Name": "newProfile",
         "Type": "ApiIsocare2.Models.UserModel.EditProfile",
         "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApiIsocare2.Controllers.UserController",
+    "Method": "GetUserNameByCitizenId",
+    "RelativePath": "api/User/citizen-id",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "citizenId",
+        "Type": "System.String",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []

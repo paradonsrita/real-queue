@@ -1,4 +1,4 @@
-﻿@page "/queue-ticket/{QueueId:int}"
+﻿@page "/queue-ticket"
 @inject HttpClient HttpClient
 @inject NavigationManager NavigationManager
 @using Microsoft.JSInterop
@@ -6,6 +6,9 @@
 @using Newtonsoft.Json
 @using QMS.Models
 @using System.Text
+@using Blazored.SessionStorage
+@inject ISessionStorageService sessionStorage
+
 
 <PageTitle>QueueTicket</PageTitle>
 
@@ -35,7 +38,6 @@ else
 
 @code {
 
-    [Parameter]
     public int QueueId { get; set; }
     private bool loading = true;
     private QueueModel queueDetails;
@@ -55,11 +57,13 @@ else
     {
         try
         {
+            QueueId = await sessionStorage.GetItemAsync<int>("queue"); // ดึงข้อมูลจาก SessionStorage
+
             var response = await HttpClient.GetAsync($"https://localhost:44328/api/Queue/{QueueId}");
             if (response.IsSuccessStatusCode)
             {
                 queueDetails = await response.Content.ReadFromJsonAsync<QueueModel>();
-                
+
                 await PrintData(queueDetails);
             }
             else
@@ -78,8 +82,9 @@ else
         }
     }
 
-    private void BackToBooking()
+    private async void BackToBooking()
     {
+        await sessionStorage.RemoveItemAsync("queue");
         NavigationManager.NavigateTo("/");
     }
 

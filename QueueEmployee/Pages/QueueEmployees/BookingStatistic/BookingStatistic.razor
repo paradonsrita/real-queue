@@ -7,7 +7,7 @@
 
 
 <h3>BookingStatistic</h3>
-<RadzenStack Orientation="Orientation.Horizontal" JustifyContent="JustifyContent.Center" AlignItems="AlignItems.Center" Gap="0.5rem" class="rz-p-12">
+<RadzenStack Orientation="Orientation.Horizontal" JustifyContent="JustifyContent.Center" AlignItems="AlignItems.Center" Gap="0.5rem" class="rz-p-6">
     <RadzenLabel Text="Select first date"/>
     <RadzenDatePicker @bind-Value="@minDate" DateFormat="MM/dd/yyyy" Name="DatePickerMinDate" Change="@(async args => await OnDateChanged())" />
     
@@ -18,37 +18,12 @@
 @if (statistics != null)
 {
 
-    <RadzenStack Orientation="Orientation.Horizontal" JustifyContent="JustifyContent.Center" AlignItems="AlignItems.Center" Gap="1rem" class="rz-p-12 graph-container">
+    <RadzenStack Orientation="Orientation.Horizontal" JustifyContent="JustifyContent.Center" AlignItems="AlignItems.Center" Gap="1rem" class="graph-container">
         <LineChartComponent Statistics="statistics"/>
         <ColumnChart Statistics="statistics" />
     </RadzenStack>
 
 
-    <!-- ตารางข้อมูล -->
-    <div class="table-container">
-        <table class="table ">
-            <thead>
-                <tr>
-                    <th>Type</th>
-                    <th>Source</th>
-                    <th>Date</th>
-                    <th>Total</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var stat in statistics)
-                {
-                    <tr>
-                        <td>@stat.type_name</td>
-                        <td>@stat.Source</td>
-                        <td>@stat.Date.ToString("MM/dd/yyyy")</td>
-                        <td>@stat.Total</td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-
-    </div>
     
 }
 else

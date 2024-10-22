@@ -5,7 +5,6 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
-using QMS.Services;
 using Microsoft.AspNetCore.SignalR.Client;
 
 
@@ -20,10 +19,7 @@ builder.Services.AddSingleton<WeatherForecastService>();
 
 
 // à¾ÔèÁ QueueService áÅÐ HttpClient ÊÓËÃÑºàª×èÍÁµèÍ¡Ñº API
-builder.Services.AddHttpClient<QueueService>(client =>
-{
-    client.BaseAddress = new Uri("https://localhost:44328/"); // à»ÅÕèÂ¹à»ç¹ URL ¢Í§ API ¢Í§¤Ø³
-});
+builder.Services.AddHttpClient();
 
 
 builder.Services.AddSignalR();

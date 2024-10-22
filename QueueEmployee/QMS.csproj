@@ -10,6 +10,7 @@
     <PackageReference Include="Blazored.LocalStorage" Version="4.5.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Radzen.Blazor" Version="5.0.4" />
+    <PackageReference Include="Syncfusion.Blazor" Version="27.1.55" />
   </ItemGroup>
 
 </Project>

@@ -56,6 +56,10 @@
             "Radzen.Blazor": {
               "target": "Package",
               "version": "[5.0.4, )"
+            },
+            "Syncfusion.Blazor": {
+              "target": "Package",
+              "version": "[27.1.55, )"
             }
           },
           "imports": [

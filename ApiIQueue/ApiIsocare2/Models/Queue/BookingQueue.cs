@@ -31,5 +31,7 @@ namespace ApiIsocare2.Models.Booking
         public DateTime appointment_date { get; set; }
 
         public int counter { get; set; }
+
+        public DateTime? call_queue_time {  get; set; }
     }
 }

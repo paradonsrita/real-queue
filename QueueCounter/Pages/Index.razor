@@ -1,9 +1,21 @@
 ﻿@page "/"
+
 @using QMS.Services
 @using QMS.Models
+@using Blazored.SessionStorage
+@inject ISessionStorageService sessionStorage
+@inject HttpClient HttpClient
+
 
 @inject QueueService QueueService
 @inject NavigationManager NavigationManager
+
+<RadzenCard>
+    <RadzenText TextStyle="TextStyle.Subtitle2" TagName="TagName.H3">5 characters maximum</RadzenText>
+    <RadzenTextBox @bind-Value=@citizenId MaxLength="13" Change=@(args => OnChange(args)) Style="width: 100%" />
+</RadzenCard>
+<RadzenText>@name</RadzenText>
+
 
 <div class="text-center border p-2 custom-border text-color" style="margin: auto; max-width: 90%; width: 550px;">
     <h1>เลือกประเภทคิว</h1>
@@ -26,7 +38,9 @@
 }
 
 @code {
-    private string ErrorMessage;
+    private string? ErrorMessage;
+    private string citizenId = "";
+    private string? name;
 
     private async Task BookQueue(string queueType)
     {
@@ -37,7 +51,8 @@
             var queueId = result.queue_id; // หรือถ้า result เป็นแบบอื่น ให้แก้ไขให้ถูกต้องตามชนิด
             if (queueId > 0)
             {
-                NavigationManager.NavigateTo($"/queue-ticket/{queueId}", true);
+                await sessionStorage.SetItemAsync("queue", queueId);
+                NavigationManager.NavigateTo($"/queue-ticket", true);
             }
             else
             {
@@ -48,5 +63,34 @@
         {
             ErrorMessage = "ไม่สามารถจองคิวได้ กรุณาลองใหม่อีกครั้ง";
         }
+    }
+    private async Task OnChange(string Id)
+    {
+        Console.WriteLine(Id);
+        var response = await HttpClient.GetAsync($"https://localhost:44328/api/User/citizen-id?citizenId={citizenId}");
+        if (response.IsSuccessStatusCode)
+        {
+            // Deserialize JSON response to extract the 'name'
+            var user = await response.Content.ReadFromJsonAsync<UserResponse>();
+            if (user != null)
+            {
+                name = user.name;
+                Console.WriteLine(name);
+            }
+        }
+        else
+        {
+            Console.WriteLine($"Error: {response.StatusCode}, Message: {await response.Content.ReadAsStringAsync()}");
+        }
+
+        StateHasChanged();
+    }
+
+
+    private class UserResponse
+    {
+        public int user_id { get; set; }
+        public string citizen_id { get; set; }
+        public string name { get; set; }
     }
 }

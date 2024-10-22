@@ -19,11 +19,11 @@ namespace QMS.Services
         private readonly ILogger<AccountService> _logger;
         private readonly HttpClient _httpClient;
 
-        public AccountService(BookingContext dbContext, ILogger<AccountService> logger, HttpClient httpClient)
+        public AccountService(BookingContext dbContext, ILogger<AccountService> logger, IHttpClientFactory httpClientFactory)
         {
             _dbContext = dbContext;
             _logger = logger;
-            _httpClient = httpClient;
+            _httpClient = httpClientFactory.CreateClient("Queue");
         }
 
         public async Task RegisterAsync(RegisterViewModel model)
@@ -65,7 +65,7 @@ namespace QMS.Services
                 var hashedPassword = HashPassword(loginModel.password);
                 loginModel.password = hashedPassword;
 
-                var response = await _httpClient.PostAsJsonAsync("https://localhost:44328/api/LogicRegister/login", loginModel);
+                var response = await _httpClient.PostAsJsonAsync("/api/LogicRegister/login", loginModel);
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -97,7 +97,7 @@ namespace QMS.Services
 
         public async Task<User> GetUserByIdAsync(string userId)
         {
-            var response = await _httpClient.GetAsync($"https://localhost:44328/api/User?userId={userId}");
+            var response = await _httpClient.GetAsync($"/api/User?userId={userId}");
 
             if (response.IsSuccessStatusCode)
             {

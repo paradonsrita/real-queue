@@ -26,7 +26,9 @@ namespace QMS.Pages.QueueEmployees.DairyStatistic
 
                 try
                 {
-                    var response = await Http.GetFromJsonAsync<List<QueueData>>("https://localhost:44328/api/Statistics/daily-statistics");
+
+                    var client = HttpClientFactory.CreateClient("Queue");
+                    var response = await client.GetFromJsonAsync<List<QueueData>>("/api/Statistics/daily-statistics");
 
                     if (response == null)
                     {

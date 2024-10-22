@@ -1,9 +1,8 @@
 ﻿@page "/"
-@inject HttpClient Http
 @using QMS.Models
 @inject IJSRuntime JsRuntime
 @inject NavigationManager Navigation
-
+@inject IHttpClientFactory HttpClientFactory
 @using Microsoft.AspNetCore.SignalR.Client
 @implements IAsyncDisposable
 
@@ -44,8 +43,15 @@ else
     {
 
         hubConnection = new HubConnectionBuilder()
-            .WithUrl("https://localhost:44328/notificationHub")
-            .Build();
+            .WithUrl("https://192.168.1.15:44328/notificationHub", options =>
+        {
+            options.HttpMessageHandlerFactory = _ => new HttpClientHandler
+                {
+                    ServerCertificateCustomValidationCallback = (message, cert, chain, sslPolicyErrors) => true
+                };
+        })
+        .WithAutomaticReconnect() // เพิ่มการเชื่อมต่อใหม่อัตโนมัติ
+        .Build();
 
         hubConnection.On("RefreshPage", () =>
         {
@@ -62,7 +68,9 @@ else
     {
         try
         {
-            queue = await Http.GetFromJsonAsync<List<QueueModel>>("https://localhost:44328/api/Monitor");
+            var client = HttpClientFactory.CreateClient("Queue");
+
+            queue = await client.GetFromJsonAsync<List<QueueModel>>("/api/Monitor");
             InvokeAsync(StateHasChanged); // อัปเดต UI
         }
         catch (Exception ex)

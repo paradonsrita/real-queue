@@ -1,5 +1,5 @@
 ﻿@page "/queue-ticket"
-@inject HttpClient HttpClient
+@inject IHttpClientFactory HttpClientFactory
 @inject NavigationManager NavigationManager
 @using Microsoft.JSInterop
 @inject IJSRuntime JSRuntime
@@ -59,7 +59,8 @@ else
         {
             QueueId = await sessionStorage.GetItemAsync<int>("queue"); // ดึงข้อมูลจาก SessionStorage
 
-            var response = await HttpClient.GetAsync($"https://localhost:44328/api/Queue/{QueueId}");
+            var client = HttpClientFactory.CreateClient("Queue");
+            var response = await client.GetAsync($"/api/Queue/{QueueId}");
             if (response.IsSuccessStatusCode)
             {
                 queueDetails = await response.Content.ReadFromJsonAsync<QueueModel>();

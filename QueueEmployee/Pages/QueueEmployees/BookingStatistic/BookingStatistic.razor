@@ -1,6 +1,6 @@
 ﻿@page "/booking-statistic"
 @using QMS.Models
-@inject HttpClient Http
+@inject IHttpClientFactory HttpClientFactory
 @using System.Net.Http.Json
 @using System.Text.Json
 
@@ -74,8 +74,10 @@ else
 
     public async Task<IEnumerable<Statistic>> GetBookingStatisticsAsync(DateTime minDate, DateTime maxDate)
     {
-        var url = $"https://localhost:44328/api/Statistics/booking-statistics?minDate={minDate:yyyy-MM-dd}&maxDate={maxDate:yyyy-MM-dd}";
-        var response = await Http.GetAsync(url);
+        var url = $"/api/Statistics/booking-statistics?minDate={minDate:yyyy-MM-dd}&maxDate={maxDate:yyyy-MM-dd}";
+        var client = HttpClientFactory.CreateClient("Queue");
+
+        var response = await client.GetAsync(url);
 
         if (response.IsSuccessStatusCode)
         {

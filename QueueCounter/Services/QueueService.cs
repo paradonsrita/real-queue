@@ -11,9 +11,9 @@ namespace QMS.Services
     {
         private readonly HttpClient _httpClient;
 
-        public QueueService(HttpClient httpClient)
+        public QueueService(IHttpClientFactory httpClientFactory)
         {
-            _httpClient = httpClient;
+            _httpClient = httpClientFactory.CreateClient("Queue");
         }
 
         // ฟังก์ชันเพื่อเพิ่มคิวใหม่

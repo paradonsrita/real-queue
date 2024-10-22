@@ -21,8 +21,17 @@ namespace ApiIsocare2
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            
-            
+            //ngrok
+            // กำหนดค่า Kestrel ให้รองรับ HTTPS
+            builder.WebHost.UseKestrel(options =>
+            {
+                options.ListenAnyIP(44328, listenOptions =>
+                {
+                    listenOptions.UseHttps(); // ใช้ HTTPS
+                });
+            });
+
+
             //forget password
             var key = Encoding.ASCII.GetBytes(builder.Configuration["Jwt:Key"]);
             builder.Services.AddAuthentication(options =>

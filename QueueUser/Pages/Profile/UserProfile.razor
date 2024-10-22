@@ -1,7 +1,7 @@
 ﻿@page "/profile"
 @using QMS.Data.Entities
 @using System.Security.Claims
-@inject HttpClient Http
+@inject IHttpClientFactory HttpClientFactory
 @using QMS.Models
 @inject NavigationManager Navigation
 @using System.Text.Json;
@@ -57,12 +57,13 @@ else
 
                     if (userId.HasValue)
                     {
+                        var client = HttpClientFactory.CreateClient("Queue");
                         // Set the Authorization header
-                        Http.DefaultRequestHeaders.Authorization =
+                        client.DefaultRequestHeaders.Authorization =
                             new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 
                         // Fetch user profile data from API
-                        var response = await Http.GetAsync($"https://localhost:44328/api/User?userId={userId.Value}");
+                        var response = await client.GetAsync($"/api/User?userId={userId.Value}");
 
                         if (response.IsSuccessStatusCode)
                         {

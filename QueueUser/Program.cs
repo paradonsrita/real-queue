@@ -1,3 +1,4 @@
+using System.Net.Http.Headers;
 using Blazored.LocalStorage;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
@@ -14,14 +15,18 @@ builder.Services.AddServerSideBlazor();
 // Add Authentication and Authorization services
 builder.Services.AddAuthorizationCore();
 
-builder.Services.AddHttpClient("API", client =>
+builder.Services.AddHttpClient("Queue", client =>
 {
-    client.BaseAddress = new Uri("https://localhost:44328/");
-});
-builder.Services.AddHttpClient<QueueCounterService>(client =>
+    client.BaseAddress = new Uri("https://192.168.1.15:44328/");
+    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+}).ConfigurePrimaryHttpMessageHandler(() =>
 {
-    client.BaseAddress = new Uri("https://localhost:44328/"); // เปลี่ยนเป็น URL ของ API ของคุณ
+    return new HttpClientHandler
+    {
+        ServerCertificateCustomValidationCallback = (message, cert, chain, sslPolicyErrors) => true
+    };
 });
+
 
 
 

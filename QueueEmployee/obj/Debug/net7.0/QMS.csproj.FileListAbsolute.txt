@@ -198,7 +198,6 @@ C:\Users\Asus\Desktop\Queue Manage\QueueEmployee\obj\Debug\net7.0\staticwebasset
 C:\Users\Asus\Desktop\Queue Manage\QueueEmployee\obj\Debug\net7.0\staticwebassets\msbuild.buildTransitive.QMS.props
 C:\Users\Asus\Desktop\Queue Manage\QueueEmployee\obj\Debug\net7.0\staticwebassets.pack.json
 C:\Users\Asus\Desktop\Queue Manage\QueueEmployee\obj\Debug\net7.0\scopedcss\Shared\MainLayout.razor.rz.scp.css
-C:\Users\Asus\Desktop\Queue Manage\QueueEmployee\obj\Debug\net7.0\scopedcss\Shared\NavMenu.razor.rz.scp.css
 C:\Users\Asus\Desktop\Queue Manage\QueueEmployee\obj\Debug\net7.0\scopedcss\bundle\QMS.styles.css
 C:\Users\Asus\Desktop\Queue Manage\QueueEmployee\obj\Debug\net7.0\scopedcss\projectbundle\QMS.bundle.scp.css
 C:\Users\Asus\Desktop\Queue Manage\QueueEmployee\obj\Debug\net7.0\QMS.csproj.Up2Date
@@ -208,3 +207,13 @@ C:\Users\Asus\Desktop\Queue Manage\QueueEmployee\obj\Debug\net7.0\QMS.pdb
 C:\Users\Asus\Desktop\Queue Manage\QueueEmployee\obj\Debug\net7.0\QMS.genruntimeconfig.cache
 C:\Users\Asus\Desktop\Queue Manage\QueueEmployee\obj\Debug\net7.0\ref\QMS.dll
 C:\Users\Asus\Desktop\Queue Manage\QueueEmployee\obj\Debug\net7.0\QMS.sourcelink.json
+C:\Users\Asus\Desktop\Queue Manage\QueueEmployee\bin\Debug\net7.0\Microsoft.AspNetCore.Components.Forms.dll
+C:\Users\Asus\Desktop\Queue Manage\QueueEmployee\bin\Debug\net7.0\Microsoft.AspNetCore.Components.Web.dll
+C:\Users\Asus\Desktop\Queue Manage\QueueEmployee\bin\Debug\net7.0\Microsoft.JSInterop.dll
+C:\Users\Asus\Desktop\Queue Manage\QueueEmployee\bin\Debug\net7.0\Syncfusion.Blazor.dll
+C:\Users\Asus\Desktop\Queue Manage\QueueEmployee\bin\Debug\net7.0\Syncfusion.ExcelExport.Net.dll
+C:\Users\Asus\Desktop\Queue Manage\QueueEmployee\bin\Debug\net7.0\Syncfusion.Licensing.dll
+C:\Users\Asus\Desktop\Queue Manage\QueueEmployee\bin\Debug\net7.0\Syncfusion.PdfExport.Net.dll
+C:\Users\Asus\Desktop\Queue Manage\QueueEmployee\bin\Debug\net7.0\System.Text.Encodings.Web.dll
+C:\Users\Asus\Desktop\Queue Manage\QueueEmployee\bin\Debug\net7.0\System.Text.Json.dll
+C:\Users\Asus\Desktop\Queue Manage\QueueEmployee\bin\Debug\net7.0\runtimes\browser\lib\net7.0\System.Text.Encodings.Web.dll

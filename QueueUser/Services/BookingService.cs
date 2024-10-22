@@ -1,4 +1,5 @@
-﻿using QMS.Models;
+﻿using System.Net.Http;
+using QMS.Models;
 using QMS.Pages.Booking;
 
 namespace QMS.Services
@@ -7,14 +8,14 @@ namespace QMS.Services
     {
         private readonly HttpClient _httpClient;
 
-        public BookingService(HttpClient httpClient)
+        public BookingService(IHttpClientFactory httpClientFactory)
         {
-            _httpClient = httpClient;
+            _httpClient = httpClientFactory.CreateClient("Queue");
         }
 
         public async Task<List<CalendarBooking>> GetQueueOnDate(string transaction)
         {
-            var response = await _httpClient.GetAsync($"https://localhost:44328/api/Booking/calendar/{transaction}");
+            var response = await _httpClient.GetAsync($"/api/Booking/calendar/{transaction}");
             response.EnsureSuccessStatusCode();
 
             return await response.Content.ReadFromJsonAsync<List<CalendarBooking>>();
@@ -22,7 +23,7 @@ namespace QMS.Services
 
         public async Task<HttpResponseMessage> BookSlot(AddBookingRequest request)
         {
-            var response = await _httpClient.PostAsJsonAsync("https://localhost:44328/api/Booking/add-queue", request);
+            var response = await _httpClient.PostAsJsonAsync("/api/Booking/add-queue", request);
             return response; // ส่งคืน HttpResponseMessage เพื่อให้ตรวจสอบสถานะ
 
         }

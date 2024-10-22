@@ -1,5 +1,5 @@
 ﻿@page "/"
-@inject HttpClient Http
+@inject IHttpClientFactory HttpClientFactory
 @inject NavigationManager Navigation
 @using QMS.Models
 @inject TokenService TokenService
@@ -28,10 +28,12 @@
 
                 if (userId.HasValue)
                 {
-                    Http.DefaultRequestHeaders.Authorization =
+                        var client = HttpClientFactory.CreateClient("Queue");
+
+                        client.DefaultRequestHeaders.Authorization =
                         new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 
-                        var response = await Http.GetAsync($"https://localhost:44328/api/User?userId={userId.Value}");
+                        var response = await client.GetAsync($"/api/User?userId={userId.Value}");
 
                     if (response.IsSuccessStatusCode)
                     {
@@ -42,7 +44,7 @@
                             await TokenService.RemoveTokenAsync();
                             Navigation.NavigateTo("/login");
                     }
-                }//1500701309052 Paradon_2003
+                }
                 else
                 {
                         await TokenService.RemoveTokenAsync();

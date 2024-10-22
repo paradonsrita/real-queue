@@ -3,7 +3,7 @@
 @using QMS.Data
 @using QMS.Data.Entities
 @using QMS.Models
-@inject HttpClient Http
+@inject IHttpClientFactory HttpClientFactory
 @inject IJSRuntime js
 @inject NavigationManager Navigation
 
@@ -64,7 +64,8 @@
     {
         try
         {
-            var response = await Http.PostAsJsonAsync("https://localhost:44328/api/LogicRegister/login", loginModel);
+            var client = HttpClientFactory.CreateClient("Queue");
+            var response = await client.PostAsJsonAsync("/api/LogicRegister/login", loginModel);
             if (response.IsSuccessStatusCode)
             {
                 var result = await response.Content.ReadFromJsonAsync<TokenResponse>();

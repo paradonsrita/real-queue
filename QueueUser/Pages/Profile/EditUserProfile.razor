@@ -1,5 +1,5 @@
 ﻿@page "/edit-user-profile"
-@inject HttpClient Http
+@inject IHttpClientFactory HttpClientFactory
 @inject NavigationManager Navigation
 @using QMS.Models
 @inject IJSRuntime js
@@ -73,12 +73,13 @@ else
 
                 if (userId.HasValue)
                 {
+                    var client = HttpClientFactory.CreateClient("Queue");
                     // Set the Authorization header
-                    Http.DefaultRequestHeaders.Authorization =
+                    client.DefaultRequestHeaders.Authorization =
                         new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 
                     // Fetch user profile data from API
-                    var response = await Http.GetAsync($"https://localhost:44328/api/User?userId={userId.Value}");
+                    var response = await client.GetAsync($"/api/User?userId={userId.Value}");
 
                     if (response.IsSuccessStatusCode)
                     {
@@ -114,7 +115,8 @@ else
     private async Task SaveProfile()
     {
         Console.WriteLine("กำลังบันทึกข้อมูล...");
-        var response = await Http.PutAsJsonAsync($"https://localhost:44328/api/User", user);
+        var client = HttpClientFactory.CreateClient("Queue");
+        var response = await client.PutAsJsonAsync($"/api/User", user);
         Console.WriteLine($"สถานะการตอบกลับ: {response.StatusCode}");
 
         if (response.IsSuccessStatusCode)

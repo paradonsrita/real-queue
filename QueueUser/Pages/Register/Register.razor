@@ -2,7 +2,7 @@
 @using QMS.Models
 @inject ILogger<Index> Logger
 @inject NavigationManager NavigationManager
-@inject HttpClient Http
+@inject IHttpClientFactory HttpClientFactory
 
 
 <h1>ลงทะเบียน</h1>
@@ -69,8 +69,9 @@
                 return;
             }
 
+            var client = HttpClientFactory.CreateClient("Queue");
             // ส่งข้อมูลไปยัง API
-            var response = await Http.PostAsJsonAsync("https://localhost:44328/api/LogicRegister/register", model);
+            var response = await client.PostAsJsonAsync("/api/LogicRegister/register", model);
 
             if (response.IsSuccessStatusCode)
             {

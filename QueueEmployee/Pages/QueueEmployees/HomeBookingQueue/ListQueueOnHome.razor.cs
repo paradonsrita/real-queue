@@ -1,5 +1,7 @@
 ﻿using QMS.Services.LocalStorage;
 using QMS.Models;
+using System.Net.Http;
+
 
 namespace QMS.Pages.QueueEmployees.HomeBookingQueue
 {
@@ -25,8 +27,8 @@ namespace QMS.Pages.QueueEmployees.HomeBookingQueue
         {
             try
             {
-                var savedCounter = await LocalStorageService.GetItemAsync("selectedCounter");
-                var savedTransaction = await LocalStorageService.GetItemAsync("selectedTransaction");
+                var savedCounter = await SessionStorageService.GetItemAsync("selectedCounter");
+                var savedTransaction = await SessionStorageService.GetItemAsync("selectedTransaction");
 
                 if (!string.IsNullOrEmpty(savedCounter))
                 {
@@ -38,8 +40,9 @@ namespace QMS.Pages.QueueEmployees.HomeBookingQueue
                     selectedTransaction = savedTransaction;
                 }
 
+                var client = HttpClientFactory.CreateClient("Queue");
                 // ดึงข้อมูลจาก API
-                queues = await Http.GetFromJsonAsync<IEnumerable<QueueData>>("https://localhost:44328/api/Booking");
+                queues = await client.GetFromJsonAsync<IEnumerable<QueueData>>("/api/Booking");
             }
             catch (Exception ex)
             {

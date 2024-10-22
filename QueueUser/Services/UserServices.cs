@@ -19,9 +19,9 @@ namespace QMS.Services
         private readonly IConfiguration _configuration;
         private readonly NavigationManager _navigation;
 
-        public UserServices(HttpClient httpClient, IJSRuntime jsRuntime, IConfiguration configuration, NavigationManager navigation)
+        public UserServices(IHttpClientFactory httpClientFactory, IJSRuntime jsRuntime, IConfiguration configuration, NavigationManager navigation)
         {
-            _httpClient = httpClient;
+            _httpClient = httpClientFactory.CreateClient("Queue");
             _jsRuntime = jsRuntime;
             _configuration = configuration;
             _navigation = navigation;
@@ -32,7 +32,7 @@ namespace QMS.Services
             try
             {
                 // เรียก API เพื่อดึงข้อมูลผู้ใช้ตาม userId
-                var response = await _httpClient.GetAsync($"https://localhost:44328/api/User?userId={userId}");
+                var response = await _httpClient.GetAsync($"/api/User?userId={userId}");
                 if (response.IsSuccessStatusCode)
                 {
                     return await response.Content.ReadFromJsonAsync<UserModel>();

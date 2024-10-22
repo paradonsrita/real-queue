@@ -1,12 +1,14 @@
-using Microsoft.AspNetCore.Components;
+๏ปฟusing Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using QMS.Data;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
-using QMS.Services;
 using Blazored.SessionStorage;
+using System.Net.Http.Headers;
+using QMS.Services; // ??? namespace ??????????
+
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,14 +19,24 @@ builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<WeatherForecastService>();
 
 builder.Services.AddBlazoredSessionStorage();
+builder.Services.AddScoped<QueueService>(); // ????????? QueueService
 
 
 
-// เพิ่ม QueueService และ HttpClient สำหรับเชื่อมต่อกับ API
-builder.Services.AddHttpClient<QueueService>(client =>
+// ร ยพร”รจร QueueService รกร…ร HttpClient รร“รรร‘ยบร ยชร—รจรรยตรจรยกร‘ยบ API
+builder.Services.AddHttpClient("Queue", client =>
 {
-    client.BaseAddress = new Uri("https://localhost:44328/"); // เปลี่ยนเป็น URL ของ API ของคุณ
+    client.BaseAddress = new Uri("https://192.168.1.15:44328/");
+    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+}).ConfigurePrimaryHttpMessageHandler(() =>
+{
+    return new HttpClientHandler
+    {
+        ServerCertificateCustomValidationCallback = (message, cert, chain, sslPolicyErrors) => true
+    };
 });
+
+
 
 
 

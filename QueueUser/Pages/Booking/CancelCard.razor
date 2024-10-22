@@ -2,7 +2,7 @@
 @inject TokenService TokenService
 @inject NavigationManager Navigation
 @inject IJSRuntime js
-@inject HttpClient Http
+@inject IHttpClientFactory HttpClientFactory
 
 
 
@@ -70,9 +70,9 @@
                 Navigation.NavigateTo("/login");
                 return;
             }
-
-            Http.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
-            var response = await Http.PutAsync($"https://localhost:44328/api/Booking/cancel?id={queueId}", null);
+            var client = HttpClientFactory.CreateClient("Queue");
+            client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+            var response = await client.PutAsync($"/api/Booking/cancel?id={queueId}", null);
             if (response.IsSuccessStatusCode)
             {
                 Console.WriteLine("ยกเลิกการจองเรียบร้อยแล้ว");

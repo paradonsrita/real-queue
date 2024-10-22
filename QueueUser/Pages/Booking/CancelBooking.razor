@@ -1,6 +1,6 @@
 ﻿﻿
-@page "/cancel/"
-@inject HttpClient Http
+@page "/cancel-booking/"
+@inject IHttpClientFactory HttpClientFactory
 @inject IJSRuntime js
 @using QMS.Models
 @inject NavigationManager Navigation
@@ -206,10 +206,11 @@
         var userId = TokenService.GetUserIdFromToken(token);
         if (userId.HasValue)
         {
-            Http.DefaultRequestHeaders.Authorization =
+            var client = HttpClientFactory.CreateClient("Queue");
+            client.DefaultRequestHeaders.Authorization =
                      new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 
-            var response = await Http.GetAsync($"https://localhost:44328/api/Booking/profile/{userId.Value}");
+            var response = await client.GetAsync($"/api/Booking/profile/{userId.Value}");
             if (response.IsSuccessStatusCode)
             {
                 bookings = await response.Content.ReadFromJsonAsync<List<BookingModel>>();

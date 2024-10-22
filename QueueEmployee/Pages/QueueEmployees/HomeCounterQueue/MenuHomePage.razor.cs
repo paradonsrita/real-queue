@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using System.Net.Http;
+using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
+using QMS.Models;
 using QMS.Services.LocalStorage;
 
 
@@ -27,8 +29,8 @@ namespace QMS.Pages.QueueEmployees.HomeCounterQueue
         {
             try
             {
-                var savedCounter = await LocalStorageService.GetItemAsync("selectedCounter");
-                var savedTransaction = await LocalStorageService.GetItemAsync("selectedTransaction");
+                var savedCounter = await SessionStorageService.GetItemAsync("selectedCounter");
+                var savedTransaction = await SessionStorageService.GetItemAsync("selectedTransaction");
                 if (!string.IsNullOrEmpty(savedCounter))
                 {
                     selectedCounter = int.Parse(savedCounter);
@@ -71,12 +73,13 @@ namespace QMS.Pages.QueueEmployees.HomeCounterQueue
                 "Loan" => "L",
                 "Shares" => "S",
                 _ => throw new InvalidOperationException("Invalid transaction type")
-            }; 
-            var requestUri = $"https://localhost:44328/api/Employee/callCounterQueue?transaction={Uri.EscapeDataString(transactionInitial)}&counter={selectedCounter}";
+            };
+            var client = HttpClientFactory.CreateClient("Queue");
+            var requestUri = $"/api/Employee/callCounterQueue?transaction={Uri.EscapeDataString(transactionInitial)}&counter={selectedCounter}";
 
             try
             {
-                var response = await Http.PutAsync(requestUri, null);
+                var response = await client.PutAsync(requestUri, null);
                 if (response.IsSuccessStatusCode)
                 {
                     Console.WriteLine("Queue updated successfully!");
@@ -113,11 +116,13 @@ namespace QMS.Pages.QueueEmployees.HomeCounterQueue
                 "Shares" => "S",
                 _ => throw new InvalidOperationException("Invalid transaction type")
             };
-            var requestUri = $"https://localhost:44328/api/Employee/skipCounterQueue?transaction={Uri.EscapeDataString(transactionInitial)}&counter={selectedCounter}";
+
+            var client = HttpClientFactory.CreateClient("Queue");
+            var requestUri = $"/api/Employee/skipCounterQueue?transaction={Uri.EscapeDataString(transactionInitial)}&counter={selectedCounter}";
 
             try
             {
-                var response = await Http.PutAsync(requestUri, null);
+                var response = await client.PutAsync(requestUri, null);
                 if (response.IsSuccessStatusCode)
                 {
                     Console.WriteLine("Queue updated successfully!");

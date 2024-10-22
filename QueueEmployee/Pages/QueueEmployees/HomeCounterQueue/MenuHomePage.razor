@@ -1,12 +1,13 @@
 ﻿@inject HttpClient Http
 @using System.Net.Http.Json
 @using QMS.Services.LocalStorage;
-@inject SessionStorageService LocalStorageService
+@inject SessionStorageService SessionStorageService
 @inject IJSRuntime JSRuntime
 @inject HttpClient Http
 @using Radzen
 @using Radzen.Blazor
 @inject NavigationManager Navigation
+@inject IHttpClientFactory HttpClientFactory
 
 
 

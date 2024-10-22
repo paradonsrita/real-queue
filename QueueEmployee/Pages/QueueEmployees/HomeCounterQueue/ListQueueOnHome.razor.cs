@@ -1,5 +1,6 @@
 ﻿using QMS.Services.LocalStorage;
 using QMS.Models;
+using System.Net.Http;
 
 
 namespace QMS.Pages.QueueEmployees.HomeCounterQueue
@@ -24,8 +25,8 @@ namespace QMS.Pages.QueueEmployees.HomeCounterQueue
         {
             try
             {
-                var savedTransaction = await LocalStorageService.GetItemAsync("selectedTransaction");
-                var savedCounter = await LocalStorageService.GetItemAsync("selectedCounter");
+                var savedTransaction = await SessionStorageService.GetItemAsync("selectedTransaction");
+                var savedCounter = await SessionStorageService.GetItemAsync("selectedCounter");
 
 
                 if (!string.IsNullOrEmpty(savedTransaction))
@@ -37,8 +38,10 @@ namespace QMS.Pages.QueueEmployees.HomeCounterQueue
                     selectedCounter = int.Parse(savedCounter);
                 }
 
+
+                var client = HttpClientFactory.CreateClient("Queue");
                 // ดึงข้อมูลจาก API
-                queues = await Http.GetFromJsonAsync<IEnumerable<QueueData>>("https://localhost:44328/api/Queue");
+                queues = await client.GetFromJsonAsync<IEnumerable<QueueData>>("/api/Queue");
             }
             catch (Exception ex)
             {

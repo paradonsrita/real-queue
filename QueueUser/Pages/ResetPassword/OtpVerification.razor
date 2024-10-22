@@ -1,6 +1,8 @@
 ﻿@page "/verify-otp"
 @using System.Net.Http.Json
 @using QMS.Data.Entities
+@inject IHttpClientFactory HttpClientFactory
+
 
 <h3>ตรวจสอบรหัส OTP</h3>
 
@@ -29,7 +31,8 @@
     {
         try
         {
-            var response = await Http.PostAsJsonAsync("https://localhost:44328/api/ResetPassword/otp-check", otpModel.Otp);
+            var client = HttpClientFactory.CreateClient("Queue");
+            var response = await client.PostAsJsonAsync("/api/ResetPassword/otp-check", otpModel.Otp);
 
             if (response.IsSuccessStatusCode)
             {
@@ -51,7 +54,6 @@
         
     }
 
-    [Inject] private HttpClient Http { get; set; }
     [Inject] private NavigationManager NavigationManager { get; set; }
 
 }

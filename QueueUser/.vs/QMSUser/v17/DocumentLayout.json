@@ -7,8 +7,12 @@
       "RelativeMoniker": "D:0:0:{CE27CAA5-165F-4E38-AE43-046442C2C853}|QMS.csproj|solutionrelative:pages\\booking\\cancelbooking.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CE27CAA5-165F-4E38-AE43-046442C2C853}|QMS.csproj|c:\\users\\asus\\desktop\\queue manage\\queueuser\\pages\\booking\\tablerecord.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{CE27CAA5-165F-4E38-AE43-046442C2C853}|QMS.csproj|solutionrelative:pages\\booking\\tablerecord.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{CE27CAA5-165F-4E38-AE43-046442C2C853}|QMS.csproj|c:\\users\\asus\\desktop\\queue manage\\queueuser\\pages\\resetpassword\\resetpassword.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{CE27CAA5-165F-4E38-AE43-046442C2C853}|QMS.csproj|solutionrelative:pages\\resetpassword\\resetpassword.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CE27CAA5-165F-4E38-AE43-046442C2C853}|QMS.csproj|c:\\users\\asus\\desktop\\queue manage\\queueuser\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CE27CAA5-165F-4E38-AE43-046442C2C853}|QMS.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,21 +22,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 4,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "CancelBooking.razor",
-              "DocumentMoniker": "C:\\Users\\Asus\\Desktop\\Queue Manage\\QueueUser\\Pages\\Booking\\CancelBooking.razor",
-              "RelativeDocumentMoniker": "Pages\\Booking\\CancelBooking.razor",
-              "ToolTip": "C:\\Users\\Asus\\Desktop\\Queue Manage\\QueueUser\\Pages\\Booking\\CancelBooking.razor",
-              "RelativeToolTip": "Pages\\Booking\\CancelBooking.razor",
-              "ViewState": "AQIAAP8AAAAAAAAAAAAAAAMBAAAFAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-10-22T03:04:17.289Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
@@ -51,15 +42,41 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "TableRecord.razor",
-              "DocumentMoniker": "C:\\Users\\Asus\\Desktop\\Queue Manage\\QueueUser\\Pages\\Booking\\TableRecord.razor",
-              "RelativeDocumentMoniker": "Pages\\Booking\\TableRecord.razor",
-              "ToolTip": "C:\\Users\\Asus\\Desktop\\Queue Manage\\QueueUser\\Pages\\Booking\\TableRecord.razor",
-              "RelativeToolTip": "Pages\\Booking\\TableRecord.razor",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAGAAAA",
+              "DocumentIndex": 0,
+              "Title": "CancelBooking.razor",
+              "DocumentMoniker": "C:\\Users\\Asus\\Desktop\\Queue Manage\\QueueUser\\Pages\\Booking\\CancelBooking.razor",
+              "RelativeDocumentMoniker": "Pages\\Booking\\CancelBooking.razor",
+              "ToolTip": "C:\\Users\\Asus\\Desktop\\Queue Manage\\QueueUser\\Pages\\Booking\\CancelBooking.razor",
+              "RelativeToolTip": "Pages\\Booking\\CancelBooking.razor",
+              "ViewState": "AQIAAEgAAAAAAAAAAAAAAFYAAAAGAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-10-22T03:05:03.689Z",
+              "WhenOpened": "2024-10-22T09:16:57.047Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ResetPassword.razor",
+              "DocumentMoniker": "C:\\Users\\Asus\\Desktop\\Queue Manage\\QueueUser\\Pages\\ResetPassword\\ResetPassword.razor",
+              "RelativeDocumentMoniker": "Pages\\ResetPassword\\ResetPassword.razor",
+              "ToolTip": "C:\\Users\\Asus\\Desktop\\Queue Manage\\QueueUser\\Pages\\ResetPassword\\ResetPassword.razor",
+              "RelativeToolTip": "Pages\\ResetPassword\\ResetPassword.razor",
+              "ViewState": "AQIAAAwAAAAAAAAAAAAAABcAAAAcAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-22T09:14:21.847Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Asus\\Desktop\\Queue Manage\\QueueUser\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\Asus\\Desktop\\Queue Manage\\QueueUser\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AQIAAAgAAAAAAAAAAAAQwBUAAAAaAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-22T08:28:02.049Z",
               "EditorCaption": ""
             }
           ]

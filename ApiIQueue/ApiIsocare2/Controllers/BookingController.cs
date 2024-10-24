@@ -1,8 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using ApiIsocare2.Data;
 using ApiIsocare2.Models.Booking;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Threading;
+using System.Globalization;
 
 namespace ApiIsocare2.Controllers
 {
@@ -43,8 +46,8 @@ namespace ApiIsocare2.Controllers
             }
             catch (Exception ex)
             {
-                var innerExceptionMessage = ex.InnerException?.Message ?? "No inner exception";
-                return StatusCode(500, $"Error : {ex.Message}, Inner Exception : {innerExceptionMessage}");
+                var innerExceptionMessage = ex.InnerException?.Message ?? "ไม่มีข้อผิดพลาดเพิ่มเติม";
+                return StatusCode(500, $"เกิดข้อผิดพลาด : {ex.Message}, ข้อผิดพลาดเพิ่มเติม : {innerExceptionMessage}");
             }
 
         }
@@ -59,7 +62,7 @@ namespace ApiIsocare2.Controllers
                 var userExists = await _db.Users.AnyAsync(u => u.user_id == userId);
                 if (!userExists)
                 {
-                    return NotFound($"User with ID {userId} not found.");
+                    return NotFound($"ไม่มีบัญชีผู้ใช้นี้");
                 }
                 var result = await (from q in _db.BookingQueues
                                     join qs in _db.QueueStatuses on q.queue_status_id equals qs.queue_status_id
@@ -87,8 +90,8 @@ namespace ApiIsocare2.Controllers
             }
             catch (Exception ex)
             {
-                var innerExceptionMessage = ex.InnerException?.Message ?? "No inner exception";
-                return StatusCode(500, $"Error : {ex.Message}, Inner Exception : {innerExceptionMessage}");
+                var innerExceptionMessage = ex.InnerException?.Message ?? "ไม่มีข้อผิดพลาดเพิ่มเติม";
+                return StatusCode(500, $"เกิดข้อผิดพลาด : {ex.Message}, ข้อผิดพลาดเพิ่มเติม : {innerExceptionMessage}");
             }
 
         }
@@ -129,8 +132,8 @@ namespace ApiIsocare2.Controllers
             }
             catch (Exception ex)
             {
-                var innerExceptionMessage = ex.InnerException?.Message ?? "No inner exception";
-                return StatusCode(500, $"Error : {ex.Message}, Inner Exception : {innerExceptionMessage}");
+                var innerExceptionMessage = ex.InnerException?.Message ?? "ไม่มีข้อผิดพลาดเพิ่มเติม";
+                return StatusCode(500, $"เกิดข้อผิดพลาด : {ex.Message}, ข้อผิดพลาดเพิ่มเติม : {innerExceptionMessage}");
             }
 
 
@@ -181,8 +184,8 @@ namespace ApiIsocare2.Controllers
             }
             catch (Exception ex)
             {
-                var innerExceptionMessage = ex.InnerException?.Message ?? "No inner exception";
-                return StatusCode(500, $"Error : {ex.Message}, Inner Exception : {innerExceptionMessage}");
+                var innerExceptionMessage = ex.InnerException?.Message ?? "ไม่มีข้อผิดพลาดเพิ่มเติม";
+                return StatusCode(500, $"เกิดข้อผิดพลาด : {ex.Message}, ข้อผิดพลาดเพิ่มเติม : {innerExceptionMessage}");
             }
         }
 
@@ -192,20 +195,31 @@ namespace ApiIsocare2.Controllers
         {
             try
             {
+                var convertAppointmentDateToAD = request.AppointmentDate;
+                if (convertAppointmentDateToAD.Year < 2020)
+                {
+                    convertAppointmentDateToAD = convertAppointmentDateToAD.AddYears(543); // แปลงเป็น ค.ศ. โดยลบ 543 ปี
+                }
                 // แปลงเวลาจาก appointmentTime เป็น TimeSpan
                 if (!TimeSpan.TryParse(request.AppointmentTime, out var timeOfDay))
                 {
-                    return BadRequest("Invalid appointment time format.");
+                    return BadRequest("ตัวแปรเวลาไม่ถูกต้อง");
                 }
 
                 // ตรวจสอบและปรับเวลา appointmentDate
                 if (timeOfDay != new TimeSpan(8, 0, 0) && timeOfDay != new TimeSpan(13, 0, 0))
                 {
-                    return BadRequest("Appointment time must be 08:00 or 13:00.");
+                    return BadRequest("เวลาการนัดหมายต้องเป็น 08:00 กับ 13:00 เท่านั้น");
+                }
+                
+
+                if (convertAppointmentDateToAD.Date <= DateTime.Now.Date)
+                {
+                    return BadRequest($"ไม่สามารถจองวันที่ที่ผ่านมาแล้วได้ ({convertAppointmentDateToAD.AddYears(543).ToString("dd/MM/yyyy")}) ({timeOfDay})");
                 }
 
                 // แก้ไขค่าเวลาให้เป็น 08:00 หรือ 13:00
-                var correctedAppointmentDate = request.AppointmentDate.Date.Add(timeOfDay);
+                var correctedAppointmentDate = DateTime.SpecifyKind(convertAppointmentDateToAD.Date.Add(timeOfDay), DateTimeKind.Local);
 
 
                 // ตรวจสอบว่า user_id ได้จองคิวในเวลานี้แล้วหรือยัง
@@ -229,7 +243,7 @@ namespace ApiIsocare2.Controllers
 
                 if (queueCount >= 10)
                 {
-                    return BadRequest("Cannot add more than 10 queues for this time.");
+                    return BadRequest("ไม่สามารถจองคิว 10 คิวในช่วงเวลาเดียวกันได้");
                 }
 
                 var number = await _db.BookingQueues
@@ -239,7 +253,6 @@ namespace ApiIsocare2.Controllers
                                 .FirstOrDefaultAsync();
 
                 number = number == 0 ? 1 : number + 1;
-
                 var queue = new BookingQueue
                 {
                     queue_type_id = request.Type,
@@ -260,8 +273,8 @@ namespace ApiIsocare2.Controllers
             }
             catch (Exception ex)
             {
-                var innerExceptionMessage = ex.InnerException?.Message ?? "No inner exception";
-                return StatusCode(500, $"Error : {ex.Message}, Inner Exception : {innerExceptionMessage}");
+                var innerExceptionMessage = ex.InnerException?.Message ?? "ไม่มีข้อผิดพลาดเพิ่มเติม";
+                return StatusCode(500, $"เกิดข้อผิดพลาด : {ex.Message}, ข้อผิดพลาดเพิ่มเติม : {innerExceptionMessage}");
             }
 
         }
@@ -275,7 +288,7 @@ namespace ApiIsocare2.Controllers
 
                 if (queue == null)
                 {
-                    return BadRequest("Not found");
+                    return BadRequest("ไม่มีคิวนี้ในฐานข้อมูล");
                 }
                 
                 queue.queue_status_id = -9;
@@ -285,8 +298,8 @@ namespace ApiIsocare2.Controllers
             }
             catch (Exception ex)
             {
-                var innerExceptionMessage = ex.InnerException?.Message ?? "No inner exception";
-                return StatusCode(500, $"Error : {ex.Message}, Inner Exception : {innerExceptionMessage}");
+                var innerExceptionMessage = ex.InnerException?.Message ?? "ไม่มีข้อผิดพลาดเพิ่มเติม";
+                return StatusCode(500, $"เกิดข้อผิดพลาด : {ex.Message}, ข้อผิดพลาดเพิ่มเติม : {innerExceptionMessage}");
             }
 
         }

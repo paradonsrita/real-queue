@@ -52,7 +52,7 @@ namespace ApiIsocare2.Controllers
                     }
                     else
                     {
-                        throw new Exception("Counter cannot zero");
+                        throw new Exception("เคาน์เตอร์ไม่สามารถเป็นเลข 0 หรือช่องว่างได้");
                     }
                 }
                 if (nowQueue != null || waitQueue != null)
@@ -63,14 +63,14 @@ namespace ApiIsocare2.Controllers
 
                     return NoContent();
                 }
-                throw new Exception("No wait queue or now queue");
+                throw new Exception("ไม่มีคิวทีรออยู่แล้ว");
 
 
             }
             catch (Exception ex)
             {
-                var innerExceptionMessage = ex.InnerException?.Message ?? "No inner exception";
-                return StatusCode(500, $"Error : {ex.Message}, Inner Exception : {innerExceptionMessage}");
+                var innerExceptionMessage = ex.InnerException?.Message ?? "ไม่มีข้อผิดพลาดเพิ่มเติม";
+                return StatusCode(500, $"เกิดข้อผิดพลาด : {ex.Message}, ข้อผิดพลาดเพิ่มเติม : {innerExceptionMessage}");
             }
         }
 
@@ -92,7 +92,7 @@ namespace ApiIsocare2.Controllers
 
                 if (nowQueue != null)
                 {
-                    nowQueue.queue_status_id = 3;
+                    nowQueue.queue_status_id = -9;
                     nowQueue.counter = 0;
 
                     if (waitQueue != null)
@@ -108,12 +108,12 @@ namespace ApiIsocare2.Controllers
                     return NoContent();
                 }
 
-                throw new Exception("No now queue");
+                throw new Exception("ไม่มีคิวที่รออยู่แล้ว");
             }
             catch (Exception ex)
             {
-                var innerExceptionMessage = ex.InnerException?.Message ?? "No inner exception";
-                return StatusCode(500, $"Error : {ex.Message}, Inner Exception : {innerExceptionMessage}");
+                var innerExceptionMessage = ex.InnerException?.Message ?? "ไม่มีข้อผิดพลาดเพิ่มเติม";
+                return StatusCode(500, $"เกิดข้อผิดพลาด : {ex.Message}, ข้อผิดพลาดเพิ่มเติม : {innerExceptionMessage}");
             }
         }
 
@@ -152,7 +152,7 @@ namespace ApiIsocare2.Controllers
                     }
                     else
                     {
-                        throw new Exception("Counter cannot zero");
+                        throw new Exception("เคาน์เตอร์ไม่สามารถเป็นเลข 0 หรือช่องว่างได้");
                     }
                 }
                 
@@ -161,8 +161,8 @@ namespace ApiIsocare2.Controllers
             }
             catch (Exception ex)
             {
-                var innerExceptionMessage = ex.InnerException?.Message ?? "No inner exception";
-                return StatusCode(500, $"Error : {ex.Message}, Inner Exception : {innerExceptionMessage}");
+                var innerExceptionMessage = ex.InnerException?.Message ?? "ไม่มีข้อผิดพลาดเพิ่มเติม";
+                return StatusCode(500, $"เกิดข้อผิดพลาด : {ex.Message}, ข้อผิดพลาดเพิ่มเติม : {innerExceptionMessage}");
             }
         }
 
@@ -186,7 +186,7 @@ namespace ApiIsocare2.Controllers
 
                 if (nowQueue != null)
                 {
-                    nowQueue.queue_status_id = 3;
+                    nowQueue.queue_status_id = -9;
                     nowQueue.counter = 0;
 
                     if (waitQueue != null)
@@ -203,12 +203,12 @@ namespace ApiIsocare2.Controllers
                     return NoContent();
                 }
 
-                throw new Exception("No now queue");
+                throw new Exception("ไม่มีคิวที่รออยู่แล้ว");
             }
             catch (Exception ex)
             {
-                var innerExceptionMessage = ex.InnerException?.Message ?? "No inner exception";
-                return StatusCode(500, $"Error : {ex.Message}, Inner Exception : {innerExceptionMessage}");
+                var innerExceptionMessage = ex.InnerException?.Message ?? "ไม่มีข้อผิดพลาดเพิ่มเติม";
+                return StatusCode(500, $"เกิดข้อผิดพลาด : {ex.Message}, ข้อผิดพลาดเพิ่มเติม : {innerExceptionMessage}");
             }
         }
 

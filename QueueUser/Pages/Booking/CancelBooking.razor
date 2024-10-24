@@ -22,22 +22,20 @@
 
         <div class="filter-options">
             <RadzenLabel Text="เลือกประเภทธุรกรรม" Component="TypeFilter" class="" />
-            <RadzenDropDown @bind-Value="selectedQueueType" Placeholder="เลือกประเภทคิว" Data="queueTypeOptions" 
-                Change="@((arg) => {currentPage = 1;})"/>
+            <RadzenDropDown @bind-Value="selectedQueueType" Placeholder="เลือกประเภทคิว" Data="queueTypeOptions" />
         </div>
 
         <div class="filter-options">
             <RadzenLabel Text="Appointment Date" Component="AppointmentDateFilter" class="rz-ms-2" />
 
-            <RadzenCheckBox TValue="bool" Value=@appointmentDateFilter Change="(arg => { appointmentDateFilter = !appointmentDateFilter; currentPage = 1; })" Name="AppointmentDateFilter" />
+            <RadzenCheckBox TValue="bool" Value=@appointmentDateFilter Change="(arg => { appointmentDateFilter = !appointmentDateFilter;})" Name="AppointmentDateFilter" />
         </div>
 
         <!--sort-->
         <RadzenText TextStyle="TextStyle.Body1" Style="font-size: 1.5rem; text-align: center; margin-top:50px;"><b>เรียงลำดับตาม</b></RadzenText>
 
         <div class="filter-options">
-            <RadzenDropDown @bind-Value="selectedSortOption" Placeholder="เลือกการเรียงลำดับ" Data="sortOptions" 
-                Change="@((arg) => {currentPage = 1; })"/>
+            <RadzenDropDown @bind-Value="selectedSortOption" Placeholder="เลือกการเรียงลำดับ" Data="sortOptions"/>
         </div>
 
         <div class="filter-options">
@@ -65,26 +63,28 @@
     else if (FilteredBookings != null && FilteredBookings.Count() > 0)
     {
         <div class="justify-content-evenly">
-            <div>
-                <button @onclick="PreviousPage" disabled="@IsFirstPage">หน้าก่อนหน้า</button>
-                <button @onclick="NextPage" disabled="@IsLastPage">หน้าถัดไป</button>
-            </div>
+            
             <RadzenButton Click=@(args => ToggleFilter()) Text="กรอง" />
         </div>
         
-        <div class="booking-card">
-            @foreach (var booking in PaginatedQueueBookings)
-            {
-                <CancelCard Booking="@booking"
-                            Variant="@variant"></CancelCard>
-            }
-        </div>
+
+            <CancelCard Bookings="@bookings"
+                            Variant="@variant"
+                            OnBookingCancelled="LoadQueueData"
+                            SelectedQueueType="@selectedQueueType"
+                            AppointmentDateFilter="@appointmentDateFilter"
+                            StartDate="@startDate"
+                            EndDate="@endDate"
+                            SelectedSortOption="@selectedSortOption">
+
+                </CancelCard>
+            
     }
     else
     {
         <RadzenAlert Severity="Error">@message</RadzenAlert>
     }
-</div>
+</div> 
 
 @code {
 
@@ -93,8 +93,7 @@
     private List<BookingModel> bookings = new List<BookingModel>();
     private string? message;
     private bool isLoading = false;
-    private int currentPage = 1;
-    private int pageSize = 10;
+
 
 
     //filter
@@ -114,32 +113,7 @@
     //sort
     private string selectedSortOption = "วันที่จอง"; // ตัวเลือกการเรียงลำดับเริ่มต้น
     private List<string> sortOptions = new List<string> { "วันที่จอง" ,"วันที่นัดหมาย", "ประเภทธุรกรรม", "สถานะ" }; // ตัวเลือกการเรียงลำดับ
-    private IEnumerable<BookingModel> SortedFilteredBookings
-    {
-        get
-        {
-            var filtered = FilteredBookings;
-
-            // กรองตามวันที่เริ่มต้นและวันที่สิ้นสุด
-            if (startDate.HasValue)
-            {
-                filtered = filtered.Where(b => b.appointment_date >= startDate.Value);
-            }
-            if (endDate.HasValue)
-            {
-                filtered = filtered.Where(b => b.appointment_date <= endDate.Value);
-            }
-
-            return selectedSortOption switch
-            {
-                "วันที่จอง" => filtered.OrderBy(b => b.booking_date), // เรียงลำดับตามวันที่
-                "วันที่นัดหมาย" => filtered.OrderBy(b => b.appointment_date), // เรียงลำดับตามวันที่
-                "ประเภทธุรกรรม" => filtered.OrderBy(b => b.QueueType), // เรียงลำดับตามประเภท
-                "สถานะ" => filtered.OrderBy(b => b.QueueStatus), // เรียงลำดับตามสถานะ
-                _ => filtered
-            };
-        }
-    }
+    
 
 
 
@@ -148,7 +122,7 @@
         try
         {
             isLoading = true;
-            await LoadQueueData(1);
+            await LoadQueueData();
 
 
         }
@@ -164,36 +138,21 @@
     }
 
 
-    private IEnumerable<BookingModel> PaginatedQueueBookings
-    {
-        get
-        {
-
-            var bookingsToPaginate = appointmentDateFilter 
-                ? SortedFilteredBookings.Where(b => b.appointment_date.Date > DateTime.Today) 
-                : SortedFilteredBookings;
-
-            return bookingsToPaginate.Skip((currentPage - 1) * pageSize).Take(pageSize);
-        }
-    }
+    
 
     private void ToggleFilter()
     {
         filterExpanded = !filterExpanded;
-        if (filterExpanded)
-        {
-            currentPage = 1; // ตั้งค่าหน้าปัจจุบันเป็น 1
-        }
 
         StateHasChanged();
     }
 
-    
-
-    
 
 
-    private async Task LoadQueueData(int page)
+
+
+
+    private async Task LoadQueueData()
     {
         isLoading = true;
         var token = await TokenService.GetTokenAsync();
@@ -229,53 +188,6 @@
         }
         isLoading = false;
 
-    }
-
-    
-
-
-
-
-
-
-    private bool IsLastPage
-    {
-        get
-        {
-            // ตรวจสอบว่า appointmentDateFilter เป็น true หรือไม่
-            var bookingsToCount = appointmentDateFilter
-                ? SortedFilteredBookings.Where(b => b.appointment_date.Date > DateTime.Today)
-                : SortedFilteredBookings;
-
-            return currentPage >= Math.Ceiling((double)bookingsToCount.Count() / pageSize);
-        }
-    }
-
-    // ตรวจสอบว่าหน้าปัจจุบันเป็นหน้าแรกหรือไม่
-    private bool IsFirstPage
-    {
-        get
-        {
-            return currentPage == 1;
-        }
-    }
-
-    // ไปหน้าถัดไป
-    private void NextPage()
-    {
-        if (!IsLastPage)
-        {
-            currentPage++;
-        }
-    }
-
-    // ไปหน้าก่อนหน้า
-    private void PreviousPage()
-    {
-        if (!IsFirstPage)
-        {
-            currentPage--;
-        }
     }
 
     

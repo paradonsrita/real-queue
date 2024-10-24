@@ -66,8 +66,8 @@ namespace ApiIsocare2.Controllers
             }
             catch (Exception ex)
             {
-                var innerExceptionMessage = ex.InnerException?.Message ?? "No inner exception";
-                return StatusCode(500, $"Error : {ex.Message}, Inner Exception : {innerExceptionMessage}");
+                var innerExceptionMessage = ex.InnerException?.Message ?? "ไม่มีข้อผิดพลาดเพิ่มเติม";
+                return StatusCode(500, $"เกิดข้อผิดพลาด : {ex.Message}, ข้อผิดพลาดเพิ่มเติม : {innerExceptionMessage}");
             }
 
         }
@@ -79,7 +79,7 @@ namespace ApiIsocare2.Controllers
             {
                 if (minDate > maxDate)
                 {
-                    return BadRequest("minDate should be less then maxDate");
+                    return BadRequest("วันที่เริ่มต้นต้องน้อยกว่าวันที่สิ้นสุด");
                 }
 
                 var bookingQueue = _db.BookingQueues
@@ -134,8 +134,8 @@ namespace ApiIsocare2.Controllers
             }
             catch (Exception ex)
             {
-                var innerExceptionMessage = ex.InnerException?.Message ?? "No inner exception";
-                return StatusCode(500, $"Error : {ex.Message}, Inner Exception : {innerExceptionMessage}");
+                var innerExceptionMessage = ex.InnerException?.Message ?? "ไม่มีข้อผิดพลาดเพิ่มเติม";
+                return StatusCode(500, $"เกิดข้อผิดพลาด : {ex.Message}, ข้อผิดพลาดเพิ่มเติม : {innerExceptionMessage}");
             }
 
         }

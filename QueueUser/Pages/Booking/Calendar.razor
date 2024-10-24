@@ -8,6 +8,10 @@
 @inject HttpClient Http
 @inject TokenService TokenService
 @inject IJSRuntime JsRuntime
+@using System.Text.Json
+@using System.Globalization
+
+
 
 
 
@@ -106,6 +110,8 @@
         isConfirmationVisible = true;
     }
 
+
+
     private async Task ConfirmBooking()
     {
         // ดำเนินการจองเมื่อยืนยันแล้ว
@@ -137,12 +143,34 @@
     [JSInvokable] // ตรวจสอบให้แน่ใจว่ามีการประกาศ JSInvokable
     public void ShowPopup(string dateStr)
     {
-        selectedDate = DateTime.Parse(dateStr);
-        total08 = bookingResults.FirstOrDefault(b => b.Date.Date == selectedDate.Date && b.Time.Hours == 8)?.Total ?? 0;
-        total13 = bookingResults.FirstOrDefault(b => b.Date.Date == selectedDate.Date && b.Time.Hours == 13)?.Total ?? 0;
+        // ใช้ TryParse เพื่อแปลง dateStr เป็น selectedDate
+        if (DateTime.TryParse(dateStr, out selectedDate))
+        {
+            var formattedDate = selectedDate;
 
-        isPopupVisible = true;
-        StateHasChanged();  //Update UI
+            if (selectedDate.Year < 2020)
+            {
+                formattedDate = formattedDate.AddYears(543);
+            }
+
+        // หากการแปลงสำเร็จ ให้คำนวณ total08 และ total13
+            total08 = bookingResults.FirstOrDefault(b => b.Date.Date == formattedDate.Date && b.Time.Hours == 8)?.Total ?? 0;
+            total13 = bookingResults.FirstOrDefault(b => b.Date.Date == formattedDate.Date && b.Time.Hours == 13)?.Total ?? 0;
+
+            // แสดงผลวันที่ในรูปแบบ ค.ศ.
+            
+            Console.WriteLine($"Selected Date in AD (CE): {selectedDate.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture)}");
+            Console.WriteLine($"Raw Selected Date: {selectedDate}");
+
+            isPopupVisible = true; // เปิด Popup
+        }
+        else
+        {
+            // หากการแปลงไม่สำเร็จ ให้แสดงข้อความแสดงข้อผิดพลาด
+            Console.WriteLine("cann't convert");
+        }
+
+        StateHasChanged();
 
     }
 
@@ -159,23 +187,27 @@
                 return;
             }
 
-                var userId = TokenService.GetUserIdFromToken(token);
+            var userId = TokenService.GetUserIdFromToken(token);
 
-                if (userId.HasValue)
-                {
-                    // Set the Authorization header
-                    Http.DefaultRequestHeaders.Authorization =
-                        new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+            if (userId.HasValue)
+            {
+                // Set the Authorization header
+                Http.DefaultRequestHeaders.Authorization =
+                    new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 
 
-                    var request = new AddBookingRequest
+                Console.WriteLine($"select date {selectedDate}");
+                Console.WriteLine($"Selected Date: {selectedDate.ToString("dd/MM/yyyy")}");
+                var request = new AddBookingRequest
                         {
                             UserId = userId.Value, // กำหนดค่า user ID
                             Type = transaction, // กำหนด queue_type_id
-                            AppointmentDate = selectedDate.Date,
+                            AppointmentDate = selectedDate,
                             AppointmentTime = hour == 8 ? "08:00" : "13:00"
                         };
-                        
+                var requestJson = JsonSerializer.Serialize(request);
+
+                Console.WriteLine(requestJson);
                     // ดำเนินการจอง
                     var response = await BookingService.BookSlot(request);
 
@@ -223,6 +255,7 @@
         bookingResults = await BookingService.GetQueueOnDate(transaction);
         total08 = bookingResults.FirstOrDefault(b => b.Date.Date == selectedDate.Date && b.Time.Hours == 8)?.Total ?? 0;
         total13 = bookingResults.FirstOrDefault(b => b.Date.Date == selectedDate.Date && b.Time.Hours == 13)?.Total ?? 0;
+        
         isPopupVisible = false;
         StateHasChanged();
     }

@@ -24,9 +24,10 @@ namespace ApiIsocare2.Controllers
         [HttpPost("login")]
         public IActionResult Login([FromBody] LoginModel loginModel)
         {
+            
             if (loginModel == null)
             {
-                return BadRequest("Invalid login data.");
+                return BadRequest("ข้อมูลล็อกอินไม่ถูกต้อง");
             }
             try
             {
@@ -57,13 +58,13 @@ namespace ApiIsocare2.Controllers
                     }
                     else
                     {
-                        return Unauthorized("Invalid password.");
+                        return Unauthorized("รหัสผ่านไม่ถูกต้อง");
                     }
 
 
 
                 }
-                return Unauthorized("User not found.");
+                return Unauthorized("ไม่มีบัญชีผู้ใช้นี้");
 
 
 
@@ -71,8 +72,8 @@ namespace ApiIsocare2.Controllers
             }
             catch (Exception ex)
             {
-                var innerExceptionMessage = ex.InnerException?.Message ?? "No inner exception";
-                return StatusCode(500, $"Error : {ex.Message}, Inner Exception : {innerExceptionMessage}");
+                var innerExceptionMessage = ex.InnerException?.Message ?? "ไม่มีข้อผิดพลาดเพิ่มเติม";
+                return StatusCode(500, $"เกิดข้อผิดพลาด : {ex.Message}, ข้อผิดพลาดเพิ่มเติม : {innerExceptionMessage}");
             }
 
         }
@@ -107,12 +108,12 @@ namespace ApiIsocare2.Controllers
                 _db.Users.Add(newUser);
                 _db.SaveChanges();
 
-                return Ok(new { Message = "User registered successfully." });
+                return Ok(new { Message = "ลงทะเบียนเสร็จสิ้น" });
             }
             catch (Exception ex)
             {
-                var innerException = ex.InnerException != null ? ex.InnerException.Message : "No inner exception";
-                return StatusCode(500, $"Error : {ex.Message}. Inner Exception: {innerException}");
+                var innerExceptionMessage = ex.InnerException?.Message ?? "ไม่มีข้อผิดพลาดเพิ่มเติม";
+                return StatusCode(500, $"เกิดข้อผิดพลาด : {ex.Message}, ข้อผิดพลาดเพิ่มเติม : {innerExceptionMessage}");
             }
 
         }

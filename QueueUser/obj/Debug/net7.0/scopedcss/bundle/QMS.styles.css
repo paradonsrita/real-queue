@@ -183,9 +183,23 @@
     
 }
 /* _content/QMS/Pages/Booking/CancelCard.razor.rz.scp.css */
-.card[b-sq9wr84vik] {
-    background-color: aqua !important;
+
+.responsive-card[b-sq9wr84vik] {
+    display: grid; /* เพิ่ม display: grid */
+    grid-template-columns: repeat(3, 1fr); /* สามคอลัมน์ */
+    grid-gap: 1rem; /* ระยะห่างระหว่างช่อง */
+    border-radius: 20px;
+    border: 1px solid #000;
+    padding: 1rem;
 }
+
+@media (max-width: 480px) {
+    .responsive-card[b-sq9wr84vik] {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+
 /* _content/QMS/Shared/MainLayout.razor.rz.scp.css */
 .page[b-5820ef2mb7] {
     position: relative;

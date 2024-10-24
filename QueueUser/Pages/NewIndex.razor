@@ -37,8 +37,8 @@
 
                     if (response.IsSuccessStatusCode)
                     {
-                        Navigation.NavigateTo("/home");
-                    }
+                            Navigation.NavigateTo("/booking");
+                        }
                     else
                     {
                             await TokenService.RemoveTokenAsync();

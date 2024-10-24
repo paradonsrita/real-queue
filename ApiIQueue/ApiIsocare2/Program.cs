@@ -23,13 +23,8 @@ namespace ApiIsocare2
 
             //ngrok
             // กำหนดค่า Kestrel ให้รองรับ HTTPS
-            builder.WebHost.UseKestrel(options =>
-            {
-                options.ListenAnyIP(44328, listenOptions =>
-                {
-                    listenOptions.UseHttps(); // ใช้ HTTPS
-                });
-            });
+            builder.WebHost.UseIISIntegration();
+
 
 
             //forget password

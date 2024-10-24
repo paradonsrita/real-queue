@@ -5,47 +5,124 @@
 @inject IHttpClientFactory HttpClientFactory
 
 
+<RadzenPanel AllowCollapse="true" class="rz-my-10 rz-mx-auto" Style="width: 90%;">
+    <HeaderTemplate>
+        <RadzenText TextStyle="TextStyle.H6" class="rz-display-flex rz-align-items-center rz-m-0">
+            <RadzenIcon Icon="account_box" class="rz-me-1" /><b>Orders</b>
+        </RadzenText>
+    </HeaderTemplate>
+    <ChildContent>
+        <RadzenCard class="rz-mt-4">
+            <RadzenDataList PageSize="6" WrapItems="true" AllowPaging="true"
+                                Data="@PaginatedQueueBookings" TItem="BookingModel">
+                
+                          <Template Context="booking">                    
+                    <RadzenCard Variant="@Variant" class="rz-my-12 responsive-card"  
+                                Style="width: 30%; border-radius: 20px; border: 1px solid #000;">
+                        <RadzenRow>
+                            <RadzenColumn Size="9" class="rz-text-truncate">
+                                <RadzenBadge BadgeStyle="BadgeStyle.Light" Text=@(queueTypeMappings.ContainsKey(booking.QueueType) ? queueTypeMappings[booking.QueueType] : booking.QueueType) class="rz-me-1" />
+                            </RadzenColumn>
+                            <RadzenColumn Size="3" class="rz-text-align-end">
+                                <RadzenBadge BadgeStyle="BadgeStyle.Success" Text="@booking.QueueNumber" class="rz-me-1" />
+                            </RadzenColumn>
+                        </RadzenRow>
+                        
+                        
+                        <RadzenStack Orientation="Orientation.Horizontal" JustifyContent="JustifyContent.Start" Gap="2rem" class="">
+                            <RadzenStack Gap="0">
 
-<RadzenCard Variant="@Variant" class="rz-my-12 rz-mx-auto card" Style="max-width: 520px; padding: 2rem; font-size: 1.2rem; border-radius: 20px; border: 1px solid #ddd;">
-    <!-- เพิ่ม border-radius และ border -->
-    <RadzenStack Orientation="Orientation.Horizontal" JustifyContent="JustifyContent.Start" Gap="2rem" class="rz-p-4">
-        <RadzenStack Gap="0">
-            <RadzenText TextStyle="TextStyle.Overline" class="rz-display-flex rz-mt-2 rz-my-0" Style="font-size: 1.2rem;">หมายเลขคิว</RadzenText>
-            <RadzenText TextStyle="TextStyle.Body1" Style="font-size: 1.5rem;"><b>@Booking.QueueNumber</b></RadzenText>
+                                <RadzenText TextStyle="TextStyle.Overline" class="rz-display-flex rz-mt-4 rz-mb-0" Style="font-size: 1.2rem;">วันที่จอง</RadzenText>
+                                <RadzenText TextStyle="TextStyle.Body1"><b>@booking.booking_date.ToString("yyyy-MM-dd")</b></RadzenText>
+                                <RadzenText TextStyle="TextStyle.Body1"><b>เวลา @booking.booking_date.ToString("HH:mm")</b></RadzenText>
+                                <hr />
+                                <RadzenText TextStyle="TextStyle.Overline" class="rz-display-flex rz-mt-4 rz-mb-0" Style="font-size: 1.2rem;">วันที่นัดหมาย</RadzenText>
+                                <RadzenText TextStyle="TextStyle.Body1"><b>@booking.appointment_date.ToString("yyyy-MM-dd")</b></RadzenText>
+                                <RadzenText TextStyle="TextStyle.Body1"><b>เวลา @booking.appointment_date.ToString("HH:mm")</b></RadzenText>
+                                <hr />
 
-            <RadzenText TextStyle="TextStyle.Overline" class="rz-display-flex rz-mt-4 rz-mb-0" Style="font-size: 1.2rem;">วันที่จอง</RadzenText>
-            <RadzenText TextStyle="TextStyle.Body1" Style="font-size: 1.5rem;"><b>@Booking.booking_date.ToString("yyyy-MM-dd") เวลา @Booking.booking_date.ToString("HH:mm")</b></RadzenText>
+                                <RadzenText TextStyle="TextStyle.Overline" class="rz-display-flex rz-mt-4 rz-mb-0" Style="font-size: 1.2rem;">สถานะคิว</RadzenText>
+                                <RadzenText TextStyle="TextStyle.Body1" Style="@GetStatusStyle(booking)"><b>@booking.QueueStatus</b></RadzenText>
 
-            <RadzenText TextStyle="TextStyle.Overline" class="rz-display-flex rz-mt-4 rz-mb-0" Style="font-size: 1.2rem;">วันที่นัดหมาย</RadzenText>
-            <RadzenText TextStyle="TextStyle.Body1" Style="font-size: 1.5rem;"><b>@Booking.appointment_date.ToString("yyyy-MM-dd") เวลา @Booking.appointment_date.ToString("HH:mm")</b></RadzenText>
-
-            <RadzenText TextStyle="TextStyle.Overline" class="rz-display-flex rz-mt-4 rz-mb-0" Style="font-size: 1.2rem;">ประเภทคิว</RadzenText>
-            <RadzenText TextStyle="TextStyle.Body1" Style="font-size: 1.5rem;"><b>@(queueTypeMappings.ContainsKey(Booking.QueueType) ? queueTypeMappings[Booking.QueueType] : Booking.QueueType)</b></RadzenText>
-
-            <RadzenText TextStyle="TextStyle.Overline" class="rz-display-flex rz-mt-4 rz-mb-0" Style="font-size: 1.2rem;">สถานะคิว</RadzenText>
-            <RadzenText TextStyle="TextStyle.Body1" Style="@GetStatusStyle(Booking)"><b>@Booking.QueueStatus</b></RadzenText>
-
-            @if (Booking.QueueStatus == "waiting" && Booking.appointment_date.Date > DateTime.Today)
-            {
+                                
+                            </RadzenStack>
+                            
+                        </RadzenStack>
+                        @if (booking.QueueStatus == "waiting" && booking.appointment_date.Date > DateTime.Today)
+                            {
 
 
-                <RadzenStack Orientation="Orientation.Horizontal" Gap="1rem" class="rz-mt-4 justify-content-center">
-                    <RadzenButton Text="ยกเลิกคิว" Click="@(() => HandleCancelBooking(Booking.queue_id))"
-                                  Disabled="@(Booking.QueueStatus == "canceled" || Booking.QueueStatus == "success")"
-                                  Style="font-size: 1.2rem; background-color: red; color: white;" />
+                                <RadzenStack Orientation="Orientation.Horizontal" Gap="2%" JustifyContent="JustifyContent.Center" class="rz-mt-4">
+                                    <RadzenButton Text="ยกเลิกคิว" Click="@(() => HandleCancelBooking(booking.queue_id))"
+                                                  Style="background-color: red; color: white;" class="mx-0 p-1"/>
 
-                    <RadzenButton Text="ปริ้น" Click="@(() => HandlePrintBooking(Booking))"
-                                  Disabled="@(Booking.QueueStatus == "canceled" || Booking.QueueStatus == "success")"
-                                  Style="font-size: 1.2rem; background-color: green; color: white;" />
-                </RadzenStack>
-            }
-        </RadzenStack>
-    </RadzenStack>
-</RadzenCard>
+                                    <RadzenButton Text="ปริ้น" Click="@(() => HandlePrintBooking(booking))"
+                                                  Style="background-color: green; color: white;" />
+                                </RadzenStack>
+                            }
+                    </RadzenCard>
+                </Template>
+            </RadzenDataList>
+        </RadzenCard>
+    </ChildContent>
+</RadzenPanel>
+
+
 @code {
-    [Parameter] public BookingModel Booking { get; set; }
-    [Parameter] public Variant Variant { get; set; }
+    private IEnumerable<BookingModel> FilteredBookings => Bookings.Where(b => SelectedQueueType == "All" || b.QueueType == SelectedQueueType);
 
+    [Parameter] public List<BookingModel> Bookings { get; set; } = new List<BookingModel>();
+    [Parameter] public Variant Variant { get; set; }
+    [Parameter] public EventCallback<int> OnBookingCancelled { get; set; }
+
+    // Add new parameters for filters
+    [Parameter] public string SelectedQueueType { get; set; }
+    [Parameter] public bool AppointmentDateFilter { get; set; }
+    [Parameter] public DateTime? StartDate { get; set; }
+    [Parameter] public DateTime? EndDate { get; set; }
+
+    [Parameter] public string SelectedSortOption { get; set; } // New parameter for sort
+
+
+    private IEnumerable<BookingModel> SortedFilteredBookings
+    {
+        get
+        {
+            var filtered = FilteredBookings;
+
+            // กรองตามวันที่เริ่มต้นและวันที่สิ้นสุด
+            if (StartDate.HasValue)
+            {
+                filtered = filtered.Where(b => b.appointment_date >= StartDate.Value);
+            }
+            if (EndDate.HasValue)
+            {
+                filtered = filtered.Where(b => b.appointment_date <= EndDate.Value);
+            }
+
+            return SelectedSortOption switch
+            {
+                "วันที่จอง" => filtered.OrderBy(b => b.booking_date), // เรียงลำดับตามวันที่
+                "วันที่นัดหมาย" => filtered.OrderBy(b => b.appointment_date), // เรียงลำดับตามวันที่
+                "ประเภทธุรกรรม" => filtered.OrderBy(b => b.QueueType), // เรียงลำดับตามประเภท
+                "สถานะ" => filtered.OrderBy(b => b.QueueStatus), // เรียงลำดับตามสถานะ
+                _ => filtered
+            };
+        }
+    }
+
+    private IEnumerable<BookingModel> PaginatedQueueBookings
+    {
+        get
+        {
+
+            var bookingsToPaginate = AppointmentDateFilter
+                ? SortedFilteredBookings.Where(b => b.appointment_date.Date > DateTime.Today)
+                : SortedFilteredBookings;
+
+            return bookingsToPaginate;
+        }
+    }
 
     private async Task HandlePrintBooking(BookingModel booking)
     {
@@ -76,6 +153,7 @@
             if (response.IsSuccessStatusCode)
             {
                 Console.WriteLine("ยกเลิกการจองเรียบร้อยแล้ว");
+                await OnBookingCancelled.InvokeAsync(1);
             }
             else
             {
@@ -88,20 +166,17 @@
         }
     }
 
-    private string GetQueueStatusColor(string queueStatus)
+    
+
+    private string GetStatusStyle(BookingModel booking)
     {
-        return queueStatus switch
+        return booking.QueueStatus switch
         {
             "canceled" => "color: red;",
             "waiting" => "color: blue;",
             "success" => "color: green;",
             _ => ""
         };
-    }
-
-    private string GetStatusStyle(BookingModel booking)
-    {
-        return $"font-size: 1.5rem; {GetQueueStatusColor(booking.QueueStatus)}";
     }
 
 

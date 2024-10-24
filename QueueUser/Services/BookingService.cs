@@ -1,4 +1,6 @@
-﻿using System.Net.Http;
+﻿using System.Globalization;
+using System.Net.Http;
+using System.Text.Json;
 using QMS.Models;
 using QMS.Pages.Booking;
 
@@ -23,7 +25,13 @@ namespace QMS.Services
 
         public async Task<HttpResponseMessage> BookSlot(AddBookingRequest request)
         {
+            // แสดงค่าของ request เป็น JSON
+            var requestJson = JsonSerializer.Serialize(request);
+            Console.WriteLine($"on BookSlot {requestJson}");
             var response = await _httpClient.PostAsJsonAsync("/api/Booking/add-queue", request);
+            var content = await response.Content.ReadAsStringAsync();
+            Console.WriteLine(content);
+
             return response; // ส่งคืน HttpResponseMessage เพื่อให้ตรวจสอบสถานะ
 
         }

@@ -11,19 +11,22 @@
             <RadzenSidebarToggle Click="@ToggleSidebar" />
             <RadzenLabel style="text-align: center; width: 100%;" Text="ชื่อสหกรณ์"></RadzenLabel>
             <RadzenLabel style="text-align: center; width: 10%;" Text="Header"></RadzenLabel>
-            <RadzenLabel style="text-align: center; width: 10%;" Text="Header">
-                <RadzenProfileMenu>
-                    <Template>
-                        <RadzenGravatar Email="user@example.com"></RadzenGravatar>
-                    </Template>
-                    <ChildContent>
-                        <RadzenProfileMenuItem Text="Notification" Path="notification" Icon="announcement"></RadzenProfileMenuItem>
-                        <a @onclick="Logout">
-                            <RadzenProfileMenuItem Text="Logout" Icon="account_circle"></RadzenProfileMenuItem>
-                        </a>
-                    </ChildContent>
-                </RadzenProfileMenu>
-            </RadzenLabel>
+            @if (isLoggedIn)
+            {
+                <RadzenLabel style="text-align: center; width: 10%;" Text="Header">
+                    <RadzenProfileMenu>
+                        <Template>
+                            <RadzenGravatar Email="user@example.com"></RadzenGravatar>
+                        </Template>
+                        <ChildContent>
+                            <RadzenProfileMenuItem Text="Notification" Path="notification" Icon="announcement"></RadzenProfileMenuItem>
+                            <a @onclick="Logout">
+                                <RadzenProfileMenuItem Text="Logout" Icon="account_circle"></RadzenProfileMenuItem>
+                            </a>
+                        </ChildContent>
+                    </RadzenProfileMenu>
+                </RadzenLabel>
+            }
         </RadzenStack>
     </RadzenHeader>
 

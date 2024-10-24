@@ -16,6 +16,9 @@
     var calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: 'dayGridMonth',
         selectable: true,
+        locale: 'th',  // กำหนดให้ใช้ภาษาไทย
+        // ใช้ฟังก์ชันเพื่อตั้งค่าให้แสดงปีเป็น พ.ศ.
+        titleFormat: { year: 'numeric', month: 'long' }, // รูปแบบของชื่อที่แสดงในหัวปฏิทิน
 
         // แก้ไขฟังก์ชันเพื่อเปลี่ยนสีของวันก่อนหน้าและวันที่ปัจจุบัน
         dayCellDidMount: function (info) {
@@ -34,7 +37,20 @@
 
         dateClick: function (info) {
             console.log("Date clicked:", info.dateStr);
+/*
+            var adYear = info.date.getFullYear(); // ปี ค.ศ.
+            var buddhistYear = adYear;
 
+            if (adYear < 2566) {
+                buddhistYear = adYear + 543; // แปลงเป็นปี พ.ศ.
+            }
+            
+            // สร้างสตริงวันที่ในรูปแบบที่ต้องการ
+            var day = info.date.getDate();
+            var month = info.date.getMonth() + 1; // เดือนเริ่มจาก 0
+
+            var formattedDate = `${day}/${month}/${buddhistYear}`;
+            */
             // ตรวจสอบว่ามีการจองเต็มแล้วหรือไม่
             objRef.invokeMethodAsync('CheckBookingAvailability', info.dateStr)
                 .then((result) => {
@@ -43,6 +59,7 @@
                             alert(`ต้องเลือกภายใน 30 วันต่อจากเวลาปัจจุบัน`)
                         }
                         else if (info.date >= today && isWeekday(info.date)) {
+                            
                             objRef.invokeMethodAsync('ShowPopup', info.dateStr)
                                 .then(() => {
                                     console.log("Popup should be visible now.");
@@ -73,6 +90,8 @@ function isWeekday(date) {
     var day = date.getDay(); // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
     return day >= 1 && day <= 5; // คืนค่า true หากวันคือจันทร์ถึงศุกร์
 }
+
+
 /*
 function markFullDays(fullDays) {
     var calendarEl = document.getElementById('calendar');

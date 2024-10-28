@@ -1,0 +1,55 @@
+﻿/* Popup Container */
+.filter-popup {
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+    /* Popup Title */
+    .filter-popup .rz-text-align-center {
+        margin-bottom: 20px;
+    }
+
+
+.filter-bar {
+    display: none; /* เริ่มต้นเป็น hidden */
+    position: fixed;
+    z-index: 1; /* ตั้งค่าชั้นให้สูงที่สุด */
+    background-color: #fefefe;
+    right: 0;
+    top: 0;
+    width: 30%; /* ความกว้างเต็ม */
+    height: 100vh; /* ความสูงเต็ม */
+    padding: 3%;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.3);
+    border: 1px solid #888;
+}
+
+
+.filter-options {
+    margin-bottom: 15px;
+}
+
+
+.filter-bar.show {
+    display: block;
+}
+
+/* RadzenButton Custom Styles */
+.rz-button {
+    margin-top: 10px;
+    width: 100%; /* ให้ปุ่มขยายเต็มความกว้าง */
+}
+
+    .rz-button:hover {
+        background-color: #007BFF; /* เปลี่ยนสีเมื่อ hover */
+        color: white;
+    }
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .filter-popup {
+        width: 90%; /* ให้ Popup กว้าง 90% ของหน้าจอในมือถือ */
+    }
+}

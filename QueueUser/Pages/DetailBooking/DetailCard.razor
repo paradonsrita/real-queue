@@ -3,23 +3,27 @@
 @inject NavigationManager Navigation
 @inject IJSRuntime js
 @inject IHttpClientFactory HttpClientFactory
+@inject DialogService DialogService
+
 
 
 <RadzenPanel AllowCollapse="true" class="rz-my-10 rz-mx-auto" Style="width: 90%;">
     <HeaderTemplate>
         <RadzenText TextStyle="TextStyle.H6" class="rz-display-flex rz-align-items-center rz-m-0">
-            <RadzenIcon Icon="account_box" class="rz-me-1" /><b>Orders</b>
+            <RadzenIcon Icon="account_box" class="rz-me-1" /><b>Queue</b>
         </RadzenText>
     </HeaderTemplate>
     <ChildContent>
         <RadzenCard class="rz-mt-4">
             <RadzenDataList PageSize="6" WrapItems="true" AllowPaging="true"
-                                Data="@PaginatedQueueBookings" TItem="BookingModel">
+                                Data="@PaginatedQueueBookings" TItem="BookingModel"
+                                PagerHorizontalAlign="HorizontalAlign.Left" PagerPosition="PagerPosition.TopAndBottom"
+                                class="justify-content-center align-items-center" Style="text-align:center;">
                 
-                          <Template Context="booking">                    
-                    <RadzenCard Variant="@Variant" class="rz-my-12 responsive-card"  
-                                Style="width: 30%; border-radius: 20px; border: 1px solid #000;">
-                        <RadzenRow>
+                                <Template Context="booking">                    
+                    <RadzenCard Variant="@Variant" class=""  
+                                Style="max-width: 250px; min-width:250px; border-radius: 20px; border: 1px solid #000;">
+                        <RadzenRow >
                             <RadzenColumn Size="9" class="rz-text-truncate">
                                 <RadzenBadge BadgeStyle="BadgeStyle.Light" Text=@(queueTypeMappings.ContainsKey(booking.QueueType) ? queueTypeMappings[booking.QueueType] : booking.QueueType) class="rz-me-1" />
                             </RadzenColumn>
@@ -30,19 +34,19 @@
                         
                         
                         <RadzenStack Orientation="Orientation.Horizontal" JustifyContent="JustifyContent.Start" Gap="2rem" class="">
-                            <RadzenStack Gap="0">
+                            <RadzenStack Gap="0" class="m-auto">
 
-                                <RadzenText TextStyle="TextStyle.Overline" class="rz-display-flex rz-mt-4 rz-mb-0" Style="font-size: 1.2rem;">วันที่จอง</RadzenText>
-                                <RadzenText TextStyle="TextStyle.Body1"><b>@booking.booking_date.ToString("yyyy-MM-dd")</b></RadzenText>
-                                <RadzenText TextStyle="TextStyle.Body1"><b>เวลา @booking.booking_date.ToString("HH:mm")</b></RadzenText>
+                                <RadzenText TextStyle="TextStyle.DisplayH4" class="rz-display-flex rz-mt-4 rz-mb-0" Style="font-size: 1.2rem;">วันที่จอง</RadzenText>
+                                <RadzenText TextStyle="TextStyle.Body1">@booking.booking_date.ToString("yyyy-MM-dd")</RadzenText>
+                                <RadzenText TextStyle="TextStyle.Body1">เวลา @booking.booking_date.ToString("HH:mm")</RadzenText>
                                 <hr />
-                                <RadzenText TextStyle="TextStyle.Overline" class="rz-display-flex rz-mt-4 rz-mb-0" Style="font-size: 1.2rem;">วันที่นัดหมาย</RadzenText>
-                                <RadzenText TextStyle="TextStyle.Body1"><b>@booking.appointment_date.ToString("yyyy-MM-dd")</b></RadzenText>
-                                <RadzenText TextStyle="TextStyle.Body1"><b>เวลา @booking.appointment_date.ToString("HH:mm")</b></RadzenText>
+                                <RadzenText TextStyle="TextStyle.DisplayH4" class="rz-display-flex rz-mt-4 rz-mb-0" Style="font-size: 1.2rem;">วันที่นัดหมาย</RadzenText>
+                                <RadzenText TextStyle="TextStyle.Body1">@booking.appointment_date.ToString("yyyy-MM-dd")</RadzenText>
+                                <RadzenText TextStyle="TextStyle.Body1">เวลา @booking.appointment_date.ToString("HH:mm")</RadzenText>
                                 <hr />
 
-                                <RadzenText TextStyle="TextStyle.Overline" class="rz-display-flex rz-mt-4 rz-mb-0" Style="font-size: 1.2rem;">สถานะคิว</RadzenText>
-                                <RadzenText TextStyle="TextStyle.Body1" Style="@GetStatusStyle(booking)"><b>@booking.QueueStatus</b></RadzenText>
+                                <RadzenText TextStyle="TextStyle.DisplayH4" class="rz-display-flex rz-mt-4 rz-mb-0" Style="font-size: 1.2rem;">สถานะคิว</RadzenText>
+                                <RadzenText TextStyle="TextStyle.Body1" Style="@GetStatusStyle(booking)"><b>@(queueStatusMappings.ContainsKey(booking.QueueStatus) ? queueStatusMappings[booking.QueueStatus] : booking.QueueStatus)</b></RadzenText>
 
                                 
                             </RadzenStack>
@@ -53,7 +57,8 @@
 
 
                                 <RadzenStack Orientation="Orientation.Horizontal" Gap="2%" JustifyContent="JustifyContent.Center" class="rz-mt-4">
-                                    <RadzenButton Text="ยกเลิกคิว" Click="@(() => HandleCancelBooking(booking.queue_id))"
+                                    <RadzenButton Text="ยกเลิกคิว" 
+                                                  Click="@(() => ConfirmPopup(booking.queue_id, booking.appointment_date.ToString("dd/MM/yyyy")))"
                                                   Style="background-color: red; color: white;" class="mx-0 p-1"/>
 
                                     <RadzenButton Text="ปริ้น" Click="@(() => HandlePrintBooking(booking))"
@@ -63,9 +68,11 @@
                     </RadzenCard>
                 </Template>
             </RadzenDataList>
+
         </RadzenCard>
     </ChildContent>
 </RadzenPanel>
+
 
 
 @code {
@@ -123,6 +130,27 @@
             return bookingsToPaginate;
         }
     }
+
+    private async void ConfirmPopup(int queue_id, string date)
+    {
+
+        bool? confirmed = await DialogService.Confirm($"ยืนยันการยกเลิกคิวของวันที่ {date}", "ยกเลิกคิว",
+            new ConfirmOptions() { OkButtonText = "ยืนยัน", CancelButtonText = "ย้อนกลับ" });
+
+        if (confirmed == true)
+        {
+            Console.WriteLine("Confirmed: " + queue_id);
+            await HandleCancelBooking(queue_id);
+            // ดำเนินการยกเลิกคิวตาม queue_id
+        }
+        else
+        {
+            Console.WriteLine("Cancelled");
+        }
+
+
+    }
+
 
     private async Task HandlePrintBooking(BookingModel booking)
     {
@@ -188,5 +216,12 @@
         { "Other", "อื่นๆ"}
     };
 
+    private Dictionary<string, string> queueStatusMappings = new Dictionary<string, string>
+    {
+        { "canceled", "ถูกยกเลิกแล้ว" },
+        { "waiting", "กำลังรอการเรียกคิว" },
+        { "susccess", "สำเร็จแล้ว" },
+        { "in process", "กำลังถูกเรียกคิว"}
+    };
 
 }

@@ -97,6 +97,23 @@ namespace QMS.Pages.QueueEmployees.HomeCounterQueue
             Navigation.NavigateTo(Navigation.Uri, forceLoad: true);
 
         }
+
+        private async Task RepeatQueue()
+        {
+            try
+            {
+                var client = HttpClientFactory.CreateClient("Queue");
+                await client.GetAsync("/api/Employee/repeatQueue");
+                // อาจต้องอัปเดต UI หรือทำการโหลดข้อมูลใหม่ที่นี่
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error calling RepeatQueue API: {ex.Message}");
+            }
+
+        }
+
+
         private async Task skipQueue()
         {
             Console.WriteLine("skipQueue called");

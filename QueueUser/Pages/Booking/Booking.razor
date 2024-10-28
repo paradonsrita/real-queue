@@ -1,0 +1,27 @@
+﻿@page "/booking"
+@inject HttpClient Http
+@inject NavigationManager Navigation
+
+
+
+<div class="text-center border p-2 custom-border text-color" style="margin: auto; max-width: 90%; width: 550px;">
+    <h1>เลือกประเภทคิว</h1>
+</div>
+
+<div class="button-group">
+    <button class="button-rounded shadow p-4 mb-5" @onclick='() => GoToDateInput("F")'>เปิด-ปิดบัญชีฝากถอน</button>
+    <button class="button-rounded shadow p-4 mb-5" @onclick='() => GoToDateInput("L")'>ขอกู้ จ่ายเงินกู้</button>
+    <button class="button-rounded shadow p-4 mb-5" @onclick='() => GoToDateInput("S")'>สมัครสมาชิก ลาออก ซื้อ-ถอนหุ้น รับชำระหนี้</button>
+    <button class="button-rounded shadow p-4 mb-5" @onclick='() => GoToDateInput("H")'>อื่นๆ</button>
+</div>
+
+
+@code {
+
+    private void GoToDateInput(string transaction)
+    {
+        // นำค่าที่เลือกส่งไปยังหน้า DateInput
+        Navigation.NavigateTo($"/booking-calendar/{transaction}");
+    }
+    
+}

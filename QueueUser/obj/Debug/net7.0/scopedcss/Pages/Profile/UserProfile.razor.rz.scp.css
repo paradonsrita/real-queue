@@ -1,0 +1,21 @@
+.custom-border[b-tw5x4d3n5c] {
+    position: relative;
+    padding: 20px;
+    background-color: #072f4f;
+}
+
+    .custom-border[b-tw5x4d3n5c]::before {
+        content: "";
+        position: absolute;
+        top: -10px;
+        left: -10px;
+        right: -10px;
+        bottom: -10px;
+        border: 5px solid transparent;
+        background: #0c4da2;
+        z-index: -1;
+    }
+
+.text-color[b-tw5x4d3n5c] {
+    color: #f1ede2;
+}

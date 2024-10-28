@@ -1,7 +1,7 @@
 ﻿.custom-border {
     position: relative;
     padding: 20px;
-    background-color: #f1ede2;
+    background-color: #072f4f;
 }
 
     .custom-border::before {
@@ -12,9 +12,10 @@
         right: -10px;
         bottom: -10px;
         border: 5px solid transparent;
-        background: #b3b3ba;
+        background: #0c4da2;
         z-index: -1;
     }
+
 
 /* กำหนดสไตล์สำหรับกลุ่มปุ่ม */
 .button-group {
@@ -47,34 +48,10 @@
         color: whitesmoke;
     }
 
-
-.filter-bar {
-    display: none; /* เริ่มต้นเป็น hidden */
-    position: fixed;
-    z-index: 1; /* ตั้งค่าชั้นให้สูงที่สุด */
-    background-color: #fefefe;
-    right: 0;
-    top: 0;
-    width: 30%; /* ความกว้างเต็ม */
-    height: 100vh; /* ความสูงเต็ม */
-    padding: 3%;
-    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.3);
-    border: 1px solid #888;
+.text-color {
+    color: #f1ede2;
 }
 
-
-.filter-options {
-    border-bottom: 2px solid black; /* ขอบล่างเป็นสีดำ */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* เงาให้ดูมีมิติ */
-    padding: 10px; /* เพิ่มระยะห่างด้านล่างถ้าต้องการ */
-    margin-top: 7%;
-    margin-bottom:7%;
-}
-    
-
-    .filter-bar.show {
-    display: block;
-}
 
 .booking-card {
     display: grid;

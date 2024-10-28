@@ -1,17 +1,16 @@
 ﻿@using QMS.Models;
 @using Radzen.Blazor;
 
-<h3>ColumnChart</h3>
 <RadzenChart>
     @if (CounterQueues != null && CounterQueues.Any())
     {
-        <RadzenColumnSeries Data="@TransformedCounterQueues" CategoryProperty="type_name" Title="Counter queue" LineType="LineType.Dashed" ValueProperty="Total">
+        <RadzenColumnSeries Data="@TransformedCounterQueues" CategoryProperty="type_name" Title="คิวผู้มารับบริการทันที" LineType="LineType.Dashed" ValueProperty="Total">
             <RadzenSeriesDataLabels Visible="@ShowDataLabels" />
         </RadzenColumnSeries>
     }
     @if (BookingQueues != null && BookingQueues.Any())
     {
-        <RadzenColumnSeries Data="@TransformedBookingQueues" CategoryProperty="type_name" Title="Booking queue" LineType="LineType.Dashed" ValueProperty="Total">
+        <RadzenColumnSeries Data="@TransformedBookingQueues" CategoryProperty="type_name" Title="คิวการจอง" LineType="LineType.Dashed" ValueProperty="Total">
             <RadzenSeriesDataLabels Visible="@ShowDataLabels" />
         </RadzenColumnSeries>
     }
@@ -19,7 +18,7 @@
     <RadzenColumnOptions Radius="5" />
     <RadzenValueAxis Min="0">
         <RadzenGridLines Visible="true" />
-        <RadzenAxisTitle Text="Amount of queue" />
+        <RadzenAxisTitle Text="จำนวน" />
     </RadzenValueAxis>
 </RadzenChart>
 
@@ -49,9 +48,9 @@
     {
         return typeName switch
         {
-            "Finance" => "เปิด-ปิดบัญชีฝากถอน",
-            "Loan" => "ขอกู้ รับชำระ จ่ายเงินกู้",
-            "Shares" => "สมัครสมาชิก ลาออก ซื้อ-ถอนหุ้น",
+            "Finance" => "ฝากถอน",
+            "Loan" => "กู้",
+            "Shares" => "ซื้อ-ถอนหุ้น",
             "Other" => "อื่นๆ",
             _ => typeName
         };

@@ -6,26 +6,37 @@
 @inject NavigationManager Navigation
 @using System.Text.Json;
 @inject TokenService TokenService
+@inject NotificationService NotificationService
+@using Microsoft.AspNetCore.WebUtilities
 
 
 
 
-<h3>ข้อมูลส่วนตัวของคุณ</h3>
 
+<div class="text-center border p-2 custom-border text-color" style="margin: auto; max-width: 90%; width: 550px; font-size: 2.5rem;">
+    <h1>ข้อมูลส่วนตัว</h1>
+</div>
+<br />
 @if (user == null)
 {
     <p>กำลังโหลดข้อมูล...</p>
 }
 else
 {
-    <div>
-        <p><strong>หมายเลขบัตรประชาชน:</strong> @user.citizen_id_number</p>
-        <p><strong>ชื่อ:</strong> @user.firstname @user.lastname</p>
-        
-        <p><strong>เบอร์โทรศัพท์:</strong> @user.phone_number</p>
-        <p><strong>อีเมล:</strong> @user.user_email</p>
-    </div>
-    <RadzenButton Variant="Variant.Outlined" Click=@(args => ToEditProfile()) Text="แก้ไขโปรไฟล์" ButtonStyle="ButtonStyle.Primary" />
+    <RadzenCard Variant="@variant" class="rz-my-12 rz-mx-auto" Style="max-width: 420px">
+        <RadzenStack Orientation="Orientation.Vertical" JustifyContent="JustifyContent.Start" Gap="1rem" class="rz-p-4">
+            <div>
+                <p Style="font-size: 1.4rem;"><strong>หมายเลขบัตรประชาชน:</strong> @user.citizen_id_number</p>
+                <br />
+                <p Style="font-size: 1.4rem;"><strong>ชื่อ:</strong> @user.firstname @user.lastname</p>
+                <br />
+                <p Style="font-size: 1.4rem;"><strong>เบอร์โทรศัพท์:</strong> @user.phone_number</p>
+                <br />
+                <p Style="font-size: 1.4rem;"><strong>อีเมล:</strong> @user.user_email</p>
+            </div>
+            <RadzenButton Variant="Variant.Outlined" Click=@(args => ToEditProfile()) Text="แก้ไขโปรไฟล์" ButtonStyle="ButtonStyle.Primary" />
+        </RadzenStack>
+    </RadzenCard>
 
     <CascadingValue Value="@user.user_id">
         <!-- ค่าที่จะถูกส่งไปยังหน้าถัดไป -->
@@ -35,6 +46,7 @@ else
 
 
 @code {
+    Variant variant = Variant.Filled;
     private Models.UserModel user;
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -43,6 +55,18 @@ else
         {
             try
             {
+                var uri = Navigation.ToAbsoluteUri(Navigation.Uri);
+
+                if (QueryHelpers.ParseQuery(uri.Query).TryGetValue("status", out var status) && status == "success")
+
+                {
+
+                    NotificationService.Notify(NotificationSeverity.Success, "สำเร็จ", "ข้อมูลของคุณถูกเปลี่ยนเรียบร้อยแล้ว");
+                    // ลบ Query String เพื่อป้องกันไม่ให้ Notification แสดงอีกเมื่อรีเฟรชหน้า
+                    var cleanUri = new UriBuilder(uri) { Query = "" }.ToString();
+                    Navigation.NavigateTo(cleanUri, forceLoad: true);
+
+                }
                 var token = await TokenService.GetTokenAsync();
 
                 if (string.IsNullOrEmpty(token) || TokenService.IsTokenExpired(token))

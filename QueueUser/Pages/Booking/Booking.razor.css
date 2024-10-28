@@ -1,0 +1,52 @@
+﻿.custom-border {
+    position: relative;
+    padding: 20px;
+    background-color: #072f4f;
+}
+
+    .custom-border::before {
+        content: "";
+        position: absolute;
+        top: -10px;
+        left: -10px;
+        right: -10px;
+        bottom: -10px;
+        border: 5px solid transparent;
+        background: #0c4da2;
+        z-index: -1;
+    }
+
+/* กำหนดสไตล์สำหรับกลุ่มปุ่ม */
+.button-group {
+    display: flex;
+    justify-content: center;
+    gap: 5%;
+    margin-top: 7%;
+    flex-wrap: wrap;
+}
+
+/* กำหนดสไตล์สำหรับปุ่มกลม */
+.button-rounded {
+    width: 250px;
+    height: 250px;
+    border-radius: 20%;
+    background-color: #17372a;
+    color: wheat;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 2rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+    .button-rounded:hover {
+        background-color: #a62b4c;
+        color: whitesmoke;
+    }
+
+.text-color {
+    color: #f1ede2;
+}

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "RWTTnV+LWHsfAmhZOry9XW1Ltwjq3v0f0ENPCHMrbzs=",
+  "Hash": "hRjjHDUQYLtiroxBmo1yWi23rdv4iiLfG6UM+ZV4isQ=",
   "Source": "QMS",
   "BasePath": "_content/QMS",
   "Mode": "Default",
@@ -1117,6 +1117,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.png"
+    },
+    {
+      "Identity": "C:\\Users\\Asus\\Desktop\\Queue Manage\\QueueMoniter\\wwwroot\\js\\speakText.js",
+      "SourceId": "QMS",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Asus\\Desktop\\Queue Manage\\QueueMoniter\\wwwroot\\",
+      "BasePath": "_content/QMS",
+      "RelativePath": "js/speakText.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\speakText.js"
     }
   ]
 }

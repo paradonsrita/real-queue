@@ -143,6 +143,16 @@
   },
   {
     "ContainingType": "ApiIsocare2.Controllers.EmployeeController",
+    "Method": "RepeatQueue",
+    "RelativePath": "api/Employee/repeatQueue",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApiIsocare2.Controllers.EmployeeController",
     "Method": "SkipBookingQueue",
     "RelativePath": "api/Employee/skipBookingQueue",
     "HttpMethod": "PUT",

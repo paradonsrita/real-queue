@@ -6,7 +6,7 @@
         <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" Wrap="FlexWrap.Wrap">
             <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" Gap="0.5rem">
                 <RadzenCheckBox @bind-Value="@showDataLabels" Name="dataLabels" Style="border: 2px solid #c5d0d9; padding: 4px; border-radius: 5px;"></RadzenCheckBox>
-                <RadzenLabel Text="Show Data Labels" Component="dataLabels" />
+                <RadzenLabel Text="แสดงป้ายข้อมูล" Component="dataLabels" />
             </RadzenStack>
         </RadzenStack>
     </RadzenCard>
@@ -17,16 +17,16 @@
         </RadzenCategoryAxis>
 
         <!-- Series สำหรับ bookingStatistic -->
-        <RadzenColumnSeries Data="@bookingStatistic" CategoryProperty="type_name" ValueProperty="Total" Title="Booking"
-                            Stroke="blue" Fill="blue" >
+        <RadzenColumnSeries Data="@bookingStatistic" CategoryProperty="type_name" ValueProperty="Total" Title="คิวการจอง"
+                            Stroke="blue" Fill="blue">
             <RadzenSeriesDataLabels Visible="@showDataLabels" />
         </RadzenColumnSeries>
 
         <!-- Series สำหรับ counterStatistic -->
-        <RadzenColumnSeries Data="@counterStatistic" CategoryProperty="type_name" ValueProperty="Total" Title="Counter"
+        <RadzenColumnSeries Data="@counterStatistic" CategoryProperty="type_name" ValueProperty="Total" Title="คิวผู้มารับบริการทีนที"
                             Stroke="green" Fill="green">
             <RadzenSeriesDataLabels Visible="@showDataLabels" />
-    </RadzenColumnSeries>
+        </RadzenColumnSeries>
 
         <RadzenLegend Position="LegendPosition.Top" />
         <RadzenValueAxis>
@@ -34,7 +34,6 @@
         </RadzenValueAxis>
     </RadzenChart>
 </RadzenStack>
-
 
 @code {
     [Parameter]
@@ -51,23 +50,22 @@
         bookingStatistic = Statistics
             .Where(q => q.Source == "booking")
             .GroupBy(q => q.type_name)
-                        .Select(g => new Statistic
-                            {
-                                type_name = g.Key,
-                                Total = g.Sum(g => g.Total)
-                            })
+            .Select(g => new Statistic
+            {
+                    type_name = TransformQueueType(g.Key),  // แปลงประเภทเป็นภาษาไทย
+                    Total = g.Sum(g => g.Total)
+            })
             .ToList();
 
         counterStatistic = Statistics
             .Where(q => q.Source == "counter")
             .GroupBy(q => q.type_name)
-                        .Select(g => new Statistic
-                            {
-                                type_name = g.Key,
-                                Total = g.Sum(g => g.Total)
-                            })
+            .Select(g => new Statistic
+            {
+                    type_name = TransformQueueType(g.Key),  // แปลงประเภทเป็นภาษาไทย
+                    Total = g.Sum(g => g.Total)
+            })
             .ToList();
-
 
         // ตรวจสอบข้อมูลด้วยการพิมพ์ออกมาใน Console
         Console.WriteLine("Booking Statistic:");
@@ -83,5 +81,16 @@
         }
     }
 
+    private Dictionary<string, string> queueTypeMappings = new Dictionary<string, string>
+    {
+        { "Loan", "ขอกู้" },
+        { "Finance", "ฝากถอน" },
+        { "Shares", "ซื้อ-ถอนหุ้น" },
+        { "Other", "อื่นๆ"}
+    };
 
+    private string TransformQueueType(string queueType)
+    {
+        return queueTypeMappings.TryGetValue(queueType, out var thaiValue) ? thaiValue : queueType;
+    }
 }

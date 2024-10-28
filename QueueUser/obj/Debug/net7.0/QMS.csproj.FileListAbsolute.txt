@@ -705,5 +705,8 @@ C:\Users\Asus\Desktop\Queue Manage\QueueUser\obj\Debug\net7.0\QMS.genruntimeconf
 C:\Users\Asus\Desktop\Queue Manage\QueueUser\obj\Debug\net7.0\ref\QMS.dll
 C:\Users\Asus\Desktop\Queue Manage\QueueUser\obj\Debug\net7.0\QMS.sourcelink.json
 C:\Users\Asus\Desktop\Queue Manage\QueueUser\obj\Debug\net7.0\scopedcss\Pages\Booking\Calendar.razor.rz.scp.css
-C:\Users\Asus\Desktop\Queue Manage\QueueUser\obj\Debug\net7.0\scopedcss\Pages\Booking\CancelBooking.razor.rz.scp.css
-C:\Users\Asus\Desktop\Queue Manage\QueueUser\obj\Debug\net7.0\scopedcss\Pages\Booking\CancelCard.razor.rz.scp.css
+C:\Users\Asus\Desktop\Queue Manage\QueueUser\obj\Debug\net7.0\scopedcss\Pages\DetailBooking\DetailBooking.razor.rz.scp.css
+C:\Users\Asus\Desktop\Queue Manage\QueueUser\obj\Debug\net7.0\scopedcss\Pages\DetailBooking\DetailCard.razor.rz.scp.css
+C:\Users\Asus\Desktop\Queue Manage\QueueUser\obj\Debug\net7.0\scopedcss\Pages\DetailBooking\FilterPopup.razor.rz.scp.css
+C:\Users\Asus\Desktop\Queue Manage\QueueUser\obj\Debug\net7.0\scopedcss\Pages\Profile\UserProfile.razor.rz.scp.css
+C:\Users\Asus\Desktop\Queue Manage\QueueUser\obj\Debug\net7.0\scopedcss\Pages\Booking\Booking.razor.rz.scp.css

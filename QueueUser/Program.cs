@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.EntityFrameworkCore;
 using QMS.Data;
 using QMS.Services;
+using Radzen;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -33,6 +34,9 @@ builder.Services.AddHttpClient("Queue", client =>
 builder.Services.AddScoped<BookingService>();
 builder.Services.AddScoped<UserServices>();
 builder.Services.AddScoped<TokenService>();
+builder.Services.AddScoped<DialogService>();
+builder.Services.AddScoped<NotificationService>();
+
 
 
 

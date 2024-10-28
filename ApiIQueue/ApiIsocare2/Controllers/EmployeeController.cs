@@ -61,7 +61,7 @@ namespace ApiIsocare2.Controllers
 
                     await _hubContext.Clients.All.SendAsync("RefreshPage");
 
-                    return NoContent();
+                    return Ok(waitQueue);
                 }
                 throw new Exception("ไม่มีคิวทีรออยู่แล้ว");
 
@@ -105,7 +105,7 @@ namespace ApiIsocare2.Controllers
 
                     await _hubContext.Clients.All.SendAsync("RefreshPage");
 
-                    return NoContent();
+                    return Ok(waitQueue);
                 }
 
                 throw new Exception("ไม่มีคิวที่รออยู่แล้ว");
@@ -157,7 +157,7 @@ namespace ApiIsocare2.Controllers
                 }
                 
 
-                return NoContent();
+                return Ok(waitQueue);
             }
             catch (Exception ex)
             {
@@ -200,7 +200,7 @@ namespace ApiIsocare2.Controllers
 
                     await _hubContext.Clients.All.SendAsync("RefreshPage");
 
-                    return NoContent();
+                    return Ok(waitQueue);
                 }
 
                 throw new Exception("ไม่มีคิวที่รออยู่แล้ว");
@@ -210,6 +210,14 @@ namespace ApiIsocare2.Controllers
                 var innerExceptionMessage = ex.InnerException?.Message ?? "ไม่มีข้อผิดพลาดเพิ่มเติม";
                 return StatusCode(500, $"เกิดข้อผิดพลาด : {ex.Message}, ข้อผิดพลาดเพิ่มเติม : {innerExceptionMessage}");
             }
+        }
+
+        [HttpGet("repeatQueue")]
+        public async Task<IActionResult> RepeatQueue()
+        {
+            await _hubContext.Clients.All.SendAsync("RefreshPage");
+
+            return Ok();
         }
 
     }

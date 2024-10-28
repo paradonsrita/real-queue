@@ -1,0 +1,57 @@
+﻿@using QMS.Models
+
+
+
+
+    <RadzenChart>
+    <RadzenDonutSeries Data="@CounterQueues" CategoryProperty="type_name" ValueProperty="Total"
+                       Title="Counter Queues"
+                       InnerRadius="0.3" Radius="0.6" >
+        <ChildContent>
+            <RadzenSeriesDataLabels Visible="@ShowDataLabels" />
+        </ChildContent>
+    </RadzenDonutSeries>
+        <RadzenDonutSeries Data="@TransformedBookingQueues" CategoryProperty="type_name" ValueProperty="Total" Title="Booking Queues">
+        <ChildContent>
+            <RadzenSeriesDataLabels Visible="@ShowDataLabels" />
+        </ChildContent>
+                       </RadzenDonutSeries>
+    <RadzenDonutSeries Data="@BookingQueues" CategoryProperty="type_name" ValueProperty="Total"
+                       Title="Booking Queues"
+                       InnerRadius="0.6" Radius="0.9" />
+    </RadzenChart>
+
+@code {
+    [Parameter]
+    public IEnumerable<Statistic> CounterQueues { get; set; }
+
+    [Parameter]
+    public IEnumerable<Statistic> BookingQueues { get; set; }
+
+    [Parameter]
+    public bool ShowDataLabels { get; set; }
+
+    private IEnumerable<Statistic> TransformedCounterQueues => CounterQueues?.Select(c => new Statistic
+        {
+            type_name = TransformTypeName(c.type_name),
+            Total = c.Total
+        });
+
+    private IEnumerable<Statistic> TransformedBookingQueues => BookingQueues?.Select(b => new Statistic
+        {
+            type_name = TransformTypeName(b.type_name),
+            Total = b.Total
+        });
+
+    private string TransformTypeName(string typeName)
+    {
+        return typeName switch
+        {
+            "Finance" => "เปิด-ปิดบัญชีฝากถอน",
+            "Loan" => "ขอกู้ รับชำระ จ่ายเงินกู้",
+            "Shares" => "สมัครสมาชิก ลาออก ซื้อ-ถอนหุ้น",
+            "Other" => "อื่นๆ",
+            _ => typeName
+        };
+    }
+}

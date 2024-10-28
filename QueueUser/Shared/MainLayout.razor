@@ -13,23 +13,13 @@
             <RadzenLabel style="text-align: center; width: 10%;" Text="Header"></RadzenLabel>
             @if (isLoggedIn)
             {
-                <RadzenLabel style="text-align: center; width: 10%;" Text="Header">
-                    <RadzenProfileMenu>
-                        <Template>
-                            <RadzenGravatar Email="user@example.com"></RadzenGravatar>
-                        </Template>
-                        <ChildContent>
-                            <RadzenProfileMenuItem Text="Notification" Path="notification" Icon="announcement"></RadzenProfileMenuItem>
                             <a @onclick="Logout">
-                                <RadzenProfileMenuItem Text="Logout" Icon="account_circle"></RadzenProfileMenuItem>
+                    <RadzenButton Text="Logout" class="mx-3 w-auto" Style="font-size: 0.8rem; height: 30px; padding: 4px 8px;"  Icon="exit_to_app" ButtonStyle="ButtonStyle.Danger" />
                             </a>
-                        </ChildContent>
-                    </RadzenProfileMenu>
-                </RadzenLabel>
             }
+            
         </RadzenStack>
     </RadzenHeader>
-
     @if (isLoggedIn)
     {
         <RadzenSidebar @bind-Expanded="@sidebarExpanded">
@@ -44,6 +34,8 @@
             @Body
         </div>
     </RadzenBody>
+    <RadzenDialog /> 
+
 </RadzenLayout>
 
 @code {
@@ -74,4 +66,5 @@
         Navigation.NavigateTo("/login", forceLoad: true);
         Console.WriteLine("User has logged out.");
     }
+    
 }

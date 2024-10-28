@@ -18,7 +18,7 @@
 {
     <div class="boxqueue card p-3 justify-content-center align-items-center ">
         <h4>หมายเลขคิว: @queueDetails.QueueNumber</h4>
-        <p>รายการที่เลือก: @queueDetails.QueueType</p>
+        <p>รายการที่เลือก: @(queueTypeMappings.TryGetValue(queueDetails.QueueType, out var mappedType) ? mappedType : queueDetails.QueueType)</p>
         <p>วันที่และเวลา: @queueDetails.queue_date.ToString("dd/MM/yyyy HH:mm")</p>
         <p>* ถ้าเรียกคิวแล้วไม่อยู่ทำรายการ ขอสงวนสิทธิ์ในการข้ามคิว และต้องกดคิวใหม่เพื่อใช้บริการ *</p>
     </div>

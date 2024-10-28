@@ -5,11 +5,10 @@
 @inject IHttpClientFactory HttpClientFactory
 @using Microsoft.AspNetCore.SignalR.Client
 @implements IAsyncDisposable
+@inject IJSRuntime js
 
 
 
-
-<h1 class="text-center"><b>Monitor</b></h1>
 
 
 
@@ -18,13 +17,13 @@
 {
 
 
-    <h5>Counter queue</h5>
+    <h5>ผู้ที่มารับบริการทันที</h5>
 
     <MonitorTable Source="counter" Queue="queue"></MonitorTable>
 
     
 
-    <h5>Booking queue</h5>
+    <h5>คิวการจอง</h5>
 
     <MonitorTable Source="booking" Queue="queue"></MonitorTable>
 }
@@ -43,7 +42,7 @@ else
     {
 
         hubConnection = new HubConnectionBuilder()
-            .WithUrl("https://192.168.1.15:44328/notificationHub", options =>
+            .WithUrl("https://192.168.1.12:44328/notificationHub", options =>
         {
             options.HttpMessageHandlerFactory = _ => new HttpClientHandler
                 {
@@ -56,12 +55,12 @@ else
         hubConnection.On("RefreshPage", () =>
         {
             // ทำการรีเฟรชหรือโหลดข้อมูลใหม่
-            InvokeAsync(async () => await LoadQueueData());
+            InvokeAsync(async () => await UpdateData());
         });
         await hubConnection.StartAsync();
         await LoadQueueData(); // โหลดข้อมูลครั้งแรก
 
-        
+
     }
 
     private async Task LoadQueueData()
@@ -79,12 +78,42 @@ else
         }
     }
 
+    private async Task UpdateData()
+    {
+        try
+        {
+            var client = HttpClientFactory.CreateClient("Queue");
+
+            queue = await client.GetFromJsonAsync<List<QueueModel>>("/api/Monitor");
+            InvokeAsync(StateHasChanged); // อัปเดต UI
+
+            // ตรวจสอบค่า queue.FirstOrDefault() และส่งหมายเลขคิวไปยัง TriggerVoiceAlert
+            var nextQueue = queue
+                .OrderByDescending(q => q.CallQueueTime)
+                .FirstOrDefault();
+
+            if (nextQueue != null && !string.IsNullOrEmpty(nextQueue.QueueNumber))
+            {
+                await TriggerVoiceAlert(nextQueue.QueueNumber, nextQueue.Counter);
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error loading statistics: {ex.Message}");
+        }
+    }
+
     public async ValueTask DisposeAsync()
     {
         if (hubConnection is not null)
         {
             await hubConnection.DisposeAsync();
         }
+    }
+
+    private async Task TriggerVoiceAlert(string queueNumber, int? counter)
+    {
+        await js.InvokeVoidAsync("speakText", $"หมายเลขคิวถัดไป. {queueNumber} .ในช่องบริการที่. {counter}");  // กำหนดข้อความที่ต้องการให้แจ้งเตือน
     }
     
 }

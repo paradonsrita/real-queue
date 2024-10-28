@@ -42,32 +42,7 @@
     }
 
 
-/* สำหรับวันที่ผ่านมา */
-.fc-day-past {
-    background-color: #f0f0f0 !important; /* สีเทาสำหรับวันที่ผ่านมา */
-    pointer-events: none; /* ไม่สามารถคลิกได้ */
-    opacity: 0.5; /* ทำให้โปร่งแสง */
-}
 
-/* สำหรับวันเสาร์และอาทิตย์ */
-.fc-sat, .fc-sun {
-    background-color: #f0f0f0 !important; /* สีเทาสำหรับวันหยุดสุดสัปดาห์ */
-    pointer-events: none; /* ไม่สามารถคลิกได้ */
-    opacity: 0.5; /* ทำให้โปร่งแสง */
-}
-
-
-.booking-button {
-    background-color: #ADFF2F;
-    border: 2px solid #008000;
-    border-radius: 5px;
-    color: rgb(0,0,0);
-}
-
-.booking-button:hover {
-    color: #fff;
-    background-color: #006400;
-}
 
 .message-success {
     background-color: lightgreen;

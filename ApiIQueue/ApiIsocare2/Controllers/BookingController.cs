@@ -198,7 +198,7 @@ namespace ApiIsocare2.Controllers
                 var convertAppointmentDateToAD = request.AppointmentDate;
                 if (convertAppointmentDateToAD.Year < 2020)
                 {
-                    convertAppointmentDateToAD = convertAppointmentDateToAD.AddYears(543); // แปลงเป็น ค.ศ. โดยลบ 543 ปี
+                    convertAppointmentDateToAD = convertAppointmentDateToAD.AddYears(543);
                 }
                 // แปลงเวลาจาก appointmentTime เป็น TimeSpan
                 if (!TimeSpan.TryParse(request.AppointmentTime, out var timeOfDay))
@@ -221,7 +221,7 @@ namespace ApiIsocare2.Controllers
                 // แก้ไขค่าเวลาให้เป็น 08:00 หรือ 13:00
                 var correctedAppointmentDate = DateTime.SpecifyKind(convertAppointmentDateToAD.Date.Add(timeOfDay), DateTimeKind.Local);
 
-
+                
                 // ตรวจสอบว่า user_id ได้จองคิวในเวลานี้แล้วหรือยัง
                 var existingQueue = await _db.BookingQueues
                     .Where(q => q.appointment_date.Date == correctedAppointmentDate.Date
@@ -246,13 +246,26 @@ namespace ApiIsocare2.Controllers
                     return BadRequest("ไม่สามารถจองคิว 10 คิวในช่วงเวลาเดียวกันได้");
                 }
 
+                //ทำให้คนจองช่วงเช้าเริ่มที่ 1, ช่วงบ่ายเริ่มที่เลข 11
                 var number = await _db.BookingQueues
-                                .Where(q => q.appointment_date.Date == correctedAppointmentDate.Date && q.queue_type_id == request.Type)
+                                .Where(q => q.appointment_date.Date == correctedAppointmentDate.Date && q.queue_type_id == request.Type
+                                        && q.appointment_date.TimeOfDay == timeOfDay)
                                 .OrderByDescending(q => q.queue_number)
                                 .Select(q => q.queue_number)
                                 .FirstOrDefaultAsync();
 
-                number = number == 0 ? 1 : number + 1;
+                if (timeOfDay == new TimeSpan(8, 0, 0))
+                {
+                    
+                    number = number == 0 ? 1 : number + 1;
+                }
+                else
+                {
+
+                    number = number == 0 ? 11 : number + 1;
+                }
+
+                    
                 var queue = new BookingQueue
                 {
                     queue_type_id = request.Type,

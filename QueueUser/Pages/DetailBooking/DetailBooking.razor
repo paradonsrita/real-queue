@@ -6,53 +6,19 @@
 @inject NavigationManager Navigation
 @using System.Text.Json;
 @inject TokenService TokenService
+@inject DialogService DialogService
 
-<h3 class="text-center border p-2 custom-border" style="margin: auto; max-width: 90%; width: 550px;">ข้อมูลการจองคิว</h3>
 
-<div class="">
+<div class="text-center border p-2 custom-border text-color" style="margin: auto; max-width: 90%; width: 550px;">
+    <h1>ข้อมูลการจองคิว</h1>
+</div>
+
+<div>
     <p class="mt-5 text-center" style="font-size: 130%;">กรุณาปริ้นหลักฐานการจองหรือถ่ายภาพหน้าจอการข้อมูลการจองเพื่อยื่นให้พนักงาน</p>
     <p class="text-center" style="font-size: 130%;">ขอความกรุณาลูกค้าทุกท่านมาก่อนเวลานัด 30 นาที สำหรับยื่นหลักฐานการจองต่อพนักงาน และรอรับบริการ</p>
 </div>
 
-@if(filterExpanded)
-{
-    <div class="filter-bar @(filterExpanded ? "show" : "")">
 
-        <RadzenText TextStyle="TextStyle.Body1" Style="font-size: 1.5rem; text-align: center"><b>กรองคิว</b></RadzenText>
-
-        <div class="filter-options">
-            <RadzenLabel Text="เลือกประเภทธุรกรรม" Component="TypeFilter" class="" />
-            <RadzenDropDown @bind-Value="selectedQueueType" Placeholder="เลือกประเภทคิว" Data="queueTypeOptions" />
-        </div>
-
-        <div class="filter-options">
-            <RadzenLabel Text="Appointment Date" Component="AppointmentDateFilter" class="rz-ms-2" />
-
-            <RadzenCheckBox TValue="bool" Value=@appointmentDateFilter Change="(arg => { appointmentDateFilter = !appointmentDateFilter;})" Name="AppointmentDateFilter" />
-        </div>
-
-        <!--sort-->
-        <RadzenText TextStyle="TextStyle.Body1" Style="font-size: 1.5rem; text-align: center; margin-top:50px;"><b>เรียงลำดับตาม</b></RadzenText>
-
-        <div class="filter-options">
-            <RadzenDropDown @bind-Value="selectedSortOption" Placeholder="เลือกการเรียงลำดับ" Data="sortOptions"/>
-        </div>
-
-        <div class="filter-options">
-            <RadzenLabel Text="วันที่เริ่มต้น" Component="StartDateFilter" />
-            <RadzenDatePicker @bind-Value="startDate" />
-        </div>
-
-        <div class="filter-options">
-            <RadzenLabel Text="วันที่สิ้นสุด" Component="EndDateFilter" />
-            <RadzenDatePicker @bind-Value="endDate" />
-        </div>
-
-        <RadzenButton Text="ปิด" Shade="Shade.Dark" Click="ToggleFilter" ButtonStyle="ButtonStyle.Base" Style="text-align: center; margin-top:50px;" />
-       
-    </div>
-
-}
 
 
 <div class="booking-container rz-p-0 rz-p-md-12">
@@ -63,12 +29,12 @@
     else if (FilteredBookings != null && FilteredBookings.Count() > 0)
     {
         <div class="justify-content-evenly">
-            
-            <RadzenButton Click=@(args => ToggleFilter()) Text="กรอง" />
+
+            <RadzenButton Click="@(async args => await OpenFilterPopup())" Text="กรอง" />
         </div>
         
 
-            <CancelCard Bookings="@bookings"
+            <DetailCard Bookings="@bookings"
                             Variant="@variant"
                             OnBookingCancelled="LoadQueueData"
                             SelectedQueueType="@selectedQueueType"
@@ -77,7 +43,7 @@
                             EndDate="@endDate"
                             SelectedSortOption="@selectedSortOption">
 
-                </CancelCard>
+                </DetailCard>
             
     }
     else
@@ -94,26 +60,15 @@
     private string? message;
     private bool isLoading = false;
 
-
-
-    //filter
-    private bool filterExpanded = false;
-
+    // ตัวแปรสำหรับฟิลเตอร์
     private string selectedQueueType = "All";
-    private string selectedQueueTypeTemp = "All"; // ตัวแปรชั่วคราวสำหรับการเลือก
-
     private bool appointmentDateFilter = false;
-    private bool appointmentDateFilterTemp = false; // ตัวแปรชั่วคราวสำหรับการเลือก
-
-    private IEnumerable<BookingModel> FilteredBookings => bookings.Where(b => selectedQueueType == "All" || b.QueueType == selectedQueueType);
-    private List<string> queueTypeOptions = new List<string> { "All", "Loan", "Finance", "Shares", "Other" };
-
     private DateTime? startDate;
     private DateTime? endDate;
-    //sort
-    private string selectedSortOption = "วันที่จอง"; // ตัวเลือกการเรียงลำดับเริ่มต้น
-    private List<string> sortOptions = new List<string> { "วันที่จอง" ,"วันที่นัดหมาย", "ประเภทธุรกรรม", "สถานะ" }; // ตัวเลือกการเรียงลำดับ
-    
+    private string selectedSortOption = "วันที่นัดหมาย";
+
+    private IEnumerable<BookingModel> FilteredBookings => bookings.Where(b => selectedQueueType == "All" || b.QueueType == selectedQueueType);
+
 
 
 
@@ -138,19 +93,36 @@
     }
 
 
-    
 
-    private void ToggleFilter()
+
+    private async Task OpenFilterPopup()
     {
-        filterExpanded = !filterExpanded;
+        var result = await DialogService.OpenAsync<FilterPopup>("", new Dictionary<string, object>
+        {
+            { "SelectedQueueType", selectedQueueType },
+            { "AppointmentDateFilter", appointmentDateFilter },
+            { "StartDate", startDate },
+            { "EndDate", endDate },
+            { "SelectedSortOption", selectedSortOption }
+        }); 
 
-        StateHasChanged();
+        if (result != null)
+        {
+            // รับค่าจาก Popup และอัปเดตค่าฟิลเตอร์
+            var filterResult = (FilterPopup.FilterResult)result;
+            selectedQueueType = filterResult.SelectedQueueType;
+            appointmentDateFilter = filterResult.AppointmentDateFilter;
+            startDate = filterResult.StartDate;
+            endDate = filterResult.EndDate;
+            selectedSortOption = filterResult.SelectedSortOption;
+
+            // รีโหลดข้อมูลคิว
+            await LoadQueueData();
+        }
     }
 
 
-
-
-
+    
 
     private async Task LoadQueueData()
     {

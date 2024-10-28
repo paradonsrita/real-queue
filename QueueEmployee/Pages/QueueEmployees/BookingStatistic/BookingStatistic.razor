@@ -7,12 +7,12 @@
 
 
 
-<h3>BookingStatistic</h3>
+<h3>สถิติโดยรวม</h3>
 <RadzenStack Orientation="Orientation.Horizontal" JustifyContent="JustifyContent.Center" AlignItems="AlignItems.Center" Gap="0.5rem" class="rz-p-6">
-    <RadzenLabel Text="Select first date"/>
+    <RadzenLabel Text="เลือกวันที่เริ่มต้น"/>
     <RadzenDatePicker @bind-Value="@minDate" DateFormat="MM/dd/yyyy" Name="DatePickerMinDate" Change="@(async args => await OnDateChanged())" />
     
-    <RadzenLabel Text="Select end Date" />
+    <RadzenLabel Text="เลือกวันที่สิ้นสุด" />
     <RadzenDatePicker @bind-Value="@maxDate" DateFormat="MM/dd/yyyy" Name="DatePickerMinDate" Change="@(async args => await OnDateChanged())" />
 </RadzenStack>
 

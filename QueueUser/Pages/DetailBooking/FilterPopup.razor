@@ -1,0 +1,111 @@
+﻿@inject DialogService DialogService
+
+
+<div class="filter-popup">
+
+    <RadzenText TextStyle="TextStyle.Body1" Style="font-size: 1.5rem; text-align: center"><b>กรองคิว</b></RadzenText>
+
+    <div class="filter-options">
+        <RadzenLabel Text="เลือกประเภทธุรกรรม" Component="TypeFilter" class="" />
+        <RadzenDropDown @bind-Value="selectedQueueType" Placeholder="เลือกประเภทคิว" Data="queueTypeOptions" />
+    </div>
+
+    <div class="filter-options">
+        <RadzenLabel Text="Appointment Date" Component="AppointmentDateFilter" class="rz-ms-2" />
+
+        <RadzenCheckBox TValue="bool" Value=@appointmentDateFilter Change="(arg => { appointmentDateFilter = !appointmentDateFilter;})" Name="AppointmentDateFilter"
+                        Style="border: 1px solid #0f0f0f; border-radius:5px;" />
+    </div>
+
+    <div class="filter-options">
+        <RadzenLabel Text="วันที่เริ่มต้น" Component="StartDateFilter" />
+        <RadzenDatePicker @bind-Value="startDate" />
+    </div>
+
+    <div class="filter-options">
+        <RadzenLabel Text="วันที่สิ้นสุด" Component="EndDateFilter" />
+        <RadzenDatePicker @bind-Value="endDate" />
+    </div>
+
+
+    <!--sort-->
+    <RadzenText TextStyle="TextStyle.Body1" Style="font-size: 1.5rem; text-align: center; margin-top:50px;"><b>เรียงลำดับตาม</b></RadzenText>
+
+    <div class="filter-options">
+        <RadzenDropDown @bind-Value="selectedSortOption" Placeholder="เลือกการเรียงลำดับ" Data="sortOptions" />
+    </div>
+
+
+
+    <RadzenButton Text="ยืนยัน" Shade="Shade.Dark" Click="Confirm" ButtonStyle="ButtonStyle.Base" Style="text-align: center; margin-top:50px;" />
+    <RadzenButton Text="ค่าเริ่มต้น" Shade="Shade.Dark" Click="DefaultFilter" ButtonStyle="ButtonStyle.Base" Style="text-align: center; margin-top:50px;" />
+
+</div>
+
+
+@code {
+    [Parameter] public string SelectedQueueType { get; set; } = "All";
+    [Parameter] public bool AppointmentDateFilter { get; set; } = false;
+    [Parameter] public DateTime? StartDate { get; set; }
+    [Parameter] public DateTime? EndDate { get; set; }
+    [Parameter] public string SelectedSortOption { get; set; } = "วันที่นัดหมาย";
+
+    // ตัวแปรสำหรับฟิลเตอร์
+    private string selectedQueueType;
+    private bool appointmentDateFilter;
+    private DateTime? startDate;
+    private DateTime? endDate;
+    private string selectedSortOption;
+
+    private List<string> queueTypeOptions = new List<string> { "All", "Loan", "Finance", "Shares", "Other" };
+    private List<string> sortOptions = new List<string> { "วันที่จอง", "วันที่นัดหมาย", "ประเภทธุรกรรม", "สถานะ" };
+
+    protected override void OnInitialized()
+    {
+        // ใช้ค่าฟิลเตอร์ที่ส่งมาจากภายนอกเป็นค่าเริ่มต้น
+        selectedQueueType = SelectedQueueType;
+        appointmentDateFilter = AppointmentDateFilter;
+        startDate = StartDate;
+        endDate = EndDate;
+        selectedSortOption = SelectedSortOption;
+    }
+
+    private async Task Confirm()
+    {
+        // ส่งค่ากลับไปที่ CancelBooking
+        var result = new FilterResult
+            {
+                SelectedQueueType = selectedQueueType,
+                AppointmentDateFilter = appointmentDateFilter,
+                StartDate = startDate,
+                EndDate = endDate,
+                SelectedSortOption = selectedSortOption
+            };
+
+        DialogService.Close(result);
+    }
+
+    private void Close()
+    {
+        DialogService.Close();
+    }
+    private void DefaultFilter()
+    {
+        selectedQueueType = "All";
+        appointmentDateFilter = false;
+        selectedSortOption = "วันที่นัดหมาย";
+        startDate = null;
+        endDate = null;
+        StateHasChanged();
+    }
+
+
+    public class FilterResult
+    {
+        public string SelectedQueueType { get; set; }
+        public bool AppointmentDateFilter { get; set; }
+        public DateTime? StartDate { get; set; }
+        public DateTime? EndDate { get; set; }
+        public string SelectedSortOption { get; set; }
+    }
+}

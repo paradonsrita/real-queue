@@ -9,11 +9,11 @@
 
 
 <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center">
-	<RadzenLabel Text="Select Counter" />
+	<RadzenLabel Text="เลือกเคาน์เตอร์์" />
     <RadzenDropDown @bind-Value="selectedCounter" 
     Data="counter" Change="OnCounterChanged" />
 
-	<RadzenLabel Text="Select Transaction" />
+	<RadzenLabel Text="เลือกประเภทธุรกรรม" />
     <RadzenDropDown @bind-Value="selectedTransactionThai"
     Data="transactionsInThai" Change="OnTransactionChanged"/>
 </RadzenStack>

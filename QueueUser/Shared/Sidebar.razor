@@ -39,7 +39,7 @@
                     // Check if the token is expired
                     if (TokenService.IsTokenExpired(bearerToken))
                     {
-                        await Logout(); // Redirect to login
+                        await Logout();
                         return;
                     }
                     // ตั้งค่า Bearer Token ให้กับ HttpClient
@@ -47,8 +47,9 @@
                 }
                 else
                 {
-                    await Logout(); // No token found, redirect to login
+                    await Logout();
                 }
+
             }
             catch (Exception ex)
             {

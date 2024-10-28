@@ -10,6 +10,7 @@
 
 
 
+
 <RadzenRow Gap="0" class="rz-my-12 rz-mx-auto rz-border-radius-6 rz-shadow-10" Style="width: 100%; max-width: 70%; overflow: hidden;">
     <RadzenColumn Size="12" SizeMD="6">
         <RadzenCard class="rz-shadow-0 rz-border-radius-0 rz-text-align-center rz-p-12" Style="height: 100%; background: var(--rz-primary-light) no-repeat 100% 70% fixed">
@@ -25,29 +26,44 @@
             <EditForm Model="loginModel"  OnValidSubmit="HandleLogin">
                 <DataAnnotationsValidator />
                 <ValidationSummary />
-                <RadzenStack Gap="1rem" Orientation="Orientation.Vertical" Style="margin-inline: 7%;">
-                    <RadzenStack Gap="1rem" Orientation="Orientation.Horizontal" JustifyContent="JustifyContent.SpaceBetween">
-                        <RadzenLabel Text="เลขบัตรประชาชน"/>
-                        <InputText @bind-Value="loginModel.CitizenId"/>
+                <RadzenRow Style="margin-inline: 4%;">
+                    <!-- แถวที่ 1: Label Citizen ID -->
+                    <RadzenColumn>
+                        <RadzenLabel Text="เลขบัตรประชาชน" />
+                    </RadzenColumn>
+                    <!-- แถวที่ 2: Input Citizen ID -->
+                    <RadzenColumn>
+                        <InputText @bind-Value="loginModel.CitizenId" />
+                    </RadzenColumn>
+                </RadzenRow>
 
-                    </RadzenStack> 
-                    <RadzenStack Gap="1rem" Orientation="Orientation.Horizontal" JustifyContent="JustifyContent.SpaceBetween">
-                        <RadzenLabel Text="รหัสผ่าน" />
+                <RadzenRow Style="margin-inline: 4%; margin-top: 1rem;">
+                    <!-- แถวที่ 3: Label Password -->
+                    <RadzenColumn>
+                        <RadzenLabel Text="รหัสผ่าน" Style="margin-right: 30px;"/>
+                    </RadzenColumn>
+                    <!-- แถวที่ 4: Input Password -->
+                    <RadzenColumn>
                         <InputText @bind-Value="loginModel.Password" type="password" />
-                    </RadzenStack>
-                        <RadzenStack Gap="1rem" Orientation="Orientation.Horizontal" JustifyContent="JustifyContent.Center">
-                            <label><InputCheckbox @bind-Value="rememberMe" /> Remember Me</label>
-                            <RadzenLink Path="forgot-password" Text="ลืมรหัสผ่าน?" />
+                    </RadzenColumn>
+                </RadzenRow>
 
-                    </RadzenStack>
-                    <RadzenButton Shade="Shade.Light" ButtonStyle="ButtonStyle.Primary" Size="ButtonSize.Medium" Icon="login" class="rz-mt-2" Style="border-radius: 25px;" >
-                        <RadzenLink Path="register" Text="ลงทะเบียน" Style="color:white;"/>
-                    </RadzenButton>
+                <RadzenRow Style="margin-inline: 4%; margin-top: 1rem;">
+                    <!-- แถวที่ 5: Remember Me -->
+                    <RadzenColumn>
+                        <label><InputCheckbox @bind-Value="rememberMe" /> Remember Me</label>
 
+                    </RadzenColumn>
+                    <RadzenColumn>
+                        <RadzenLink Path="forgot-password" Text="ลืมรหัสผ่าน?" />
 
-                </RadzenStack>
+                    </RadzenColumn>
+                </RadzenRow>
                 
                 <RadzenStack JustifyContent="JustifyContent.Center">
+                    <RadzenButton Shade="Shade.Light" ButtonStyle="ButtonStyle.Primary" Size="ButtonSize.Medium" Icon="login" class="rz-mt-2" Style="border-radius: 25px;">
+                        <RadzenLink Path="register" Text="ลงทะเบียน" Style="color:white;" />
+                    </RadzenButton>
                     <RadzenButton ButtonStyle="ButtonStyle.Primary" Size="ButtonSize.Medium" Icon="login" Text="Login" type="submit" class="rz-mt-2" Style="border-radius: 25px;"/>
                 </RadzenStack>
             </EditForm>
@@ -66,8 +82,9 @@
 
 @code {
     private LoginModel loginModel = new LoginModel();
-    private string errorMessage;
+    private string? errorMessage;
     private bool rememberMe = false; // ตัวเลือก Remember Me
+
 
 
 

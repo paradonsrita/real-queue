@@ -11,16 +11,16 @@
 @inject IHttpClientFactory HttpClientFactory
 
 
-<h3>DailyStatistic</h3>
+<h3>สถิติรายวัน</h3>
 
 
 @if (counter_queues == null && booking_queues == null)
 {
-    <p><em>Loading...</em></p>
+    <p><em>กำลังโหลด...</em></p>
 }
 else if (!counter_queues.Any() && !booking_queues.Any())
 {
-    <p>No data available to display.</p>
+    <p>ไม่มีข้อมูล</p>
 }
 else if (!string.IsNullOrEmpty(error))
 {
@@ -32,7 +32,7 @@ else
     <RadzenCard Variant="Variant.Outlined" Style="border-color: #c5d0d9; border-width: 2px; border-radius: 10px;">
         <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" Gap="0.5rem" Wrap="FlexWrap.Wrap">
             <RadzenCheckBox @bind-Value="@showDataLabels" Name="dataLabels" Style="border: 2px solid #c5d0d9; padding: 4px; border-radius: 5px;"></RadzenCheckBox>
-            <RadzenLabel Text="Show Data Labels" Component="dataLabels" />
+            <RadzenLabel Text="แสดงป้ายข้อมูล" Component="dataLabels" />
         </RadzenStack>
     </RadzenCard>
 

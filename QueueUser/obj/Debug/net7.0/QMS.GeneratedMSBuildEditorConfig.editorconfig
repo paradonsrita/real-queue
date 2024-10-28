@@ -22,8 +22,8 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Asus/Desktop/Queue Manage/QueueUser/Pages/Booking/BookingComponent.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQm9va2luZ1xCb29raW5nQ29tcG9uZW50LnJhem9y
+[C:/Users/Asus/Desktop/Queue Manage/QueueUser/Pages/Home.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSG9tZS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Asus/Desktop/Queue Manage/QueueUser/Pages/LoginLogout/Login.razor]
@@ -34,16 +34,8 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTG9naW5Mb2dvdXRcTG9nb3V0LnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Asus/Desktop/Queue Manage/QueueUser/Pages/NewIndex.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTmV3SW5kZXgucmF6b3I=
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/Asus/Desktop/Queue Manage/QueueUser/Pages/Profile/EditUserProfile.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJvZmlsZVxFZGl0VXNlclByb2ZpbGUucmF6b3I=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/Asus/Desktop/Queue Manage/QueueUser/Pages/Profile/UserProfile.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJvZmlsZVxVc2VyUHJvZmlsZS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Asus/Desktop/Queue Manage/QueueUser/Pages/Register/Register.razor]
@@ -74,17 +66,29 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Asus/Desktop/Queue Manage/QueueUser/Pages/Booking/Booking.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQm9va2luZ1xCb29raW5nLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-icr5kcrpry
+
 [C:/Users/Asus/Desktop/Queue Manage/QueueUser/Pages/Booking/Calendar.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQm9va2luZ1xDYWxlbmRhci5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = b-opcn1yltzr
 
-[C:/Users/Asus/Desktop/Queue Manage/QueueUser/Pages/Booking/CancelBooking.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQm9va2luZ1xDYW5jZWxCb29raW5nLnJhem9y
-build_metadata.AdditionalFiles.CssScope = b-b7953azwwt
+[C:/Users/Asus/Desktop/Queue Manage/QueueUser/Pages/DetailBooking/DetailBooking.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRGV0YWlsQm9va2luZ1xEZXRhaWxCb29raW5nLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-18rvjg836k
 
-[C:/Users/Asus/Desktop/Queue Manage/QueueUser/Pages/Booking/CancelCard.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQm9va2luZ1xDYW5jZWxDYXJkLnJhem9y
-build_metadata.AdditionalFiles.CssScope = b-sq9wr84vik
+[C:/Users/Asus/Desktop/Queue Manage/QueueUser/Pages/DetailBooking/DetailCard.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRGV0YWlsQm9va2luZ1xEZXRhaWxDYXJkLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-fye00ykcx6
+
+[C:/Users/Asus/Desktop/Queue Manage/QueueUser/Pages/DetailBooking/FilterPopup.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRGV0YWlsQm9va2luZ1xGaWx0ZXJQb3B1cC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-b1wapcfc27
+
+[C:/Users/Asus/Desktop/Queue Manage/QueueUser/Pages/Profile/UserProfile.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJvZmlsZVxVc2VyUHJvZmlsZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-tw5x4d3n5c
 
 [C:/Users/Asus/Desktop/Queue Manage/QueueUser/Shared/MainLayout.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE1haW5MYXlvdXQucmF6b3I=

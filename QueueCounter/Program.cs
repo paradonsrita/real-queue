@@ -26,7 +26,7 @@ builder.Services.AddScoped<QueueService>(); // ????????? QueueService
 // à¾ÔèÁ QueueService áÅÐ HttpClient ÊÓËÃÑºàª×èÍÁµèÍ¡Ñº API
 builder.Services.AddHttpClient("Queue", client =>
 {
-    client.BaseAddress = new Uri("https://192.168.1.15:44328/");
+    client.BaseAddress = new Uri("https://192.168.1.24:44328/");
     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 }).ConfigurePrimaryHttpMessageHandler(() =>
 {

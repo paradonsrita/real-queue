@@ -22,7 +22,7 @@ builder.Services.AddSingleton<WeatherForecastService>();
 // à¾ÔèÁ QueueService áÅÐ HttpClient ÊÓËÃÑºàª×èÍÁµèÍ¡Ñº API
 builder.Services.AddHttpClient("Queue", client =>
 {
-    client.BaseAddress = new Uri("https://192.168.1.12:44328/");
+    client.BaseAddress = new Uri("https://192.168.1.24:44328/");
     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 }).ConfigurePrimaryHttpMessageHandler(() =>
 {
@@ -38,7 +38,7 @@ builder.Services.AddSignalR();
 builder.Services.AddScoped(service =>
 {
     var connection = new HubConnectionBuilder()
-        .WithUrl("https://192.168.1.12:44328/notificationHub", options =>
+        .WithUrl("https://192.168.1.24:44328/notificationHub", options =>
         {
             options.HttpMessageHandlerFactory = _ => new HttpClientHandler
             {

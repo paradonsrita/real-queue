@@ -21,7 +21,7 @@ namespace ApiIsocare2
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            /*ngrok*
+            /*ngrok*/
             builder.WebHost.UseKestrel(options =>
             {
                 options.ListenAnyIP(44328, listenOptions =>
@@ -31,7 +31,7 @@ namespace ApiIsocare2
             });
             
 
-            /IIS Express*/
+            /*IIS Express*/
             builder.WebHost.UseIISIntegration();
             
 

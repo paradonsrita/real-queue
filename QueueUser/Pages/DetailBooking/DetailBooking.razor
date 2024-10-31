@@ -37,7 +37,7 @@
             <DetailCard Bookings="@bookings"
                             Variant="@variant"
                             OnBookingCancelled="LoadQueueData"
-                            SelectedQueueType="@selectedQueueType"
+                            SelectedQueueType="@MapThaiToEnglish(selectedQueueType)"
                             AppointmentDateFilter="@appointmentDateFilter"
                             StartDate="@startDate"
                             EndDate="@endDate"
@@ -61,13 +61,13 @@
     private bool isLoading = false;
 
     // ตัวแปรสำหรับฟิลเตอร์
-    private string selectedQueueType = "All";
+    private string selectedQueueType = "ทั้งหมด";
     private bool appointmentDateFilter = false;
     private DateTime? startDate;
     private DateTime? endDate;
     private string selectedSortOption = "วันที่นัดหมาย";
 
-    private IEnumerable<BookingModel> FilteredBookings => bookings.Where(b => selectedQueueType == "All" || b.QueueType == selectedQueueType);
+    private IEnumerable<BookingModel> FilteredBookings => bookings.Where(b => selectedQueueType == "ทั้งหมด" || b.QueueType == MapThaiToEnglish(selectedQueueType));
 
 
 
@@ -122,7 +122,18 @@
     }
 
 
-    
+    private string MapThaiToEnglish(string selected)
+    {
+        return selected switch
+        {
+            "ทั้งหมด" => "All",
+            "ขอกู้ จ่ายเงินกู้" => "Loan",
+            "เปิด-ปิดบัญชีฝากถอน" => "Finance",
+            "สมัครสมาชิก ลาออก ซื้อ-ถอนหุ้น รับชำระหนี้" => "Shares",
+            "อื่นๆ" => "Other",
+            _ => "All" // ค่าเริ่มต้นหากไม่มีการจับคู่
+        };
+    }
 
     private async Task LoadQueueData()
     {

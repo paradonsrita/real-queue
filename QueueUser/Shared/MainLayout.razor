@@ -47,6 +47,12 @@
         if (firstRender)
         {
             var token = await TokenService.GetTokenAsync();
+            if (string.IsNullOrEmpty(token) || TokenService.IsTokenExpired(token))
+            {
+                await TokenService.RemoveTokenAsync();
+                Navigation.NavigateTo("/login");
+                return;
+            }
             isLoggedIn = !string.IsNullOrEmpty(token);
             StateHasChanged();
         }

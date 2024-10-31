@@ -1,4 +1,4 @@
-﻿function speakText(text, pauseDuration = 150) {
+﻿function speakText(text, pauseDuration = 0) {
     const speechParts = text.split('.')
     let delay = 0
 
@@ -8,7 +8,7 @@
             setTimeout(() => {
                 const speech = new SpeechSynthesisUtterance(part.trim());
                 speech.lang = 'th-TH';  // ตั้งค่าเป็นภาษาไทย
-                speech.rate = 0.7;
+                speech.rate = 0.9;
                 speech.pitch = 1;
 
                 const voices = window.speechSynthesis.getVoices();

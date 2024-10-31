@@ -17,13 +17,13 @@
 {
 
 
-    <h5>ผู้ที่มารับบริการทันที</h5>
+    <h1 class="text-center">ผู้ที่มารับบริการทันที</h1>
 
     <MonitorTable Source="counter" Queue="queue"></MonitorTable>
 
-    
 
-    <h5>คิวการจอง</h5>
+
+    <h1 class="text-center">คิวการจอง</h1>
 
     <MonitorTable Source="booking" Queue="queue"></MonitorTable>
 }
@@ -42,7 +42,7 @@ else
     {
 
         hubConnection = new HubConnectionBuilder()
-            .WithUrl("https://192.168.1.12:44328/notificationHub", options =>
+            .WithUrl("https://192.168.1.24:44328/notificationHub", options =>
         {
             options.HttpMessageHandlerFactory = _ => new HttpClientHandler
                 {

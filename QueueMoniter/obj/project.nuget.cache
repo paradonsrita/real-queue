@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "aigZfZMrjjJGitjrccZue0IMu+bO4t2GGwY9ZTQMckdKIvn0FWFmfcNyHm9O6BR468Zoxtza7Tp/RPKQoHNWHw==",
+  "dgSpecHash": "xG6FLeKM2Add0QoWgtg0vV0Vtx+N4/O0tkQ6B3rB2Hw7O9dnnJhyvtlMfVKLio8ZoEzO4zT3lhYMy3+2UmoKwg==",
   "success": true,
   "projectFilePath": "C:\\Users\\Asus\\Desktop\\Queue Manage\\QueueMoniter\\QMS.csproj",
   "expectedPackageFiles": [
@@ -85,11 +85,7 @@
     "C:\\Users\\Asus\\.nuget\\packages\\system.text.json\\7.0.0\\system.text.json.7.0.0.nupkg.sha512",
     "C:\\Users\\Asus\\.nuget\\packages\\system.threading.channels\\7.0.0\\system.threading.channels.7.0.0.nupkg.sha512",
     "C:\\Users\\Asus\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.4\\system.threading.tasks.extensions.4.5.4.nupkg.sha512",
-    "C:\\Users\\Asus\\.nuget\\packages\\system.windows.extensions\\6.0.0\\system.windows.extensions.6.0.0.nupkg.sha512",
-    "C:\\Users\\Asus\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\7.0.18\\microsoft.windowsdesktop.app.ref.7.0.18.nupkg.sha512",
-    "C:\\Users\\Asus\\.nuget\\packages\\microsoft.netcore.app.ref\\7.0.18\\microsoft.netcore.app.ref.7.0.18.nupkg.sha512",
-    "C:\\Users\\Asus\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\7.0.18\\microsoft.aspnetcore.app.ref.7.0.18.nupkg.sha512",
-    "C:\\Users\\Asus\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\7.0.18\\microsoft.netcore.app.host.win-x64.7.0.18.nupkg.sha512"
+    "C:\\Users\\Asus\\.nuget\\packages\\system.windows.extensions\\6.0.0\\system.windows.extensions.6.0.0.nupkg.sha512"
   ],
   "logs": []
 }

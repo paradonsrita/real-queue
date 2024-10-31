@@ -227,7 +227,7 @@
   },
   {
     "ContainingType": "ApiIsocare2.Controllers.MonitorController",
-    "Method": "DailyStatistics",
+    "Method": "MonitorGetQueue",
     "RelativePath": "api/Monitor",
     "HttpMethod": "GET",
     "IsController": true,

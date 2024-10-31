@@ -59,7 +59,11 @@ namespace ApiIsocare2.Controllers
                 {
                     await _db.SaveChangesAsync();
 
-                    await _hubContext.Clients.All.SendAsync("RefreshPage");
+                    if (waitQueue != null)
+                    {
+                        await _hubContext.Clients.All.SendAsync("RefreshPage");
+                    }
+
 
                     return Ok(waitQueue);
                 }
@@ -103,8 +107,10 @@ namespace ApiIsocare2.Controllers
                     }
                     await _db.SaveChangesAsync();
 
-                    await _hubContext.Clients.All.SendAsync("RefreshPage");
-
+                    if (waitQueue != null)
+                    {
+                        await _hubContext.Clients.All.SendAsync("RefreshPage");
+                    }
                     return Ok(waitQueue);
                 }
 
@@ -147,8 +153,10 @@ namespace ApiIsocare2.Controllers
 
                         await _db.SaveChangesAsync();
 
-                        await _hubContext.Clients.All.SendAsync("RefreshPage");
-
+                        if (waitQueue != null)
+                        {
+                            await _hubContext.Clients.All.SendAsync("RefreshPage");
+                        }
                     }
                     else
                     {
@@ -198,8 +206,10 @@ namespace ApiIsocare2.Controllers
                     }
                     await _db.SaveChangesAsync();
 
-                    await _hubContext.Clients.All.SendAsync("RefreshPage");
-
+                    if (waitQueue != null)
+                    {
+                        await _hubContext.Clients.All.SendAsync("RefreshPage");
+                    }
                     return Ok(waitQueue);
                 }
 

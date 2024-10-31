@@ -1,6 +1,7 @@
 ﻿@inject DialogService DialogService
 
 
+
 <div class="filter-popup">
 
     <RadzenText TextStyle="TextStyle.Body1" Style="font-size: 1.5rem; text-align: center"><b>กรองคิว</b></RadzenText>
@@ -44,7 +45,7 @@
 
 
 @code {
-    [Parameter] public string SelectedQueueType { get; set; } = "All";
+    [Parameter] public string SelectedQueueType { get; set; } = "ทั้งหมด";
     [Parameter] public bool AppointmentDateFilter { get; set; } = false;
     [Parameter] public DateTime? StartDate { get; set; }
     [Parameter] public DateTime? EndDate { get; set; }
@@ -57,7 +58,7 @@
     private DateTime? endDate;
     private string selectedSortOption;
 
-    private List<string> queueTypeOptions = new List<string> { "All", "Loan", "Finance", "Shares", "Other" };
+    private List<string> queueTypeOptions = new List<string> { "ทั้งหมด", "ขอกู้ จ่ายเงินกู้", "เปิด-ปิดบัญชีฝากถอน", "สมัครสมาชิก ลาออก ซื้อ-ถอนหุ้น รับชำระหนี้", "อื่นๆ" };
     private List<string> sortOptions = new List<string> { "วันที่จอง", "วันที่นัดหมาย", "ประเภทธุรกรรม", "สถานะ" };
 
     protected override void OnInitialized()
@@ -69,6 +70,8 @@
         endDate = EndDate;
         selectedSortOption = SelectedSortOption;
     }
+    
+
 
     private async Task Confirm()
     {
@@ -91,13 +94,14 @@
     }
     private void DefaultFilter()
     {
-        selectedQueueType = "All";
+        selectedQueueType = "ทั้งหมด";
         appointmentDateFilter = false;
         selectedSortOption = "วันที่นัดหมาย";
         startDate = null;
         endDate = null;
         StateHasChanged();
     }
+    
 
 
     public class FilterResult

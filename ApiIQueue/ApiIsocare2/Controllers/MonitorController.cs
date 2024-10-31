@@ -16,7 +16,7 @@ namespace ApiIsocare2.Controllers
         }
 
         [HttpGet()]
-        public IActionResult DailyStatistics()
+        public IActionResult MonitorGetQueue()
         {
             try
             {
@@ -24,7 +24,7 @@ namespace ApiIsocare2.Controllers
                     .Include(q => q.QueueType)
                     .Include(q => q.QueueStatus) // Include QueueStatus if needed
 
-                    .Where(q => q.appointment_date.Date == DateTime.Today && q.queue_status_id == 2)
+                    .Where(q => q.appointment_date.Date == DateTime.Today && q.call_queue_time != null)
 
                     .Select(q => new
                     {
@@ -34,12 +34,14 @@ namespace ApiIsocare2.Controllers
                         CallQueueTime = q.call_queue_time,
                         Source = "booking"
                     })
+                    .OrderByDescending(q => q.CallQueueTime)
+                    .Take(3)
                     .ToList();
 
                 var counterStatistics = _db.CounterQueues
                     .Include(q => q.QueueType)
                     .Include(q => q.QueueStatus) // Include QueueStatus if needed
-                    .Where(q => q.queue_date.Date == DateTime.Today && q.queue_status_id == 2)
+                    .Where(q => q.queue_date.Date == DateTime.Today && q.call_queue_time != null)
                     .Select(q => new
                     {
                         QueueType = q.QueueType.type_name,
@@ -48,12 +50,13 @@ namespace ApiIsocare2.Controllers
                         CallQueueTime = q.call_queue_time,
                         Source = "counter"
                     })
+                    .OrderByDescending(q => q.CallQueueTime)
+                    .Take(3)
                     .ToList();
 
                 var totalStatistics = bookingStatistics
                     .Concat(counterStatistics)
                     .OrderBy(q => q.Source)
-                    .ThenBy(q => q.CallQueueTime)
                     .ToList();
 
 

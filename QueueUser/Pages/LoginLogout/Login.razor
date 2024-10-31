@@ -61,8 +61,7 @@
                 </RadzenRow>
                 
                 <RadzenStack JustifyContent="JustifyContent.Center">
-                    <RadzenButton Shade="Shade.Light" ButtonStyle="ButtonStyle.Primary" Size="ButtonSize.Medium" Icon="login" class="rz-mt-2" Style="border-radius: 25px;">
-                        <RadzenLink Path="register" Text="ลงทะเบียน" Style="color:white;" />
+                    <RadzenButton Click="Register" Text="ลงทะเบียน" Shade="Shade.Light" ButtonStyle="ButtonStyle.Primary" Size="ButtonSize.Medium" Icon="login" class="rz-mt-2" Style="border-radius: 25px;">
                     </RadzenButton>
                     <RadzenButton ButtonStyle="ButtonStyle.Primary" Size="ButtonSize.Medium" Icon="login" Text="Login" type="submit" class="rz-mt-2" Style="border-radius: 25px;"/>
                 </RadzenStack>
@@ -134,7 +133,10 @@
         }
     }
 
-
+    private void Register()
+    {
+        Navigation.NavigateTo("/register");
+    }
 
 
 

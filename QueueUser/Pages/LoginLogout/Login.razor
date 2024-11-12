@@ -21,7 +21,7 @@
     <RadzenColumn Size="12" SizeMD="6">
         <RadzenCard class="rz-shadow-0 rz-border-radius-0 rz-p-12">
             <RadzenText TextStyle="TextStyle.H4" TagName="TagName.H2" class="rz-mb-6 text-center">
-                Login
+                เข้าสู่ระบบ
             </RadzenText>
             <EditForm Model="loginModel"  OnValidSubmit="HandleLogin">
                 <DataAnnotationsValidator />
@@ -29,22 +29,22 @@
                 <RadzenRow Style="margin-inline: 4%;">
                     <!-- แถวที่ 1: Label Citizen ID -->
                     <RadzenColumn>
-                        <RadzenLabel Text="เลขบัตรประชาชน" />
+                        <RadzenLabel Text="หมายเลขโทรศัพท์" />
                     </RadzenColumn>
                     <!-- แถวที่ 2: Input Citizen ID -->
                     <RadzenColumn>
-                        <InputText @bind-Value="loginModel.CitizenId" />
+                        <InputText @bind-Value="loginModel.phone_number" />
                     </RadzenColumn>
                 </RadzenRow>
 
                 <RadzenRow Style="margin-inline: 4%; margin-top: 1rem;">
                     <!-- แถวที่ 3: Label Password -->
                     <RadzenColumn>
-                        <RadzenLabel Text="รหัสผ่าน" Style="margin-right: 30px;"/>
+                        <RadzenLabel Text="รหัสผ่าน" Style="margin-right: 23px;"/>
                     </RadzenColumn>
                     <!-- แถวที่ 4: Input Password -->
                     <RadzenColumn>
-                        <InputText @bind-Value="loginModel.Password" type="password" />
+                        <InputText @bind-Value="loginModel.password" type="password" />
                     </RadzenColumn>
                 </RadzenRow>
 
@@ -89,7 +89,7 @@
 
     private async Task HandleLogin()
     {
-        if (string.IsNullOrWhiteSpace(loginModel.CitizenId) || string.IsNullOrWhiteSpace(loginModel.Password))
+        if (string.IsNullOrWhiteSpace(loginModel.phone_number) || string.IsNullOrWhiteSpace(loginModel.password))
         {
             errorMessage = "โปรดกรอกข้อมูลให้ครบถ้วน";
             return;
@@ -98,6 +98,8 @@
         {
             var client = HttpClientFactory.CreateClient("Queue");
             var response = await client.PostAsJsonAsync("/api/LogicRegister/login", loginModel);
+            Console.WriteLine(loginModel.phone_number);
+            Console.WriteLine(loginModel.password);
             if (response.IsSuccessStatusCode)
             {
                 var result = await response.Content.ReadFromJsonAsync<TokenResponse>();

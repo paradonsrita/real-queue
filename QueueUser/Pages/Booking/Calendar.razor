@@ -10,6 +10,7 @@
 @inject IJSRuntime JsRuntime
 @using System.Text.Json
 @using System.Globalization
+@inject NotificationService NotificationService
 
 
 
@@ -17,11 +18,6 @@
 
 
 <h3 class="text-center"><strong>จองคิว @TransformQueueType(transaction)</strong></h3>
-
-@if (!string.IsNullOrEmpty(message))
-{
-    <p class="@(message.Contains("สำเร็จ") ? "message-success" : "message-error")">@((MarkupString)message)</p>
-}
 
 <div id="calendar" style="width: 50%; height: 50vh; margin: 0 auto; border: 1px solid #ddd;"></div>
 
@@ -34,8 +30,8 @@
             <h4 class="text-center mb-4"><strong>จองคิววันที่ @selectedDate.ToString("dd/MM/yyyy")</strong></h4>
             
             <RadzenStack Orientation="Orientation.Vertical" Gap="1rem">
-                @RenderBookingSlot(8, total08)
-                @RenderBookingSlot(13, total13)
+                @RenderBookingSlot(new TimeSpan(8, 30, 0), total08)
+                @RenderBookingSlot(new TimeSpan(13, 0, 0), total13)
             </RadzenStack>
 
         </div>
@@ -53,7 +49,7 @@
                 <div class="modal-detail">
                     <p>ประเภทธุรกรรม: @TransformQueueType(transaction)</p>
                     <p>วันที่: @selectedDate.ToString("dd/MM/yyyy")</p>
-                    <p>เวลา: @(selectedHour == 8 ? "08:00" : "13:00")</p>
+                    <p>เวลา: @(selectedHour.Hours == 8 ? "08:30" : "13:00")</p>
                 </div>
                 <RadzenStack Orientation="Orientation.Horizontal" Gap="1rem" class="rz-mt-4 justify-content-center">
                     <RadzenButton Text="ยกเลิก" Click="CancelConfirmation" Style="margin: 10px; background-color:red;" />
@@ -75,7 +71,7 @@
     private DateTime selectedDate;
     private int total08;
     private int total13;
-    private int selectedHour;
+    private TimeSpan selectedHour;
 
     private List<CalendarBooking> bookingResults;
     private string message;
@@ -104,9 +100,9 @@
 
     }
 
-    private void ShowConfirmation(int hour)
+    private void ShowConfirmation(TimeSpan time)
     {
-        selectedHour = hour;
+        selectedHour = time;
         isConfirmationVisible = true;
     }
 
@@ -157,11 +153,7 @@
             total08 = bookingResults.FirstOrDefault(b => b.Date.Date == formattedDate.Date && b.Time.Hours == 8)?.Total ?? 0;
             total13 = bookingResults.FirstOrDefault(b => b.Date.Date == formattedDate.Date && b.Time.Hours == 13)?.Total ?? 0;
 
-            // แสดงผลวันที่ในรูปแบบ ค.ศ.
             
-            Console.WriteLine($"Selected Date in AD (CE): {selectedDate.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture)}");
-            Console.WriteLine($"Raw Selected Date: {selectedDate}");
-
             isPopupVisible = true; // เปิด Popup
         }
         else
@@ -174,7 +166,7 @@
 
     }
 
-    private async Task BookTimeSlot(int hour)
+    private async Task BookTimeSlot(TimeSpan time)
     {
         try
         {
@@ -196,18 +188,14 @@
                     new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 
 
-                Console.WriteLine($"select date {selectedDate}");
-                Console.WriteLine($"Selected Date: {selectedDate.ToString("dd/MM/yyyy")}");
                 var request = new AddBookingRequest
                         {
                             UserId = userId.Value, // กำหนดค่า user ID
                             Type = transaction, // กำหนด queue_type_id
                             AppointmentDate = selectedDate,
-                            AppointmentTime = hour == 8 ? "08:00" : "13:00"
+                            AppointmentTime = time.ToString(@"hh\:mm")
                         };
-                var requestJson = JsonSerializer.Serialize(request);
-
-                Console.WriteLine(requestJson);
+                
                     // ดำเนินการจอง
                     var response = await BookingService.BookSlot(request);
 
@@ -216,15 +204,28 @@
                         // จองสำเร็จ
                         await RefreshBookingData();
                         message = $@"คุณได้จองคิวประเภท{@TransformQueueType(transaction)}<br/>
-                            ในวันที่ {request.AppointmentDate.ToString("dd/MM/yyyy")} เวลา {(hour == 8 ? "08:00" : "13:00")} สำเร็จแล้ว!"; // เพิ่มข้อความแจ้งเตือนสำเร็จ
-
-                    }
+                            ในวันที่ {request.AppointmentDate.ToString("dd/MM/yyyy")} เวลา {time.ToString(@"hh\:mm")} สำเร็จแล้ว!"; // เพิ่มข้อความแจ้งเตือนสำเร็จ
+                    NotificationService.Notify(new NotificationMessage
+                            {
+                                Severity = NotificationSeverity.Success,
+                                Summary = "สำเร็จ",
+                                Detail = message,
+                                Duration = 5000
+                            });
+                }
                     else
                     {
                         // ดึงข้อความแจ้งเตือนจาก API
                         message = await response.Content.ReadAsStringAsync();
                         await RefreshBookingData();
-                    }
+                        NotificationService.Notify(new NotificationMessage
+                            {
+                                Severity = NotificationSeverity.Error,
+                                Summary = "เกิดข้อผิดพลาด",
+                                Detail = message,
+                                Duration = 5000
+                            });
+                }
 
 
                 }
@@ -281,11 +282,11 @@
         return queueTypeMappings.TryGetValue(queueType, out var thaiValue) ? thaiValue : queueType;
     }
 
-    private RenderFragment RenderBookingSlot(int hour, int total) => @<p>
-        @hour:00 ว่าง @(10 - total) คิว
+    private RenderFragment RenderBookingSlot(TimeSpan time, int total) => @<p>
+        @time.ToString(@"hh\:mm") ว่าง @(10 - total) คิว
         @if (total < 10)
     {
-        <button @onclick="() => ShowConfirmation(hour)" class="booking-button">จอง @hour:00</button>
+        <button @onclick="() => ShowConfirmation(time)" class="booking-button">จอง @time.ToString(@"hh\:mm")</button>
     }
     else
     {

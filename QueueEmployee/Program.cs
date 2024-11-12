@@ -26,7 +26,7 @@ builder.Services.AddServerSideBlazor();
 builder.Services.AddScoped<ApiProvider>();
 builder.Services.AddHttpClient("Queue", client =>
 {
-    client.BaseAddress = new Uri("https://192.168.1.24:44328/");
+    client.BaseAddress = new Uri("https://localhost:44328/");
     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 }).ConfigurePrimaryHttpMessageHandler(() =>
 {

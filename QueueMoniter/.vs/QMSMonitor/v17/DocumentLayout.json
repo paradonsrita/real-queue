@@ -3,16 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\Asus\\Desktop\\Queue Manage\\QueueMoniter\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{CE27CAA5-165F-4E38-AE43-046442C2C853}|QMS.csproj|c:\\users\\asus\\desktop\\queue manage\\queuemoniter\\pages\\moniter\\monitercomponent.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{CE27CAA5-165F-4E38-AE43-046442C2C853}|QMS.csproj|solutionrelative:pages\\moniter\\monitercomponent.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{CE27CAA5-165F-4E38-AE43-046442C2C853}|QMS.csproj|c:\\users\\asus\\desktop\\queue manage\\queuemoniter\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CE27CAA5-165F-4E38-AE43-046442C2C853}|QMS.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{CE27CAA5-165F-4E38-AE43-046442C2C853}|QMS.csproj|c:\\users\\asus\\desktop\\queue manage\\queuemoniter\\pages\\moniter\\monitortable.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{CE27CAA5-165F-4E38-AE43-046442C2C853}|QMS.csproj|solutionrelative:pages\\moniter\\monitortable.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CE27CAA5-165F-4E38-AE43-046442C2C853}|QMS.csproj|c:\\users\\asus\\desktop\\queue manage\\queuemoniter\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CE27CAA5-165F-4E38-AE43-046442C2C853}|QMS.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{CE27CAA5-165F-4E38-AE43-046442C2C853}|QMS.csproj|c:\\users\\asus\\desktop\\queue manage\\queuemoniter\\pages\\moniter\\monitercomponent.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{CE27CAA5-165F-4E38-AE43-046442C2C853}|QMS.csproj|solutionrelative:pages\\moniter\\monitercomponent.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{CE27CAA5-165F-4E38-AE43-046442C2C853}|QMS.csproj|c:\\users\\asus\\desktop\\queue manage\\queuemoniter\\wwwroot\\js\\speaktext.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
@@ -26,7 +26,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
@@ -54,18 +54,17 @@
               "RelativeToolTip": "wwwroot\\js\\speakText.js",
               "ViewState": "AQIAAAMAAAAAAAAAAAAAAAoAAAAiAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2024-10-28T10:29:14.878Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-28T10:29:14.878Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\Asus\\Desktop\\Queue Manage\\QueueMoniter\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
               "ToolTip": "C:\\Users\\Asus\\Desktop\\Queue Manage\\QueueMoniter\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AQIAAAoAAAAAAAAAAAAQwA8AAAAhAAAA",
+              "ViewState": "AQIAABkAAAAAAAAAAAAQwCQAAAAzAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-28T10:25:41.132Z",
               "EditorCaption": ""
@@ -78,20 +77,20 @@
               "RelativeDocumentMoniker": "Pages\\Moniter\\MonitorTable.razor",
               "ToolTip": "C:\\Users\\Asus\\Desktop\\Queue Manage\\QueueMoniter\\Pages\\Moniter\\MonitorTable.razor",
               "RelativeToolTip": "Pages\\Moniter\\MonitorTable.razor",
-              "ViewState": "AQIAABgAAAAAAAAAAAAAAA4AAAAbAAAA",
+              "ViewState": "AQIAADkAAAAAAAAAAAAAAA4AAAAbAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2024-10-28T08:35:25.712Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "MoniterComponent.razor",
               "DocumentMoniker": "C:\\Users\\Asus\\Desktop\\Queue Manage\\QueueMoniter\\Pages\\Moniter\\MoniterComponent.razor",
               "RelativeDocumentMoniker": "Pages\\Moniter\\MoniterComponent.razor",
               "ToolTip": "C:\\Users\\Asus\\Desktop\\Queue Manage\\QueueMoniter\\Pages\\Moniter\\MoniterComponent.razor",
               "RelativeToolTip": "Pages\\Moniter\\MoniterComponent.razor",
-              "ViewState": "AQIAAAkAAAAAAAAAAAAAABIAAAAAAAAA",
+              "ViewState": "AQIAACEAAAAAAAAAAAAmwCgAAAAvAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2024-10-28T08:35:23.744Z",
               "EditorCaption": ""

@@ -149,7 +149,7 @@ namespace ApiIsocare2.Controllers
                 var maxDate = today.AddDays(30);
 
                 // 1. สร้างรายการของทุกวันและเวลาที่เป็นไปได้
-                var timesOfInterest = new[] { new TimeSpan(8, 0, 0), new TimeSpan(13, 0, 0) };
+                var timesOfInterest = new[] { new TimeSpan(8, 30, 0), new TimeSpan(13, 0, 0) };
                 var allDatesAndTimes = Enumerable.Range(0, (maxDate - today).Days + 1)
                     .SelectMany(d => timesOfInterest.Select(t => today.AddDays(d).Date.Add(t)))
                     .ToList();
@@ -207,9 +207,9 @@ namespace ApiIsocare2.Controllers
                 }
 
                 // ตรวจสอบและปรับเวลา appointmentDate
-                if (timeOfDay != new TimeSpan(8, 0, 0) && timeOfDay != new TimeSpan(13, 0, 0))
+                if (timeOfDay != new TimeSpan(8, 30, 0) && timeOfDay != new TimeSpan(13, 0, 0))
                 {
-                    return BadRequest("เวลาการนัดหมายต้องเป็น 08:00 กับ 13:00 เท่านั้น");
+                    return BadRequest("เวลาการนัดหมายต้องเป็น 08:30 กับ 13:00 เท่านั้น");
                 }
                 
 
@@ -218,7 +218,7 @@ namespace ApiIsocare2.Controllers
                     return BadRequest($"ไม่สามารถจองวันที่ที่ผ่านมาแล้วได้ ({convertAppointmentDateToAD.AddYears(543).ToString("dd/MM/yyyy")}) ({timeOfDay})");
                 }
 
-                // แก้ไขค่าเวลาให้เป็น 08:00 หรือ 13:00
+                // แก้ไขค่าเวลาให้เป็น 08:30 หรือ 13:00
                 var correctedAppointmentDate = DateTime.SpecifyKind(convertAppointmentDateToAD.Date.Add(timeOfDay), DateTimeKind.Local);
 
                 
@@ -254,7 +254,7 @@ namespace ApiIsocare2.Controllers
                                 .Select(q => q.queue_number)
                                 .FirstOrDefaultAsync();
 
-                if (timeOfDay == new TimeSpan(8, 0, 0))
+                if (timeOfDay == new TimeSpan(8, 30, 0))
                 {
                     
                     number = number == 0 ? 1 : number + 1;
@@ -262,7 +262,7 @@ namespace ApiIsocare2.Controllers
                 else
                 {
 
-                    number = number == 0 ? 11 : number + 1;
+                    number = number == 0 ? 51 : number + 1;
                 }
 
                     

@@ -266,6 +266,35 @@
 .text-color[b-tw5x4d3n5c] {
     color: #f1ede2;
 }
+
+@media (max-width: 768px) {
+    .rz-my-12[b-tw5x4d3n5c] {
+        margin-top: 20px !important;
+        margin-bottom: 20px !important;
+    }
+
+    .rz-p-4[b-tw5x4d3n5c] {
+        padding: 10px !important;
+    }
+
+    .profile-text[b-tw5x4d3n5c] {
+        font-size: 1.2rem !important;
+    }
+
+    .rz-mx-auto[b-tw5x4d3n5c] {
+        max-width: 95% !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .profile-text[b-tw5x4d3n5c] {
+        font-size: 1rem !important;
+    }
+
+    .rz-mx-auto[b-tw5x4d3n5c] {
+        max-width: 100% !important;
+    }
+}
 /* _content/QMS/Shared/MainLayout.razor.rz.scp.css */
 .page[b-5820ef2mb7] {
     position: relative;

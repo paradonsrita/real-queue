@@ -33,8 +33,8 @@ namespace ApiIsocare2.Controllers
             {
                 var hashedPassword = PasswordHasher.HashPassword(loginModel.password);
                 var user = _db.Users
-                    .Where(u => u.citizen_id_number == loginModel.citizenId)
-                    .Select(u => new { u.user_id, u.citizen_id_number, u.password })
+                    .Where(u => u.phone_number == loginModel.phone_number)
+                    .Select(u => new { u.user_id, u.phone_number, u.password })
                     .SingleOrDefault();
 
 
@@ -84,9 +84,9 @@ namespace ApiIsocare2.Controllers
         {
             try
             {
-                if (_db.Users.Any(u => u.citizen_id_number == registerModel.citizen_id_number))
+                if (_db.Users.Any(u => u.phone_number == registerModel.phone_number))
                 {
-                    return BadRequest("หมายเลขบัตรประจำตัวประชาชนนี้ถูกใช้ไปแล้ว");
+                    return BadRequest("หมายเลขโทรศัพท์นี้ถูกใช้ไปแล้ว");
                 }
                 if (_db.Users.Any(u => u.user_email == registerModel.user_email))
                 {

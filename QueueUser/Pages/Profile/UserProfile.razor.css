@@ -19,3 +19,32 @@
 .text-color {
     color: #f1ede2;
 }
+
+@media (max-width: 768px) {
+    .rz-my-12 {
+        margin-top: 20px !important;
+        margin-bottom: 20px !important;
+    }
+
+    .rz-p-4 {
+        padding: 10px !important;
+    }
+
+    .profile-text {
+        font-size: 1.2rem !important;
+    }
+
+    .rz-mx-auto {
+        max-width: 95% !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .profile-text {
+        font-size: 1rem !important;
+    }
+
+    .rz-mx-auto {
+        max-width: 100% !important;
+    }
+}

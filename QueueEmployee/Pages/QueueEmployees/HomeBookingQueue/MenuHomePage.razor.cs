@@ -11,7 +11,7 @@ namespace QMS.Pages.QueueEmployees.HomeBookingQueue
     public partial class MenuHomePage
     {
         private bool loading = true;
-        private string error;
+        private string message;
         private int? selectedCounter;
         private string selectedTransaction;
 
@@ -43,7 +43,7 @@ namespace QMS.Pages.QueueEmployees.HomeBookingQueue
             }
             catch (Exception ex)
             {
-                error = ex.Message;
+                message = ex.Message;
             }
             finally
             {
@@ -59,9 +59,9 @@ namespace QMS.Pages.QueueEmployees.HomeBookingQueue
 
             if (string.IsNullOrEmpty(selectedTransaction) || !selectedCounter.HasValue)
             {
-                // จัดการกรณีที่ข้อมูลไม่ครบถ้วน
-                Console.WriteLine("Transaction or Counter is not set.");
-                return;
+				// จัดการกรณีที่ข้อมูลไม่ครบถ้วน
+				message = "กรุณาเลือกช่องบริการและประเภทธุรกรรมให้ควรถ้วน";
+				return;
             }
 
             string transactionInitial = selectedTransaction switch
@@ -70,7 +70,7 @@ namespace QMS.Pages.QueueEmployees.HomeBookingQueue
                 "Other" => "H",
                 "Loan" => "L",
                 "Shares" => "S",
-                _ => throw new InvalidOperationException("Invalid transaction type")
+                _ => throw new InvalidOperationException("ประเภทข้อมูลไม่ถูกต้อง")
             };
             var client = HttpClientFactory.CreateClient("Queue");
             var requestUri = $"/api/Employee/callBookingQueue?transaction={Uri.EscapeDataString(transactionInitial)}&counter={selectedCounter}";
@@ -80,19 +80,19 @@ namespace QMS.Pages.QueueEmployees.HomeBookingQueue
                 var response = await client.PutAsync(requestUri, null);
                 if (response.IsSuccessStatusCode)
                 {
-                    Console.WriteLine("Queue updated successfully!");
-                }
-                else
+					message = "เรียกคิวสำเร็จ";
+				}
+				else
                 {
                     var responseContent = await response.Content.ReadAsStringAsync();
-                    Console.WriteLine($"Error: {responseContent}");
-                }
-            }
+					message = $"เกิดข้อผิดพลาด: {responseContent}";
+				}
+			}
             catch (Exception ex)
             {
-                Console.WriteLine($"Error calling API: {ex.Message}");
-            }
-            Navigation.NavigateTo(Navigation.Uri, forceLoad: true);
+				message = $"เกิดข้อผิดพลาดในการเรียก API: {ex.Message}";
+			}
+			Navigation.NavigateTo(Navigation.Uri, forceLoad: true);
 
         }
 
@@ -106,19 +106,18 @@ namespace QMS.Pages.QueueEmployees.HomeBookingQueue
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error calling RepeatQueue API: {ex.Message}");
-            }
+				message = $"เกิดข้อผิดพลาดในการเรียก API: {ex.Message}";
+			}
 
-        }
+		}
         private async Task skipQueue()
         {
-            Console.WriteLine("skipQueue called");
 
             if (string.IsNullOrEmpty(selectedTransaction) || !selectedCounter.HasValue)
             {
-                // จัดการกรณีที่ข้อมูลไม่ครบถ้วน
-                Console.WriteLine("Transaction or Counter is not set.");
-                return;
+				// จัดการกรณีที่ข้อมูลไม่ครบถ้วน
+				message = "กรุณาเลือกช่องบริการและประเภทธุรกรรมให้ควรถ้วน";
+				return;
             }
 
             string transactionInitial = selectedTransaction switch
@@ -127,33 +126,32 @@ namespace QMS.Pages.QueueEmployees.HomeBookingQueue
                 "Other" => "H",
                 "Loan" => "L",
                 "Shares" => "S",
-                _ => throw new InvalidOperationException("Invalid transaction type")
-            };
-            Console.WriteLine($"Transaction Initial: {transactionInitial}"); // พิมพ์ค่าที่จะส่งไป
+                _ => throw new InvalidOperationException("ประเภทข้อมูลไม่ถูกต้อง")
+
+			};
 
             var client = HttpClientFactory.CreateClient("Queue");
             var requestUri = $"/api/Employee/skipBookingQueue?transaction={Uri.EscapeDataString(transactionInitial)}&counter={selectedCounter}";
 
             try
             {
-                Console.WriteLine($"Transaction: {selectedTransaction}, Counter: {selectedCounter}");
 
                 var response = await client.PutAsync(requestUri, null);
                 if (response.IsSuccessStatusCode)
                 {
-                    Console.WriteLine("Queue updated successfully!");
-                }
-                else
+					message = "ข้ามคิวสำเร็จ";
+				}
+				else
                 {
                     var responseContent = await response.Content.ReadAsStringAsync();
-                    Console.WriteLine($"Error: {responseContent}");
-                }
-            }
+					message = $"เกิดข้อผิดพลาด: {responseContent}";
+				}
+			}
             catch (Exception ex)
             {
-                Console.WriteLine($"Error calling API: {ex.Message}");
-            }
-            Navigation.NavigateTo(Navigation.Uri, forceLoad: true);
+				message = $"เกิดข้อผิดพลาดในการเรียก API: {ex.Message}";
+			}
+			Navigation.NavigateTo(Navigation.Uri, forceLoad: true);
 
         }
     }

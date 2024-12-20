@@ -42,6 +42,7 @@ else
     private bool loading = true;
     private QueueModel queueDetails;
     private string htmlData;
+    private int waitQueue;
 
     // Dictionary สำหรับแปลงค่า QueueType
     private Dictionary<string, string> queueTypeMappings = new Dictionary<string, string>
@@ -64,7 +65,10 @@ else
             if (response.IsSuccessStatusCode)
             {
                 queueDetails = await response.Content.ReadFromJsonAsync<QueueModel>();
-
+                var queues = await client.GetFromJsonAsync<IEnumerable<QueueModel>>("/api/Queue");
+                waitQueue = queues
+                        .Where(q => q.QueueType == queueDetails.QueueType && q.QueueStatus == queueDetails.QueueStatus && q.queue_date.Date == queueDetails.queue_date.Date)
+                        .Count();
                 await PrintData(queueDetails);
             }
             else
@@ -135,6 +139,7 @@ else
                 <h2 style='text-align:start;'>{queue.QueueNumber}</h2>
                 <p>รายการที่เลือก: {TransformQueueType(queue.QueueType)}</p>
                 <p>วันที่และเวลา: {queueDateFormatted}</p>
+                <p>คิวที่รอ: {waitQueue - 1}</p>
                 <p>*ถ้าเรียกคิวแล้วไม่อยู่ทำรายการ ขอสงวนสิทธิ์ในการข้ามคิว และต้องกดคิวใหม่เพื่อใช้บริการ*</p>
             </div>
         </body>

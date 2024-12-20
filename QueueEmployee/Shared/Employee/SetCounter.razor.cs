@@ -14,19 +14,23 @@ namespace QMS.Shared.Employee
 
         private int? selectedCounter;
         private string selectedTransaction;
-        private string selectedTransactionThai;
+        private string selectedTransactionThai = "ทั้งหมด";
 
         private List<int> counter = new List<int> { 1, 2, 3, 4, 5, 6 };
-        private List<string> transactionsInThai = new List<string> { "ขอกู้ รับชำระ จ่ายเงินกู้", "เปิด-ปิดบัญชีฝากถอน", "สมัครสมาชิก ลาออก ซื้อ-ถอนหุ้น" , "อื่นๆ"};
+        private List<string> transactionsInThai = new List<string> { "ทั้งหมด", "ขอกู้ รับชำระ จ่ายเงินกู้", "เปิด-ปิดบัญชีฝากถอน", "สมัครสมาชิก ลาออก ซื้อ-ถอนหุ้น" , "อื่นๆ"};
 
         // ภาษาอังกฤษที่เก็บใน LocalStorage
         private Dictionary<string, string> transactionMappings = new Dictionary<string, string>
     {
+        { "ทั้งหมด" , "All"},
         { "ขอกู้ รับชำระ จ่ายเงินกู้", "Loan" },
         { "เปิด-ปิดบัญชีฝากถอน", "Finance" },
         { "สมัครสมาชิก ลาออก ซื้อ-ถอนหุ้น", "Shares" },
         { "อื่นๆ" , "Other"}
+        
     };
+
+
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             if (firstRender)
@@ -49,7 +53,6 @@ namespace QMS.Shared.Employee
             }
         }
 
-
         private async Task OnCounterChanged()
         {
             await LocalStorageService.SetItemAsync("selectedCounter", selectedCounter.ToString());
@@ -60,7 +63,16 @@ namespace QMS.Shared.Employee
         private async Task OnTransactionChanged()
         {
             selectedTransaction = transactionMappings[selectedTransactionThai];
-            await LocalStorageService.SetItemAsync("selectedTransaction", selectedTransaction);
+
+            if (selectedTransaction == "All")
+            {
+                await LocalStorageService.RemoveItemAsync("selectedTransaction");
+            }
+            else
+            {
+                await LocalStorageService.SetItemAsync("selectedTransaction", selectedTransaction);
+            }
+
             Navigation.NavigateTo(Navigation.Uri, forceLoad: true);
 
         }

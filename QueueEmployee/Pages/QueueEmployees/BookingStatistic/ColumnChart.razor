@@ -2,7 +2,7 @@
 @using Radzen.Blazor;
 
 <RadzenStack Orientation="Orientation.Vertical" Gap="1rem" class="rz-p-0 rz-p-md-6 rz-p-lg-12">
-    <RadzenCard Variant="Variant.Outlined" Style=" border-width: 2px; border-radius: 10px;">
+    <RadzenCard Variant="Variant.Outlined" class="shadow-lg" Style=" border-width: 2px; border-radius: 10px;">
         <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" Wrap="FlexWrap.Wrap">
             <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" Gap="0.5rem">
                 <RadzenCheckBox @bind-Value="@showDataLabels" Name="dataLabels" Style="border: 2px solid #c5d0d9; padding: 4px; border-radius: 5px;"></RadzenCheckBox>
@@ -38,6 +38,7 @@
 @code {
     [Parameter]
     public IEnumerable<Statistic> Statistics { get; set; }
+    
 
     public IEnumerable<Statistic> bookingStatistic { get; set; }
     public IEnumerable<Statistic> counterStatistic { get; set; }

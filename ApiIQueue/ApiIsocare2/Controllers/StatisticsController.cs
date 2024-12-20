@@ -14,87 +14,24 @@ namespace ApiIsocare2.Controllers
             _db = db;
         }
 
-        [HttpGet("daily-statistics")]
-        public IActionResult DailyStatistics()
+        
+
+        [HttpGet("statistics")]
+        public IActionResult BookingStatistics([FromQuery] int year)
         {
             try
             {
-                var bookingStatistics = _db.BookingQueues
-                    .Include(q => q.QueueType)
-                    .Include(q => q.QueueStatus) // Include QueueStatus if needed
-
-                    .Where(q => q.appointment_date.Date == DateTime.Today)
-
-                    .Select(q => new
-                    {
-                        q.queue_id,
-                        queue_date = q.appointment_date,
-                        QueueStatus = q.QueueStatus.queue_status_name,
-                        QueueType = q.QueueType.type_name,
-                        QueueNumber = q.queue_type_id.ToUpper() + q.queue_number.ToString("000"),
-                        q.counter,
-                        Source = "booking"
-                    })
-                    .OrderBy(q => q.queue_date)
-                    .ToList();
-
-                var counterStatistics = _db.CounterQueues
-                    .Include(q => q.QueueType)
-                    .Include(q => q.QueueStatus) // Include QueueStatus if needed
-                    .Where(q => q.queue_date.Date == DateTime.Today)
-                    .Select(q => new
-                    {
-                        q.queue_id,
-                        q.queue_date,
-                        QueueStatus = q.QueueStatus.queue_status_name,
-                        QueueType = q.QueueType.type_name,
-                        QueueNumber = q.queue_type_id.ToUpper() + q.queue_number.ToString("000"),
-                        q.counter,
-                        Source = "counter"
-                    })
-                    .ToList();
-
-                var totalStatistics = bookingStatistics
-                    .Concat(counterStatistics)
-                    .OrderBy(q => q.Source)
-                    .ThenBy(q => q.queue_date)
-                    .ToList();
-
                 
-                return Ok(totalStatistics);
-                
-            }
-            catch (Exception ex)
-            {
-                var innerExceptionMessage = ex.InnerException?.Message ?? "ไม่มีข้อผิดพลาดเพิ่มเติม";
-                return StatusCode(500, $"เกิดข้อผิดพลาด : {ex.Message}, ข้อผิดพลาดเพิ่มเติม : {innerExceptionMessage}");
-            }
-
-        }
-
-        [HttpGet("booking-statistics")]
-        public IActionResult BookingStatistics([FromQuery] DateTime minDate, [FromQuery] DateTime maxDate)
-        {
-            try
-            {
-                if (minDate > maxDate)
-                {
-                    return BadRequest("วันที่เริ่มต้นต้องน้อยกว่าวันที่สิ้นสุด");
-                }
 
                 var bookingQueue = _db.BookingQueues
                     .Include(q => q.QueueType)
-                    .Where(q => q.appointment_date >= minDate && q.appointment_date <= maxDate)
+                    .Where(q => q.appointment_date.Year == year && q.queue_status_id != -9)
                     .GroupBy(q => new 
                     { 
                         q.QueueType.type_name,
                         Source = "booking",
                         Date = q.appointment_date.Date,
-                        /*Time = q.appointment_date.TimeOfDay == TimeSpan.FromHours(8)
-                                ? "08:00:00"
-                                : q.appointment_date.TimeOfDay == TimeSpan.FromHours(13)
-                                    ? "13:00:00"
-                                    : "Other"*/
+                        
                     })
                     .Select(group => new
                     {
@@ -107,7 +44,7 @@ namespace ApiIsocare2.Controllers
 
                 var counterQueue = _db.CounterQueues
                     .Include(q => q.QueueType)
-                    .Where(q => q.queue_date >= minDate && q.queue_date <= maxDate)
+                    .Where(q => q.queue_date.Year == year && q.queue_status_id != -9)
                     .GroupBy(q => new
                     {
                         q.QueueType.type_name,

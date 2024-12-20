@@ -23,23 +23,21 @@
 }
 
     .table th[b-dvelimjc70], .table td[b-dvelimjc70] {
-        border: 1px solid #ddd; /* กำหนดสีและความหนาของกรอบเซลล์ */
+        border: 1px solid #808080; /* กำหนดสีและความหนาของกรอบเซลล์ */
         padding: 8px; /* กำหนดระยะห่างภายในเซลล์ */
-        font-size: 120%;
+        font-size: 200%;
         align-content:center;
+        
     }
 
-    .table tbody tr:nth-child(even)[b-dvelimjc70] {
-        background-color: #343a40 !important; /* สีดำสำหรับแถวที่เป็นเลขคี่ */
-        color: #ffffff; /* สีตัวอักษรขาวเพื่อให้มีความชัดเจน */
-    }
+    
 
     .table thead[b-dvelimjc70] {
         background-color: #343a40 !important; /* สีดำสำหรับแถวที่เป็นเลขคี่ */
         color: #ffffff; /* สีตัวอักษรขาวเพื่อให้มีความชัดเจน */
     }
 
-    .table tbody tr:nth-child(odd)[b-dvelimjc70] {
+    .table tbody[b-dvelimjc70]{
         background-color: #bfbfbf !important; /* สีขาวสำหรับแถวที่เป็นเลขคู่ */
         color: #000000; /* สีตัวอักษรดำสำหรับแถวที่เป็นสีขาว */
     }

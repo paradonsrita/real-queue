@@ -28,7 +28,7 @@ else
             </tr>
         </thead>
         <tbody>
-            @foreach (var queue in queues.Where(q => q.counter == selectedCounter && q.QueueStatus == "in process").OrderBy(q => q.QueueNumber))
+            @foreach (var queue in queues.Where(q => q.counter == selectedCounter && q.QueueStatus == "in process"))
             {
                 <tr>
                     <td>@TransformQueueType(queue.QueueType)</td>
@@ -48,7 +48,9 @@ else
             </tr>
         </thead>
         <tbody>
-            @foreach (var queue in queues.Where(q => q.QueueType == selectedTransaction && q.QueueStatus == "waiting").OrderBy(q => q.QueueNumber))
+            @foreach (var queue in queues
+           .Where(q => (string.IsNullOrEmpty(selectedTransaction) || q.QueueType == selectedTransaction) && q.QueueStatus == "waiting")
+           .OrderBy(q => q.QueueNumber))
             {
                 <tr>
                     <td>@TransformQueueType(queue.QueueType)</td>

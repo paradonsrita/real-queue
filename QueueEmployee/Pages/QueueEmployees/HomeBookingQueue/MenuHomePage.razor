@@ -11,7 +11,17 @@
 
 
 <RadzenStack Orientation="Orientation.Horizontal" JustifyContent="JustifyContent.SpaceEvenly" AlignItems="AlignItems.Center" Gap="1rem" Wrap="FlexWrap.Wrap">
-	<RadzenButton Text="เรียกคิว" ButtonStyle="ButtonStyle.Success" Shade="Shade.Light" Click="callNextQueue" Style="width: 200px; height: 50px; font-size: 1.25rem;" />
-	<RadzenButton Text="เรียกคิวเดิมซ่ำ" ButtonStyle="ButtonStyle.Success" Shade="Shade.Light" Click="RepeatQueue" Style="width: 200px; height: 50px; font-size: 1.25rem;" />
-	<RadzenButton Text="ข้ามคิว" ButtonStyle="ButtonStyle.Success" Shade="Shade.Light" Click="skipQueue" Style="width: 200px; height: 50px; font-size: 1.25rem;" />
+	<RadzenButton Text="เรียกคิว" ButtonStyle="ButtonStyle.Success" Shade="Shade.Light"
+				  Click="callNextQueue" Style="width: 200px; height: 50px; font-size: 1.25rem;" />
+	<RadzenButton Text="เรียกคิวเดิมซ่ำ" ButtonStyle="ButtonStyle.Primary" Shade="Shade.Light"
+				  Click="RepeatQueue" Style="width: 200px; height: 50px; font-size: 1.25rem;" />
+	<RadzenButton Text="ข้ามคิว"
+				  Click="skipQueue" Style="background-color: #FF0000; width: 200px; height: 50px; font-size: 1.25rem;" />
 </RadzenStack>
+@if (!string.IsNullOrEmpty(message))
+{
+	<RadzenAlert Severity="AlertSeverity.Error" Text="@message"
+				 Style="width: 100%; font-size: 1rem; margin-top: 1rem;  color: #FF0000;"
+				 class="shadow-lg" />
+
+}

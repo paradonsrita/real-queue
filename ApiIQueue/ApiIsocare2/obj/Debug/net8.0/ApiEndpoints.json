@@ -348,32 +348,17 @@
   {
     "ContainingType": "ApiIsocare2.Controllers.StatisticsController",
     "Method": "BookingStatistics",
-    "RelativePath": "api/Statistics/booking-statistics",
+    "RelativePath": "api/Statistics/statistics",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "minDate",
-        "Type": "System.DateTime",
-        "IsRequired": false
-      },
-      {
-        "Name": "maxDate",
-        "Type": "System.DateTime",
+        "Name": "year",
+        "Type": "System.Int32",
         "IsRequired": false
       }
     ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "ApiIsocare2.Controllers.StatisticsController",
-    "Method": "DailyStatistics",
-    "RelativePath": "api/Statistics/daily-statistics",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
     "ReturnTypes": []
   },
   {

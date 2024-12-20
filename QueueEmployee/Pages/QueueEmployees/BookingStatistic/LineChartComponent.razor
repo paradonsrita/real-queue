@@ -2,9 +2,8 @@
 @using Radzen.Blazor;
 @using System.Globalization
 
-
 <RadzenStack class="rz-p-0 rz-p-md-6 rz-p-lg-12" Gap="1rem">
-    <RadzenCard Variant="Variant.Outlined"  Style=" border-width: 2px; border-radius: 10px;">
+    <RadzenCard Variant="Variant.Outlined" class="shadow-lg" Style=" border-width: 2px; border-radius: 10px;">
         <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" Wrap="FlexWrap.Wrap">
             <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" Gap="0.5rem">
                 <RadzenCheckBox @bind-Value="@smooth" Name="smooth" Style="border: 2px solid #c5d0d9; padding: 4px; border-radius: 5px;"></RadzenCheckBox>
@@ -22,8 +21,9 @@
         </RadzenStack>
     </RadzenCard>
 
-   <RadzenChart>
-        <RadzenChartTooltipOptions/>
+    
+    <RadzenChart>
+        <RadzenChartTooltipOptions />
         <RadzenLineSeries Smooth="@smooth" Data="@counterStatistic" CategoryProperty="Date" Title="คิวผู้มารับบริการทันที" LineType="LineType.Dashed" ValueProperty="Total">
             <RadzenMarkers Visible="@showMarkers" MarkerType="MarkerType.Square" />
             <RadzenSeriesDataLabels Visible="@showDataLabels" />
@@ -39,6 +39,8 @@
         <RadzenLegend Position="LegendPosition.Top" />
 
     </RadzenChart>
+    
+    
 </RadzenStack>
 
 @code {
@@ -47,6 +49,7 @@
     bool showMarkers = true;
     [Parameter] 
     public IEnumerable<Statistic> Statistics { get; set; }
+
 
     private IEnumerable<Statistic> bookingStatistic { get; set; }
     private IEnumerable<Statistic> counterStatistic { get; set; }

@@ -1,4 +1,4 @@
-﻿@page "/booking-statistic"
+﻿@page "/statistic"
 @using QMS.Models
 @inject IHttpClientFactory HttpClientFactory
 @using System.Net.Http.Json
@@ -7,24 +7,66 @@
 
 
 
-<h3>สถิติโดยรวม</h3>
-<RadzenStack Orientation="Orientation.Horizontal" JustifyContent="JustifyContent.Center" AlignItems="AlignItems.Center" Gap="0.5rem" class="rz-p-6">
-    <RadzenLabel Text="เลือกวันที่เริ่มต้น"/>
-    <RadzenDatePicker @bind-Value="@minDate" DateFormat="MM/dd/yyyy" Name="DatePickerMinDate" Change="@(async args => await OnDateChanged())" />
-    
-    <RadzenLabel Text="เลือกวันที่สิ้นสุด" />
-    <RadzenDatePicker @bind-Value="@maxDate" DateFormat="MM/dd/yyyy" Name="DatePickerMinDate" Change="@(async args => await OnDateChanged())" />
-</RadzenStack>
+
+<RadzenCard Variant="Variant.Outlined" class="rz-my-4 shadow-lg">
+    <RadzenStack Orientation="Orientation.Horizontal" Gap="0.5rem" AlignItems="AlignItems.Center">
+        <div>รูปแบบ:</div>
+        <RadzenSelectBar Value="@range" ValueChanged="OnRangeChanged" TValue="string">
+            <Items>
+                @foreach (var dataItem in options)
+                {
+                    <RadzenSelectBarItem Text="@dataItem.Text" Value="@dataItem.Value"/>
+                }
+            </Items>
+        </RadzenSelectBar>
+    </RadzenStack>
+</RadzenCard>
+
+@if (range == "Daily")
+{
+    <RadzenCard Variant="Variant.Outlined" class="rz-my-4 shadow-lg">
+        <RadzenStack Orientation="Orientation.Horizontal" Gap="0.5rem" AlignItems="AlignItems.Center">
+            <div>เลือกวันที่:</div>
+            <RadzenDatePicker @bind-Value="@selectedDate" Style="width: 200px;" @onchange="OnFilterChanged" />
+        </RadzenStack>
+    </RadzenCard>
+}
+else if (range == "Monthly")
+{
+    <RadzenCard Variant="Variant.Outlined" class="rz-my-4 shadow-lg">
+        <RadzenStack Orientation="Orientation.Horizontal" Gap="0.5rem" AlignItems="AlignItems.Center">
+            <div>เลือกเดือน:</div>
+            <RadzenDropDown @bind-Value="@selectedMonth" Data="@months" TextProperty="Text" ValueProperty="Value"
+                            Placeholder="เลือกเดือน" Style="width: 200px;" Change="@(args => OnFilterChanged(args))" />
+            <div>เลือกปี:</div>
+            <RadzenDropDown @bind-Value="@selectedYear" Data="@years" TextProperty="Text" ValueProperty="Value"
+                            Placeholder="เลือกปี" Style="width: 150px;" Change="@(args => LoadStatisticsAsync())" />
+        </RadzenStack>
+    </RadzenCard>
+}
+else if (range == "Yearly")
+{
+    <RadzenCard Variant="Variant.Outlined" class="rz-my-4 shadow-lg">
+        <RadzenStack Orientation="Orientation.Horizontal" Gap="0.5rem" AlignItems="AlignItems.Center">
+            <div>เลือกปี:</div>
+            <RadzenDropDown @bind-Value="@selectedYear" Data="@years" TextProperty="Text" ValueProperty="Value"
+                            Placeholder="เลือกปี" Style="width: 150px;" Change="@(args => LoadStatisticsAsync())" />
+        </RadzenStack>
+    </RadzenCard>
+}
+
 
 @if (statistics != null)
 {
 
     <RadzenStack Orientation="Orientation.Horizontal" JustifyContent="JustifyContent.Center" AlignItems="AlignItems.Center" Gap="1rem" class="graph-container">
-        <LineChartComponent Statistics="statistics"/>
-        <ColumnChart Statistics="statistics" />
+        @if (range != "Daily")
+        {
+            <LineChartComponent Statistics="statistics"/>
+
+        }
+        <ColumnChart Statistics="statistics"/>
     </RadzenStack>
-
-
     
 }
 else
@@ -33,11 +75,42 @@ else
 }
 
 
+
 @code {
+    private IEnumerable<Statistic> responseStatistics;
     private IEnumerable<Statistic> statistics;
-    DateTime minDate = DateTime.Now;
-    DateTime maxDate = DateTime.Now;
-    bool showDataLabels = false;
+    private string range = "Daily";
+    private DateTime? selectedDate = DateTime.Now;
+    private string? selectedMonth = DateTime.Now.Month.ToString("00"); 
+    private string? selectedYear = DateTime.Now.Year.ToString(); 
+    private List<Option> options = new List<Option>
+    {
+        new Option { Text = "รายวัน", Value = "Daily" },
+        new Option { Text = "รายเดือน", Value = "Monthly" },
+        new Option { Text = "รายปี", Value = "Yearly" }
+
+    };
+
+    private List<Option> months = new List<Option>
+    {
+        new Option { Text = "มกราคม", Value = "01" },
+        new Option { Text = "กุมภาพันธ์", Value = "02" },
+        new Option { Text = "มีนาคม", Value = "03" },
+        new Option { Text = "เมษายน", Value = "04" },
+        new Option { Text = "พฤษภาคม", Value = "05" },
+        new Option { Text = "มิถุนายน", Value = "06" },
+        new Option { Text = "กรกฎาคม", Value = "07" },
+        new Option { Text = "สิงหาคม", Value = "08" },
+        new Option { Text = "กันยายน", Value = "09" },
+        new Option { Text = "ตุลาคม", Value = "10" },
+        new Option { Text = "พฤศจิกายน", Value = "11" },
+        new Option { Text = "ธันวาคม", Value = "12" }
+    };
+
+    private List<Option> years = Enumerable.Range(DateTime.Now.Year - 10, 11)
+                                           .Select(y => new Option { Text = y.ToString(), Value = y.ToString() })
+                                           .OrderByDescending(y => y.Value)
+                                           .ToList();
 
 
 
@@ -46,6 +119,7 @@ else
         try
         {
             await LoadStatisticsAsync();
+
         }
         catch (Exception ex)
         {
@@ -53,29 +127,60 @@ else
         }
     }
 
-    private async Task OnDateChanged()
-    {
-        // ค่าที่ไม่ต้องการการรีเฟรชหน้า
-        if (minDate <= maxDate)
-        {
-            await LoadStatisticsAsync();
-        }
-        else
-        {
-            Console.WriteLine("วันที่เริ่มต้นต้องน้อยกว่าวันที่สิ้นสุด");
-            return;
-        }
-    }
+
 
     private async Task LoadStatisticsAsync()
     {
-        statistics = await GetBookingStatisticsAsync(minDate, maxDate);
+
+        try
+        {
+            responseStatistics = await GetBookingStatisticsAsync(int.Parse(selectedYear));
+            ApplyFilter();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"โหลดข้อมูลไม่สำเร็จ: {ex.Message}");
+        }
     }
 
-
-    public async Task<IEnumerable<Statistic>> GetBookingStatisticsAsync(DateTime minDate, DateTime maxDate)
+    private void ApplyFilter()
     {
-        var url = $"/api/Statistics/booking-statistics?minDate={minDate.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture)}&maxDate={maxDate.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture)}";
+        if (range == "Daily" && selectedDate.HasValue)
+        {
+            statistics = responseStatistics.Where(s => s.Date.Date == selectedDate.Value.Date);
+        }
+        else if (range == "Monthly" && !string.IsNullOrEmpty(selectedMonth) && !string.IsNullOrEmpty(selectedYear))
+        {
+            var year = int.Parse(selectedYear);
+            var month = int.Parse(selectedMonth);
+            statistics = responseStatistics.Where(s => s.Date.Year == year && s.Date.Month == month);
+        }
+        else if (range == "Yearly" && !string.IsNullOrEmpty(selectedYear))
+        {
+            var year = int.Parse(selectedYear);
+            statistics = responseStatistics.Where(s => s.Date.Year == year);
+        }
+        else
+        {
+            statistics = Enumerable.Empty<Statistic>();
+        }
+        StateHasChanged();
+    }
+
+    private void OnRangeChanged(object value)
+    {
+        range = value.ToString();
+        ApplyFilter();
+    }
+
+    private void OnFilterChanged(object value)
+    {
+        ApplyFilter();
+    }
+
+    public async Task<IEnumerable<Statistic>> GetBookingStatisticsAsync(int year)
+    {
+        var url = $"/api/Statistics/statistics?year={year}";
         var client = HttpClientFactory.CreateClient("Queue");
 
         var response = await client.GetAsync(url);
@@ -90,4 +195,9 @@ else
     }
 
     
+    public class Option
+    {
+        public string Text { get; set; }
+        public string Value { get; set; }
+    }
 }

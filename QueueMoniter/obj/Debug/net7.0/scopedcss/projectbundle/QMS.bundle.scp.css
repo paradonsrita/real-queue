@@ -24,10 +24,11 @@
 
     .table th[b-dvelimjc70], .table td[b-dvelimjc70] {
         border: 1px solid #808080; /* กำหนดสีและความหนาของกรอบเซลล์ */
-        padding: 8px; /* กำหนดระยะห่างภายในเซลล์ */
-        font-size: 200%;
-        align-content:center;
-        
+        padding: 20px; /* กำหนดระยะห่างภายในเซลล์ */
+        font-size: 30px;
+        align-content: center;
+        padding-left: 50px;
+        padding-right: 50px;
     }
 
     

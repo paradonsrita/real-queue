@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\Asus\\Desktop\\Queue Manage\\QueueEmployee\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{CE27CAA5-165F-4E38-AE43-046442C2C853}|QMS.csproj|c:\\users\\asus\\desktop\\queue manage\\queueemployee\\pages\\queueemployees\\homebookingqueue\\menuhomepage.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{CE27CAA5-165F-4E38-AE43-046442C2C853}|QMS.csproj|solutionrelative:pages\\queueemployees\\homebookingqueue\\menuhomepage.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{CE27CAA5-165F-4E38-AE43-046442C2C853}|QMS.csproj|c:\\users\\asus\\desktop\\queue manage\\queueemployee\\pages\\queueemployees\\bookingstatistic\\bookingstatistic.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{CE27CAA5-165F-4E38-AE43-046442C2C853}|QMS.csproj|solutionrelative:pages\\queueemployees\\bookingstatistic\\bookingstatistic.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CE27CAA5-165F-4E38-AE43-046442C2C853}|QMS.csproj|c:\\users\\asus\\desktop\\queue manage\\queueemployee\\pages\\queueemployees\\homecounterqueue\\menuhomepage.razor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CE27CAA5-165F-4E38-AE43-046442C2C853}|QMS.csproj|solutionrelative:pages\\queueemployees\\homecounterqueue\\menuhomepage.razor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{CE27CAA5-165F-4E38-AE43-046442C2C853}|QMS.csproj|c:\\users\\asus\\desktop\\queue manage\\queueemployee\\pages\\queueemployees\\bookingstatistic\\linechartcomponent.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{CE27CAA5-165F-4E38-AE43-046442C2C853}|QMS.csproj|solutionrelative:pages\\queueemployees\\bookingstatistic\\linechartcomponent.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -37,33 +37,29 @@
               "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
-            },
-            {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "MenuHomePage.razor",
-              "DocumentMoniker": "C:\\Users\\Asus\\Desktop\\Queue Manage\\QueueEmployee\\Pages\\QueueEmployees\\HomeBookingQueue\\MenuHomePage.razor",
-              "RelativeDocumentMoniker": "Pages\\QueueEmployees\\HomeBookingQueue\\MenuHomePage.razor",
-              "ToolTip": "C:\\Users\\Asus\\Desktop\\Queue Manage\\QueueEmployee\\Pages\\QueueEmployees\\HomeBookingQueue\\MenuHomePage.razor",
-              "RelativeToolTip": "Pages\\QueueEmployees\\HomeBookingQueue\\MenuHomePage.razor",
-              "ViewState": "AQIAAAcAAAAAAAAAAAAcwBcAAAA3AAAA",
+              "DocumentIndex": 1,
+              "Title": "LineChartComponent.razor",
+              "DocumentMoniker": "C:\\Users\\Asus\\Desktop\\Queue Manage\\QueueEmployee\\Pages\\QueueEmployees\\BookingStatistic\\LineChartComponent.razor",
+              "RelativeDocumentMoniker": "Pages\\QueueEmployees\\BookingStatistic\\LineChartComponent.razor",
+              "ToolTip": "C:\\Users\\Asus\\Desktop\\Queue Manage\\QueueEmployee\\Pages\\QueueEmployees\\BookingStatistic\\LineChartComponent.razor",
+              "RelativeToolTip": "Pages\\QueueEmployees\\BookingStatistic\\LineChartComponent.razor",
+              "ViewState": "AQIAABgAAAAAAAAAAAAAADUAAAA1AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-12-20T06:45:11.784Z",
+              "WhenOpened": "2024-12-23T04:53:01.04Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "MenuHomePage.razor.cs",
-              "DocumentMoniker": "C:\\Users\\Asus\\Desktop\\Queue Manage\\QueueEmployee\\Pages\\QueueEmployees\\HomeCounterQueue\\MenuHomePage.razor.cs",
-              "RelativeDocumentMoniker": "Pages\\QueueEmployees\\HomeCounterQueue\\MenuHomePage.razor.cs",
-              "ToolTip": "C:\\Users\\Asus\\Desktop\\Queue Manage\\QueueEmployee\\Pages\\QueueEmployees\\HomeCounterQueue\\MenuHomePage.razor.cs",
-              "RelativeToolTip": "Pages\\QueueEmployees\\HomeCounterQueue\\MenuHomePage.razor.cs",
-              "ViewState": "AQIAAIoAAAAAAAAAAAAowJgAAAAXAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-20T06:29:49.417Z",
+              "DocumentIndex": 0,
+              "Title": "BookingStatistic.razor",
+              "DocumentMoniker": "C:\\Users\\Asus\\Desktop\\Queue Manage\\QueueEmployee\\Pages\\QueueEmployees\\BookingStatistic\\BookingStatistic.razor",
+              "RelativeDocumentMoniker": "Pages\\QueueEmployees\\BookingStatistic\\BookingStatistic.razor",
+              "ToolTip": "C:\\Users\\Asus\\Desktop\\Queue Manage\\QueueEmployee\\Pages\\QueueEmployees\\BookingStatistic\\BookingStatistic.razor",
+              "RelativeToolTip": "Pages\\QueueEmployees\\BookingStatistic\\BookingStatistic.razor",
+              "ViewState": "AQIAAGYAAAAAAAAAAAAIwDwAAAAEAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-12-23T04:49:23.858Z",
               "EditorCaption": ""
             }
           ]

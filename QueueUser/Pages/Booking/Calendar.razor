@@ -149,17 +149,25 @@
                 formattedDate = formattedDate.AddYears(543);
             }
 
-        // หากการแปลงสำเร็จ ให้คำนวณ total08 และ total13
+            // หากการแปลงสำเร็จ ให้คำนวณ total08 และ total13
             total08 = bookingResults.FirstOrDefault(b => b.Date.Date == formattedDate.Date && b.Time.Hours == 8)?.Total ?? 0;
             total13 = bookingResults.FirstOrDefault(b => b.Date.Date == formattedDate.Date && b.Time.Hours == 13)?.Total ?? 0;
 
-            
+
             isPopupVisible = true; // เปิด Popup
         }
         else
         {
             // หากการแปลงไม่สำเร็จ ให้แสดงข้อความแสดงข้อผิดพลาด
             Console.WriteLine("cann't convert");
+            message = "ประเภทข้อมูลไม่ถูกต้อง";
+            NotificationService.Notify(new NotificationMessage
+                    {
+                        Severity = NotificationSeverity.Error,
+                        Summary = "เกิดข้อผิดพลาด",
+                        Detail = message,
+                        Duration = 5000
+                    });
         }
 
         StateHasChanged();
@@ -212,7 +220,7 @@
                                 Detail = message,
                                 Duration = 5000
                             });
-                }
+                    }
                     else
                     {
                         // ดึงข้อความแจ้งเตือนจาก API

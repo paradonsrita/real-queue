@@ -3,24 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\Asus\\Desktop\\Queue Manage\\QueueUser\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{CE27CAA5-165F-4E38-AE43-046442C2C853}|QMS.csproj|c:\\users\\asus\\desktop\\queue manage\\queueuser\\pages\\detailbooking\\detailbooking.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{CE27CAA5-165F-4E38-AE43-046442C2C853}|QMS.csproj|solutionrelative:pages\\detailbooking\\detailbooking.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{CE27CAA5-165F-4E38-AE43-046442C2C853}|QMS.csproj|c:\\users\\asus\\desktop\\queue manage\\queueuser\\pages\\profile\\edituserprofile.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{CE27CAA5-165F-4E38-AE43-046442C2C853}|QMS.csproj|solutionrelative:pages\\profile\\edituserprofile.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CE27CAA5-165F-4E38-AE43-046442C2C853}|QMS.csproj|c:\\users\\asus\\desktop\\queue manage\\queueuser\\pages\\detailbooking\\detailcard.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{CE27CAA5-165F-4E38-AE43-046442C2C853}|QMS.csproj|solutionrelative:pages\\detailbooking\\detailcard.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CE27CAA5-165F-4E38-AE43-046442C2C853}|QMS.csproj|c:\\users\\asus\\desktop\\queue manage\\queueuser\\pages\\detailbooking\\filterpopup.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{CE27CAA5-165F-4E38-AE43-046442C2C853}|QMS.csproj|solutionrelative:pages\\detailbooking\\filterpopup.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{CE27CAA5-165F-4E38-AE43-046442C2C853}|QMS.csproj|c:\\users\\asus\\desktop\\queue manage\\queueuser\\pages\\loginlogout\\logout.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{CE27CAA5-165F-4E38-AE43-046442C2C853}|QMS.csproj|solutionrelative:pages\\loginlogout\\logout.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{CE27CAA5-165F-4E38-AE43-046442C2C853}|QMS.csproj|c:\\users\\asus\\desktop\\queue manage\\queueuser\\pages\\loginlogout\\login.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{CE27CAA5-165F-4E38-AE43-046442C2C853}|QMS.csproj|solutionrelative:pages\\loginlogout\\login.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CE27CAA5-165F-4E38-AE43-046442C2C853}|QMS.csproj|c:\\users\\asus\\desktop\\queue manage\\queueuser\\pages\\booking\\booking.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{CE27CAA5-165F-4E38-AE43-046442C2C853}|QMS.csproj|solutionrelative:pages\\booking\\booking.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{CE27CAA5-165F-4E38-AE43-046442C2C853}|QMS.csproj|c:\\users\\asus\\desktop\\queue manage\\queueuser\\pages\\booking\\calendar.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{CE27CAA5-165F-4E38-AE43-046442C2C853}|QMS.csproj|solutionrelative:pages\\booking\\calendar.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,7 +26,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -49,72 +45,56 @@
               "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
-            },
-            {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "DetailBooking.razor",
-              "DocumentMoniker": "C:\\Users\\Asus\\Desktop\\Queue Manage\\QueueUser\\Pages\\DetailBooking\\DetailBooking.razor",
-              "RelativeDocumentMoniker": "Pages\\DetailBooking\\DetailBooking.razor",
-              "ToolTip": "C:\\Users\\Asus\\Desktop\\Queue Manage\\QueueUser\\Pages\\DetailBooking\\DetailBooking.razor",
-              "RelativeToolTip": "Pages\\DetailBooking\\DetailBooking.razor",
-              "ViewState": "AQIAADwAAAAAAAAAAAAAAE4AAAAdAAAA",
+              "Title": "EditUserProfile.razor",
+              "DocumentMoniker": "C:\\Users\\Asus\\Desktop\\Queue Manage\\QueueUser\\Pages\\Profile\\EditUserProfile.razor",
+              "RelativeDocumentMoniker": "Pages\\Profile\\EditUserProfile.razor",
+              "ToolTip": "C:\\Users\\Asus\\Desktop\\Queue Manage\\QueueUser\\Pages\\Profile\\EditUserProfile.razor",
+              "RelativeToolTip": "Pages\\Profile\\EditUserProfile.razor",
+              "ViewState": "AQIAAGwAAAAAAAAAAAAAABIAAAA4AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-12-20T06:51:53.636Z",
+              "WhenOpened": "2024-12-20T09:13:17.526Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "DetailCard.razor",
-              "DocumentMoniker": "C:\\Users\\Asus\\Desktop\\Queue Manage\\QueueUser\\Pages\\DetailBooking\\DetailCard.razor",
-              "RelativeDocumentMoniker": "Pages\\DetailBooking\\DetailCard.razor",
-              "ToolTip": "C:\\Users\\Asus\\Desktop\\Queue Manage\\QueueUser\\Pages\\DetailBooking\\DetailCard.razor",
-              "RelativeToolTip": "Pages\\DetailBooking\\DetailCard.razor",
-              "ViewState": "AQIAAE4AAAAAAAAAAAAAAA4AAAAVAAAA",
+              "Title": "Logout.razor",
+              "DocumentMoniker": "C:\\Users\\Asus\\Desktop\\Queue Manage\\QueueUser\\Pages\\LoginLogout\\Logout.razor",
+              "RelativeDocumentMoniker": "Pages\\LoginLogout\\Logout.razor",
+              "ToolTip": "C:\\Users\\Asus\\Desktop\\Queue Manage\\QueueUser\\Pages\\LoginLogout\\Logout.razor",
+              "RelativeToolTip": "Pages\\LoginLogout\\Logout.razor",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAAxAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-12-20T06:51:45.411Z",
+              "WhenOpened": "2024-12-20T09:12:36.354Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "FilterPopup.razor",
-              "DocumentMoniker": "C:\\Users\\Asus\\Desktop\\Queue Manage\\QueueUser\\Pages\\DetailBooking\\FilterPopup.razor",
-              "RelativeDocumentMoniker": "Pages\\DetailBooking\\FilterPopup.razor",
-              "ToolTip": "C:\\Users\\Asus\\Desktop\\Queue Manage\\QueueUser\\Pages\\DetailBooking\\FilterPopup.razor",
-              "RelativeToolTip": "Pages\\DetailBooking\\FilterPopup.razor",
-              "ViewState": "AQIAACoAAAAAAAAAAAAAADAAAABGAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-12-20T06:51:32.953Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
               "Title": "Login.razor",
               "DocumentMoniker": "C:\\Users\\Asus\\Desktop\\Queue Manage\\QueueUser\\Pages\\LoginLogout\\Login.razor",
               "RelativeDocumentMoniker": "Pages\\LoginLogout\\Login.razor",
               "ToolTip": "C:\\Users\\Asus\\Desktop\\Queue Manage\\QueueUser\\Pages\\LoginLogout\\Login.razor",
               "RelativeToolTip": "Pages\\LoginLogout\\Login.razor",
-              "ViewState": "AQIAAFQAAAAAAAAAAAAAAFIAAAA1AAAA",
+              "ViewState": "AQIAAHgAAAAAAAAAAAAAAIAAAAANAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-12-20T06:02:51.002Z",
+              "WhenOpened": "2024-12-20T09:12:07.56Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Booking.razor",
-              "DocumentMoniker": "C:\\Users\\Asus\\Desktop\\Queue Manage\\QueueUser\\Pages\\Booking\\Booking.razor",
-              "RelativeDocumentMoniker": "Pages\\Booking\\Booking.razor",
-              "ToolTip": "C:\\Users\\Asus\\Desktop\\Queue Manage\\QueueUser\\Pages\\Booking\\Booking.razor",
-              "RelativeToolTip": "Pages\\Booking\\Booking.razor",
-              "ViewState": "AQIAAAYAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "DocumentIndex": 3,
+              "Title": "Calendar.razor",
+              "DocumentMoniker": "C:\\Users\\Asus\\Desktop\\Queue Manage\\QueueUser\\Pages\\Booking\\Calendar.razor",
+              "RelativeDocumentMoniker": "Pages\\Booking\\Calendar.razor",
+              "ToolTip": "C:\\Users\\Asus\\Desktop\\Queue Manage\\QueueUser\\Pages\\Booking\\Calendar.razor",
+              "RelativeToolTip": "Pages\\Booking\\Calendar.razor",
+              "ViewState": "AQIAACQBAAAAAAAAAAAIwC8BAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-12-20T06:02:44.074Z"
+              "WhenOpened": "2024-12-20T09:02:44.322Z",
+              "EditorCaption": ""
             }
           ]
         }

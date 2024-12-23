@@ -6,7 +6,7 @@
         <tr>
             <th style="width: 25%;">หมายเลขคิว</th>
             <th style="width: 50%;">ประเภทธุรกรรม</th>
-            <th style="width: 25%;">ช่องบริการ</th>
+            <th style="width: 25%;" class="text-end">ช่องบริการ</th>
         </tr>
     </thead>
     <tbody>
@@ -22,9 +22,9 @@
             @foreach (var stat in filteredQueue)
             {
                 <tr>
-                    <td style="font-size: 210%;"><b>@(string.IsNullOrEmpty(stat.QueueNumber) ? "-" : stat.QueueNumber)</b></td>
+                    <td style="font-size: 80px; color: #f92234;"><b>@(string.IsNullOrEmpty(stat.QueueNumber) ? "-" : stat.QueueNumber)</b></td>
                     <td>@(queueTypeMappings.ContainsKey(stat.QueueType) ? queueTypeMappings[stat.QueueType] : stat.QueueType)</td>
-                    <td style="font-size: 210%;"><b>@(stat.Counter.HasValue ? stat.Counter.ToString() : "-")</b></td>
+                    <td style="font-size: 80px; color: #f92234;" class="text-end"><b>@(stat.Counter.HasValue ? stat.Counter.ToString() : "-")</b></td>
                 </tr>
             }
             @if (queueCount < 3)

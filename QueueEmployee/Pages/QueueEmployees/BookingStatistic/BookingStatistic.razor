@@ -11,7 +11,7 @@
 <RadzenCard Variant="Variant.Outlined" class="rz-my-4 shadow-lg">
     <RadzenStack Orientation="Orientation.Horizontal" Gap="0.5rem" AlignItems="AlignItems.Center">
         <div>รูปแบบ:</div>
-        <RadzenSelectBar Value="@range" ValueChanged="OnRangeChanged" TValue="string">
+        <RadzenSelectBar Value="@range" ValueChanged="OnRangeChanged" TValue="string" class="shadow">
             <Items>
                 @foreach (var dataItem in options)
                 {
@@ -27,7 +27,7 @@
     <RadzenCard Variant="Variant.Outlined" class="rz-my-4 shadow-lg">
         <RadzenStack Orientation="Orientation.Horizontal" Gap="0.5rem" AlignItems="AlignItems.Center">
             <div>เลือกวันที่:</div>
-            <RadzenDatePicker @bind-Value="@selectedDate" Style="width: 200px;" @onchange="OnFilterChanged" />
+            <RadzenDatePicker @bind-Value="@selectedDate" Style="width: 200px;" @onchange="OnFilterChanged" class="shadow" />
         </RadzenStack>
     </RadzenCard>
 }
@@ -37,10 +37,10 @@ else if (range == "Monthly")
         <RadzenStack Orientation="Orientation.Horizontal" Gap="0.5rem" AlignItems="AlignItems.Center">
             <div>เลือกเดือน:</div>
             <RadzenDropDown @bind-Value="@selectedMonth" Data="@months" TextProperty="Text" ValueProperty="Value"
-                            Placeholder="เลือกเดือน" Style="width: 200px;" Change="@(args => OnFilterChanged(args))" />
+                            Placeholder="เลือกเดือน" Style="width: 200px;" class="shadow" Change="@(args => OnFilterChanged(args))" />
             <div>เลือกปี:</div>
             <RadzenDropDown @bind-Value="@selectedYear" Data="@years" TextProperty="Text" ValueProperty="Value"
-                            Placeholder="เลือกปี" Style="width: 150px;" Change="@(args => LoadStatisticsAsync())" />
+                            Placeholder="เลือกปี" Style="width: 150px;" class="shadow" Change="@(args => LoadStatisticsAsync())" />
         </RadzenStack>
     </RadzenCard>
 }
@@ -50,7 +50,7 @@ else if (range == "Yearly")
         <RadzenStack Orientation="Orientation.Horizontal" Gap="0.5rem" AlignItems="AlignItems.Center">
             <div>เลือกปี:</div>
             <RadzenDropDown @bind-Value="@selectedYear" Data="@years" TextProperty="Text" ValueProperty="Value"
-                            Placeholder="เลือกปี" Style="width: 150px;" Change="@(args => LoadStatisticsAsync())" />
+                            Placeholder="เลือกปี" Style="width: 150px;" class="shadow" Change="@(args => LoadStatisticsAsync())" />
         </RadzenStack>
     </RadzenCard>
 }
@@ -58,6 +58,7 @@ else if (range == "Yearly")
 
 @if (statistics != null)
 {
+    
 
     <RadzenStack Orientation="Orientation.Horizontal" JustifyContent="JustifyContent.Center" AlignItems="AlignItems.Center" Gap="1rem" class="graph-container">
         @if (range != "Daily")
@@ -80,7 +81,7 @@ else
     private IEnumerable<Statistic> responseStatistics;
     private IEnumerable<Statistic> statistics;
     private string range = "Daily";
-    private DateTime? selectedDate = DateTime.Now;
+    private DateTime? selectedDate = DateTime.Now.Date;
     private string? selectedMonth = DateTime.Now.Month.ToString("00"); 
     private string? selectedYear = DateTime.Now.Year.ToString(); 
     private List<Option> options = new List<Option>

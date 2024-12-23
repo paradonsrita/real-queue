@@ -21,15 +21,13 @@ namespace QMS.Services
         {
 
             var response = await _httpClient.PostAsync($"/api/Queue?type={queueType}", null);
-            Console.WriteLine($"Response status code: {response.StatusCode}");
 
             if (response.IsSuccessStatusCode)
             {
                 var newQueue = await response.Content.ReadFromJsonAsync<QueueModel>();
-                Console.WriteLine($"Queue ID from response: {newQueue.queue_id}");
                 
                     return newQueue; // คืนค่าข้อมูล QueueResponse
-              
+                
                 
             }
 
@@ -42,7 +40,6 @@ namespace QMS.Services
 
         public async Task<QueueModel> GetQueueById(int queueId)
         {
-            Console.WriteLine($"Received request for queue ID: {queueId}");
 
             try
             {

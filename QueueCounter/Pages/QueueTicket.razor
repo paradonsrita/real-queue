@@ -31,6 +31,12 @@ else if (loading)
     <p>กำลังโหลดข้อมูล...</p>
 
 }
+@if (!string.IsNullOrEmpty(ErrorMessage))
+{
+    <div class="alert alert-danger mt-3">
+        @ErrorMessage
+    </div>
+}
 else
 {
     <p>ไม่พบข้อมูล</p>
@@ -43,6 +49,7 @@ else
     private QueueModel queueDetails;
     private string htmlData;
     private int waitQueue;
+    private string ErrorMessage;
 
     // Dictionary สำหรับแปลงค่า QueueType
     private Dictionary<string, string> queueTypeMappings = new Dictionary<string, string>
@@ -73,17 +80,16 @@ else
             }
             else
             {
-                Console.WriteLine($"API returned error: {response.StatusCode}");
+                ErrorMessage = $"API เกิดข้อผิดพลาด : {response.Content.ReadAsStringAsync()}";
             }
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Error fetching queue details: {ex.Message}");
+            ErrorMessage = $"API เกิดข้อผิดพลาด : {ex.Message}";
         }
         finally
         {
             loading = false;
-            Console.WriteLine(queueDetails);
         }
     }
 

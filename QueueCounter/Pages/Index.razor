@@ -76,12 +76,12 @@
             if (user != null)
             {
                 name = user.name;
-                Console.WriteLine(name);
             }
         }
         else
         {
             Console.WriteLine($"Error: {response.StatusCode}, Message: {await response.Content.ReadAsStringAsync()}");
+            ErrorMessage = $"เกิดข้อผิดพลาด : {response.Content.ReadAsStringAsync()}";
         }
 
         StateHasChanged();

@@ -194,6 +194,27 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "ApiIsocare2.Controllers.EmployeeController",
+    "Method": "TestCallBookingQueue",
+    "RelativePath": "api/Employee/testCallBookingQueue",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "counter",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "ApiIsocare2.Controllers.LogicRegisterController",
     "Method": "Login",
     "RelativePath": "api/LogicRegister/login",

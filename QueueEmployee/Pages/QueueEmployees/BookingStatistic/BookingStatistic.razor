@@ -9,13 +9,21 @@
 
 
 <RadzenCard Variant="Variant.Outlined" class="rz-my-4 shadow-lg">
-    <RadzenStack Orientation="Orientation.Horizontal" Gap="0.5rem" AlignItems="AlignItems.Center">
+    <RadzenStack Orientation="Orientation.Vertical" Gap="0.5rem" AlignItems="AlignItems.Center">
         <div>รูปแบบ:</div>
         <RadzenSelectBar Value="@range" ValueChanged="OnRangeChanged" TValue="string" class="shadow">
             <Items>
                 @foreach (var dataItem in options)
                 {
                     <RadzenSelectBarItem Text="@dataItem.Text" Value="@dataItem.Value"/>
+                }
+            </Items>
+        </RadzenSelectBar>
+        <RadzenSelectBar Value="@selectedTransaction" ValueChanged="OnTransactionChanged" TValue="string" class="shadow">
+            <Items>
+                @foreach (var dataItem in transaction)
+                {
+                    <RadzenSelectBarItem Text="@dataItem.Text" Value="@dataItem.Value" />
                 }
             </Items>
         </RadzenSelectBar>
@@ -58,7 +66,13 @@ else if (range == "Yearly")
 
 @if (statistics != null)
 {
-    
+
+    <RadzenCard Variant="Variant.Outlined" class="rz-my-4 shadow-lg">
+        <RadzenStack Orientation="Orientation.Vertical" Gap="0.5rem" AlignItems="AlignItems.Center">
+            
+            <Summary Statistics="@statistics"/>
+        </RadzenStack>
+    </RadzenCard>
 
     <RadzenStack Orientation="Orientation.Horizontal" JustifyContent="JustifyContent.Center" AlignItems="AlignItems.Center" Gap="1rem" class="graph-container">
         @if (range != "Daily")
@@ -80,7 +94,11 @@ else
 @code {
     private IEnumerable<Statistic> responseStatistics;
     private IEnumerable<Statistic> statistics;
+
+
     private string range = "Daily";
+    private string selectedTransaction = "All";
+
     private DateTime? selectedDate = DateTime.Now.Date;
     private string? selectedMonth = DateTime.Now.Month.ToString("00"); 
     private string? selectedYear = DateTime.Now.Year.ToString(); 
@@ -90,6 +108,15 @@ else
         new Option { Text = "รายเดือน", Value = "Monthly" },
         new Option { Text = "รายปี", Value = "Yearly" }
 
+    };
+
+    private List<Option> transaction = new List<Option>
+    {
+        new Option { Text = "ทั้งหมด", Value = "All" },
+        new Option { Text = "ขอกู้ รับชำระ จ่ายเงินกู้", Value = "Loan" },
+        new Option { Text = "ฝากถอน", Value = "Finance" },
+        new Option { Text = "สมัครสมาชิก ลาออก ซื้อ-ถอนหุ้น", Value = "Shares" },
+        new Option { Text = "อื่นๆ", Value = "Other" },
     };
 
     private List<Option> months = new List<Option>
@@ -165,12 +192,23 @@ else
         {
             statistics = Enumerable.Empty<Statistic>();
         }
-        StateHasChanged();
+
+
+        if (selectedTransaction != "All")
+        {
+            statistics = statistics.Where(s => s.type_name == selectedTransaction);
+        }
     }
 
     private void OnRangeChanged(object value)
     {
         range = value.ToString();
+        ApplyFilter();
+    }
+
+    private void OnTransactionChanged(object value)
+    {
+        selectedTransaction = value.ToString();
         ApplyFilter();
     }
 

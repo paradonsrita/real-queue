@@ -1,0 +1,48 @@
+﻿@using QMS.Models
+
+<RadzenStack Orientation="Orientation.Horizontal" Gap="2rem">
+	<RadzenCard Variant="Variant.Filled" class="rz-mx-auto" Style="max-width: 420px">
+		<RadzenStack Orientation="Orientation.Vertical" JustifyContent="JustifyContent.Start" Gap="1rem" class="rz-p-2">
+			<RadzenText TextStyle="TextStyle.H5" class="text-center">ผลรวม</RadzenText>
+			<RadzenText TextStyle="TextStyle.Body1" class="text-center"><b>มีจำนวน @summary คิว</b></RadzenText>
+		</RadzenStack>
+	</RadzenCard>
+	<RadzenCard Variant="Variant.Filled" class="rz-mx-auto" Style="max-width: 420px">
+		<RadzenStack Orientation="Orientation.Vertical" JustifyContent="JustifyContent.Start" Gap="1rem" class="rz-p-2">
+			<RadzenText TextStyle="TextStyle.H5" class="text-center">ค่าเฉลี่ย</RadzenText>
+			<RadzenText TextStyle="TextStyle.Body1" class="text-center"><b>ประมาณ @Math.Round(mean) คิว ต่อวัน</b></RadzenText>
+		</RadzenStack>
+	</RadzenCard>
+
+</RadzenStack>
+
+@code {
+	[Parameter]
+	public IEnumerable<Statistic> Statistics { get; set; }
+
+
+	private int summary;
+
+	private double mean;
+
+
+	protected override void OnParametersSet()
+	{
+		
+		if (Statistics != null && Statistics.Any())
+		{
+			summary = Statistics.Sum(stat => stat.Total);
+
+			var dailyGroups = Statistics
+				.GroupBy(stat => stat.Date.Date) 
+				.Select(group => group.Sum(stat => stat.Total));
+
+			// คัดแค่วันที่มีผู้มาใช้บริการ
+			mean = dailyGroups.Any() ? dailyGroups.Average() : 0;
+		}
+		
+		
+	}
+
+
+}

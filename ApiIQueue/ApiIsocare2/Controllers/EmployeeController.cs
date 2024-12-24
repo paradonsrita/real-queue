@@ -222,6 +222,55 @@ namespace ApiIsocare2.Controllers
             }
         }
 
+        //  PUT: api/Employee/testCallBookingQueue
+        [HttpPut("testCallBookingQueue")]
+        public async Task<IActionResult> TestCallBookingQueue(int id, int counter)
+        {
+            try
+            {
+                var callQueue = await _db.BookingQueues
+                    .Where(q => q.queue_id == id && q.queue_status_id == 0)
+                    .FirstOrDefaultAsync();
+                var nowQueue = await _db.BookingQueues
+                    .Where(q => q.counter == counter && q.queue_status_id == 2 && q.appointment_date.Date == DateTime.Now.Date)
+                    .FirstOrDefaultAsync();
+
+                if (nowQueue != null)
+                {
+                    nowQueue.queue_status_id = 1;
+                }
+                if (callQueue != null)
+                {
+                    if (counter != 0)
+                    {
+                        callQueue.queue_status_id = 2;
+                        callQueue.counter = counter;
+                        callQueue.call_queue_time = DateTime.Now;
+
+                        await _db.SaveChangesAsync();
+
+                        if (callQueue != null)
+                        {
+                            await _hubContext.Clients.All.SendAsync("RefreshPage");
+                        }
+                    }
+                    else
+                    {
+                        throw new Exception("เคาน์เตอร์ไม่สามารถเป็นเลข 0 หรือช่องว่างได้");
+                    }
+                }
+                
+
+                return Ok(callQueue);
+            }
+            catch (Exception ex)
+            {
+                var innerExceptionMessage = ex.InnerException?.Message ?? "ไม่มีข้อผิดพลาดเพิ่มเติม";
+                return StatusCode(500, $"เกิดข้อผิดพลาด : {ex.Message}, ข้อผิดพลาดเพิ่มเติม : {innerExceptionMessage}");
+            }
+        }
+
+        
         [HttpGet("repeatQueue")]
         public async Task<IActionResult> RepeatQueue()
         {

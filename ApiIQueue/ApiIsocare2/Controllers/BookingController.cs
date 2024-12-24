@@ -35,6 +35,7 @@ namespace ApiIsocare2.Controllers
                                     {
                                         q.queue_id,
                                         q.appointment_date,
+                                        qu.citizen_id_number,
                                         QueueStatus = qs.queue_status_name,
                                         QueueType = qt.type_name,
                                         QueueNumber = q.queue_type_id.ToUpper() + q.queue_number.ToString("000"),

@@ -1,0 +1,194 @@
+﻿@page "/test"
+@using System.Net.Http.Json
+@inject HttpClient Http
+@using QMS.Services.LocalStorage;
+@inject SessionStorageService SessionStorageService
+@using QMS.Services
+@inject IHttpClientFactory HttpClientFactory
+@using QMS.Shared.Employee
+@inject NavigationManager Navigation
+
+
+<div class="rz-p-2">
+	<SetCounter />
+</div>
+
+<h1 class="text-center rz-p-4"><b>คิวการจอง</b></h1>
+
+@if (queues == null)
+{
+    <p><em>Loading...</em></p>
+}
+else if (!string.IsNullOrEmpty(error))
+{
+    <p><em>@error</em></p>
+}
+else
+{
+
+    <h2 class="text-center rz-p-1">คิวปัจจุบัน</h2>
+    <table class="table table-dark">
+        <thead>
+            <tr>
+                <th>หมายเลขคิว</th>
+                <th>หมายเลขบัตรประชาชน</th>
+                <th>ประเภทธุรกรรม</th>
+                <th>เคาน์เตอร์</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var queue in queues.Where(q => q.counter == selectedCounter && q.QueueStatus == "in process"))
+            {
+                <tr>
+                    <td>@queue.QueueNumber</td>
+                    <td>@queue.citizen_id_number</td>
+                    <td>@TransformQueueType(queue.QueueType)</td>
+                    <td>@queue.counter</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+
+    <h2 class="text-center rz-p-1">คิวที่รอ</h2>
+    <table class="table table-dark">
+        <thead>
+            <tr>
+                <th>หมายเลขคิว</th>
+                <th>หมายเลขบัตรประชาชน</th>
+                <th>ประเภทธุรกรรม</th>
+                <th>เวลาการนัดหมาย</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var queue in queues
+           .Where(q => (string.IsNullOrEmpty(selectedTransaction) || q.QueueType == selectedTransaction) && q.QueueStatus == "waiting")
+           .OrderBy(q => q.QueueNumber))
+            {
+                <tr>
+                    <td>@queue.QueueNumber</td>
+                    <td>@queue.citizen_id_number</td>
+                    <td>@TransformQueueType(queue.QueueType)</td>
+                    <td>@queue.appointment_date.ToString("HH:mm")</td>
+                    <td>
+                        <RadzenButton Text="เรียกคิว" Click="() => CallNextQueue(queue.queue_id)"/>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private IEnumerable<BookingQueue> queues;
+    private bool loading = true;
+    private string error;
+    private int? selectedCounter;
+    private string selectedTransaction;
+    private string message;
+
+
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            Console.WriteLine("Loaded");
+            await LoadDataAsync();
+        }
+    }
+    private async Task LoadDataAsync()
+    {
+        try
+        {
+            var savedCounter = await SessionStorageService.GetItemAsync("selectedCounter");
+            var savedTransaction = await SessionStorageService.GetItemAsync("selectedTransaction");
+
+            if (!string.IsNullOrEmpty(savedCounter))
+            {
+                selectedCounter = int.Parse(savedCounter);
+            }
+
+            if (!string.IsNullOrEmpty(savedTransaction))
+            {
+                selectedTransaction = savedTransaction;
+            }
+
+            var client = HttpClientFactory.CreateClient("Queue");
+            // ดึงข้อมูลจาก API
+            queues = await client.GetFromJsonAsync<IEnumerable<BookingQueue>>("/api/Booking");
+        }
+        catch (Exception ex)
+        {
+            error = ex.Message;
+        }
+        finally
+        {
+            loading = false;
+            StateHasChanged(); // เรียกใช้เพื่อบอก Blazor ว่าต้องการ re-render เนื่องจากค่าที่เปลี่ยนแปลง
+        }
+    }
+
+    private async Task CallNextQueue(int id)
+    {
+        Console.WriteLine($"id = {id}");
+        if (!selectedCounter.HasValue)
+        {
+            // จัดการกรณีที่ข้อมูลไม่ครบถ้วน
+            error = "กรุณาเลือกช่องบริการ";
+            return;
+        }
+
+
+        var client = HttpClientFactory.CreateClient("Queue");
+        var requestUrl = $"/api/Employee/testCallBookingQueue?id={id}&counter={selectedCounter}";
+        Console.WriteLine($"requestURL = {requestUrl}");
+
+        try
+        {
+            var response = await client.PutAsync(requestUrl, null);
+            if (response.IsSuccessStatusCode)
+            {
+                message = "เรียกคิวสำเร็จ";
+            }
+            else
+            {
+                var responseContent = await response.Content.ReadAsStringAsync();
+                error = $"เกิดข้อผิดพลาด: {responseContent}";
+            }
+        }
+        catch (Exception ex)
+        {
+            error = $"เกิดข้อผิดพลาดในการเรียก API: {ex.Message}";
+        }
+        Navigation.NavigateTo(Navigation.Uri, forceLoad: true);
+
+    }
+
+
+    private string TransformQueueType(string queueType)
+    {
+        return queueType switch
+        {
+            "Finance" => "เปิด-ปิดบัญชีฝากถอน",
+            "Loan" => "ขอกู้ รับชำระ จ่ายเงินกู้",
+            "Shares" => "สมัครสมาชิก ลาออก ซื้อ-ถอนหุ้น",
+            "Other" => "อื่นๆ",
+            _ => queueType
+        };
+    }
+
+    private class BookingQueue
+    {
+        public int queue_id { get; set; }
+        public DateTime appointment_date { get; set; }
+        public string citizen_id_number { get; set; }
+        public string QueueStatus { get; set; }
+        public string QueueType { get; set; }
+        public string QueueNumber { get; set; }
+        public int counter { get; set; }
+
+    }
+}
+

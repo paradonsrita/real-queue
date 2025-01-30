@@ -48,26 +48,29 @@
                     </RadzenColumn>
                 </RadzenRow>
 
-                <RadzenRow Style="margin-inline: 4%; margin-top: 1rem;">
-                    <!-- แถวที่ 5: Remember Me -->
-                    <RadzenColumn>
-                        <label><InputCheckbox @bind-Value="rememberMe" /> Remember Me</label>
-
-                    </RadzenColumn>
-                    <RadzenColumn>
-                        <RadzenLink Path="forgot-password" Text="ลืมรหัสผ่าน?" />
-
-                    </RadzenColumn>
-                </RadzenRow>
+                
                 
                 <RadzenStack JustifyContent="JustifyContent.Center">
+                    <RadzenButton ButtonStyle="ButtonStyle.Primary" Size="ButtonSize.Medium" Icon="login" Text="ล็อกอิน" type="submit" class="rz-mt-2" Style="border-radius: 25px;" />
+
                     <RadzenButton Click="Register" Text="ลงทะเบียน" Shade="Shade.Light" ButtonStyle="ButtonStyle.Primary" Size="ButtonSize.Medium" Icon="login" class="rz-mt-2" Style="border-radius: 25px;">
                     </RadzenButton>
-                    <RadzenButton ButtonStyle="ButtonStyle.Primary" Size="ButtonSize.Medium" Icon="login" Text="Login" type="submit" class="rz-mt-2" Style="border-radius: 25px;"/>
+                    <RadzenRow Style="margin-inline: 4%; margin-top: 1rem;">
+                        <!-- แถวที่ 5: Remember Me -->
+                        <RadzenColumn>
+                            <label><InputCheckbox @bind-Value="rememberMe" />จดจำรหัสผ่าน</label>
+
+                        </RadzenColumn>
+                        <RadzenColumn>
+                            <RadzenLink Path="forgot-password" Text="ลืมรหัสผ่าน?" />
+
+                        </RadzenColumn>
+                    </RadzenRow>
                 </RadzenStack>
+
             </EditForm>
 
-
+            
             @if (!string.IsNullOrEmpty(errorMessage))
             {
                 <p style="color:red">@errorMessage</p>

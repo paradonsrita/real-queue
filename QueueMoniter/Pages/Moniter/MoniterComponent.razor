@@ -46,7 +46,7 @@ else
     {
 
         hubConnection = new HubConnectionBuilder()
-            .WithUrl("https://localhost:44328/notificationHub", options =>
+            .WithUrl("https://192.168.0.182:44328/notificationHub", options =>
         {
             options.HttpMessageHandlerFactory = _ => new HttpClientHandler
                 {

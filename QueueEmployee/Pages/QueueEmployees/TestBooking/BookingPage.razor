@@ -1,4 +1,4 @@
-﻿@page "/test"
+﻿@page "/booking-queue"
 @using System.Net.Http.Json
 @inject HttpClient Http
 @using QMS.Services.LocalStorage;
@@ -34,6 +34,9 @@ else
                 <th>หมายเลขบัตรประชาชน</th>
                 <th>ประเภทธุรกรรม</th>
                 <th>เคาน์เตอร์</th>
+                <th></th>
+                <th></th>
+
             </tr>
         </thead>
         <tbody>
@@ -44,6 +47,12 @@ else
                     <td>@queue.citizen_id_number</td>
                     <td>@TransformQueueType(queue.QueueType)</td>
                     <td>@queue.counter</td>
+                    <td>
+                        <RadzenButton Text="เรียกคิวเดิมซ้ำ" Click="RepeatQueue" />
+                    </td>
+                    <td>
+                        <RadzenButton Text="คิวเสร็จสิ้น" Click="CompleteQueue" />
+                    </td>
                 </tr>
             }
         </tbody>
@@ -142,7 +151,7 @@ else
 
 
         var client = HttpClientFactory.CreateClient("Queue");
-        var requestUrl = $"/api/Employee/testCallBookingQueue?id={id}&counter={selectedCounter}";
+        var requestUrl = $"/api/Employee/callBookingQueue?id={id}&counter={selectedCounter}";
         Console.WriteLine($"requestURL = {requestUrl}");
 
         try
@@ -166,7 +175,51 @@ else
 
     }
 
+    private async Task CompleteQueue()
+    {
 
+        
+
+        
+
+        var client = HttpClientFactory.CreateClient("Queue");
+        var requestUri = $"/api/Employee/callBookingQueue?counter={selectedCounter}";
+
+        try
+        {
+            var response = await client.PutAsync(requestUri, null);
+            if (response.IsSuccessStatusCode)
+            {
+                message = "ข้ามคิวสำเร็จ";
+            }
+            else
+            {
+                var responseContent = await response.Content.ReadAsStringAsync();
+                message = $"เกิดข้อผิดพลาด: {responseContent}";
+            }
+        }
+        catch (Exception ex)
+        {
+            message = $"เกิดข้อผิดพลาดในการเรียก API: {ex.Message}";
+        }
+        Navigation.NavigateTo(Navigation.Uri, forceLoad: true);
+
+    }
+
+    private async Task RepeatQueue()
+    {
+        try
+        {
+            var client = HttpClientFactory.CreateClient("Queue");
+            await client.GetAsync("/api/Employee/repeatQueue");
+            // อาจต้องอัปเดต UI หรือทำการโหลดข้อมูลใหม่ที่นี่
+        }
+        catch (Exception ex)
+        {
+            message = $"เกิดข้อผิดพลาดในการเรียก API: {ex.Message}";
+        }
+
+    }
     private string TransformQueueType(string queueType)
     {
         return queueType switch

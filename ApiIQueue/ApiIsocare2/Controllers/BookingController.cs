@@ -239,12 +239,13 @@ namespace ApiIsocare2.Controllers
                 var queueCount = await _db.BookingQueues
                                 .Where(q => q.appointment_date.Date == correctedAppointmentDate.Date
                                             && q.appointment_date.TimeOfDay == timeOfDay
-                                            && q.queue_type_id == request.Type)
+                                            && q.queue_type_id == request.Type
+                                            && q.queue_status_id != -9)
                                 .CountAsync();
 
-                if (queueCount >= 10)
+                if (queueCount >= 5)
                 {
-                    return BadRequest("ไม่สามารถจองคิว 10 คิวในช่วงเวลาเดียวกันได้");
+                    return BadRequest("คิวเต็มแล้ว");
                 }
 
                 //ทำให้คนจองช่วงเช้าเริ่มที่ 1, ช่วงบ่ายเริ่มที่เลข 11
@@ -263,7 +264,7 @@ namespace ApiIsocare2.Controllers
                 else
                 {
 
-                    number = number == 0 ? 51 : number + 1;
+                    number = number == 0 ? 11 : number + 1;
                 }
 
                     

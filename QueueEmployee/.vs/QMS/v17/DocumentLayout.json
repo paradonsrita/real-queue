@@ -50,8 +50,7 @@
               "RelativeToolTip": "Models\\QueueData.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-23T12:24:32.277Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-23T12:24:32.277Z"
             },
             {
               "$type": "Document",
@@ -61,7 +60,7 @@
               "RelativeDocumentMoniker": "Pages\\QueueEmployees\\TestBooking\\BookingPage.razor",
               "ToolTip": "C:\\Users\\Asus\\Desktop\\Queue Manage\\QueueEmployee\\Pages\\QueueEmployees\\TestBooking\\BookingPage.razor",
               "RelativeToolTip": "Pages\\QueueEmployees\\TestBooking\\BookingPage.razor",
-              "ViewState": "AQIAADAAAAAAAAAAAAAAAEYAAAAwAAAA",
+              "ViewState": "AQIAADAAAAAAAAAAAAAAADUAAAAkAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2024-12-23T07:22:29.919Z",
               "EditorCaption": ""
@@ -76,8 +75,7 @@
               "RelativeToolTip": "Pages\\QueueEmployees\\HomeBookingQueue\\HomeEmployee.razor",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-12-23T18:16:34.254Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-23T18:16:34.254Z"
             }
           ]
         }

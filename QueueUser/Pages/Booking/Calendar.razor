@@ -291,8 +291,8 @@
     }
 
     private RenderFragment RenderBookingSlot(TimeSpan time, int total) => @<p>
-        @time.ToString(@"hh\:mm") ว่าง @(10 - total) คิว
-        @if (total < 10)
+        @time.ToString(@"hh\:mm") ว่าง @(5 - total) คิว
+        @if (total < 5)
     {
         <button @onclick="() => ShowConfirmation(time)" class="booking-button">จอง @time.ToString(@"hh\:mm")</button>
     }

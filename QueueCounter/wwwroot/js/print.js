@@ -1,4 +1,4 @@
-﻿// สร้าง PDF ด้วย iframe
+﻿// ฟังก์ชันสร้าง PDF ด้วย iframe
 window.createPdf = function (pdfData) {
     var iframe = document.createElement("iframe");
     iframe.style.width = "80mm";  // ปรับขนาดให้ตรงกับกระดาษของเครื่อง POS-80 (80mm กว้าง)
@@ -15,6 +15,7 @@ window.createPdf = function (pdfData) {
     return iframe;
 };
 
+// ฟังก์ชันสั่งพิมพ์ PDF
 window.printPdf = function (pdfData) {
     var iframe = createPdf(pdfData);
     iframe.contentWindow.focus();

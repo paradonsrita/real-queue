@@ -46,7 +46,7 @@ else
     {
 
         hubConnection = new HubConnectionBuilder()
-            .WithUrl("https://192.168.0.182:44328/notificationHub", options =>
+            .WithUrl("https://localhost:44328/notificationHub", options =>
         {
             options.HttpMessageHandlerFactory = _ => new HttpClientHandler
                 {
@@ -117,7 +117,7 @@ else
 
     private async Task TriggerVoiceAlert(string queueNumber, int? counter)
     {
-        await js.InvokeVoidAsync("speakText", $"หมายเลขคิวถัดไป. {queueNumber} .ในช่องบริการที่. {counter}");  // กำหนดข้อความที่ต้องการให้แจ้งเตือน
+        await js.InvokeVoidAsync("speakText", $"หมายเลขคิวถัดไป. {queueNumber} .ในช่องบริการที่. {counter}");  // ข้อความที่ต้องการให้แจ้งเตือน
     }
     
 }
